@@ -1,0 +1,78 @@
+<svg viewBox="0 0 960 440" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system, Helvetica, Arial, sans-serif">
+<rect x="0" y="0" width="960" height="440" fill="#ffffff"></rect>
+
+<rect x="92" y="95" width="36" height="218" fill="#eef0f2"></rect>
+<text transform="rotate(90 110 204)" x="110" y="204" text-anchor="middle" font-size="12" fill="#4b5563">alley (west)</text>
+<rect x="850" y="95" width="58" height="218" fill="#eef0f2"></rect>
+<text transform="rotate(90 879 204)" x="879" y="204" text-anchor="middle" font-size="12" fill="#4b5563">street · front (east)</text>
+
+<rect x="130" y="95" width="718" height="218" fill="none" stroke="#1f2937" stroke-width="2"></rect>
+
+<path d="M804 139 L804 199 L770 199 L770 270 L493 270 L493 197 L537 197 L537 139 Z" fill="#eef0f2" stroke="#6b7280" stroke-width="1.5"></path>
+<line x1="770" y1="139" x2="770" y2="199" stroke="#d1d5db" stroke-width="1" stroke-dasharray="4 3"></line>
+<line x1="600" y1="139" x2="600" y2="270" stroke="#d1d5db" stroke-width="1" stroke-dasharray="4 3"></line>
+<line x1="537" y1="197" x2="537" y2="270" stroke="#d1d5db" stroke-width="1" stroke-dasharray="4 3"></line>
+<text x="652" y="200" text-anchor="middle" font-size="12" fill="#4b5563">main house · 1-story</text>
+<text x="652" y="216" text-anchor="middle" font-size="11" fill="#9ca3af">≈ 1,300 sf footprint</text>
+<text x="568" y="240" text-anchor="middle" font-size="11" fill="#9ca3af">rear</text>
+<text x="515" y="237" text-anchor="middle" font-size="11" fill="#9ca3af">deck</text>
+<text x="787" y="172" text-anchor="middle" font-size="11" fill="#9ca3af">porch</text>
+
+<line x1="770" y1="230" x2="848" y2="230" stroke="#9ca3af" stroke-width="1"></line>
+<line x1="770" y1="225" x2="770" y2="235" stroke="#9ca3af" stroke-width="1"></line>
+<line x1="848" y1="225" x2="848" y2="235" stroke="#9ca3af" stroke-width="1"></line>
+<text x="809" y="224" text-anchor="middle" font-size="11" fill="#4b5563">16 ft</text>
+
+<line x1="478" y1="139" x2="478" y2="270" stroke="#9ca3af" stroke-width="1"></line>
+<line x1="473" y1="139" x2="483" y2="139" stroke="#9ca3af" stroke-width="1"></line>
+<line x1="473" y1="270" x2="483" y2="270" stroke="#9ca3af" stroke-width="1"></line>
+<text transform="rotate(90 468 204)" x="468" y="204" text-anchor="middle" font-size="11" fill="#4b5563">27 ft</text>
+
+<rect x="169" y="226" width="87" height="58" fill="#eef0f2" stroke="#6b7280" stroke-width="1.5"></rect>
+<text x="212" y="259" text-anchor="middle" font-size="11" fill="#4b5563">shed 12×18</text>
+<line x1="130" y1="262" x2="169" y2="262" stroke="#9ca3af" stroke-width="1"></line>
+<line x1="130" y1="257" x2="130" y2="267" stroke="#9ca3af" stroke-width="1"></line>
+<line x1="169" y1="257" x2="169" y2="267" stroke="#9ca3af" stroke-width="1"></line>
+<text x="149" y="255" text-anchor="middle" font-size="11" fill="#4b5563">8 ft</text>
+
+<line x1="256" y1="250" x2="493" y2="250" stroke="#dc2626" stroke-width="1"></line>
+<line x1="256" y1="245" x2="256" y2="255" stroke="#dc2626" stroke-width="1"></line>
+<line x1="493" y1="245" x2="493" y2="255" stroke="#dc2626" stroke-width="1"></line>
+<text x="374" y="244" text-anchor="middle" font-size="11" fill="#dc2626">≈ 49 ft deck-to-shed (you noted ~17 ft)</text>
+
+<rect x="154" y="110" width="117" height="97" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"></rect>
+<rect x="154" y="134" width="7" height="49" fill="#ffffff" stroke="#3b82f6" stroke-width="1"></rect>
+<text x="214" y="130" text-anchor="middle" font-size="13" fill="#2563eb" font-weight="500">new ADU</text>
+<text x="214" y="148" text-anchor="middle" font-size="12" fill="#2563eb">20 × 24 ft footprint</text>
+<text x="214" y="165" text-anchor="middle" font-size="11" fill="#2563eb">garage below · 1-bed above</text>
+<text x="214" y="181" text-anchor="middle" font-size="11" fill="#2563eb">1-bed ≈ 480 sf · ≤ 20 ft tall</text>
+<text x="214" y="197" text-anchor="middle" font-size="11" fill="#2563eb">garage door → alley</text>
+
+<line x1="130" y1="142" x2="154" y2="142" stroke="#9ca3af" stroke-width="1"></line>
+<text x="142" y="136" text-anchor="middle" font-size="11" fill="#4b5563">5 ft</text>
+<line x1="232" y1="95" x2="232" y2="110" stroke="#dc2626" stroke-width="1.5"></line>
+<text transform="rotate(90 224 102)" x="224" y="102" text-anchor="middle" font-size="11" fill="#dc2626">3 ft</text>
+<text x="240" y="106" font-size="11" fill="#dc2626">(R-5 min is 5 ft)</text>
+<line x1="232" y1="207" x2="232" y2="226" stroke="#9ca3af" stroke-width="1"></line>
+<text x="300" y="221" font-size="11" fill="#4b5563">≈ 4 ft gap</text>
+<line x1="248" y1="219" x2="296" y2="218" stroke="#9ca3af" stroke-width="0.75"></line>
+
+<line x1="130" y1="332" x2="848" y2="332" stroke="#9ca3af" stroke-width="1"></line>
+<line x1="130" y1="327" x2="130" y2="337" stroke="#9ca3af" stroke-width="1"></line>
+<line x1="848" y1="327" x2="848" y2="337" stroke="#9ca3af" stroke-width="1"></line>
+<text x="489" y="348" text-anchor="middle" font-size="12" fill="#4b5563">148 ft — lot depth (front to rear)</text>
+<line x1="80" y1="95" x2="80" y2="313" stroke="#9ca3af" stroke-width="1"></line>
+<line x1="75" y1="95" x2="85" y2="95" stroke="#9ca3af" stroke-width="1"></line>
+<line x1="75" y1="313" x2="85" y2="313" stroke="#9ca3af" stroke-width="1"></line>
+<text transform="rotate(90 64 204)" x="64" y="204" text-anchor="middle" font-size="12" fill="#4b5563">45 ft wide</text>
+
+<line x1="78" y1="56" x2="78" y2="28" stroke="#1f2937" stroke-width="2"></line>
+<path d="M73 36 L78 24 L83 36 Z" fill="#1f2937"></path>
+<text x="78" y="72" text-anchor="middle" font-size="13" fill="#1f2937">N</text>
+<text x="560" y="40" text-anchor="middle" font-size="12" fill="#4b5563">112 W 29th St · R-5 · north up · west = alley</text>
+
+<rect x="130" y="392" width="14" height="14" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"></rect>
+<text x="150" y="403" font-size="12" fill="#4b5563">new ADU (20×24, 2-story)</text>
+<rect x="400" y="392" width="14" height="14" fill="#eef0f2" stroke="#6b7280"></rect>
+<text x="420" y="403" font-size="12" fill="#4b5563">existing house, deck, porch &amp; shed</text>
+</svg>
