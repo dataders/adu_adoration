@@ -489,7 +489,7 @@ $SKPOLY
   9
 $TDCREATE
  40
-2461220.604398148
+2461220.6111574075
   9
 $TDUCREATE
  40
@@ -497,7 +497,7 @@ $TDUCREATE
   9
 $TDUPDATE
  40
-2461220.604398148
+2461220.6111574075
   9
 $TDUUPDATE
  40
@@ -549,7 +549,7 @@ $SPLINESEGS
   9
 $HANDSEED
   5
-15D
+16E
   9
 $SURFTAB1
  70
@@ -929,11 +929,11 @@ $PSTYLEMODE
   9
 $FINGERPRINTGUID
   2
-{C39F752C-41EC-4F42-8756-C151A82C0D6C}
+{AE919958-456E-4F85-849E-4ACE1FDE4333}
   9
 $VERSIONGUID
   2
-{AE05657F-DEC2-4A36-A9D1-7BC6A8061FDD}
+{67C647AF-00D8-435D-AD0C-76CEC070E3BB}
   9
 $EXTNAMES
 290
@@ -3301,7 +3301,7 @@ ACAD
   0
 APPID
   5
-15A
+16B
 330
 3
 100
@@ -3315,7 +3315,7 @@ HATCHBACKGROUNDCOLOR
   0
 APPID
   5
-15B
+16C
 330
 3
 100
@@ -5153,7 +5153,7 @@ BLOCK_RECORD
 100
 AcDbSymbolTable
  70
-15
+16
   0
 BLOCK_RECORD
   5
@@ -5446,6 +5446,26 @@ AcDbSymbolTableRecord
 AcDbBlockTableRecord
   2
 *D10
+340
+0
+ 70
+0
+280
+1
+281
+0
+  0
+BLOCK_RECORD
+  5
+140
+330
+9
+100
+AcDbSymbolTableRecord
+100
+AcDbBlockTableRecord
+  2
+*D11
 340
 0
  70
@@ -8161,13 +8181,13 @@ AcDbEntity
 100
 AcDbLine
  10
-132.0
+123.0
  20
 8.4
  30
 0.0
  11
-132.0
+123.0
  21
 4.4
  31
@@ -8211,7 +8231,7 @@ AcDbBlockReference
   2
 _CLOSEDFILLED
  10
-132.0
+123.0
  20
 5.0
  30
@@ -8259,13 +8279,13 @@ AcDbEntity
 100
 AcDbLine
  10
-133.2
+124.2
  20
 5.0
  30
 0.0
  11
-138.2
+133.7
  21
 5.0
  31
@@ -8283,7 +8303,7 @@ AcDbEntity
 100
 AcDbLine
  10
-141.8
+137.3
  20
 5.0
  30
@@ -8307,7 +8327,7 @@ DIMENSIONS
 100
 AcDbMText
  10
-140.0
+135.5
  20
 5.0
  30
@@ -8317,7 +8337,7 @@ AcDbMText
  71
 5
   1
-16
+25
   7
 OpenSansCondensed-Light
   0
@@ -8333,7 +8353,7 @@ Defpoints
 100
 AcDbPoint
  10
-132.0
+123.0
  20
 5.0
  30
@@ -8351,7 +8371,7 @@ Defpoints
 100
 AcDbPoint
  10
-132.0
+123.0
  20
 9.0
  30
@@ -8380,6 +8400,270 @@ ENDBLK
 132
 330
 130
+100
+AcDbEntity
+  8
+0
+100
+AcDbBlockEnd
+  0
+BLOCK
+  5
+141
+330
+140
+100
+AcDbEntity
+  8
+0
+100
+AcDbBlockBegin
+  2
+*D11
+ 70
+1
+ 10
+0.0
+ 20
+0.0
+ 30
+0.0
+  3
+*D11
+  1
+
+  0
+LINE
+  5
+143
+330
+140
+100
+AcDbEntity
+  8
+0
+100
+AcDbLine
+ 10
+26.0
+ 20
+6.6
+ 30
+0.0
+ 11
+26.0
+ 21
+9.6
+ 31
+0.0
+  0
+LINE
+  5
+144
+330
+140
+100
+AcDbEntity
+  8
+0
+100
+AcDbLine
+ 10
+66.0
+ 20
+6.6
+ 30
+0.0
+ 11
+66.0
+ 21
+9.6
+ 31
+0.0
+  0
+INSERT
+  5
+145
+330
+140
+100
+AcDbEntity
+  8
+DIMENSIONS
+100
+AcDbBlockReference
+  2
+_CLOSEDFILLED
+ 10
+26.0
+ 20
+9.0
+ 30
+0.0
+ 41
+1.2
+ 42
+1.2
+ 50
+180.0
+  0
+INSERT
+  5
+147
+330
+140
+100
+AcDbEntity
+  8
+DIMENSIONS
+100
+AcDbBlockReference
+  2
+_CLOSEDFILLED
+ 10
+66.0
+ 20
+9.0
+ 30
+0.0
+ 41
+1.2
+ 42
+1.2
+  0
+LINE
+  5
+149
+330
+140
+100
+AcDbEntity
+  8
+0
+100
+AcDbLine
+ 10
+27.2
+ 20
+9.0
+ 30
+0.0
+ 11
+44.2
+ 21
+9.0
+ 31
+0.0
+  0
+LINE
+  5
+14A
+330
+140
+100
+AcDbEntity
+  8
+0
+100
+AcDbLine
+ 10
+47.8
+ 20
+9.0
+ 30
+0.0
+ 11
+64.8
+ 21
+9.0
+ 31
+0.0
+  0
+MTEXT
+  5
+14B
+330
+140
+100
+AcDbEntity
+  8
+DIMENSIONS
+100
+AcDbMText
+ 10
+46.0
+ 20
+9.0
+ 30
+0.0
+ 40
+1.8
+ 71
+5
+  1
+40
+  7
+OpenSansCondensed-Light
+  0
+POINT
+  5
+14C
+330
+140
+100
+AcDbEntity
+  8
+Defpoints
+100
+AcDbPoint
+ 10
+26.0
+ 20
+9.0
+ 30
+0.0
+  0
+POINT
+  5
+14D
+330
+140
+100
+AcDbEntity
+  8
+Defpoints
+100
+AcDbPoint
+ 10
+26.0
+ 20
+6.0
+ 30
+0.0
+  0
+POINT
+  5
+14E
+330
+140
+100
+AcDbEntity
+  8
+Defpoints
+100
+AcDbPoint
+ 10
+66.0
+ 20
+6.0
+ 30
+0.0
+  0
+ENDBLK
+  5
+142
+330
+140
 100
 AcDbEntity
   8
@@ -8441,39 +8725,39 @@ AcDbPolyline
  70
 1
  10
-139.0
+125.0
  20
 36.0
  10
-84.0
+75.0
  20
 36.0
- 10
-84.0
- 20
-24.0
  10
 75.0
  20
 24.0
  10
+66.0
+ 20
+24.0
+ 10
+66.0
+ 20
+9.0
+ 10
 75.0
  20
 9.0
  10
-84.0
+123.0
  20
 9.0
  10
-132.0
- 20
-9.0
- 10
-132.0
+123.0
  20
 23.6
  10
-139.0
+125.0
  20
 23.6
   0
@@ -8489,13 +8773,13 @@ EXISTING-HOUSE-DETAIL
 100
 AcDbLine
  10
-97.0
+88.0
  20
 9.0
  30
 0.0
  11
-97.0
+88.0
  21
 36.0
  31
@@ -8513,13 +8797,13 @@ EXISTING-HOUSE-DETAIL
 100
 AcDbLine
  10
-132.0
+123.0
  20
 23.6
  30
 0.0
  11
-132.0
+123.0
  21
 36.0
  31
@@ -8537,13 +8821,13 @@ EXISTING-HOUSE-DETAIL
 100
 AcDbLine
  10
-84.0
+75.0
  20
 9.0
  30
 0.0
  11
-84.0
+75.0
  21
 24.0
  31
@@ -9245,13 +9529,13 @@ AcDbDimension
   3
 FT
  10
-132.0
+123.0
  20
 5.0
  30
 0.0
  11
-140.0
+135.5
  21
 5.0
  31
@@ -9265,7 +9549,7 @@ FT
 100
 AcDbAlignedDimension
  13
-132.0
+123.0
  23
 9.0
  33
@@ -9281,9 +9565,63 @@ AcDbAlignedDimension
 100
 AcDbRotatedDimension
   0
-TEXT
+DIMENSION
   5
 13F
+330
+17
+100
+AcDbEntity
+  8
+DIMENSIONS
+100
+AcDbDimension
+280
+0
+  2
+*D11
+  3
+FT
+ 10
+26.0
+ 20
+9.0
+ 30
+0.0
+ 11
+46.0
+ 21
+9.0
+ 31
+0.0
+ 70
+32
+ 71
+5
+  1
+<>
+100
+AcDbAlignedDimension
+ 13
+26.0
+ 23
+6.0
+ 33
+0.0
+ 14
+66.0
+ 24
+6.0
+ 34
+0.0
+ 50
+0.0
+100
+AcDbRotatedDimension
+  0
+TEXT
+  5
+14F
 330
 17
 100
@@ -9293,7 +9631,7 @@ TEXT
 100
 AcDbText
  10
-114.0
+105.0
  20
 22.0
  30
@@ -9305,7 +9643,7 @@ EXISTING HOUSE  1-STORY  1,303 SF
  72
 1
  11
-114.0
+105.0
  21
 22.0
  31
@@ -9317,7 +9655,7 @@ AcDbText
   0
 TEXT
   5
-140
+150
 330
 17
 100
@@ -9327,7 +9665,7 @@ TEXT
 100
 AcDbText
  10
-114.0
+105.0
  20
 18.5
  30
@@ -9339,7 +9677,7 @@ AcDbText
  72
 1
  11
-114.0
+105.0
  21
 18.5
  31
@@ -9351,7 +9689,7 @@ AcDbText
   0
 TEXT
   5
-141
+151
 330
 17
 100
@@ -9361,7 +9699,7 @@ TEXT
 100
 AcDbText
  10
-135.5
+126.5
  20
 30.0
  30
@@ -9373,7 +9711,7 @@ PORCH
  72
 1
  11
-135.5
+126.5
  21
 30.0
  31
@@ -9385,7 +9723,7 @@ AcDbText
   0
 TEXT
   5
-142
+152
 330
 17
 100
@@ -9395,7 +9733,7 @@ TEXT
 100
 AcDbText
  10
-79.5
+70.5
  20
 16.0
  30
@@ -9407,7 +9745,7 @@ DECK
  72
 1
  11
-79.5
+70.5
  21
 16.0
  31
@@ -9419,7 +9757,7 @@ AcDbText
   0
 TEXT
   5
-143
+153
 330
 17
 100
@@ -9453,7 +9791,7 @@ AcDbText
   0
 TEXT
   5
-144
+154
 330
 17
 100
@@ -9487,7 +9825,7 @@ AcDbText
   0
 TEXT
   5
-145
+155
 330
 17
 100
@@ -9521,7 +9859,7 @@ AcDbText
   0
 TEXT
   5
-146
+156
 330
 17
 100
@@ -9555,7 +9893,7 @@ AcDbText
   0
 TEXT
   5
-147
+157
 330
 17
 100
@@ -9589,7 +9927,7 @@ AcDbText
   0
 TEXT
   5
-148
+158
 330
 17
 100
@@ -9623,7 +9961,7 @@ AcDbText
   0
 TEXT
   5
-149
+159
 330
 17
 100
@@ -9657,7 +9995,7 @@ AcDbText
   0
 TEXT
   5
-14A
+15A
 330
 17
 100
@@ -9691,7 +10029,7 @@ AcDbText
   0
 TEXT
   5
-14B
+15B
 330
 17
 100
@@ -9725,7 +10063,7 @@ AcDbText
   0
 TEXT
   5
-14C
+15C
 330
 17
 100
@@ -9735,7 +10073,7 @@ DIMENSIONS
 100
 AcDbText
  10
-141.0
+134.0
  20
 6.0
  30
@@ -9743,9 +10081,9 @@ AcDbText
  40
 1.3
   1
-FRONT SETBACK - FIELD-VERIFY
+FRONT SETBACK 25' (MEASURED)
  11
-141.0
+134.0
  21
 6.0
  31
@@ -9755,9 +10093,43 @@ AcDbText
  73
 2
   0
+TEXT
+  5
+15D
+330
+17
+100
+AcDbEntity
+  8
+DIMENSIONS
+100
+AcDbText
+ 10
+46.0
+ 20
+4.0
+ 30
+0.0
+ 40
+1.2
+  1
+DECK-TO-SHED
+ 72
+1
+ 11
+46.0
+ 21
+4.0
+ 31
+0.0
+100
+AcDbText
+ 73
+2
+  0
 LINE
   5
-14D
+15E
 330
 17
 100
@@ -9781,7 +10153,7 @@ AcDbLine
   0
 LWPOLYLINE
   5
-14E
+15F
 330
 17
 100
@@ -9809,7 +10181,7 @@ AcDbPolyline
   0
 TEXT
   5
-14F
+160
 330
 17
 100
@@ -9843,7 +10215,7 @@ AcDbText
   0
 LWPOLYLINE
   5
-150
+161
 330
 17
 100
@@ -9875,7 +10247,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-151
+162
 330
 17
 100
@@ -9907,7 +10279,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-152
+163
 330
 17
 100
@@ -9939,7 +10311,7 @@ AcDbPolyline
   0
 TEXT
   5
-153
+164
 330
 17
 100
@@ -9973,7 +10345,7 @@ AcDbText
   0
 TEXT
   5
-154
+165
 330
 17
 100
@@ -10007,7 +10379,7 @@ AcDbText
   0
 TEXT
   5
-155
+166
 330
 17
 100
@@ -10041,7 +10413,7 @@ AcDbText
   0
 TEXT
   5
-156
+167
 330
 17
 100
@@ -10075,7 +10447,7 @@ AcDbText
   0
 TEXT
   5
-157
+168
 330
 17
 100
@@ -10109,7 +10481,7 @@ AcDbText
   0
 TEXT
   5
-158
+169
 330
 17
 100
@@ -10143,7 +10515,7 @@ AcDbText
   0
 TEXT
   5
-159
+16A
 330
 17
 100
@@ -11265,7 +11637,7 @@ CREATED_BY_EZDXF
   3
 WRITTEN_BY_EZDXF
 350
-15C
+16D
   0
 DICTIONARYVAR
   5
@@ -11277,7 +11649,7 @@ DictionaryVariables
 280
 0
   1
-1.4.4 @ 2026-06-28T18:30:20.812833+00:00
+1.4.4 @ 2026-06-28T18:40:04.839428+00:00
   0
 VISUALSTYLE
   5
@@ -11981,7 +12353,7 @@ X-Ray
   0
 DICTIONARYVAR
   5
-15C
+16D
 330
 2D
 100
@@ -11989,7 +12361,7 @@ DictionaryVariables
 280
 0
   1
-1.4.4 @ 2026-06-28T18:30:20.822637+00:00
+1.4.4 @ 2026-06-28T18:40:04.848868+00:00
   0
 ENDSEC
   0

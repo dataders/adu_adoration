@@ -22,12 +22,15 @@ By-right in R-5 (5 ft side + 5 ft rear setbacks; 20 ft accessory height cap; acc
 footprint; ADU living area ≤ greater of 500 sf or 1/3 of the house = 500 sf cap). A 24×24 was ruled out —
 576 sf upstairs exceeds the 500 sf cap for this 1,303 sf house.
 
-## Open questions (need owner confirmation / field measurement)
-- **Front setback:** owner stated 16 ft, but satellite imagery suggests ~25–35 ft with a large backyard.
-  This drives the deck-to-shed distance (drawn ~49 ft; owner noted ~17 ft — unreconciled).
-- **North side setback:** current sketch shows 3 ft, which is **below the R-5 by-right minimum of 5 ft** and
+## Confirmed by field measurement (2026-06-28)
+- **Front setback: 25 ft** — main east wall to the front (east) property line (inside edge of the sidewalk).
+- **Front porch projects ~2 ft** east of the house wall.
+- Resulting **deck-to-shed clear distance ≈ 40 ft** — the earlier ~17 ft figure was a mismeasurement.
+
+## Open questions
+- **North side setback:** current plan shows 3 ft, which is **below the R-5 by-right minimum of 5 ft** and
   would require a Board of Zoning Appeals variance. The by-right alternative is an 18-ft-wide ADU at 5 ft.
-- **Shed footprint:** 12 × 18 (owner) vs 360 sf detached garage (assessor).
+- **Shed footprint:** 12 × 18 (owner) vs 360 sf detached garage (assessor record).
 
 ## Repo layout
 - [`plan/`](plan/) — the site plan in several formats:

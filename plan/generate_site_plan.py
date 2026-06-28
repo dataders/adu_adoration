@@ -10,7 +10,8 @@ import ezdxf
 from ezdxf.enums import TextEntityAlignment
 
 DATE = "2026-06-28"
-FRONT_SETBACK = 16.0  # main east wall to front lot line — FIELD-VERIFY
+FRONT_SETBACK = 25.0  # MEASURED: main east wall to front (east) lot line (inside of sidewalk)
+PORCH_PROJECTION = 2.0  # MEASURED: front porch protrudes ~2 ft east of the house wall
 
 doc = ezdxf.new("R2010", setup=True)
 doc.units = ezdxf.units.FT
@@ -64,16 +65,17 @@ ew = 148 - FRONT_SETBACK          # main east wall x  (=132 @ 16')
 hw = ew - 48                       # heated west face  (48' deep)
 rd = hw + 13                       # rear/main division
 # silhouette outline
+pp = PORCH_PROJECTION
 poly([
-    (ew + 7, 36),   # porch NE  (porch projects 7' east)
-    (hw, 36),       # north edge
-    (hw, 24),       # west face down to deck
-    (hw - 9, 24),   # deck NW (projects 9' west)
-    (hw - 9, 9),    # deck SW
-    (hw, 9),        # deck SE / heated SW
-    (ew, 9),        # heated SE
-    (ew, 23.6),     # up east wall to porch
-    (ew + 7, 23.6), # porch SE
+    (ew + pp, 36),   # porch NE  (porch projects east of the wall)
+    (hw, 36),        # north edge
+    (hw, 24),        # west face down to deck
+    (hw - 9, 24),    # deck NW (projects 9' west)
+    (hw - 9, 9),     # deck SW
+    (hw, 9),         # deck SE / heated SW
+    (ew, 9),         # heated SE
+    (ew, 23.6),      # up east wall to porch
+    (ew + pp, 23.6), # porch SE
 ], "EXISTING-HOUSE")
 line((rd, 9), (rd, 36), "EXISTING-HOUSE-DETAIL")        # main/rear
 line((ew, 23.6), (ew, 36), "EXISTING-HOUSE-DETAIL")     # porch/main
@@ -102,7 +104,8 @@ dimen((5, 42), (29, 42), 4)               # ADU 24 deep
 dimen((29, 22), (29, 42), 5)              # ADU 20 wide
 dimen((0, 30), (5, 30), 3)                # ADU 5' off alley
 dimen((29, 45), (29, 42), 6)              # ADU 3' off north
-dimen((ew, 9), (148, 9), -4)              # front setback (verify)
+dimen((ew, 9), (148, 9), -4)              # front setback (measured 25')
+dimen((26, 6), (hw - 9, 6), 3)            # deck-to-shed clear distance
 
 # ---- labels ----
 label("EXISTING HOUSE  1-STORY  1,303 SF", (rd + 17), 22, 2.0, align=TextEntityAlignment.MIDDLE_CENTER)
@@ -118,8 +121,9 @@ label("ALLEY (REAR)", -5, 22.5, 1.8, align=TextEntityAlignment.MIDDLE_CENTER)
 label("W 29TH ST (FRONT)", 154, 22.5, 1.8, align=TextEntityAlignment.MIDDLE_CENTER)
 label("R-5 REQ'D YARD (5' SIDE / 5' REAR / 25' FRONT)", 74, 47, 1.4, layer="R5-SETBACK")
 label("ADU N. SETBACK 3' < R-5 MIN 5' - VARIANCE REQUIRED", 60, 43.4, 1.3, layer="R5-SETBACK")
-label("FRONT SETBACK - FIELD-VERIFY", ew + 9, 6, 1.3, layer="DIMENSIONS",
+label("FRONT SETBACK 25' (MEASURED)", ew + 11, 6, 1.3, layer="DIMENSIONS",
       align=TextEntityAlignment.MIDDLE_LEFT)
+label("DECK-TO-SHED", (26 + hw - 9) / 2, 4, 1.2, layer="DIMENSIONS")
 
 # ---- north arrow (north = +Y) ----
 ax, ay = 6, 52
