@@ -1,0 +1,106 @@
+<svg viewBox="0 0 920 580" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system, Helvetica, Arial, sans-serif">
+<defs>
+<pattern id="lap" width="14" height="11" patternUnits="userSpaceOnUse">
+  <rect width="14" height="11" fill="#8f9e7e"></rect>
+  <line x1="0" y1="10.5" x2="14" y2="10.5" stroke="#7a8a69" stroke-width="1"></line>
+</pattern>
+<pattern id="lapg" width="14" height="11" patternUnits="userSpaceOnUse">
+  <rect width="14" height="11" fill="#99a78a"></rect>
+  <line x1="0" y1="10.5" x2="14" y2="10.5" stroke="#828f72" stroke-width="1"></line>
+</pattern>
+<pattern id="corr" width="9" height="9" patternUnits="userSpaceOnUse">
+  <rect width="9" height="9" fill="#b7bdc0"></rect>
+  <line x1="0.5" y1="0" x2="0.5" y2="9" stroke="#9aa1a4" stroke-width="1"></line>
+</pattern>
+<pattern id="gravel" width="22" height="16" patternUnits="userSpaceOnUse">
+  <rect width="22" height="16" fill="#c4beb2"></rect>
+  <circle cx="4" cy="5" r="1.3" fill="#b1aa9b"></circle>
+  <circle cx="15" cy="11" r="1.4" fill="#b1aa9b"></circle>
+  <circle cx="10" cy="3" r="1" fill="#d0cabe"></circle>
+</pattern>
+</defs>
+<g transform="translate(920,0) scale(-1,1)">
+<rect x="0" y="0" width="920" height="460" fill="#c3d3db"></rect>
+<ellipse cx="230" cy="70" rx="120" ry="34" fill="#d4dee3"></ellipse>
+<ellipse cx="660" cy="50" rx="150" ry="38" fill="#d4dee3"></ellipse>
+<ellipse cx="120" cy="330" rx="150" ry="95" fill="#7d9469"></ellipse>
+<ellipse cx="430" cy="320" rx="180" ry="78" fill="#869b74"></ellipse>
+<ellipse cx="800" cy="300" rx="160" ry="120" fill="#6f8560"></ellipse>
+<rect x="0" y="402" width="920" height="48" fill="#ad9874"></rect>
+<g stroke="#9a855f" stroke-width="1.5">
+<line x1="30" y1="402" x2="30" y2="450"></line><line x1="58" y1="402" x2="58" y2="450"></line>
+<line x1="86" y1="402" x2="86" y2="450"></line><line x1="114" y1="402" x2="114" y2="450"></line>
+<line x1="450" y1="402" x2="450" y2="450"></line><line x1="478" y1="402" x2="478" y2="450"></line>
+<line x1="740" y1="402" x2="740" y2="450"></line><line x1="768" y1="402" x2="768" y2="450"></line>
+<line x1="796" y1="402" x2="796" y2="450"></line><line x1="824" y1="402" x2="824" y2="450"></line>
+</g>
+<rect x="0" y="445" width="920" height="135" fill="url(#gravel)"></rect>
+<ellipse cx="466" cy="430" rx="34" ry="22" fill="#6f8560"></ellipse>
+<polygon points="605,270 484,309 726,309" fill="#9aa1a4"></polygon>
+<polygon points="605,277 496,310 714,310" fill="#aab0b2"></polygon>
+<rect x="500" y="302" width="210" height="143" fill="url(#corr)"></rect>
+<rect x="523" y="315" width="152" height="7" fill="#71767a"></rect>
+<rect x="532" y="320" width="126" height="125" fill="#a4453a"></rect>
+<g stroke="#8a382f" stroke-width="1.5">
+<line x1="556" y1="320" x2="556" y2="445"></line><line x1="585" y1="320" x2="585" y2="445"></line>
+<line x1="614" y1="320" x2="614" y2="445"></line><line x1="635" y1="320" x2="635" y2="445"></line>
+</g>
+<line x1="532" y1="320" x2="658" y2="430" stroke="#8a382f" stroke-width="2"></line>
+<rect x="676" y="350" width="26" height="36" fill="#cad7d9" stroke="#dfe2e1" stroke-width="2"></rect>
+<polygon points="300,180 150,250 450,250" fill="#474c4f"></polygon>
+<polygon points="300,189 172,245 428,245" fill="url(#lapg)"></polygon>
+<line x1="150" y1="250" x2="300" y2="180" stroke="#f1eee4" stroke-width="5"></line>
+<line x1="450" y1="250" x2="300" y2="180" stroke="#f1eee4" stroke-width="5"></line>
+<polygon points="300,206 290,224 310,224" fill="#5f6353"></polygon>
+<polygon points="178,245 178,231 196,245" fill="#7a6f55"></polygon>
+<polygon points="422,245 422,231 404,245" fill="#7a6f55"></polygon>
+<rect x="170" y="245" width="260" height="200" fill="url(#lap)"></rect>
+<rect x="170" y="245" width="260" height="8" fill="#f1eee4"></rect>
+<rect x="170" y="245" width="9" height="200" fill="#f1eee4"></rect>
+<rect x="421" y="245" width="9" height="200" fill="#f1eee4"></rect>
+<g>
+<rect x="203" y="270" width="54" height="62" fill="#9e3f36"></rect>
+<rect x="207" y="274" width="46" height="54" fill="#f1eee4"></rect>
+<rect x="210" y="277" width="40" height="48" fill="#cad7d9"></rect>
+<line x1="210" y1="301" x2="250" y2="301" stroke="#f1eee4" stroke-width="3"></line>
+<line x1="230" y1="277" x2="230" y2="301" stroke="#f1eee4" stroke-width="2"></line>
+</g>
+<g>
+<rect x="343" y="270" width="54" height="62" fill="#9e3f36"></rect>
+<rect x="347" y="274" width="46" height="54" fill="#f1eee4"></rect>
+<rect x="350" y="277" width="40" height="48" fill="#cad7d9"></rect>
+<line x1="350" y1="301" x2="390" y2="301" stroke="#f1eee4" stroke-width="3"></line>
+<line x1="370" y1="277" x2="370" y2="301" stroke="#f1eee4" stroke-width="2"></line>
+</g>
+<rect x="190" y="440" width="220" height="9" fill="#d6d2c8"></rect>
+<rect x="192" y="315" width="152" height="130" fill="#f1eee4"></rect>
+<rect x="197" y="320" width="142" height="125" fill="#e3dac6"></rect>
+<rect x="202" y="325" width="132" height="24" fill="#cad7d9"></rect>
+<g stroke="#f1eee4" stroke-width="2">
+<line x1="235" y1="325" x2="235" y2="349"></line><line x1="268" y1="325" x2="268" y2="349"></line><line x1="301" y1="325" x2="301" y2="349"></line>
+</g>
+<line x1="268" y1="349" x2="268" y2="445" stroke="#c9bfa6" stroke-width="2"></line>
+<g stroke="#cabfa4" stroke-width="1.5">
+<line x1="218" y1="355" x2="218" y2="445"></line><line x1="243" y1="355" x2="243" y2="445"></line>
+<line x1="293" y1="355" x2="293" y2="445"></line><line x1="318" y1="355" x2="318" y2="445"></line>
+</g>
+<polygon points="207,360 233,360 226,366 214,366" fill="#2c2c2c"></polygon>
+<polygon points="333,360 307,360 314,366 326,366" fill="#2c2c2c"></polygon>
+<rect x="258" y="392" width="6" height="20" fill="#2c2c2c"></rect>
+<rect x="272" y="392" width="6" height="20" fill="#2c2c2c"></rect>
+<rect x="352" y="348" width="52" height="97" fill="#f1eee4"></rect>
+<rect x="356" y="352" width="44" height="93" fill="#9e3f36"></rect>
+<rect x="362" y="358" width="32" height="20" fill="#cad7d9"></rect>
+<rect x="362" y="385" width="32" height="24" fill="#8a362d"></rect>
+<rect x="362" y="414" width="32" height="24" fill="#8a362d"></rect>
+<g fill="#2c2c2c"><rect x="180" y="332" width="9" height="15"></rect><rect x="345" y="332" width="9" height="15"></rect><rect x="408" y="360" width="8" height="14"></rect></g>
+<g fill="#f4e6b0"><rect x="182" y="335" width="5" height="8"></rect><rect x="347" y="335" width="5" height="8"></rect><rect x="410" y="363" width="4" height="7"></rect></g>
+<rect x="455" y="404" width="28" height="41" fill="#3f6a3f"></rect>
+<rect x="453" y="400" width="32" height="7" fill="#345a34"></rect>
+<ellipse cx="755" cy="415" rx="60" ry="34" fill="#6f8560"></ellipse>
+<ellipse cx="118" cy="430" rx="44" ry="24" fill="#7d9469"></ellipse>
+</g>
+<text x="620" y="468" text-anchor="middle" font-size="12" fill="#3a3a3a" font-weight="500">new ADU · 20 × 24 · garage + 1-bed above</text>
+<text x="315" y="468" text-anchor="middle" font-size="12" fill="#3a3a3a">existing metal shed (kept)</text>
+<text x="20" y="566" font-size="11" fill="#5a5a5a">From the yard, looking west toward the alley · illustrative — Craftsman style to match the 1931 house · not to exact scale</text>
+</svg>
