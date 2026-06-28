@@ -30,8 +30,16 @@ footprint; ADU living area ≤ greater of 500 sf or 1/3 of the house = 500 sf ca
 - **Shed footprint:** 12 × 18 (owner) vs 360 sf detached garage (assessor).
 
 ## Repo layout
-- [`plan/`](plan/) — working site-plan diagram (`site-plan.svg` + rendered `site-plan.png`).
-  Render with `rsvg-convert -w 1920 -h 880 site-plan.svg -o site-plan.png` (cairosvg has no cairo lib here).
+- [`plan/`](plan/) — the site plan in several formats:
+  - **`site-plan.dxf`** — true-scale CAD file (1 unit = 1 ft, layered: lot / house / shed / ADU /
+    R-5 setbacks / dims / text). This is the file to hand an architect — opens in AutoCAD, Revit,
+    SketchUp, etc.
+  - **`site-plan-architect.pdf`** — printable/markup version of the DXF (north arrow, scale bar, title block).
+  - `site-plan.svg` / `site-plan.png` — the quick colored diagram. Render with
+    `rsvg-convert -w 1920 -h 880 site-plan.svg -o site-plan.png` (cairosvg has no cairo lib here).
+  - `generate_site_plan.py` — regenerates the DXF + PDF:
+    `uv run --no-project --with ezdxf --with matplotlib python3 plan/generate_site_plan.py`.
+    Edit `FRONT_SETBACK` at the top once the front-yard measurement is confirmed.
 - [`images/`](images/) — all reference imagery (hand sketches, assessor sketch, satellite shots). See its README.
 - [`documents/`](documents/) — source PDFs (hand-drawn site plans, assessor sketch, DataScout property report).
 
