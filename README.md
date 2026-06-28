@@ -45,6 +45,7 @@ footprint; ADU living area ≤ greater of 500 sf or 1/3 of the house = 500 sf ca
     Edit `FRONT_SETBACK` at the top once the front-yard measurement is confirmed.
 - [`images/`](images/) — all reference imagery (hand sketches, assessor sketch, satellite shots). See its README.
 - [`documents/`](documents/) — source PDFs (hand-drawn site plans, assessor sketch, DataScout property report).
+- [`inspiration/`](inspiration/) — reference photos of styles we like for the ADU exterior.
 
 ## Resources & sources
 
