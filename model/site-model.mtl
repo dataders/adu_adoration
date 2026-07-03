@@ -1,0 +1,75 @@
+# materials for site-model.obj
+newmtl m0
+Kd 0.471 0.565 0.361
+
+newmtl m1
+Kd 0.498 0.612 0.369
+
+newmtl m2
+Kd 0.702 0.671 0.612
+
+newmtl m3
+Kd 0.792 0.776 0.733
+
+newmtl m4
+Kd 0.522 0.533 0.545
+
+newmtl m5
+Kd 0.494 0.573 0.420
+
+newmtl m6
+Kd 0.925 0.902 0.831
+
+newmtl m7
+Kd 0.718 0.788 0.827
+
+newmtl m8
+Kd 0.478 0.231 0.180
+
+newmtl m9
+Kd 0.416 0.318 0.251
+
+newmtl m10
+Kd 0.725 0.702 0.643
+
+newmtl m11
+Kd 0.659 0.494 0.322
+
+newmtl m12
+Kd 0.588 0.439 0.247
+
+newmtl m13
+Kd 0.765 0.780 0.796
+
+newmtl m14
+Kd 0.647 0.271 0.227
+
+newmtl m15
+Kd 0.718 0.737 0.757
+
+newmtl m16
+Kd 0.459 0.514 0.310
+
+newmtl m17
+Kd 0.561 0.231 0.196
+
+newmtl m18
+Kd 0.914 0.886 0.800
+
+newmtl m19
+Kd 0.922 0.894 0.812
+
+newmtl m20
+Kd 0.298 0.290 0.271
+
+newmtl m21
+Kd 0.725 0.706 0.659
+
+newmtl m22
+Kd 0.561 0.541 0.502
+
+newmtl m23
+Kd 0.769 0.757 0.722
+
+newmtl m24
+Kd 0.847 0.835 0.804
