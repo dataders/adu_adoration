@@ -6,7 +6,9 @@ West (X=0) = alley/rear, East (X=148) = street/front. North = +Y (up).
 
 Run:  uv run --no-project --with ezdxf --with matplotlib python3 plan/generate_site_plan.py
 """
+
 import ezdxf
+import ezdxf.units
 from ezdxf.enums import TextEntityAlignment
 
 DATE = "2026-06-28"
@@ -18,7 +20,7 @@ doc.units = ezdxf.units.FT
 msp = doc.modelspace()
 
 # ---- layers (ACI colors) ----
-doc.layers.add("LOT-BOUNDARY", color=250)   # dark; ACI 7 renders white-on-white in preview
+doc.layers.add("LOT-BOUNDARY", color=250)  # dark; ACI 7 renders white-on-white in preview
 doc.layers.add("EXISTING-HOUSE", color=8)
 doc.layers.add("EXISTING-HOUSE-DETAIL", color=9, linetype="DASHED")
 doc.layers.add("EXISTING-SHED", color=8)
@@ -52,8 +54,7 @@ def label(text, x, y, h=2.0, layer="TEXT", align=TextEntityAlignment.MIDDLE_CENT
 
 
 def dimen(p1, p2, dist, layer="DIMENSIONS"):
-    d = msp.add_aligned_dim(p1=p1, p2=p2, distance=dist, dimstyle="FT",
-                            dxfattribs={"layer": layer})
+    d = msp.add_aligned_dim(p1=p1, p2=p2, distance=dist, dimstyle="FT", dxfattribs={"layer": layer})
     d.render()
 
 
@@ -61,25 +62,28 @@ def dimen(p1, p2, dist, layer="DIMENSIONS"):
 poly([(0, 0), (148, 0), (148, 45), (0, 45)], "LOT-BOUNDARY")
 
 # ---- existing house (porch NE, deck SW); east wall at FRONT_SETBACK ----
-ew = 148 - FRONT_SETBACK          # main east wall x  (=132 @ 16')
-hw = ew - 48                       # heated west face  (48' deep)
-rd = hw + 13                       # rear/main division
+ew = 148 - FRONT_SETBACK  # main east wall x  (=132 @ 16')
+hw = ew - 48  # heated west face  (48' deep)
+rd = hw + 13  # rear/main division
 # silhouette outline
 pp = PORCH_PROJECTION
-poly([
-    (ew + pp, 36),   # porch NE  (porch projects east of the wall)
-    (hw, 36),        # north edge
-    (hw, 24),        # west face down to deck
-    (hw - 9, 24),    # deck NW (projects 9' west)
-    (hw - 9, 9),     # deck SW
-    (hw, 9),         # deck SE / heated SW
-    (ew, 9),         # heated SE
-    (ew, 23.6),      # up east wall to porch
-    (ew + pp, 23.6), # porch SE
-], "EXISTING-HOUSE")
-line((rd, 9), (rd, 36), "EXISTING-HOUSE-DETAIL")        # main/rear
-line((ew, 23.6), (ew, 36), "EXISTING-HOUSE-DETAIL")     # porch/main
-line((hw, 9), (hw, 24), "EXISTING-HOUSE-DETAIL")        # deck/house
+poly(
+    [
+        (ew + pp, 36),  # porch NE  (porch projects east of the wall)
+        (hw, 36),  # north edge
+        (hw, 24),  # west face down to deck
+        (hw - 9, 24),  # deck NW (projects 9' west)
+        (hw - 9, 9),  # deck SW
+        (hw, 9),  # deck SE / heated SW
+        (ew, 9),  # heated SE
+        (ew, 23.6),  # up east wall to porch
+        (ew + pp, 23.6),  # porch SE
+    ],
+    "EXISTING-HOUSE",
+)
+line((rd, 9), (rd, 36), "EXISTING-HOUSE-DETAIL")  # main/rear
+line((ew, 23.6), (ew, 36), "EXISTING-HOUSE-DETAIL")  # porch/main
+line((hw, 9), (hw, 24), "EXISTING-HOUSE-DETAIL")  # deck/house
 
 # ---- existing shed 12x18, SW corner: 8' off alley, 6' off south ----
 poly([(8, 6), (26, 6), (26, 18), (8, 18)], "EXISTING-SHED")
@@ -89,26 +93,28 @@ poly([(5, 22), (29, 22), (29, 42), (5, 42)], "PROPOSED-ADU")
 poly([(5, 26), (6.5, 26), (6.5, 38), (5, 38)], "PROPOSED-ADU")  # garage door @ alley
 
 # ---- R-5 required yards (dashed reference) ----
-line((0, 5), (148, 5), "R5-SETBACK")      # side 5'
-line((0, 40), (148, 40), "R5-SETBACK")    # side 5'
-line((5, 0), (5, 45), "R5-SETBACK")       # rear 5'
-line((123, 0), (123, 45), "R5-SETBACK")   # front 25'
+line((0, 5), (148, 5), "R5-SETBACK")  # side 5'
+line((0, 40), (148, 40), "R5-SETBACK")  # side 5'
+line((5, 0), (5, 45), "R5-SETBACK")  # rear 5'
+line((123, 0), (123, 45), "R5-SETBACK")  # front 25'
 
 # ---- dimensions ----
-dimen((0, 0), (148, 0), -9)               # lot length
-dimen((0, 0), (0, 45), -9)                # lot width
-dimen((8, 6), (26, 6), -3)                # shed 18 deep
-dimen((8, 6), (8, 18), -3)                # shed 12 wide
-dimen((0, 6), (8, 6), 3)                  # shed 8' off alley (uses x=0 alley)
-dimen((5, 42), (29, 42), 4)               # ADU 24 deep
-dimen((29, 22), (29, 42), 5)              # ADU 20 wide
-dimen((0, 30), (5, 30), 3)                # ADU 5' off alley
-dimen((29, 45), (29, 42), 6)              # ADU 3' off north
-dimen((ew, 9), (148, 9), -4)              # front setback (measured 25')
-dimen((26, 6), (hw - 9, 6), 3)            # deck-to-shed clear distance
+dimen((0, 0), (148, 0), -9)  # lot length
+dimen((0, 0), (0, 45), -9)  # lot width
+dimen((8, 6), (26, 6), -3)  # shed 18 deep
+dimen((8, 6), (8, 18), -3)  # shed 12 wide
+dimen((0, 6), (8, 6), 3)  # shed 8' off alley (uses x=0 alley)
+dimen((5, 42), (29, 42), 4)  # ADU 24 deep
+dimen((29, 22), (29, 42), 5)  # ADU 20 wide
+dimen((0, 30), (5, 30), 3)  # ADU 5' off alley
+dimen((29, 45), (29, 42), 6)  # ADU 3' off north
+dimen((ew, 9), (148, 9), -4)  # front setback (measured 25')
+dimen((26, 6), (hw - 9, 6), 3)  # deck-to-shed clear distance
 
 # ---- labels ----
-label("EXISTING HOUSE  1-STORY  1,303 SF", (rd + 17), 22, 2.0, align=TextEntityAlignment.MIDDLE_CENTER)
+label(
+    "EXISTING HOUSE  1-STORY  1,303 SF", (rd + 17), 22, 2.0, align=TextEntityAlignment.MIDDLE_CENTER
+)
 label("(built 1931)", (rd + 17), 18.5, 1.5, layer="TEXT")
 label("PORCH", ew + 3.5, 30, 1.3)
 label("DECK", hw - 4.5, 16, 1.3)
@@ -121,8 +127,14 @@ label("ALLEY (REAR)", -5, 22.5, 1.8, align=TextEntityAlignment.MIDDLE_CENTER)
 label("W 29TH ST (FRONT)", 154, 22.5, 1.8, align=TextEntityAlignment.MIDDLE_CENTER)
 label("R-5 REQ'D YARD (5' SIDE / 5' REAR / 25' FRONT)", 74, 47, 1.4, layer="R5-SETBACK")
 label("ADU N. SETBACK 3' < R-5 MIN 5' - VARIANCE REQUIRED", 60, 43.4, 1.3, layer="R5-SETBACK")
-label("FRONT SETBACK 25' (MEASURED)", ew + 11, 6, 1.3, layer="DIMENSIONS",
-      align=TextEntityAlignment.MIDDLE_LEFT)
+label(
+    "FRONT SETBACK 25' (MEASURED)",
+    ew + 11,
+    6,
+    1.3,
+    layer="DIMENSIONS",
+    align=TextEntityAlignment.MIDDLE_LEFT,
+)
 label("DECK-TO-SHED", (26 + hw - 9) / 2, 4, 1.2, layer="DIMENSIONS")
 
 # ---- north arrow (north = +Y) ----
@@ -135,19 +147,42 @@ label("N", ax, ay + 8, 2.2, layer="NORTH-ARROW")
 sx, sy = 40, -16
 for i in range(3):
     fill = i % 2
-    msp.add_lwpolyline([(sx + i * 10, sy), (sx + (i + 1) * 10, sy),
-                        (sx + (i + 1) * 10, sy + 1.2), (sx + i * 10, sy + 1.2)],
-                       close=True, dxfattribs={"layer": "TEXT"})
+    msp.add_lwpolyline(
+        [
+            (sx + i * 10, sy),
+            (sx + (i + 1) * 10, sy),
+            (sx + (i + 1) * 10, sy + 1.2),
+            (sx + i * 10, sy + 1.2),
+        ],
+        close=True,
+        dxfattribs={"layer": "TEXT"},
+    )
 for i, t in enumerate(["0", "10", "20", "30 FT"]):
     label(t, sx + i * 10, sy - 2.2, 1.3, align=TextEntityAlignment.MIDDLE_CENTER)
 
 # ---- title block ----
-label("ADU SITE PLAN  -  112 W 29TH ST, RICHMOND VA 23225", 74, -24, 2.6,
-      align=TextEntityAlignment.MIDDLE_CENTER)
-label("PIN S0001130005  -  ZONE R-5  -  LOT 45' x 148' (6,660 SF)  -  1 UNIT = 1 FOOT  -  " + DATE,
-      74, -28, 1.6, align=TextEntityAlignment.MIDDLE_CENTER)
-label("PRELIMINARY - NOT FOR CONSTRUCTION - DIMENSIONS APPROX, FIELD-VERIFY",
-      74, -31.5, 1.6, layer="R5-SETBACK", align=TextEntityAlignment.MIDDLE_CENTER)
+label(
+    "ADU SITE PLAN  -  112 W 29TH ST, RICHMOND VA 23225",
+    74,
+    -24,
+    2.6,
+    align=TextEntityAlignment.MIDDLE_CENTER,
+)
+label(
+    "PIN S0001130005  -  ZONE R-5  -  LOT 45' x 148' (6,660 SF)  -  1 UNIT = 1 FOOT  -  " + DATE,
+    74,
+    -28,
+    1.6,
+    align=TextEntityAlignment.MIDDLE_CENTER,
+)
+label(
+    "PRELIMINARY - NOT FOR CONSTRUCTION - DIMENSIONS APPROX, FIELD-VERIFY",
+    74,
+    -31.5,
+    1.6,
+    layer="R5-SETBACK",
+    align=TextEntityAlignment.MIDDLE_CENTER,
+)
 
 doc.saveas("plan/site-plan.dxf")
 print("wrote plan/site-plan.dxf")
@@ -155,12 +190,14 @@ print("wrote plan/site-plan.dxf")
 # ---- PDF export via matplotlib backend ----
 try:
     import matplotlib
+
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
-    from ezdxf.addons.drawing import RenderContext, Frontend
+    from ezdxf.addons.drawing import Frontend, RenderContext
     from ezdxf.addons.drawing.matplotlib import MatplotlibBackend
+
     fig = plt.figure(figsize=(16, 9))
-    ax = fig.add_axes([0.02, 0.02, 0.96, 0.96])
+    ax = fig.add_axes((0.02, 0.02, 0.96, 0.96))
     ax.set_aspect("equal")
     ax.axis("off")
     Frontend(RenderContext(doc), MatplotlibBackend(ax)).draw_layout(msp, finalize=True)

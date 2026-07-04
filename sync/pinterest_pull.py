@@ -29,6 +29,7 @@ Usage:
 Honors HTTPS_PROXY/HTTP_PROXY and the CA bundle in the environment.
 Standard library only — no pip install required.
 """
+
 from __future__ import annotations
 
 import argparse
@@ -105,7 +106,7 @@ def largest_image_url(url: str) -> str:
 
 
 def _slug(text: str, limit: int = 48) -> str:
-    text = re.sub(r"<[^>]+>", " ", text or "")          # strip any stray HTML
+    text = re.sub(r"<[^>]+>", " ", text or "")  # strip any stray HTML
     text = re.sub(r"[^a-zA-Z0-9]+", "-", text).strip("-").lower()
     return (text[:limit].strip("-")) or "pin"
 

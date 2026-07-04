@@ -14,8 +14,8 @@ Outputs (all written next to this script):
 
 Run:  python3 model/generate_3d_model.py   (stdlib only, no deps)
 """
+
 import json
-import math
 import os
 
 OUT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -23,36 +23,52 @@ DATE = "2026-07-03"
 
 # ---------------- site geometry (matches plan/generate_site_plan.py) --------
 LOT_L, LOT_W = 148.0, 45.0
-FRONT_SETBACK = 25.0            # measured 2026-06-28
+FRONT_SETBACK = 25.0  # measured 2026-06-28
 PORCH_PROJECTION = 2.0
-EW = LOT_L - FRONT_SETBACK      # house main east wall  = 123
-HW = EW - 48                    # house west face       = 75  (48' deep)
-HS, HN = 9.0, 36.0              # house south / north walls (27' wide)
-DECK = (HW - 9, HS, HW, 24.0)   # 9x15 deck, SW
-PORCH = (EW, 23.6, EW + PORCH_PROJECTION, HN)   # open porch, NE
-SHED = (8.0, 6.0, 26.0, 18.0)   # 12x18, SW corner
-ADU = (5.0, 22.0, 29.0, 42.0)   # 20x24, 5' off alley / 3' off north line
+EW = LOT_L - FRONT_SETBACK  # house main east wall  = 123
+HW = EW - 48  # house west face       = 75  (48' deep)
+HS, HN = 9.0, 36.0  # house south / north walls (27' wide)
+DECK = (HW - 9, HS, HW, 24.0)  # 9x15 deck, SW
+PORCH = (EW, 23.6, EW + PORCH_PROJECTION, HN)  # open porch, NE
+SHED = (8.0, 6.0, 26.0, 18.0)  # 12x18, SW corner
+ADU = (5.0, 22.0, 29.0, 42.0)  # 20x24, 5' off alley / 3' off north line
 
 # heights (ft) -- massing estimates, field-verify before design work
-HOUSE_EAVE, HOUSE_RIDGE = 10.0, 20.0      # 1-story 1931, gable ridge E-W
-SHED_EAVE, SHED_RIDGE = 7.5, 10.8         # corrugated metal, ridge E-W
-ADU_EAVE, ADU_RIDGE = 16.0, 20.0          # 2-story at the R-5 20' cap
+HOUSE_EAVE, HOUSE_RIDGE = 10.0, 20.0  # 1-story 1931, gable ridge E-W
+SHED_EAVE, SHED_RIDGE = 7.5, 10.8  # corrugated metal, ridge E-W
+ADU_EAVE, ADU_RIDGE = 16.0, 20.0  # 2-story at the R-5 20' cap
 
-SUN = (0.45, -0.5, 0.74)                  # unit vector toward the sun (SE, high)
-SHADOW_K = 0.7                            # aesthetic shadow-length factor
+SUN = (0.45, -0.5, 0.74)  # unit vector toward the sun (SE, high)
+SHADOW_K = 0.7  # aesthetic shadow-length factor
 
 # ---------------- palette ---------------------------------------------------
-GRASS = "#7f9c5e"; GRASS_N = "#78905c"; GRAVEL = "#b3ab9c"; ASPHALT = "#85888b"
+GRASS = "#7f9c5e"
+GRASS_N = "#78905c"
+GRAVEL = "#b3ab9c"
+ASPHALT = "#85888b"
 CONCRETE = "#cac6bb"
-H_WALL = "#7e926b"; H_ROOF = "#6a5140"; H_TRIM = "#ece6d4"; H_DOOR = "#7a3b2e"
-DECK_C = "#a87e52"; RAIL_C = "#96703f"; PORCH_F = "#b9b3a4"
-S_WALL = "#c3c7cb"; S_ROOF = "#b7bcc1"; S_DOOR = "#a5453a"
-A_WALL = "#75834f"; A_ROOF = "#4c4a45"; A_TRIM = "#ebe4cf"; A_GDOOR = "#e9e2cc"
-A_DOOR = "#a5453a"; A_WTRIM = "#8f3b32"
-GLASS = "#b7c9d3"; NBR_W = "#b9b4a8"; NBR_R = "#8f8a80"
+H_WALL = "#7e926b"
+H_ROOF = "#6a5140"
+H_TRIM = "#ece6d4"
+H_DOOR = "#7a3b2e"
+DECK_C = "#a87e52"
+RAIL_C = "#96703f"
+PORCH_F = "#b9b3a4"
+S_WALL = "#c3c7cb"
+S_ROOF = "#b7bcc1"
+S_DOOR = "#a5453a"
+A_WALL = "#75834f"
+A_ROOF = "#4c4a45"
+A_TRIM = "#ebe4cf"
+A_GDOOR = "#e9e2cc"
+A_DOOR = "#a5453a"
+A_WTRIM = "#8f3b32"
+GLASS = "#b7c9d3"
+NBR_W = "#b9b4a8"
+NBR_R = "#8f8a80"
 
-faces = []   # {c,g,p,[a],[layer]}
-lines = []   # {c,g,p,[dash]}
+faces = []  # {c,g,p,[a],[layer]}
+lines = []  # {c,g,p,[dash]}
 labels = []  # {t,g,p,[s]}
 
 
@@ -123,13 +139,20 @@ def window(plane, k, d, u0, u1, z0, z1, g, parent, trim=H_TRIM, glass=GLASS):
 
 def hull(pts):
     pts = sorted(set(pts))
+
     def half(seq):
         h = []
         for p in seq:
-            while len(h) >= 2 and (h[-1][0]-h[-2][0])*(p[1]-h[-2][1]) - (h[-1][1]-h[-2][1])*(p[0]-h[-2][0]) <= 0:
+            while (
+                len(h) >= 2
+                and (h[-1][0] - h[-2][0]) * (p[1] - h[-2][1])
+                - (h[-1][1] - h[-2][1]) * (p[0] - h[-2][0])
+                <= 0
+            ):
                 h.pop()
             h.append(p)
         return h[:-1]
+
     return half(pts) + half(pts[::-1])
 
 
@@ -141,23 +164,51 @@ def shadow(x0, y0, x1, y1, h, g):
 
 
 # ---------------- ground ----------------------------------------------------
-F([(-30, -30, -0.02), (178, -30, -0.02), (178, 75, -0.02), (-30, 75, -0.02)],
-  GRASS_N, "site", layer="ground")                                    # context
-F([(0, 0, 0), (LOT_L, 0, 0), (LOT_L, LOT_W, 0), (0, LOT_W, 0)],
-  GRASS, "site", layer="ground")                                      # lot
-F([(-14, -30, 0.01), (0, -30, 0.01), (0, 75, 0.01), (-14, 75, 0.01)],
-  GRAVEL, "site", layer="ground")                                     # alley
-F([(148, -30, 0.01), (152.5, -30, 0.01), (152.5, 75, 0.01), (148, 75, 0.01)],
-  CONCRETE, "site", layer="ground")                                   # sidewalk
-F([(157, -30, 0.01), (178, -30, 0.01), (178, 75, 0.01), (157, 75, 0.01)],
-  ASPHALT, "site", layer="ground")                                    # street
+F(
+    [(-30, -30, -0.02), (178, -30, -0.02), (178, 75, -0.02), (-30, 75, -0.02)],
+    GRASS_N,
+    "site",
+    layer="ground",
+)  # context
+F(
+    [(0, 0, 0), (LOT_L, 0, 0), (LOT_L, LOT_W, 0), (0, LOT_W, 0)], GRASS, "site", layer="ground"
+)  # lot
+F(
+    [(-14, -30, 0.01), (0, -30, 0.01), (0, 75, 0.01), (-14, 75, 0.01)],
+    GRAVEL,
+    "site",
+    layer="ground",
+)  # alley
+F(
+    [(148, -30, 0.01), (152.5, -30, 0.01), (152.5, 75, 0.01), (148, 75, 0.01)],
+    CONCRETE,
+    "site",
+    layer="ground",
+)  # sidewalk
+F(
+    [(157, -30, 0.01), (178, -30, 0.01), (178, 75, 0.01), (157, 75, 0.01)],
+    ASPHALT,
+    "site",
+    layer="ground",
+)  # street
 
 # lot boundary + R-5 setback reference lines
-lines.append({"c": "#2c2c2c", "g": "site",
-              "p": [[0, 0, 0.06], [148, 0, 0.06], [148, 45, 0.06], [0, 45, 0.06], [0, 0, 0.06]]})
+lines.append(
+    {
+        "c": "#2c2c2c",
+        "g": "site",
+        "p": [[0, 0, 0.06], [148, 0, 0.06], [148, 45, 0.06], [0, 45, 0.06], [0, 0, 0.06]],
+    }
+)
 for seg in ([(0, 5), (148, 5)], [(0, 40), (148, 40)], [(5, 0), (5, 45)], [(123, 0), (123, 45)]):
-    lines.append({"c": "#c0392b", "g": "setback", "dash": 1,
-                  "p": [[seg[0][0], seg[0][1], 0.06], [seg[1][0], seg[1][1], 0.06]]})
+    lines.append(
+        {
+            "c": "#c0392b",
+            "g": "setback",
+            "dash": 1,
+            "p": [[seg[0][0], seg[0][1], 0.06], [seg[1][0], seg[1][1], 0.06]],
+        }
+    )
 
 # ---------------- existing house (1931, green siding, gable E-W) ------------
 g = "house"
@@ -165,35 +216,43 @@ hf = gable(HW, EW, HS, HN, HOUSE_EAVE, HOUSE_RIDGE, H_WALL, H_ROOF, g)
 shadow(HW, HS, EW, HN, 13, g)
 # windows / doors
 for x0 in (80, 90, 101, 111):
-    window("y", HS, -1, x0, x0 + 4, 3.5, 7.5, g, hf["s"])             # south wall
+    window("y", HS, -1, x0, x0 + 4, 3.5, 7.5, g, hf["s"])  # south wall
 for x0 in (82, 95, 108):
-    window("y", HN, 1, x0, x0 + 4, 3.5, 7.5, g, hf["n"])              # north wall
+    window("y", HN, 1, x0, x0 + 4, 3.5, 7.5, g, hf["n"])  # north wall
 for y0 in (11, 17):
-    window("x", EW, 1, y0, y0 + 3.5, 3.5, 7.5, g, hf["e"])            # street wall
-wquad("x", EW, 1, 28, 31.4, 1, 8, 0.07, H_DOOR, g, hf["e"])           # front door
-wquad("x", HW, -1, 14, 17, 1.6, 8, 0.07, H_DOOR, g, hf["w"])          # deck door
+    window("x", EW, 1, y0, y0 + 3.5, 3.5, 7.5, g, hf["e"])  # street wall
+wquad("x", EW, 1, 28, 31.4, 1, 8, 0.07, H_DOOR, g, hf["e"])  # front door
+wquad("x", HW, -1, 14, 17, 1.6, 8, 0.07, H_DOOR, g, hf["w"])  # deck door
 window("x", HW, -1, 19, 22, 3.5, 7.5, g, hf["w"])
 # front porch (NE): slab, posts, low shed roof
 px0, py0, px1, py1 = PORCH
 box(px0, py0, px1 + 0.5, py1, 0, 1.0, PORCH_F, g)
 for py in (py0 + 0.6, py1 - 1.0):
     box(px1 + 0.1, py, px1 + 0.5, py + 0.4, 1.0, 8.9, H_TRIM, g)
-F([(px0 - 0.2, py0 - 0.4, 9.4), (px1 + 1.2, py0 - 0.4, 8.5),
-   (px1 + 1.2, py1 + 0.4, 8.5), (px0 - 0.2, py1 + 0.4, 9.4)], H_ROOF, g)
+F(
+    [
+        (px0 - 0.2, py0 - 0.4, 9.4),
+        (px1 + 1.2, py0 - 0.4, 8.5),
+        (px1 + 1.2, py1 + 0.4, 8.5),
+        (px0 - 0.2, py1 + 0.4, 9.4),
+    ],
+    H_ROOF,
+    g,
+)
 # deck (SW) with railing
 dx0, dy0, dx1, dy1 = DECK
 box(dx0, dy0, dx1, dy1, 0, 1.6, DECK_C, g)
 shadow(dx0, dy0, dx1, dy1, 2.5, g)
-box(dx0 - 0.25, dy0, dx0, dy1, 1.6, 4.4, RAIL_C, g)                   # west rail
-box(dx0 - 0.25, dy0 - 0.25, dx1, dy0, 1.6, 4.4, RAIL_C, g)            # south rail
-box(dx0 - 0.25, dy1, dx1, dy1 + 0.25, 1.6, 4.4, RAIL_C, g)            # north rail
+box(dx0 - 0.25, dy0, dx0, dy1, 1.6, 4.4, RAIL_C, g)  # west rail
+box(dx0 - 0.25, dy0 - 0.25, dx1, dy0, 1.6, 4.4, RAIL_C, g)  # south rail
+box(dx0 - 0.25, dy1, dx1, dy1 + 0.25, 1.6, 4.4, RAIL_C, g)  # north rail
 
 # ---------------- existing shed (12x18 corrugated metal) --------------------
 g = "shed"
 sx0, sy0, sx1, sy1 = SHED
 sf = gable(sx0, sx1, sy0, sy1, SHED_EAVE, SHED_RIDGE, S_WALL, S_ROOF, g, oe=0.7, og=0.5)
 shadow(sx0, sy0, sx1, sy1, 9, g)
-wquad("x", sx1, 1, 8.8, 15.2, 0, 6.9, 0.07, S_DOOR, g, sf["e"])       # red slider, east end
+wquad("x", sx1, 1, 8.8, 15.2, 0, 6.9, 0.07, S_DOOR, g, sf["e"])  # red slider, east end
 window("x", sx1, 1, 15.6, 17.2, 3.2, 4.8, g, sf["e"], trim=S_WALL)
 
 # ---------------- proposed ADU (20x24, garage below / 1-bed above) ----------
@@ -202,17 +261,17 @@ ax0, ay0, ax1, ay1 = ADU
 af = gable(ax0, ax1, ay0, ay1, ADU_EAVE, ADU_RIDGE, A_WALL, A_ROOF, g)
 shadow(ax0, ay0, ax1, ay1, 18, g)
 # west (alley) face: garage door + entry + upper windows
-wquad("x", ax0, -1, 26.5, 37.5, 0, 8, 0.07, A_GDOOR, g, af["w"])      # garage door
-wquad("x", ax0, -1, 27.2, 36.8, 6.7, 7.6, 0.11, GLASS, g, af["w"])    # door lites
+wquad("x", ax0, -1, 26.5, 37.5, 0, 8, 0.07, A_GDOOR, g, af["w"])  # garage door
+wquad("x", ax0, -1, 27.2, 36.8, 6.7, 7.6, 0.11, GLASS, g, af["w"])  # door lites
 wquad("x", ax0, -1, 22.9, 25.9, -0.1, 7.2, 0.05, A_TRIM, g, af["w"])
-wquad("x", ax0, -1, 23.2, 25.6, 0, 7, 0.09, A_DOOR, g, af["w"])       # entry door
+wquad("x", ax0, -1, 23.2, 25.6, 0, 7, 0.09, A_DOOR, g, af["w"])  # entry door
 window("x", ax0, -1, 26.5, 30, 11.5, 15, g, af["w"], trim=A_WTRIM)
 window("x", ax0, -1, 34, 37.5, 11.5, 15, g, af["w"], trim=A_WTRIM)
 # east (yard) face
-wquad("x", ax1, 1, 30, 33, 0, 7, 0.07, A_DOOR, g, af["e"])            # yard door
+wquad("x", ax1, 1, 30, 33, 0, 7, 0.07, A_DOOR, g, af["e"])  # yard door
 window("x", ax1, 1, 24.5, 28, 11, 14.5, g, af["e"], trim=A_WTRIM)
 window("x", ax1, 1, 35, 38.5, 11, 14.5, g, af["e"], trim=A_WTRIM)
-window("x", ax1, 1, 34.5, 38.5, 3, 6.5, g, af["e"], trim=A_WTRIM)     # office window
+window("x", ax1, 1, 34.5, 38.5, 3, 6.5, g, af["e"], trim=A_WTRIM)  # office window
 # south / north faces
 for x0 in (9, 17):
     window("y", ay0, -1, x0, x0 + 4, 11, 14.5, g, af["s"], trim=A_WTRIM)
@@ -221,11 +280,11 @@ window("y", ay1, 1, 12, 16, 11, 14.5, g, af["n"], trim=A_WTRIM)
 
 # ---------------- neighbor massing (approx, from oblique satellite) ---------
 g = "context"
-gable(96, 126, 53, 74, 17, 26, NBR_W, NBR_R, g)                       # 108 (2-story, N)
+gable(96, 126, 53, 74, 17, 26, NBR_W, NBR_R, g)  # 108 (2-story, N)
 shadow(96, 53, 126, 74, 20, g)
-gable(98, 126, -24, -4, 11, 19, NBR_W, NBR_R, g)                      # 114 (S)
+gable(98, 126, -24, -4, 11, 19, NBR_W, NBR_R, g)  # 114 (S)
 shadow(98, -24, 126, -4, 14, g)
-box(5, 56, 21, 68, 0, 8.5, "#d8d5cd", g, top="#c4c1b8")               # N-neighbor shed
+box(5, 56, 21, 68, 0, 8.5, "#d8d5cd", g, top="#c4c1b8")  # N-neighbor shed
 shadow(5, 56, 21, 68, 8, g)
 
 # ---------------- labels -----------------------------------------------------
@@ -239,8 +298,14 @@ labels += [
     {"t": "W 29TH ST", "g": "site", "p": [166, 22.5, 1.5], "s": 1},
 ]
 
-SCENE = {"faces": faces, "lines": lines, "labels": labels, "sun": SUN,
-         "meta": {"title": "112 W 29th St · lot + ADU 3D model", "date": DATE}}
+SCENE = {
+    "faces": faces,
+    "lines": lines,
+    "labels": labels,
+    "sun": SUN,
+    "meta": {"title": "112 W 29th St · lot + ADU 3D model", "date": DATE},
+}
+
 
 # ============================ OBJ / MTL export ===============================
 # OBJ is Y-up: (E, N, U) -> (x=E, y=U, z=-N). 1 unit = 1 foot.
@@ -252,6 +317,7 @@ def flat(fs):
         for ch in f.get("ch", ()):
             yield ch
 
+
 mtl_of, mtls = {}, []
 for f in flat(faces):
     c = f["c"]
@@ -259,14 +325,21 @@ for f in flat(faces):
         mtl_of[c] = "m%d" % len(mtl_of)
         mtls.append(c)
 
-obj = ["# 112 W 29th St, Richmond VA -- lot massing model (house / shed / proposed ADU)",
-       "# units: feet, Y-up. Generated %s by model/generate_3d_model.py" % DATE,
-       "# PRELIMINARY - massing only, heights estimated, field-verify",
-       "mtllib site-model.mtl"]
+obj = [
+    "# 112 W 29th St, Richmond VA -- lot massing model (house / shed / proposed ADU)",
+    "# units: feet, Y-up. Generated %s by model/generate_3d_model.py" % DATE,
+    "# PRELIMINARY - massing only, heights estimated, field-verify",
+    "mtllib site-model.mtl",
+]
 vi = 1
 cur_g, cur_m = None, None
-GROUP_NAMES = {"site": "Site_Ground", "house": "Existing_House", "shed": "Existing_Shed",
-               "adu": "Proposed_ADU", "context": "Neighbors_Approx"}
+GROUP_NAMES = {
+    "site": "Site_Ground",
+    "house": "Existing_House",
+    "shed": "Existing_Shed",
+    "adu": "Proposed_ADU",
+    "context": "Neighbors_Approx",
+}
 for f in flat(faces):
     gname = GROUP_NAMES.get(f["g"], f["g"])
     if gname != cur_g:
@@ -288,12 +361,14 @@ with open(os.path.join(OUT_DIR, "site-model.obj"), "w") as fh:
 
 mtl_out = ["# materials for site-model.obj"]
 for c in mtls:
-    r, gg, b = (int(c[i:i + 2], 16) / 255 for i in (1, 3, 5))
+    r, gg, b = (int(c[i : i + 2], 16) / 255 for i in (1, 3, 5))
     mtl_out += ["newmtl " + mtl_of[c], "Kd %.3f %.3f %.3f" % (r, gg, b), ""]
 with open(os.path.join(OUT_DIR, "site-model.mtl"), "w") as fh:
     fh.write("\n".join(mtl_out))
-print("wrote model/site-model.obj (+.mtl): %d faces, %d materials" %
-      (sum(1 for _ in flat(faces)), len(mtls)))
+print(
+    "wrote model/site-model.obj (+.mtl): %d faces, %d materials"
+    % (sum(1 for _ in flat(faces)), len(mtls))
+)
 
 # ============================ interactive HTML viewer ========================
 BODY = r"""
@@ -559,9 +634,11 @@ document.querySelectorAll('#ui .views button').forEach(bt=>bt.addEventListener('
 """
 
 html_body = BODY.replace("__SCENE__", json.dumps(SCENE, separators=(",", ":")))
-page = ("<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n"
-        "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n"
-        "</head>\n<body>" + html_body + "</body>\n</html>\n")
+page = (
+    '<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
+    '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
+    "</head>\n<body>" + html_body + "</body>\n</html>\n"
+)
 with open(os.path.join(OUT_DIR, "site-model-3d.html"), "w") as fh:
     fh.write(page)
 print("wrote model/site-model-3d.html")
