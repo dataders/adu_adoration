@@ -33,6 +33,9 @@ footprint; ADU living area ≤ greater of 500 sf or 1/3 of the house = 500 sf ca
 - **Shed footprint:** 12 × 18 (owner) vs 360 sf detached garage (assessor record).
 
 ## Repo layout
+- [`apartment/`](apartment/) — floor-plan studies for the 1-bed apartment (level 2) and garage
+  (level 1): three furnished layout options (A/B/C) as SVG/PNG sheets, the decision framework,
+  and `generate_floorplans.py` to iterate them.
 - [`model/`](model/) — 3D massing model of the whole lot (house + shed + proposed ADU):
   - **`site-model-3d.html`** — interactive 3D viewer, open directly in a browser
     (orbit/zoom/pan, layer toggles, preset views).
