@@ -1,0 +1,43 @@
+name: Pinterest inspiration sync
+
+# Pulls new pins from the public board in sync/board.txt into inspiration/
+# and commits them. Read-only against Pinterest (RSS feed, no token/secret).
+# See sync/README.md for how the sync works and its limits.
+
+on:
+  schedule:
+    # Weekly, Mondays 13:00 UTC (~8-9am US Eastern). Adjust as you like.
+    - cron: "0 13 * * 1"
+  workflow_dispatch: {}  # "Run workflow" button for an on-demand pull
+
+permissions:
+  contents: write  # needed to commit any newly pulled pins
+
+concurrency:
+  group: pinterest-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Pull new pins
+        run: python3 sync/pinterest_pull.py
+
+      - name: Commit new pins if any
+        run: |
+          if [ -z "$(git status --porcelain inspiration sync/manifest.json)" ]; then
+            echo "No new pins — nothing to commit."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add inspiration sync/manifest.json
+          git commit -m "Sync new Pinterest pins into inspiration/ [skip ci]"
+          git push
