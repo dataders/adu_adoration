@@ -1,0 +1,37 @@
+[project]
+name = "adu-adoration"
+version = "0.0.0"
+description = "Design studies and generators for the 112 W 29th St ADU project"
+readme = "README.md"
+requires-python = ">=3.11"
+# Runtime dependencies of the generator scripts. Declared so `ty` can resolve
+# their imports; the scripts themselves are typically run via `uv run`.
+dependencies = [
+    "ezdxf>=1.1",
+    "matplotlib>=3.8",
+]
+
+[dependency-groups]
+# Tooling used by pre-commit and CI. `uv sync` installs these.
+dev = [
+    "ruff>=0.15",
+    "ty>=0.0.1a1",
+]
+
+# ---------------------------------------------------------------------------
+# Ruff: linter + formatter
+# ---------------------------------------------------------------------------
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+# Ruff's default rules (pyflakes + a curated pycodestyle subset) plus import
+# sorting. Kept intentionally lean to avoid noise on these generator scripts.
+extend-select = ["I"]
+
+# ---------------------------------------------------------------------------
+# ty: static type checker (Astral)
+# ---------------------------------------------------------------------------
+[tool.ty.environment]
+python-version = "3.11"
