@@ -46,6 +46,10 @@ footprint; ADU living area ≤ greater of 500 sf or 1/3 of the house = 500 sf ca
 - [`images/`](images/) — all reference imagery (hand sketches, assessor sketch, satellite shots). See its README.
 - [`documents/`](documents/) — source PDFs (hand-drawn site plans, assessor sketch, DataScout property report).
 - [`inspiration/`](inspiration/) — reference photos of styles we like for the ADU exterior.
+- [`sync/`](sync/) — one-way sync that mirrors a **public Pinterest board** into `inspiration/`
+  from the board's RSS feed (no login/API token). Save your board URL to `sync/board.txt`, then
+  `python3 sync/pinterest_pull.py`. See its README for limits (pull-only, no delete-sync) and how
+  to upgrade to full bidirectional via the Pinterest API.
 
 ## Resources & sources
 

@@ -21,3 +21,7 @@ with tapered columns, wide eaves / exposed rafter tails, divided-light sashes (p
 `documents/richmond-datascout-report-S0001130005.pdf`).
 
 Add new references as `NN-short-description.jpg`.
+
+Files named `pin-<id>-<slug>.jpg` are auto-pulled from a Pinterest board by
+[`sync/pinterest_pull.py`](../sync/) and tracked in `sync/manifest.json` — leave the
+naming as-is so re-runs stay idempotent.
