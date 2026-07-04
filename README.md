@@ -33,6 +33,11 @@ footprint; ADU living area ≤ greater of 500 sf or 1/3 of the house = 500 sf ca
 - **Shed footprint:** 12 × 18 (owner) vs 360 sf detached garage (assessor record).
 
 ## Repo layout
+- [`model/`](model/) — 3D massing model of the whole lot (house + shed + proposed ADU):
+  - **`site-model-3d.html`** — interactive 3D viewer, open directly in a browser
+    (orbit/zoom/pan, layer toggles, preset views).
+  - **`site-model.obj`** (+ `.mtl`) — true-scale OBJ (feet, Y-up) for SketchUp / Blender.
+  - `generate_3d_model.py` — regenerates both: `python3 model/generate_3d_model.py` (no deps).
 - [`plan/`](plan/) — the site plan in several formats:
   - **`site-plan.dxf`** — true-scale CAD file (1 unit = 1 ft, layered: lot / house / shed / ADU /
     R-5 setbacks / dims / text). This is the file to hand an architect — opens in AutoCAD, Revit,
