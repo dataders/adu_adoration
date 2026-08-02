@@ -30,7 +30,10 @@
       </header>
 
       <nav class="tab-bar" aria-label="Design brief sections" role="tablist">
-        <button id="tab-site" role="tab" aria-selected="true" aria-controls="site" tabindex="0" data-tab="site">
+        <button id="tab-summary" role="tab" aria-selected="true" aria-controls="summary" tabindex="0" data-tab="summary">
+          Summary
+        </button>
+        <button id="tab-site" role="tab" aria-selected="false" aria-controls="site" tabindex="-1" data-tab="site">
           <span>01</span> Site plan draft
         </button>
         <button id="tab-floor-plans" role="tab" aria-selected="false" aria-controls="floor-plans" tabindex="-1" data-tab="floor-plans">
@@ -45,7 +48,36 @@
       </nav>
 
       <div id="content" class="tab-content">
-        <section id="site" class="tab-panel" role="tabpanel" aria-labelledby="tab-site">
+        <section id="summary" class="tab-panel summary-panel" role="tabpanel" aria-labelledby="tab-summary">
+          <div class="summary-heading">
+            <p class="eyebrow">Project at a glance</p>
+            <h2>480 sf above a garage,<br />under a 20 ft ridge.</h2>
+            <p>Three drawings tell the current story. Open any one for a full-size view.</p>
+          </div>
+
+          <div class="summary-grid">
+            <a class="summary-card" href="plan/site-plan-architect.pdf">
+              <div class="summary-image"><img src="plan/site-plan.png" alt="Draft site plan showing the proposed ADU behind the house" /></div>
+              <div><span>01 · Site</span><h3>Site plan draft</h3><p>20 × 24 ft footprint north of the existing shed, garage facing the alley.</p></div>
+            </a>
+            <a class="summary-card" href="renderings/alley-view-craftsman.png">
+              <div class="summary-image"><img src="renderings/alley-view-craftsman.png" alt="Illustrative view of the proposed ADU from the alley" /></div>
+              <div><span>02 · Exterior</span><h3>Alley-side rendering</h3><p>Working massing and Craftsman character; openings still follow final plan.</p></div>
+            </a>
+            <a class="summary-card" href="apartment/option-c-exterior-stair.png">
+              <div class="summary-image"><img src="apartment/option-c-exterior-stair.png" alt="Option C garage and apartment floor-plan study" /></div>
+              <div><span>03 · Interior</span><h3>Apartment layout · Option C</h3><p>Exterior stair preserves the most usable area inside both levels.</p></div>
+            </a>
+          </div>
+
+          <div class="summary-note">
+            <strong>Still open</strong>
+            <span>North setback: 3 ft relief or 5 ft by-right?</span>
+            <span>Shed: keep, move, rebuild, or remove?</span>
+          </div>
+        </section>
+
+        <section id="site" class="tab-panel" role="tabpanel" aria-labelledby="tab-site" hidden>
           <div class="panel-heading">
             <div>
               <p class="eyebrow">Draft 01 · Starting point</p>
@@ -59,23 +91,9 @@
             <span>Open printable site plan ↗</span>
           </a>
 
-          <div class="brief-grid" aria-label="Project brief">
-            <article>
-              <h3>Keep</h3>
-              <p>Existing house. Garage access from the rear alley. Quiet Craftsman character.</p>
-            </article>
-            <article>
-              <h3>Resolve</h3>
-              <p>Stair, roof within 20 ft height, garage-office fit, windows, grading, drainage, and utilities.</p>
-            </article>
-            <article class="alert-card">
-              <h3>Open setback question</h3>
-              <p>Current draft shows 3 ft at the north line. Test a 5 ft by-right scheme and confirm whether narrow-lot relief applies.</p>
-            </article>
-            <article class="alert-card">
-              <h3>Open shed question</h3>
-              <p>Keep, move, rebuild, or remove? Owner measurement is 12 × 18 ft; assessor record says 18 × 20 ft. Verify before design development.</p>
-            </article>
+          <div class="open-questions" aria-label="Open site questions">
+            <p><strong>North setback</strong> Current draft shows 3 ft. Test a 5 ft by-right scheme and confirm whether narrow-lot relief applies.</p>
+            <p><strong>Existing shed</strong> Keep, move, rebuild, or remove? Verify its footprint before design development.</p>
           </div>
           <p class="disclaimer">Owner measurements and public records only. Preliminary — not for permitting or construction.</p>
         </section>
