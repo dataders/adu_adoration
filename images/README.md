@@ -12,6 +12,7 @@ All pictures shared while planning the ADU, in roughly the order they were provi
 | `06-satellite-parcel-outline.png` | Aerial with the green parcel boundary drawn |
 | `07-satellite-oblique-3d.png` | Oblique 3D aerial (houses 108 / 112 / 114 labeled) |
 | `08-satellite-apple-scalebar.png` | Apple Maps aerial with a 0–39 ft scale bar |
+| `12-handdrawn-two-level-design-basis.jpg` | Owner's preferred two-level layout sketch; design basis for floor-plan Option E |
 | `source-assessor-sketch-43615.pdf` | Original assessor PDF (source of #04) |
 
 Notes:
