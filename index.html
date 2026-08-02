@@ -3,181 +3,206 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="A concise architectural brief for a proposed detached garage ADU at 112 W 29th St in Richmond, Virginia." />
-    <meta property="og:title" content="112 W 29th St - ADU brief" />
-    <meta property="og:description" content="Recommended floor plan, site information, design direction, and source files." />
-    <meta property="og:image" content="https://adu.anders.omg.lol/images/11-backyard-alley-parking-facing-east.jpg" />
+    <meta name="description" content="Site plan, floor-plan studies, references, and source files for a proposed detached ADU at 112 W 29th St in Richmond, Virginia." />
+    <meta property="og:title" content="112 W 29th St — ADU design brief" />
+    <meta property="og:description" content="A simple working brief for early architectural concepts." />
+    <meta property="og:image" content="https://adu.anders.omg.lol/plan/site-plan.png" />
     <meta property="og:url" content="https://adu.anders.omg.lol/" />
-    <meta name="theme-color" content="#25362d" />
-    <title>112 W 29th St - ADU brief</title>
+    <meta name="theme-color" content="#2f4238" />
+    <title>112 W 29th St — ADU design brief</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <a class="skip-link" href="#main">Skip to content</a>
+    <a class="skip-link" href="#content">Skip to content</a>
 
-    <header class="site-header" id="top">
-      <a class="brand" href="#top">112 W 29th St <span>ADU brief</span></a>
-      <nav aria-label="Primary">
-        <a href="#plan">Plan</a>
-        <a href="#site">Site</a>
-        <a href="#files">Files</a>
-      </nav>
-    </header>
-
-    <main id="main">
-      <section class="hero">
-        <div class="hero-copy">
-          <p class="label">For early architectural concepts</p>
-          <h1>Garage below.<br />One-bedroom home above.</h1>
-          <p class="summary">A compact detached ADU behind a 1931 Craftsman bungalow in Richmond, Virginia.</p>
-          <div class="actions">
-            <a class="button" href="apartment/option-a-living-east.png">Open recommended plan</a>
-            <a class="quiet-link" href="plan/site-plan-architect.pdf">View site plan</a>
-          </div>
+    <main class="page-shell">
+      <header class="brief-header">
+        <div>
+          <p class="eyebrow">Working architect brief</p>
+          <h1>112 W 29th St</h1>
+          <p class="subtitle">Detached garage apartment · Richmond, Virginia</p>
         </div>
-        <figure class="hero-figure">
-          <img src="images/11-backyard-alley-parking-facing-east.jpg" alt="Existing backyard viewed east from the rear alley" />
-          <figcaption>Existing site from the rear alley; proposed building sits left of the shed.</figcaption>
-        </figure>
-        <dl class="fact-strip">
-          <div><dt>Envelope</dt><dd>20 x 24 ft</dd></div>
-          <div><dt>Living area</dt><dd>480 sf gross</dd></div>
-          <div><dt>Height</dt><dd>20 ft max</dd></div>
-          <div><dt>Access</dt><dd>Rear alley</dd></div>
+        <dl class="project-meta">
+          <div><dt>Status</dt><dd>Early concept</dd></div>
+          <div><dt>Living space</dt><dd>480 sf gross</dd></div>
+          <div><dt>Roof height</dt><dd>20 ft planned ridge</dd></div>
         </dl>
-      </section>
+      </header>
 
-      <aside class="warning">
-        <strong>Working brief, not permit drawings.</strong>
-        <span>No boundary survey yet. Field-verify all dimensions and confirm zoning before design development.</span>
-      </aside>
+      <nav class="tab-bar" aria-label="Design brief sections" role="tablist">
+        <button id="tab-summary" role="tab" aria-selected="true" aria-controls="summary" tabindex="0" data-tab="summary">
+          Summary
+        </button>
+        <button id="tab-site" role="tab" aria-selected="false" aria-controls="site" tabindex="-1" data-tab="site">
+          <span>01</span> Site plan draft
+        </button>
+        <button id="tab-floor-plans" role="tab" aria-selected="false" aria-controls="floor-plans" tabindex="-1" data-tab="floor-plans">
+          <span>02</span> Floor plans
+        </button>
+        <button id="tab-inspiration" role="tab" aria-selected="false" aria-controls="inspiration" tabindex="-1" data-tab="inspiration">
+          <span>03</span> Inspiration
+        </button>
+        <button id="tab-files" role="tab" aria-selected="false" aria-controls="files" tabindex="-1" data-tab="files">
+          <span>04</span> Files
+        </button>
+      </nav>
 
-      <section class="brief section-rule">
-        <div class="section-title">
-          <p class="label">The ask</p>
-          <h2>Help us test one clear idea.</h2>
-        </div>
-        <div class="brief-body">
-          <p class="lead">Develop the recommended 20 x 24 ft scheme into rudimentary plans and elevations. Also show whether a conservative 18 x 24 ft envelope materially changes the design.</p>
-          <div class="deliverables">
-            <div><strong>Draw</strong><span>Two floor plans, four elevations, one or two sections</span></div>
-            <div><strong>Resolve</strong><span>Stair geometry, roof/height, garage-office fit, windows</span></div>
-            <div><strong>Preserve</strong><span>Existing shed, alley garage access, simple Craftsman character</span></div>
+      <div id="content" class="tab-content">
+        <section id="summary" class="tab-panel summary-panel" role="tabpanel" aria-labelledby="tab-summary">
+          <div class="summary-heading">
+            <p class="eyebrow">Project at a glance</p>
+            <h2>480 sf above a garage,<br />under a 20 ft ridge.</h2>
+            <p>Three drawings tell the current story. Open any one for a full-size view.</p>
           </div>
-        </div>
-      </section>
 
-      <section id="plan" class="section-rule">
-        <div class="section-title">
-          <p class="label">Recommended scheme</p>
-          <h2>Interior stair. Living toward the yard.</h2>
-          <p>Option A is the best starting point: weather-tight entry, a mostly blank north service wall, and living spaces facing south and east.</p>
-        </div>
-        <a class="plan-image" href="apartment/option-a-living-east.png">
-          <img src="apartment/option-a-living-east.png" alt="Recommended floor-plan study with garage and entry below, and a one-bedroom apartment above" />
-          <span>Open full-size plan</span>
-        </a>
-        <div class="rationale">
-          <div><strong>Stair</strong><span>Interior run along north wall; enter from northeast yard corner</span></div>
-          <div><strong>Upper floor</strong><span>Bedroom west; living, dining, and kitchen south/east</span></div>
-          <div><strong>Wet core</strong><span>Bath and laundry stacked over garage mechanical corner</span></div>
-        </div>
-        <details class="alternates">
-          <summary>Compare two alternate layouts</summary>
-          <div class="alternate-grid">
-            <a href="apartment/option-b-bedroom-east.png">
-              <img src="apartment/option-b-bedroom-east.png" alt="Alternate floor plan with bedroom toward the yard" />
-              <span><strong>Option B</strong> - bedroom toward yard</span>
+          <div class="summary-grid">
+            <a class="summary-card" href="plan/site-plan-architect.pdf">
+              <div class="summary-image"><img src="plan/site-plan.png" alt="Draft site plan showing the proposed ADU behind the house" /></div>
+              <div><span>01 · Site</span><h3>Site plan draft</h3><p>20 × 24 ft footprint north of the existing shed, garage facing the alley.</p></div>
             </a>
-            <a href="apartment/option-c-exterior-stair.png">
-              <img src="apartment/option-c-exterior-stair.png" alt="Alternate floor plan with an exterior yard-side stair" />
-              <span><strong>Option C</strong> - exterior stair, more interior area</span>
+            <a class="summary-card" href="renderings/alley-view-craftsman.png">
+              <div class="summary-image"><img src="renderings/alley-view-craftsman.png" alt="Illustrative view of the proposed ADU from the alley" /></div>
+              <div><span>02 · Exterior</span><h3>Alley-side rendering</h3><p>Working massing and Craftsman character; openings still follow final plan.</p></div>
+            </a>
+            <a class="summary-card" href="apartment/option-c-exterior-stair.png">
+              <div class="summary-image"><img src="apartment/option-c-exterior-stair.png" alt="Option C garage and apartment floor-plan study" /></div>
+              <div><span>03 · Interior</span><h3>Apartment layout · Option C</h3><p>Exterior stair preserves the most usable area inside both levels.</p></div>
             </a>
           </div>
-        </details>
-      </section>
 
-      <section id="site" class="site-section section-rule">
-        <div class="section-title">
-          <p class="label">Site</p>
-          <h2>North of the shed, facing the alley.</h2>
-          <p>Long 45 x 148 ft R-5 lot. Proposed building sits 5 ft from the rear alley and currently 3 ft from the north line.</p>
-          <div class="site-links">
-            <a href="plan/site-plan-architect.pdf">Printable site plan</a>
-            <a href="plan/site-plan.dxf" download>Download CAD</a>
-            <a href="model/site-model-3d.html#yard">Interactive 3D model</a>
+          <div class="summary-note">
+            <strong>Still open</strong>
+            <span>North setback: 3 ft relief or 5 ft by-right?</span>
+            <span>Shed: keep, move, rebuild, or remove?</span>
           </div>
-        </div>
-        <a class="site-plan" href="plan/site-plan-architect.pdf">
-          <img src="plan/site-plan.png" alt="Site plan showing the lot, house, shed, alley, setbacks, and proposed ADU" />
-        </a>
-        <div class="site-notes">
-          <div><strong>North setback</strong><p>3 ft is unresolved. Test a full 5 ft setback and confirm whether narrow-lot relief applies.</p></div>
-          <div><strong>Shed</strong><p>Owner measurement is 12 x 18 ft; assessor record says 18 x 20 ft. Verify in field.</p></div>
-          <div><strong>Survey + utilities</strong><p>Locate boundaries, easements, grade, drainage, overhead lines, water, sewer, and electric.</p></div>
-        </div>
-      </section>
+        </section>
 
-      <section class="visual-section section-rule">
-        <div class="section-title">
-          <p class="label">Character + context</p>
-          <h2>Quiet Craftsman, not a costume.</h2>
-          <p>Sage or olive lap siding, simple gable, wide eaves, divided-light windows, warm red accents, and a wood or carriage-style garage door.</p>
-        </div>
-        <figure class="primary-render">
-          <img src="renderings/alley-view-craftsman.png" alt="Illustrative Craftsman ADU elevation from the alley" />
-          <figcaption>Alley elevation is directional only; window and door locations follow the final plan.</figcaption>
-        </figure>
-        <div class="context-row">
-          <figure><img src="images/11-backyard-alley-parking-facing-east.jpg" alt="Existing backyard viewed east from the alley" /><figcaption>Site from alley</figcaption></figure>
-          <figure><img src="images/09-backyard-shed-facing-west.jpg" alt="Existing metal shed viewed from the garden" /><figcaption>Shed to remain</figcaption></figure>
-          <figure><img src="inspiration/03-craftsman-gray-red-trim-carriage-door.jpg" alt="Craftsman garage reference with gray-green siding and red trim" /><figcaption>Closest character reference</figcaption></figure>
-        </div>
-        <details class="references">
-          <summary>View more visual references</summary>
-          <div class="reference-grid">
-            <img src="inspiration/01-gold-siding-black-windows-bay-tower.jpg" alt="Warm lap siding and dark-window reference" />
-            <img src="inspiration/04-olive-carriage-door-balcony-cottage.jpg" alt="Olive cottage garage reference" />
-            <img src="inspiration/05-brick-shed-roof-black-windows-wood-door.jpg" alt="Brick and wood garage reference" />
-            <img src="inspiration/06-modern-olive-bronze-windows-corner-glass.jpg" alt="Modern olive siding and dark-window reference" />
+        <section id="site" class="tab-panel" role="tabpanel" aria-labelledby="tab-site" hidden>
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Draft 01 · Starting point</p>
+              <h2>ADU north of the shed, garage facing the alley.</h2>
+            </div>
+            <p>Two-story, 20 × 24 ft detached structure. Garage and office below; one-bedroom apartment above. Develop this into a code-aware schematic design.</p>
           </div>
-        </details>
-      </section>
 
-      <section id="files" class="files-section section-rule">
-        <div class="section-title">
-          <p class="label">Files</p>
-          <h2>Working set</h2>
-          <p>These five files are enough to begin. Supporting records stay available below for traceability.</p>
-        </div>
-        <div class="file-list">
-          <a href="apartment/option-a-living-east.png"><strong>Recommended floor plan</strong><span>PNG</span></a>
-          <a href="plan/site-plan.dxf" download><strong>True-scale site plan</strong><span>DXF</span></a>
-          <a href="plan/site-plan-architect.pdf"><strong>Printable site plan</strong><span>PDF</span></a>
-          <a href="model/site-model.obj" download><strong>3D massing model</strong><span>OBJ</span></a>
-          <a href="documents/site-plans-handdrawn-compressed.pdf"><strong>Owner field sketches</strong><span>PDF</span></a>
-        </div>
-        <details class="records">
-          <summary>Supporting property and zoning records</summary>
-          <div>
-            <a href="documents/assessor-building-sketch-43615.pdf">Assessor building sketch</a>
-            <a href="documents/richmond-datascout-report-S0001130005.pdf">DataScout property report</a>
-            <a href="https://rva.gov/planning-development-review/accessory-dwelling-units">Richmond ADU overview</a>
-            <a href="https://www.rva.gov/sites/default/files/2025-06/ADUs%20-%20Customer%20Guide%20-%20June%202025.pdf">Richmond permit guide</a>
-            <a href="https://library.municode.com/va/richmond/codes/code_of_ordinances">Current zoning ordinance</a>
+          <a class="drawing" href="plan/site-plan-architect.pdf" aria-label="Open printable site plan PDF">
+            <img src="plan/site-plan.png" alt="Draft site plan showing lot, existing house and shed, alley, setbacks, and proposed ADU" />
+            <span>Open printable site plan ↗</span>
+          </a>
+
+          <div class="open-questions" aria-label="Open site questions">
+            <p><strong>North setback</strong> Current draft shows 3 ft. Test a 5 ft by-right scheme and confirm whether narrow-lot relief applies.</p>
+            <p><strong>Existing shed</strong> Keep, move, rebuild, or remove? Verify its footprint before design development.</p>
           </div>
-        </details>
-      </section>
+          <p class="disclaimer">Owner measurements and public records only. Preliminary — not for permitting or construction.</p>
+        </section>
 
-      <section class="final-note">
-        <p>Prepared from owner measurements and public records. Preliminary and not for construction.</p>
-        <a class="button" href="mailto:?subject=112%20W%2029th%20St%20ADU%20brief&body=ADU%20brief%3A%20https%3A%2F%2Fadu.anders.omg.lol%2F">Share brief</a>
-      </section>
+        <section id="floor-plans" class="tab-panel" role="tabpanel" aria-labelledby="tab-floor-plans" hidden>
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Plans under consideration</p>
+              <h2>Four ways to organize the same small envelope.</h2>
+            </div>
+            <p>Option A is the current baseline. Option D is the newest roof-aware study. We want the architect to test the strongest direction, not preserve these layouts literally.</p>
+          </div>
+
+          <div class="plan-grid">
+            <a class="plan-card recommended" href="apartment/option-a-living-east.png">
+              <img src="apartment/option-a-living-east.png" alt="Option A floor-plan study with an interior stair and living space facing the yard" />
+              <div><span class="tag">Baseline</span><h3>Option A</h3><p>Interior stair · living toward yard</p></div>
+            </a>
+            <a class="plan-card" href="apartment/option-b-bedroom-east.png">
+              <img src="apartment/option-b-bedroom-east.png" alt="Option B floor-plan study with the bedroom facing the yard" />
+              <div><h3>Option B</h3><p>Interior stair · bedroom toward yard</p></div>
+            </a>
+            <a class="plan-card" href="apartment/option-c-exterior-stair.png">
+              <img src="apartment/option-c-exterior-stair.png" alt="Option C floor-plan study with an exterior stair" />
+              <div><h3>Option C</h3><p>Exterior stair · more interior area</p></div>
+            </a>
+            <a class="plan-card" href="apartment/option-d-south-stair-roof-aware.png">
+              <img src="apartment/option-d-south-stair-roof-aware.png" alt="Option D roof-aware floor-plan study with a south exterior stair and balcony" />
+              <div><span class="tag new">Newest</span><h3>Option D</h3><p>South alley stair · roof-aware kitchen</p></div>
+            </a>
+          </div>
+        </section>
+
+        <section id="inspiration" class="tab-panel" role="tabpanel" aria-labelledby="tab-inspiration" hidden>
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Design direction</p>
+              <h2>Simple, warm, and compatible with the 1931 house.</h2>
+            </div>
+            <p>Olive or muted green lap siding, a legible roof, generous eaves, divided-light windows, warm accents, and a carriage-style garage door. Craftsman influence without imitation.</p>
+          </div>
+
+          <div class="image-grid">
+            <figure class="featured"><img src="renderings/alley-view-craftsman.png" alt="Illustrative Craftsman ADU elevation viewed from the alley" /><figcaption>Current massing and character study</figcaption></figure>
+            <figure><img src="inspiration/03-craftsman-gray-red-trim-carriage-door.jpg" alt="Craftsman garage reference with gray-green siding and red trim" /><figcaption>Color, trim, and garage door</figcaption></figure>
+            <figure><img src="inspiration/04-olive-carriage-door-balcony-cottage.jpg" alt="Olive cottage garage reference with balcony" /><figcaption>Olive siding and balcony</figcaption></figure>
+            <figure><img src="inspiration/02-modern-taupe-shed-roof-awning-windows.jpg" alt="Compact modern outbuilding with a simple roof and awning windows" /><figcaption>Roof and window restraint</figcaption></figure>
+            <figure><img src="inspiration/05-brick-shed-roof-black-windows-wood-door.jpg" alt="Small brick building with black windows and a wood door" /><figcaption>Material warmth</figcaption></figure>
+          </div>
+        </section>
+
+        <section id="files" class="tab-panel" role="tabpanel" aria-labelledby="tab-files" hidden>
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Downloadable working set</p>
+              <h2>Everything needed to start.</h2>
+            </div>
+            <p>CAD and model files are true-scale working references. PDFs and public records provide markup context and traceability.</p>
+          </div>
+
+          <div class="file-list">
+            <a href="plan/site-plan.dxf" download><div><strong>Site plan — CAD</strong><span>True scale · 1 unit = 1 ft</span></div><b>DXF ↓</b></a>
+            <a href="plan/site-plan-architect.pdf"><div><strong>Site plan — printable</strong><span>North arrow, scale bar, title block</span></div><b>PDF ↗</b></a>
+            <a href="model/site-model-3d.html#yard"><div><strong>Interactive site model</strong><span>Orbit, zoom, layers, and preset views</span></div><b>HTML ↗</b></a>
+            <a href="model/site-model.obj" download><div><strong>3D massing model</strong><span>True-scale, feet, Y-up</span></div><b>OBJ ↓</b></a>
+            <a href="documents/site-plans-handdrawn-compressed.pdf"><div><strong>Owner field sketches</strong><span>Original site measurements</span></div><b>PDF ↗</b></a>
+            <a href="documents/assessor-building-sketch-43615.pdf"><div><strong>Assessor building sketch</strong><span>City record reference</span></div><b>PDF ↗</b></a>
+            <a href="documents/richmond-datascout-report-S0001130005.pdf"><div><strong>Property report</strong><span>DataScout public record</span></div><b>PDF ↗</b></a>
+          </div>
+        </section>
+      </div>
+
+      <footer>
+        <p>Last updated August 2026 · Early architectural concepts</p>
+        <a href="mailto:?subject=112%20W%2029th%20St%20ADU%20brief&body=ADU%20brief%3A%20https%3A%2F%2Fadu.anders.omg.lol%2F">Share brief</a>
+      </footer>
     </main>
 
-    <footer>
-      <span>112 W 29th St / Richmond, VA</span>
-      <a href="#top">Back to top</a>
-    </footer>
+    <script>
+      const tabs = [...document.querySelectorAll('[role="tab"]')];
+      const panels = [...document.querySelectorAll('[role="tabpanel"]')];
+
+      function selectTab(tab, updateHash = true) {
+        tabs.forEach((item) => {
+          const active = item === tab;
+          item.setAttribute('aria-selected', active);
+          item.tabIndex = active ? 0 : -1;
+        });
+        panels.forEach((panel) => { panel.hidden = panel.id !== tab.dataset.tab; });
+        if (updateHash) history.replaceState(null, '', `#${tab.dataset.tab}`);
+      }
+
+      tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => selectTab(tab));
+        tab.addEventListener('keydown', (event) => {
+          if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+          event.preventDefault();
+          let next = index;
+          if (event.key === 'ArrowRight') next = (index + 1) % tabs.length;
+          if (event.key === 'ArrowLeft') next = (index - 1 + tabs.length) % tabs.length;
+          if (event.key === 'Home') next = 0;
+          if (event.key === 'End') next = tabs.length - 1;
+          selectTab(tabs[next]);
+          tabs[next].focus();
+        });
+      });
+
+      const initialTab = tabs.find((tab) => `#${tab.dataset.tab}` === window.location.hash);
+      if (initialTab) selectTab(initialTab, false);
+    </script>
   </body>
 </html>
