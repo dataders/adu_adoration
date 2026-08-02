@@ -95,6 +95,17 @@ blockquote p { margin: 0; }
 .decision-row { margin-top: 1.4rem; padding: 1.3rem 1.5rem; display: grid; grid-template-columns: 180px 1fr; gap: 1.5rem; background: var(--paper-deep); }
 .decision-row span { color: var(--red); font-size: .7rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
 .decision-row p { margin: 0; }
+.decision-row a { color: var(--green); font-weight: 700; text-underline-offset: .2em; }
+.layout-list { display: grid; gap: 1.2rem; }
+.layout-card { display: grid; grid-template-columns: 270px minmax(0, 1fr); gap: 1rem; padding: 8px; background: var(--white); border: 1px solid var(--line); }
+.layout-card.recommended { border-top: 5px solid var(--red); }
+.layout-copy { padding: 1.2rem; align-self: center; }
+.layout-copy h3 { font-family: Georgia, serif; font-size: 1.55rem; font-weight: 400; }
+.layout-copy > p:not(.floor-label) { color: var(--muted); font-size: .86rem; }
+.layout-copy > a { color: var(--green); font-size: .76rem; font-weight: 750; text-underline-offset: .2em; }
+.layout-card > a { display: block; overflow: hidden; background: #f7f7f5; }
+.layout-card img { width: 100%; height: 320px; object-fit: cover; object-position: center top; transition: transform .2s ease; }
+.layout-card > a:hover img { transform: scale(1.01); }
 .full-bleed-section { position: relative; border: 0; color: white; }
 .full-bleed-section::before { content: ""; position: absolute; z-index: -1; inset: 0 calc((100vw - 100%) / -2); background: var(--green); }
 .light { color: white; }
@@ -178,6 +189,8 @@ footer a { color: white; }
   .split-heading .button { margin-top: 1rem; }
   .facts-grid { grid-template-columns: 1fr 1fr; }
   .program-grid, .render-grid, .render-grid.single-render, .photo-grid { grid-template-columns: 1fr; }
+  .layout-card { grid-template-columns: 1fr; }
+  .layout-card img { height: auto; }
   .photo-grid .photo-wide { grid-column: auto; }
   .photo-grid img, .photo-grid .photo-wide img { height: auto; max-height: none; }
   .decision-row { grid-template-columns: 1fr; gap: .4rem; }
