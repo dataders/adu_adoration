@@ -3,7 +3,8 @@
 Building envelope (from plan/generate_site_plan.py): 24 ft east-west x 20 ft
 north-south, two stories, garage below / apartment above. Drawn north-up to
 match the site plan: alley = left (west), yard & main house = right (east),
-property line 3 ft off the top (north) edge, shed 4 ft off the bottom (south).
+property line 5 ft off the top (north) edge. The selected replacement shed is
+9 ft south of the building shell and 5 ft clear of the exterior stair.
 
 Coordinate system: 1 unit = 1 foot, origin at the SW *exterior* corner of the
 building, X = east, Y = north. Exterior walls 6" nominal -> interior clear
@@ -322,14 +323,14 @@ class Plan:
         self.text(
             BW / 2,
             BH + 0.65,
-            "north &#8593; &#183; property line 3' &#8212; keep this wall (nearly) window-free",
+            "north &#8593; &#183; property line 5' &#8212; keep this wall (nearly) window-free",
             size=9,
             fill=NOTEC,
         )
         self.text(
             BW / 2,
             south_y,
-            south_text or "south &#183; shed 4' away &#183; best all-day sun",
+            south_text or "south &#183; replacement shed 9' from building &#183; best all-day sun",
             size=9,
             fill=NOTEC,
         )
@@ -787,7 +788,7 @@ def lower_e(p):
     p.label(18.8, 12.3, "sunroom", "directly below office", size=11.5)
 
     # East patio is exterior, not part of the sunroom footprint.
-    p.rect(24.0, 0.5, 3.5, 19.0, "#f6f6f3", stroke="#c9cdd3", sw=1, dash="6 4", layer=p.mid)
+    p.rect(24.0, 0.0, 3.5, 19.5, "#f6f6f3", stroke="#c9cdd3", sw=1, dash="6 4", layer=p.mid)
     for yy in (1.0, 9.25, 18.0):
         p.rect(26.65, yy, 0.55, 0.55, "#dadde1", stroke="#aeb3ba", sw=1, layer=p.over)
     p.text(25.7, 10.0, "PATIO", size=9, fill="#7d838d", rotate=90)
@@ -802,9 +803,13 @@ def lower_e(p):
     p.label(6.5, 11.0, "garage", "vehicle depth to verify", size=11.5)
 
     # Exterior stair starts at the west alley and rises east along south wall.
+    # After the flight, the raised landing shelters a usable level-1 patio that
+    # continues around the southeast corner into the east patio.
     p.stair(0.5, -4.0, 11.0, 4.0, direction="e", updown="UP", n=13)
-    p.rect(11.5, -4.0, 12.5, 4.0, "none", stroke="#c9cdd3", sw=1, dash="6 4", layer=p.mid)
-    p.text(17.75, -2.0, "upper landing / walk to east patio above", size=8.2, fill="#8d939c")
+    p.rect(11.5, -4.0, 16.0, 4.0, "#eef5ed", stroke="#9caf9a", sw=1, dash="6 4", layer=p.mid)
+    p.line(24.0, 0.0, 27.5, 0.0, stroke="#f6f6f3", sw=3.2)
+    p.text(19.5, -1.55, "COVERED SOUTH PATIO", size=8.7, fill="#668064")
+    p.text(19.5, -2.55, "16' x 4' overall &#183; upper landing above", size=7.8, fill="#7b8e79")
     p.text(5.9, -4.55, "alley entry &#8592; stair rises east", size=9, fill=NOTEC)
     p.dims(yb=-5.7)
 
@@ -813,13 +818,14 @@ def upper_e(p):
     """Primary upper plan: owner sketch geometry with roof-aware kitchen."""
     # Patio/balcony stacks directly over the level-1 east patio. South stair
     # reaches it through a narrow top-landing walkway around the SE corner.
-    p.rect(24.0, 0.5, 3.5, 19.0, "#f6f6f3", stroke="#c9cdd3", sw=1, dash="6 4", layer=p.mid)
+    p.rect(24.0, 0.0, 3.5, 19.5, "#f6f6f3", stroke="#c9cdd3", sw=1, dash="6 4", layer=p.mid)
     for yy in (1.0, 9.25, 18.0):
         p.rect(26.65, yy, 0.55, 0.55, "#dadde1", stroke="#aeb3ba", sw=1, layer=p.over)
     p.text(25.7, 10.0, "UPPER PATIO / BALCONY", size=8.5, fill="#7d838d", rotate=90)
     p.stair(0.5, -4.0, 11.0, 4.0, direction="w", updown="DN", n=13)
-    p.rect(11.5, -4.0, 12.5, 4.0, "#f6f6f6", stroke="#c9cdd3", sw=1, layer=p.mid)
-    p.text(17.75, -2.0, "top landing / walk to east patio", size=8.5, fill="#7d838d")
+    p.rect(11.5, -4.0, 16.0, 4.0, "#f6f6f6", stroke="#c9cdd3", sw=1, layer=p.mid)
+    p.line(24.0, 0.0, 27.5, 0.0, stroke="#f6f6f3", sw=3.2)
+    p.text(19.5, -2.0, "top landing connects directly to upper patio", size=8.5, fill="#7d838d")
     p.text(5.9, -4.55, "alley entry &#8592; stair rises east", size=9, fill=NOTEC)
 
     p.shell()
@@ -1044,24 +1050,24 @@ if __name__ == "__main__":
                 "&#8226; PRO: direct alley access; straight south stair arrives at a covered SE balcony without consuming apartment or garage area.",
                 "&#8226; PRO: fridge + tall kitchen cabinets sit on the east gable end near the E-W ridge, not beneath a north/south roof slope.",
                 "&#8226; ROOF CHECK: headroom bands are diagrammatic; final section must verify floor elevation, joist depth, insulation, and 7' ceiling compliance.",
-                "&#8226; SITE CHECK: current shed is only 4' south of ADU; relocate/rebuild shed or revise footprint to obtain practical fire + maintenance clearance.",
+                "&#8226; SITE RESPONSE: selected 18' x 6' replacement shed sits on the south 5' setback, leaving 5' clear before the stair; verify fire + maintenance details.",
             ],
         ),
         (
             "option-e-primary-design-basis.svg",
             "Option E &#8212; PRIMARY DESIGN BASIS &#183; owner sketch corrected",
-            "South alley stair + stacked east patios &#183; garage/bath/office/sunroom below "
+            "South alley stair + covered lower patio + stacked east patios &#183; garage/bath/office/sunroom below "
             "&#183; west bedroom + roof-aware open kitchen/living above",
             upper_e,
             False,
             [
                 "&#8226; DESIGN BASIS: preserves the owner's two-level sketch, west bedroom/bath core, central TV wall, open living room, and stacked east patios.",
                 "&#8226; KITCHEN FIX: fridge + pantry move to the full-height east gable; sink/range island sits beneath the E-W ridge, clear of low north/south eaves.",
-                "&#8226; LEVEL 1: garage left; bath north-center; office northeast; sunroom directly below office; patio outside the east wall &#8212; matching the sketch.",
+                "&#8226; LEVEL 1: garage left; bath north-center; office northeast; sunroom below; covered south patio connects around the corner to the east patio.",
                 "&#8226; LEVEL 2 ENTRY: south stair and top landing lead to an east patio directly above level 1; apartment entry is a sliding glass door.",
                 "&#8226; GARAGE CHECK: exact sketch proportions leave only about 13'-6\" clear depth; enlarge/rebalance footprint or reduce sunroom width for a typical 16' car.",
                 "&#8226; AREA/ZONING CHECK: confirm whether enclosed office/sunroom count as ADU living area; upper level alone is 480 sf gross against the working 500 sf cap.",
-                "&#8226; ROOF/SITE CHECK: verify section/headroom and relocate/rebuild shed for safe stair, fire, drainage, and maintenance clearance.",
+                "&#8226; ROOF/SITE CHECK: verify section/headroom and the selected 5' shed-to-stair zone for safe fire, drainage, and maintenance clearance.",
             ],
         ),
     ]
@@ -1079,7 +1085,7 @@ if __name__ == "__main__":
             east_x=east_x,
             extra_bottom=190 if is_south_stair else 0,
             upper_south_note=(
-                "south stair zone &#183; existing shed clearance must increase from 4'"
+                "south stair zone &#183; 5' clear to selected 18' x 6' replacement shed"
                 if is_south_stair
                 else None
             ),

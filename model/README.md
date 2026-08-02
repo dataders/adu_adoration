@@ -1,8 +1,8 @@
-# 3D lot model — house, shed, proposed ADU
+# 3D lot model — house, replacement shed, proposed ADU
 
 True-scale 3D massing model of the whole lot (1 unit = 1 foot), built from the same
 measured geometry as [`plan/generate_site_plan.py`](../plan/generate_site_plan.py):
-45×148 lot, existing 1931 house (with porch + deck), 12×18 shed, and the proposed
+45×148 lot, existing 1931 house (with porch + deck), selected low-profile 18×6 replacement shed, and the proposed
 20×24 two-story ADU at the R-5 20 ft accessory height cap, plus approximate massing
 of the two neighboring houses for context.
 
@@ -24,9 +24,9 @@ of the two neighboring houses for context.
 | building | eave | ridge | notes |
 |---|---|---|---|
 | house | 10′ | 20′ | 1-story, gable ridge E–W, green siding |
-| shed | 7.5′ | 10.8′ | corrugated metal, red slider on east gable end |
+| replacement shed | 7′ | 9.5′ | 18×6 low-profile massing, red slider on east gable end |
 | ADU | 16′ | 20′ | two-story at the §30-680.4 20′ accessory cap |
 
 Footprints and setbacks are the measured/confirmed values from the site plan
-(front setback 25′, ADU 5′ off alley / 3′ off north line — variance required).
+(front setback 25′, ADU 5′ off alley / 5′ off north line).
 Preliminary massing only — not for construction.

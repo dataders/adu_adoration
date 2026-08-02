@@ -9,9 +9,10 @@ backyard of **112 W 29th St** (PID 43615 / PIN S0001130005), Richmond, VA 23225.
 - House: **1,303 sf, one story**, built **1931** ("1 Sty Oldest" style), gable roof, green wood siding,
   3 bed / 2 bath, heat pump, hardwood floors. Plus a **138 sf wood deck (SW)** and **87 sf open front porch (NE)**.
 - Orientation: house faces the **street on the east (front)**; an **alley runs along the west (rear)**.
-- Outbuilding: the owner uses a **12 × 18 shed** fixed in the **southwest corner**, 8 ft off the alley, 6 ft off
-  the south line. ⚠️ The assessor record logs this as a **360 sf detached garage (18×20)** — the owner says that
-  measurement is wrong; we use 12 × 18, but the larger figure would tighten the lot-coverage and footprint math.
+- Outbuilding: the current **12 × 18 shed** in the southwest corner conflicts with Option E access and is
+  designated for removal. Selected replacement is a **low-profile 18 × 6 shed (108 sf)**, 8 ft off the alley
+  with the south edge of its maximum envelope on the 5-ft side setback. The assessor record logs the old structure as a 360 sf
+  detached garage (18×20); field-verify removal scope and records during permitting.
 - 2026 assessment: land $87,000 + improvements $324,000 = **$411,000**.
 
 ## Current design direction
@@ -19,10 +20,22 @@ A **20 × 24 ft, ≤20 ft tall, two-story detached ADU** — garage/office below
 at the rear, garage door facing the alley, just north of the shed.
 
 **Primary floor-plan design basis: Option E.** It translates the owner's two-level sketch into the
-20 × 24 envelope: garage/bath/office/sunroom below; bedroom/bath-laundry/open living above; exterior
-stair from the alley along the south side to stacked east patios. Apartment entry is a sliding glass
-door from the upper patio. Refrigerator and pantry sit on the full-height east gable,
+20 × 24 enclosed envelope: garage/bath/office/sunroom below; bedroom/bath-laundry/open living above;
+4-ft-deep exterior stair/landing from the alley along the south side to 3-ft-6-in-deep stacked east
+patios. Apartment entry is a sliding glass door from the upper patio. Refrigerator and pantry sit
+on the full-height east gable,
 with the sink/range island beneath the E–W ridge. See [`apartment/`](apartment/).
+The 4-ft-deep upper landing wraps around the southeast corner to the patio's outer edge, creating a
+full 3-ft-6-in-wide open connection into the upper patio rather than stopping at the ADU wall. After
+the 11-ft stair flight, the raised landing also shelters a 16 × 4 ft covered level-1 south patio
+(12 ft 6 in × 4 ft directly along the south wall) that connects around the corner to the east patio.
+
+**Selected site response:** remove the current 12 × 18 shed and replace it with a low-profile 18 × 6
+shed on the southern 5-ft setback. Its north edge sits 5 ft south of the Option E stair, creating a
+usable circulation, drainage, and maintenance strip while preserving 108 sf of storage. Treat 18 × 6
+as the maximum outer envelope; roof edges, gutters, and foundations must remain inside it. Including
+exterior circulation, Option E extends from 5 ft to 32.5 ft off the alley and from 16 ft to 40 ft
+north-south, while the enclosed building remains 24 × 20 ft.
 
 By-right in R-5 (5 ft side + 5 ft rear setbacks; 20 ft accessory height cap; accessory footprint ≤ house
 footprint; ADU living area ≤ greater of 500 sf or 1/3 of the house = 500 sf cap). A 24×24 was ruled out —
@@ -34,9 +47,10 @@ footprint; ADU living area ≤ greater of 500 sf or 1/3 of the house = 500 sf ca
 - Resulting **deck-to-shed clear distance ≈ 40 ft** — the earlier ~17 ft figure was a mismeasurement.
 
 ## Open questions
-- **North side setback:** current plan shows 3 ft, which is **below the R-5 by-right minimum of 5 ft** and
-  would require a Board of Zoning Appeals variance. The by-right alternative is an 18-ft-wide ADU at 5 ft.
-- **Shed footprint:** 12 × 18 (owner) vs 360 sf detached garage (assessor record).
+- **North side setback:** current plan places the ADU at the **5-ft R-5 minimum**; no north-setback
+  variance is assumed.
+- **Shed records:** reconcile removal of the field-measured 12 × 18 shed with the assessor's 360 sf
+  detached-garage record.
 
 ## Repo layout
 - [`apartment/`](apartment/) — floor-plan studies for the 1-bed apartment (level 2) and garage
@@ -48,9 +62,9 @@ footprint; ADU living area ≤ greater of 500 sf or 1/3 of the house = 500 sf ca
   - **`site-model.obj`** (+ `.mtl`) — true-scale OBJ (feet, Y-up) for SketchUp / Blender.
   - `generate_3d_model.py` — regenerates both: `python3 model/generate_3d_model.py` (no deps).
 - [`plan/`](plan/) — the site plan in several formats:
-  - **`site-plan.dxf`** — true-scale CAD file (1 unit = 1 ft, layered: lot / house / shed / ADU /
-    R-5 setbacks / dims / text). This is the file to hand an architect — opens in AutoCAD, Revit,
-    SketchUp, etc.
+  - **`site-plan.dxf`** — true-scale CAD file (1 unit = 1 ft, layered: lot / house / existing shed
+    removal / replacement shed / Option E ADU / exterior access / R-5 setbacks / dims / text). This is the file to hand an
+    architect — opens in AutoCAD, Revit, SketchUp, etc.
   - **`site-plan-architect.pdf`** — printable/markup version of the DXF (north arrow, scale bar, title block).
   - `site-plan.svg` / `site-plan.png` — the quick colored diagram. Render with
     `rsvg-convert -w 1920 -h 880 site-plan.svg -o site-plan.png` (cairosvg has no cairo lib here).
