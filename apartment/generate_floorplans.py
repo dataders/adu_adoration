@@ -9,13 +9,13 @@ Coordinate system: 1 unit = 1 foot, origin at the SW *exterior* corner of the
 building, X = east, Y = north. Exterior walls 6" nominal -> interior clear
 23'-0" x 19'-0" = 437 sf net (480 sf gross).
 
-Three schemes share one plumbing core (bath+laundry NW, stacked over a garage
-mech corner) so you can compare zone swaps apples-to-apples:
+Four schemes compare interior/exterior access and room placement:
   A - interior stair on the blank north wall, LIVING toward the yard (east)
   B - same core, BEDROOM toward the yard (east), kitchen on the west wall
   C - EXTERIOR stair on the east face: no stair inside, biggest apartment
+  D - EXTERIOR stair from the alley along the south face; roof-aware layout
 
-Run:  python3 apartment/generate_floorplans.py
+Run:  uv run python3 apartment/generate_floorplans.py
 PNGs are rendered with headless chromium if available (rsvg-convert as
 fallback). Iterate by editing the option_* functions and re-running.
 """
@@ -305,19 +305,17 @@ class Plan:
         self.text(x + 7.75, y + 3.1 - 0.2, "car (typ. 16' x 6')", size=9, fill="#9aa0a9")
 
     # ---- annotations around the plan ----
-    def dims(self):
-        yb = -1.3
+    def dims(self, yb=-1.3, xl=-1.3):
         self.line(0, yb, BW, yb, stroke=DIMC, sw=1)
         for xx in (0, BW):
             self.line(xx, yb - 0.3, xx, yb + 0.3, stroke=DIMC, sw=1)
         self.text(BW / 2, yb - 0.85, "24'-0\"", size=10.5, fill=DIMC)
-        xl = -1.3
         self.line(xl, 0, xl, BH, stroke=DIMC, sw=1)
         for yy in (0, BH):
             self.line(xl - 0.3, yy, xl + 0.3, yy, stroke=DIMC, sw=1)
         self.text(xl - 0.55, BH / 2, "20'-0\"", size=10.5, fill=DIMC, rotate=-90)
 
-    def context(self, title, east_x=None):
+    def context(self, title, east_x=None, south_text=None, south_y=-2.9):
         self.text(BW / 2, BH + 1.75, title, size=13, weight="bold")
         self.text(
             BW / 2,
@@ -327,7 +325,11 @@ class Plan:
             fill=NOTEC,
         )
         self.text(
-            BW / 2, -2.9, "south &#183; shed 4' away &#183; best all-day sun", size=9, fill=NOTEC
+            BW / 2,
+            south_y,
+            south_text or "south &#183; shed 4' away &#183; best all-day sun",
+            size=9,
+            fill=NOTEC,
         )
         self.text(
             -3.4,
@@ -406,7 +408,7 @@ def notes_block(x, y, lines):
     return out
 
 
-def garage_plan(p, with_stair=True):
+def garage_plan(p, with_stair=True, south_stair=False):
     p.shell()
     p.tint(0.5, 0.5, 23.0, 19.0, "garage")
     # north service band: mech + bench (plumbing stacks under the bath)
@@ -419,7 +421,13 @@ def garage_plan(p, with_stair=True):
         f'stroke-width="1.1"/>'
     )
     p.text(7.6, 18.1, "WH", size=8.5, fill="#8d939c")
-    p.text(4.9, 16.55, "plumbing drops from bath above", size=8, fill="#8d939c")
+    p.text(
+        4.9,
+        16.55,
+        "utilities route to west-center bath above" if south_stair else "plumbing drops from bath above",
+        size=8,
+        fill="#8d939c",
+    )
 
     if with_stair:
         p.wall(10.2, 16.0, 13.3, INT)
@@ -448,7 +456,24 @@ def garage_plan(p, with_stair=True):
     p.window(19.5, 0, 2.5, wall="h")
     p.window(23.5, 3.5, 2.5, wall="v")
     p.label(9.0, 8.8, "garage / shop", "one bay + wall of storage", size=12)
-    p.dims()
+    if south_stair:
+        p.stair(0.5, -4.0, 11.0, 4.0, direction="e", updown="UP", n=13)
+        p.rect(
+            11.5,
+            -4.0,
+            12.5,
+            4.0,
+            "none",
+            stroke="#c9cdd3",
+            sw=1,
+            dash="6 4",
+            layer=p.mid,
+        )
+        p.text(17.75, -2.0, "balcony above", size=8.5, fill="#8d939c")
+        p.text(5.9, -4.55, "alley entry &#8592; stair rises east", size=9, fill=NOTEC)
+        p.dims(yb=-5.7)
+    else:
+        p.dims()
 
 
 # --------------------------------------------------------------------------
@@ -628,6 +653,92 @@ def upper_c(p):
 
 
 # --------------------------------------------------------------------------
+# Option D - exterior stair from alley along south face; roof-aware layout
+# --------------------------------------------------------------------------
+
+
+def roof_headroom_guide(p):
+    """Diagrammatic headroom bands for current E-W ridge / 16' eave massing.
+
+    Exact bands depend on final floor elevation, structure depth, and roof
+    assembly. They are deliberately conservative prompts for section design,
+    not construction dimensions.
+    """
+    p.rect(0.5, 0.5, 23.0, 2.5, "#eceff2", opacity=0.72, layer=p.under)
+    p.rect(0.5, 17.0, 23.0, 2.5, "#eceff2", opacity=0.72, layer=p.under)
+    p.line(0.5, 10.0, 23.5, 10.0, stroke="#9a7b42", sw=1.2, dash="7 4")
+    p.text(12.0, 10.35, "E-W ROOF RIDGE / HIGHEST HEADROOM", size=8.5, fill="#8a6b35")
+    p.text(15.4, 18.15, "LOW EAVE ZONE &#8212; storage / low fixtures", size=8, fill="#7d838d")
+
+
+def upper_d(p):
+    # Four-foot-deep covered stair starts at the alley (west) and climbs east.
+    # Top landing continues as a balcony to the apartment door at the SE corner.
+    p.stair(0.5, -4.0, 11.0, 4.0, direction="w", updown="DN", n=13)
+    p.rect(11.5, -4.0, 12.5, 4.0, "#f6f6f6", stroke="#c9cdd3", sw=1, layer=p.mid)
+    p.text(17.75, -2.0, "covered balcony / top landing", size=8.5, fill="#7d838d")
+    p.text(5.9, -4.55, "alley entry &#8592; stair rises east", size=9, fill=NOTEC)
+
+    p.shell()
+    roof_headroom_guide(p)
+
+    # Entry from the south balcony. Tall elements stay away from sloping eaves.
+    p.door(20.0, 0.0, 3.0, wall="h", t=EXT, hinge="right", swing=1)
+
+    # Bath sits beside the ridge instead of under the north eave. Storage above
+    # it occupies the lower north-roof zone.
+    p.tint(0.5, 10.0, 6.4, 6.2, "bath")
+    p.wall(6.9, 10.0, INT, 6.2)
+    p.wall(0.5, 16.2, 6.73, INT)
+    p.slider(6.9, 11.0, 2.4, wall="v")
+    p.shower(0.7, 10.4, 3.0, 3.0)
+    p.toilet(4.45, 10.7, face="s")
+    p.vanity(0.7, 13.75, 2.4, 1.75)
+    p.wd(4.35, 13.65)
+    p.window(0, 12.2, 2.0, wall="v")
+    p.label(3.6, 15.8, "bath + W/D", None, size=10.5)
+    p.tint(0.5, 16.53, 6.4, 2.97, "hall")
+    p.text(3.6, 17.7, "linen / seasonal storage", size=8.5, fill="#8d939c")
+
+    # Compact west bedroom: bed occupies low south-eave zone; standing route
+    # and closet sit nearer the ridge.
+    p.tint(0.5, 0.5, 9.7, 9.5, "bed")
+    p.wall(10.2, 0.5, INT, 9.5)
+    p.wall(0.5, 10.0, 10.03, INT)
+    p.door(10.2, 7.1, 2.4, wall="v", hinge="right", swing=1)
+    p.wall(0.5, 8.0, 6.0, INT)
+    p.slider(1.0, 8.0, 5.0, wall="h")
+    p.text(3.5, 9.0, "closet 6'", size=8.5, fill="#8d939c")
+    p.bed_q(0.9, 1.2, head="w")
+    p.furn(0.9, 6.45, 1.4, 1.3, "nt")
+    p.furn(7.2, 0.85, 2.8, 1.5, "dresser")
+    p.window(0, 3.3, 2.5, wall="v")
+    p.label(7.2, 7.4, "bedroom", "9'-8\" x 9'-6\" &#183; 92 sf", size=11.5)
+
+    # Kitchen uses the east gable wall in its high center band. Fridge and wall
+    # cabinets no longer sit under a north/south roof slope.
+    p.tint(19.6, 5.6, 3.9, 9.5, "kitchen")
+    p.counter(21.33, 6.2, 2.17, 8.9)
+    p.sink(21.57, 7.0, w=1.7, h=1.3)
+    p.range_(21.33, 9.4, w=2.17, h=2.5)
+    p.fridge(20.9, 12.15, w=2.5, h=2.6)
+    p.window(23.5, 7.0, 2.0, wall="v")
+    p.text(20.25, 11.0, "full-height", size=8, fill="#8d939c", rotate=-90)
+    p.text(20.95, 11.0, "gable-wall kitchen", size=8.5, fill="#6f6250", rotate=-90)
+
+    # Open living/dining remains on south/east side and receives balcony entry.
+    p.tint(10.53, 0.5, 9.07, 15.0, "living")
+    p.sofa(11.0, 2.7, 3.0, 6.2, back="w")
+    p.furn(14.6, 4.0, 3.4, 1.8, "coffee")
+    p.table(13.2, 11.7, 4.2, 2.6)
+    p.furn(18.35, 5.3, 1.1, 2.5, "tv")
+    p.window(15.0, 0, 2.5, wall="h")
+    p.window(23.5, 3.5, 1.8, wall="v")
+    p.label(15.5, 2.25, "living / dining", "balcony entry + S/E light", size=12.5)
+    p.dims(yb=-5.7)
+
+
+# --------------------------------------------------------------------------
 # Sheet assembly
 # --------------------------------------------------------------------------
 
@@ -637,21 +748,42 @@ SHEET_W = LM + PLAN_W + GAP + PLAN_W + RM
 PLAN_TOP = 156
 
 
-def make_sheet(fname, name, sub, upper_fn, notes, with_stair=True, east_x=None):
+def make_sheet(
+    fname,
+    name,
+    sub,
+    upper_fn,
+    notes,
+    with_stair=True,
+    east_x=None,
+    extra_bottom=0,
+    upper_south_note=None,
+    upper_south_y=-2.9,
+    south_stair=False,
+):
     plan_h = int(BH * S)
-    notes_y = PLAN_TOP + plan_h + 120
+    notes_y = PLAN_TOP + plan_h + 120 + extra_bottom
     H = notes_y + 17 * len(notes) + 46
     body = []
     body += title_block(None, SHEET_W, name, sub, notes)
 
     g = Plan(LM, PLAN_TOP)
-    garage_plan(g, with_stair=with_stair)
-    g.context("LEVEL 1 &#8212; garage / entry")
+    garage_plan(g, with_stair=with_stair, south_stair=south_stair)
+    g.context(
+        "LEVEL 1 &#8212; garage / entry",
+        south_text=upper_south_note if south_stair else None,
+        south_y=upper_south_y if south_stair else -2.9,
+    )
     body.append(g.svg())
 
     u = Plan(LM + PLAN_W + GAP, PLAN_TOP)
     upper_fn(u)
-    u.context("LEVEL 2 &#8212; apartment &#183; 480 sf gross / 437 sf net", east_x=east_x)
+    u.context(
+        "LEVEL 2 &#8212; apartment &#183; 480 sf gross / 437 sf net",
+        east_x=east_x,
+        south_text=upper_south_note,
+        south_y=upper_south_y,
+    )
     body.append(u.svg())
 
     body += notes_block(46, notes_y, notes)
@@ -752,8 +884,37 @@ if __name__ == "__main__":
                 "&#8226; CON: harder aging-in-place story; exterior stairs need real detailing (covered, lit, guard) to not look tacked-on.",
             ],
         ),
+        (
+            "option-d-south-stair-roof-aware.svg",
+            "Option D &#8212; alley stair + south balcony &#183; roof-aware plan",
+            "Covered stair rises east along south face &#183; kitchen moves to high gable-end zone "
+            "&#183; low eave bands hold bed, seating, and storage",
+            upper_d,
+            False,
+            [
+                "&#8226; PRO: direct alley access; straight south stair arrives at a covered SE balcony without consuming apartment or garage area.",
+                "&#8226; PRO: fridge + tall kitchen cabinets sit on the east gable end near the E-W ridge, not beneath a north/south roof slope.",
+                "&#8226; ROOF CHECK: headroom bands are diagrammatic; final section must verify floor elevation, joist depth, insulation, and 7' ceiling compliance.",
+                "&#8226; SITE CHECK: current shed is only 4' south of ADU; relocate/rebuild shed or revise footprint to obtain practical fire + maintenance clearance.",
+            ],
+        ),
     ]
     for fname, name, sub, fn, with_stair, notes in sheets:
         east_x = BW + 5.6 if fn is upper_c else None
-        path, w, h = make_sheet(fname, name, sub, fn, notes, with_stair=with_stair, east_x=east_x)
+        is_d = fn is upper_d
+        path, w, h = make_sheet(
+            fname,
+            name,
+            sub,
+            fn,
+            notes,
+            with_stair=with_stair,
+            east_x=east_x,
+            extra_bottom=190 if is_d else 0,
+            upper_south_note=(
+                "south stair zone &#183; existing shed clearance must increase from 4'" if is_d else None
+            ),
+            upper_south_y=-7.1 if is_d else -2.9,
+            south_stair=is_d,
+        )
         to_png(path, w, h)

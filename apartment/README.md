@@ -1,7 +1,7 @@
 # Apartment layout — the 1-bed above the garage
 
 How to plan (and keep iterating) the ~480 sf apartment on level 2 of the
-20 × 24 ADU. Three worked schemes live here as full sheets (garage level +
+20 × 24 ADU. Four worked schemes live here as full sheets (garage level +
 apartment level, furnished, annotated):
 
 | sheet | stair | bedroom | living | headline trade |
@@ -9,8 +9,9 @@ apartment level, furnished, annotated):
 | [`option-a-living-east`](option-a-living-east.png) | interior, north wall | west (alley) | east + south | living gets the yard view; bedroom sits over the garage door |
 | [`option-b-bedroom-east`](option-b-bedroom-east.png) | interior, north wall | east (yard) | center + south | quiet bright bedroom; living loses the yard view |
 | [`option-c-exterior-stair`](option-c-exterior-stair.png) | **exterior**, east face | west (alley) | east + south | ~46 sf more apartment *and* garage; you arrive outside |
+| [`option-d-south-stair-roof-aware`](option-d-south-stair-roof-aware.png) | **exterior**, south face from alley | west (alley) | center + east | direct alley stair; kitchen moves to full-height gable zone; shed must move |
 
-Regenerate after editing: `python3 apartment/generate_floorplans.py`
+Regenerate after editing: `uv run python3 apartment/generate_floorplans.py`
 (pure-stdlib Python → SVG; PNGs render via the local headless chromium,
 or `rsvg-convert` if present).
 
@@ -37,6 +38,16 @@ the repo README:
    likely have a low-ish plate or some sloped ceiling. Put low-headroom
    zones over things that don't need standing height at the edges: the bed,
    the tub, closets — not the kitchen counter.
+
+   **Roof warning:** A–C are plan studies, not section-verified layouts. Current
+   massing uses an E–W ridge with 16' eaves and a 20' ridge, so ceiling height
+   falls toward the north and south walls. At the working 9'-6" floor-to-floor
+   assumption, the roof exterior is only about 6'-6" above the upper floor at
+   the eaves before subtracting roof structure and finishes, so a full-height
+   refrigerator cannot sit against those walls. Option D responds by moving the tall
+   kitchen to the east gable-end wall near the ridge and pulling standing bath
+   fixtures into the central high-headroom band. Final floor/roof section still
+   controls; changing roof overhang alone does not create interior headroom.
 
 ## The three decisions that ARE the layout
 
