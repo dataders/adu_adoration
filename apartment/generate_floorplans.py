@@ -9,11 +9,13 @@ Coordinate system: 1 unit = 1 foot, origin at the SW *exterior* corner of the
 building, X = east, Y = north. Exterior walls 6" nominal -> interior clear
 23'-0" x 19'-0" = 437 sf net (480 sf gross).
 
-Four schemes compare interior/exterior access and room placement:
+Five schemes compare interior/exterior access and room placement:
   A - interior stair on the blank north wall, LIVING toward the yard (east)
   B - same core, BEDROOM toward the yard (east), kitchen on the west wall
   C - EXTERIOR stair on the east face: no stair inside, biggest apartment
   D - EXTERIOR stair from the alley along the south face; roof-aware layout
+  E - PRIMARY DESIGN BASIS from the owner's sketch; two-level program,
+      south alley stair, and roof-aware kitchen
 
 Run:  uv run python3 apartment/generate_floorplans.py
 PNGs are rendered with headless chromium if available (rsvg-convert as
@@ -741,6 +743,144 @@ def upper_d(p):
 
 
 # --------------------------------------------------------------------------
+# Option E - primary design basis from owner sketch; corrected kitchen
+# --------------------------------------------------------------------------
+
+
+def lower_e(p):
+    """Owner-sketch program fitted to the 20 x 24 lower-level envelope."""
+    p.shell()
+
+    # Preserve the sketch's adjacency: L-shaped garage left; bath north-center;
+    # office northeast; sunroom directly below office; patio outside east wall.
+    p.tint(0.5, 0.5, 13.5, 13.5, "garage")
+    p.tint(0.5, 14.0, 7.0, 5.5, "garage")
+    p.tint(7.5, 14.0, 6.5, 5.5, "bath")
+    p.tint(14.0, 14.0, 9.5, 5.5, "flex")
+    p.tint(14.0, 0.5, 9.5, 13.5, "living")
+    p.wall(7.5, 14.0, 6.5, INT)
+    p.wall(7.5, 14.0, INT, 5.5)
+    p.wall(14.0, 0.5, INT, 19.0)
+    p.wall(14.0, 14.0, 9.5, INT)
+
+    # Bathroom sits over the garage edge, as drawn, with its door to garage.
+    p.shower(7.9, 16.1, 3.0, 3.0)
+    p.toilet(11.25, 16.25, face="s")
+    p.vanity(8.0, 14.35, 2.4, 1.45)
+    p.door(10.8, 14.0, 2.4, wall="h", hinge="right", swing=-1)
+    p.label(10.75, 15.75, "bathroom", "north-center", size=10.5)
+
+    # Office occupies the northeast band and opens down into the sunroom.
+    p.door(16.0, 14.0, 2.6, wall="h", hinge="left", swing=1)
+    p.furn(15.0, 17.2, 5.6, 1.6, "desk")
+    p.furn(21.0, 15.0, 1.8, 1.2, "files")
+    p.door(23.5, 15.8, 2.5, wall="v", t=EXT, hinge="right", swing=-1)
+    p.label(18.7, 16.55, "office", "above the sunroom", size=10.5)
+
+    # Large sunroom sits directly below office and opens to exterior east patio.
+    p.slider(14.0, 8.0, 3.0, wall="v")
+    p.sofa(14.7, 1.0, 8.0, 2.5, back="s")
+    p.furn(16.0, 5.2, 3.2, 1.8, "coffee")
+    p.furn(20.1, 8.0, 2.4, 2.4, "chair")
+    p.slider(23.5, 8.1, 4.0, wall="v", t=EXT)
+    p.window(23.5, 3.2, 2.5, wall="v")
+    p.label(18.8, 12.3, "sunroom", "directly below office", size=11.5)
+
+    # East patio is exterior, not part of the sunroom footprint.
+    p.rect(24.0, 0.5, 3.5, 19.0, "#f6f6f3", stroke="#c9cdd3", sw=1, dash="6 4", layer=p.mid)
+    for yy in (1.0, 9.25, 18.0):
+        p.rect(26.65, yy, 0.55, 0.55, "#dadde1", stroke="#aeb3ba", sw=1, layer=p.over)
+    p.text(25.7, 10.0, "PATIO", size=9, fill="#7d838d", rotate=90)
+
+    # Garage remains alley-loaded, but exact sketch proportions shorten its
+    # clear vehicle depth; architect must resolve garage vs sunroom width.
+    p.rect(1.0, 3.0, 12.0, 6.2, "#fff", stroke="#b3b8bf", sw=1.3, rx=14, layer=p.over)
+    p.text(7.0, 6.0, "compact vehicle / storage", size=8.5, fill="#9aa0a9")
+    p.rect(0, 2.2, EXT, 9.7, "#fff", stroke=WALL, sw=1.2, layer=p.over)
+    p.line(0.25, 2.2, 0.25, 11.9, stroke=WALL, sw=1.5)
+    p.text(1.0, 7.1, "overhead door &#8594; alley", size=8.5, fill=NOTEC, rotate=-90)
+    p.label(6.5, 11.0, "garage", "vehicle depth to verify", size=11.5)
+
+    # Exterior stair starts at the west alley and rises east along south wall.
+    p.stair(0.5, -4.0, 11.0, 4.0, direction="e", updown="UP", n=13)
+    p.rect(11.5, -4.0, 12.5, 4.0, "none", stroke="#c9cdd3", sw=1, dash="6 4", layer=p.mid)
+    p.text(17.75, -2.0, "upper landing / walk to east patio above", size=8.2, fill="#8d939c")
+    p.text(5.9, -4.55, "alley entry &#8592; stair rises east", size=9, fill=NOTEC)
+    p.dims(yb=-5.7)
+
+
+def upper_e(p):
+    """Primary upper plan: owner sketch geometry with roof-aware kitchen."""
+    # Patio/balcony stacks directly over the level-1 east patio. South stair
+    # reaches it through a narrow top-landing walkway around the SE corner.
+    p.rect(24.0, 0.5, 3.5, 19.0, "#f6f6f3", stroke="#c9cdd3", sw=1, dash="6 4", layer=p.mid)
+    for yy in (1.0, 9.25, 18.0):
+        p.rect(26.65, yy, 0.55, 0.55, "#dadde1", stroke="#aeb3ba", sw=1, layer=p.over)
+    p.text(25.7, 10.0, "UPPER PATIO / BALCONY", size=8.5, fill="#7d838d", rotate=90)
+    p.stair(0.5, -4.0, 11.0, 4.0, direction="w", updown="DN", n=13)
+    p.rect(11.5, -4.0, 12.5, 4.0, "#f6f6f6", stroke="#c9cdd3", sw=1, layer=p.mid)
+    p.text(17.75, -2.0, "top landing / walk to east patio", size=8.5, fill="#7d838d")
+    p.text(5.9, -4.55, "alley entry &#8592; stair rises east", size=9, fill=NOTEC)
+
+    p.shell()
+    roof_headroom_guide(p)
+    p.slider(23.5, 2.0, 5.0, wall="v", t=EXT)
+    p.text(22.9, 4.5, "SLIDING GLASS ENTRY", size=8, fill="#5b6f8d", rotate=-90)
+
+    # Bath + laundry and bedroom retain the owner's west-side organization.
+    p.tint(0.5, 10.0, 6.4, 6.2, "bath")
+    p.wall(6.9, 10.0, INT, 6.2)
+    p.wall(0.5, 16.2, 6.73, INT)
+    p.slider(6.9, 11.0, 2.4, wall="v")
+    p.shower(0.7, 10.4, 3.0, 3.0)
+    p.toilet(4.45, 10.7, face="s")
+    p.vanity(0.7, 13.75, 2.4, 1.75)
+    p.wd(4.35, 13.65)
+    p.window(0, 12.2, 2.0, wall="v")
+    p.label(3.6, 15.8, "bath + W/D", None, size=10.5)
+    p.tint(0.5, 16.53, 6.4, 2.97, "hall")
+    p.text(3.6, 17.7, "low-eave linen / storage", size=8.5, fill="#8d939c")
+
+    p.tint(0.5, 0.5, 9.7, 9.5, "bed")
+    p.wall(10.2, 0.5, INT, 9.5)
+    p.wall(0.5, 10.0, 10.03, INT)
+    p.door(10.2, 7.1, 2.4, wall="v", hinge="right", swing=1)
+    p.wall(0.5, 8.0, 6.0, INT)
+    p.slider(1.0, 8.0, 5.0, wall="h")
+    p.text(3.5, 9.0, "closet 6'", size=8.5, fill="#8d939c")
+    p.bed_q(0.9, 1.2, head="w")
+    p.furn(0.9, 6.45, 1.4, 1.3, "nt")
+    p.furn(7.2, 0.85, 2.8, 1.5, "dresser")
+    p.window(0, 3.3, 2.5, wall="v")
+    p.label(7.2, 7.4, "bedroom", "9'-8\" x 9'-6\" &#183; 92 sf", size=11.5)
+
+    # Corrected kitchen: refrigerator/pantry on full-height east gable;
+    # sink/range island lies under the E-W ridge rather than beneath an eave.
+    p.tint(11.4, 8.7, 12.1, 6.8, "kitchen")
+    p.counter(12.0, 8.9, 7.4, 2.2)
+    p.sink(12.45, 9.25, w=1.8, h=1.3)
+    p.range_(16.45, 8.9, w=2.3, h=2.2)
+    p.counter(21.33, 8.5, 2.17, 6.6)
+    p.fridge(20.9, 12.2, w=2.5, h=2.6)
+    p.furn(21.45, 9.0, 1.7, 2.4, "pantry")
+    p.window(23.5, 9.2, 2.0, wall="v")
+    p.text(15.7, 11.7, "ridge-line island &#183; sink + range", size=8.5, fill="#6f6250")
+    p.text(20.55, 12.0, "gable appliance wall", size=8.2, fill="#6f6250", rotate=-90)
+
+    # Sketch-like open room: sofa faces a low central TV wall; dining sits NE.
+    p.tint(10.53, 0.5, 10.8, 8.2, "living")
+    p.sofa(12.0, 1.2, 6.5, 2.7, back="s")
+    p.furn(13.4, 4.6, 3.7, 1.7, "coffee")
+    p.rect(12.0, 7.35, 6.5, 0.35, "#656970", layer=p.over)
+    p.text(15.25, 7.05, "LOW TV WALL", size=8.5, fill="#656970")
+    p.table(13.0, 13.0, 4.2, 2.6)
+    p.window(15.0, 0, 2.5, wall="h")
+    p.window(23.5, 3.5, 1.8, wall="v")
+    p.label(15.4, 2.25, "open living / dining", "sliding-glass entry from east patio", size=11.5)
+    p.dims(yb=-5.7)
+
+
+# --------------------------------------------------------------------------
 # Sheet assembly
 # --------------------------------------------------------------------------
 
@@ -762,6 +902,9 @@ def make_sheet(
     upper_south_note=None,
     upper_south_y=-2.9,
     south_stair=False,
+    lower_fn=None,
+    lower_title="LEVEL 1 &#8212; garage / entry",
+    lower_east_x=None,
 ):
     plan_h = int(BH * S)
     notes_y = PLAN_TOP + plan_h + 120 + extra_bottom
@@ -770,9 +913,13 @@ def make_sheet(
     body += title_block(None, SHEET_W, name, sub, notes)
 
     g = Plan(LM, PLAN_TOP)
-    garage_plan(g, with_stair=with_stair, south_stair=south_stair)
+    if lower_fn:
+        lower_fn(g)
+    else:
+        garage_plan(g, with_stair=with_stair, south_stair=south_stair)
     g.context(
-        "LEVEL 1 &#8212; garage / entry",
+        lower_title,
+        east_x=lower_east_x,
         south_text=upper_south_note if south_stair else None,
         south_y=upper_south_y if south_stair else -2.9,
     )
@@ -900,10 +1047,28 @@ if __name__ == "__main__":
                 "&#8226; SITE CHECK: current shed is only 4' south of ADU; relocate/rebuild shed or revise footprint to obtain practical fire + maintenance clearance.",
             ],
         ),
+        (
+            "option-e-primary-design-basis.svg",
+            "Option E &#8212; PRIMARY DESIGN BASIS &#183; owner sketch corrected",
+            "South alley stair + stacked east patios &#183; garage/bath/office/sunroom below "
+            "&#183; west bedroom + roof-aware open kitchen/living above",
+            upper_e,
+            False,
+            [
+                "&#8226; DESIGN BASIS: preserves the owner's two-level sketch, west bedroom/bath core, central TV wall, open living room, and stacked east patios.",
+                "&#8226; KITCHEN FIX: fridge + pantry move to the full-height east gable; sink/range island sits beneath the E-W ridge, clear of low north/south eaves.",
+                "&#8226; LEVEL 1: garage left; bath north-center; office northeast; sunroom directly below office; patio outside the east wall &#8212; matching the sketch.",
+                "&#8226; LEVEL 2 ENTRY: south stair and top landing lead to an east patio directly above level 1; apartment entry is a sliding glass door.",
+                "&#8226; GARAGE CHECK: exact sketch proportions leave only about 13'-6\" clear depth; enlarge/rebalance footprint or reduce sunroom width for a typical 16' car.",
+                "&#8226; AREA/ZONING CHECK: confirm whether enclosed office/sunroom count as ADU living area; upper level alone is 480 sf gross against the working 500 sf cap.",
+                "&#8226; ROOF/SITE CHECK: verify section/headroom and relocate/rebuild shed for safe stair, fire, drainage, and maintenance clearance.",
+            ],
+        ),
     ]
     for fname, name, sub, fn, with_stair, notes in sheets:
-        east_x = BW + 5.6 if fn is upper_c else None
-        is_d = fn is upper_d
+        east_x = BW + 5.6 if fn is upper_c else (28.5 if fn is upper_e else None)
+        is_south_stair = fn in (upper_d, upper_e)
+        is_e = fn is upper_e
         path, w, h = make_sheet(
             fname,
             name,
@@ -912,13 +1077,20 @@ if __name__ == "__main__":
             notes,
             with_stair=with_stair,
             east_x=east_x,
-            extra_bottom=190 if is_d else 0,
+            extra_bottom=190 if is_south_stair else 0,
             upper_south_note=(
                 "south stair zone &#183; existing shed clearance must increase from 4'"
-                if is_d
+                if is_south_stair
                 else None
             ),
-            upper_south_y=-7.1 if is_d else -2.9,
-            south_stair=is_d,
+            upper_south_y=-7.1 if is_south_stair else -2.9,
+            south_stair=is_south_stair,
+            lower_fn=lower_e if is_e else None,
+            lower_title=(
+                "LEVEL 1 &#8212; garage / bath / office / sunroom"
+                if is_e
+                else "LEVEL 1 &#8212; garage / entry"
+            ),
+            lower_east_x=28.5 if is_e else None,
         )
         to_png(path, w, h)

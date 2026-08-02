@@ -18,6 +18,12 @@ backyard of **112 W 29th St** (PID 43615 / PIN S0001130005), Richmond, VA 23225.
 A **20 × 24 ft, ≤20 ft tall, two-story detached ADU** — garage/office below, ~480 sf 1-bed above —
 at the rear, garage door facing the alley, just north of the shed.
 
+**Primary floor-plan design basis: Option E.** It translates the owner's two-level sketch into the
+20 × 24 envelope: garage/bath/office/sunroom below; bedroom/bath-laundry/open living above; exterior
+stair from the alley along the south side to stacked east patios. Apartment entry is a sliding glass
+door from the upper patio. Refrigerator and pantry sit on the full-height east gable,
+with the sink/range island beneath the E–W ridge. See [`apartment/`](apartment/).
+
 By-right in R-5 (5 ft side + 5 ft rear setbacks; 20 ft accessory height cap; accessory footprint ≤ house
 footprint; ADU living area ≤ greater of 500 sf or 1/3 of the house = 500 sf cap). A 24×24 was ruled out —
 576 sf upstairs exceeds the 500 sf cap for this 1,303 sf house.
@@ -34,7 +40,7 @@ footprint; ADU living area ≤ greater of 500 sf or 1/3 of the house = 500 sf ca
 
 ## Repo layout
 - [`apartment/`](apartment/) — floor-plan studies for the 1-bed apartment (level 2) and garage
-  (level 1): three furnished layout options (A/B/C) as SVG/PNG sheets, the decision framework,
+  (level 1): five furnished layout options (A–E) as SVG/PNG sheets, the decision framework,
   and `generate_floorplans.py` to iterate them.
 - [`model/`](model/) — 3D massing model of the whole lot (house + shed + proposed ADU):
   - **`site-model-3d.html`** — interactive 3D viewer, open directly in a browser
