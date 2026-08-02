@@ -424,7 +424,9 @@ def garage_plan(p, with_stair=True, south_stair=False):
     p.text(
         4.9,
         16.55,
-        "utilities route to west-center bath above" if south_stair else "plumbing drops from bath above",
+        "utilities route to west-center bath above"
+        if south_stair
+        else "plumbing drops from bath above",
         size=8,
         fill="#8d939c",
     )
@@ -912,7 +914,9 @@ if __name__ == "__main__":
             east_x=east_x,
             extra_bottom=190 if is_d else 0,
             upper_south_note=(
-                "south stair zone &#183; existing shed clearance must increase from 4'" if is_d else None
+                "south stair zone &#183; existing shed clearance must increase from 4'"
+                if is_d
+                else None
             ),
             upper_south_y=-7.1 if is_d else -2.9,
             south_stair=is_d,
