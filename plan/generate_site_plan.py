@@ -11,9 +11,24 @@ import ezdxf
 import ezdxf.units
 from ezdxf.enums import TextEntityAlignment
 
-DATE = "2026-06-28"
+DATE = "2026-08-02"
 FRONT_SETBACK = 25.0  # MEASURED: main east wall to front (east) lot line (inside of sidewalk)
 PORCH_PROJECTION = 2.0  # MEASURED: front porch protrudes ~2 ft east of the house wall
+
+# Option E design basis. Enclosed footprint remains 24' E-W x 20' N-S.
+# Exterior circulation adds a 4'-deep south stair/landing and a 3'-6"-deep
+# stacked east patio/balcony. A selected 18' x 6' replacement shed sits on the
+# south 5' setback and leaves 5' clear before the stair.
+ADU_WEST, ADU_SOUTH = 5.0, 20.0
+ADU_DEPTH, ADU_WIDTH = 24.0, 20.0
+STAIR_WEST, STAIR_EAST, STAIR_SOUTH = 5.5, 16.5, 16.0
+LANDING_EAST = 32.5  # wraps around SE corner to patio outer edge
+PATIO_WEST, PATIO_EAST = 29.0, 32.5
+PATIO_SOUTH, PATIO_NORTH = 20.0, 39.5
+SHED_WEST, SHED_SOUTH = 8.0, 5.0
+SHED_DEPTH, SHED_WIDTH = 18.0, 6.0
+SHED_EAST = SHED_WEST + SHED_DEPTH
+SHED_NORTH = SHED_SOUTH + SHED_WIDTH
 
 doc = ezdxf.new("R2010", setup=True)
 doc.units = ezdxf.units.FT
@@ -23,8 +38,10 @@ msp = doc.modelspace()
 doc.layers.add("LOT-BOUNDARY", color=250)  # dark; ACI 7 renders white-on-white in preview
 doc.layers.add("EXISTING-HOUSE", color=8)
 doc.layers.add("EXISTING-HOUSE-DETAIL", color=9, linetype="DASHED")
-doc.layers.add("EXISTING-SHED", color=8)
+doc.layers.add("EXISTING-SHED-REMOVE", color=1, linetype="DASHED")
+doc.layers.add("PROPOSED-SHED", color=3)
 doc.layers.add("PROPOSED-ADU", color=5)
+doc.layers.add("PROPOSED-ADU-ACCESS", color=4)
 doc.layers.add("R5-SETBACK", color=1, linetype="DASHED")
 doc.layers.add("DIMENSIONS", color=3)
 doc.layers.add("TEXT", color=250)
@@ -85,12 +102,63 @@ line((rd, 9), (rd, 36), "EXISTING-HOUSE-DETAIL")  # main/rear
 line((ew, 23.6), (ew, 36), "EXISTING-HOUSE-DETAIL")  # porch/main
 line((hw, 9), (hw, 24), "EXISTING-HOUSE-DETAIL")  # deck/house
 
-# ---- existing shed 12x18, SW corner: 8' off alley, 6' off south ----
-poly([(8, 6), (26, 6), (26, 18), (8, 18)], "EXISTING-SHED")
+# ---- shed replacement: old 12x18 removed; new low-profile 18x6 ----
+poly([(8, 6), (26, 6), (26, 18), (8, 18)], "EXISTING-SHED-REMOVE")
+poly(
+    [
+        (SHED_WEST, SHED_SOUTH),
+        (SHED_EAST, SHED_SOUTH),
+        (SHED_EAST, SHED_NORTH),
+        (SHED_WEST, SHED_NORTH),
+    ],
+    "PROPOSED-SHED",
+)
 
-# ---- proposed ADU 20x24: 5' off alley, 3' off north line ----
-poly([(5, 22), (29, 22), (29, 42), (5, 42)], "PROPOSED-ADU")
-poly([(5, 26), (6.5, 26), (6.5, 38), (5, 38)], "PROPOSED-ADU")  # garage door @ alley
+# ---- proposed ADU: Option E enclosed footprint + exterior circulation ----
+adu_east = ADU_WEST + ADU_DEPTH
+adu_north = ADU_SOUTH + ADU_WIDTH
+poly(
+    [(ADU_WEST, ADU_SOUTH), (adu_east, ADU_SOUTH), (adu_east, adu_north), (ADU_WEST, adu_north)],
+    "PROPOSED-ADU",
+)
+poly([(ADU_WEST, 24), (6.5, 24), (6.5, 36), (ADU_WEST, 36)], "PROPOSED-ADU")
+
+# South exterior stair begins at the alley and rises east. Its raised landing
+# shelters a 16' x 4' level-1 patio and continues to the stacked east patio.
+poly(
+    [
+        (STAIR_WEST, STAIR_SOUTH),
+        (STAIR_EAST, STAIR_SOUTH),
+        (STAIR_EAST, ADU_SOUTH),
+        (STAIR_WEST, ADU_SOUTH),
+    ],
+    "PROPOSED-ADU-ACCESS",
+)
+for i in range(1, 13):
+    x = STAIR_WEST + (STAIR_EAST - STAIR_WEST) * i / 13
+    line((x, STAIR_SOUTH), (x, ADU_SOUTH), "PROPOSED-ADU-ACCESS")
+# Landing wraps around the southeast corner. Leave shared 3.5' landing/patio
+# edge open so circulation reads as continuous rather than two touching decks.
+poly(
+    [
+        (STAIR_EAST, STAIR_SOUTH),
+        (LANDING_EAST, STAIR_SOUTH),
+        (LANDING_EAST, ADU_SOUTH),
+    ],
+    "PROPOSED-ADU-ACCESS",
+    closed=False,
+)
+line((STAIR_EAST, ADU_SOUTH), (PATIO_WEST, ADU_SOUTH), "PROPOSED-ADU-ACCESS")
+poly(
+    [
+        (PATIO_WEST, PATIO_SOUTH),
+        (PATIO_WEST, PATIO_NORTH),
+        (PATIO_EAST, PATIO_NORTH),
+        (PATIO_EAST, PATIO_SOUTH),
+    ],
+    "PROPOSED-ADU-ACCESS",
+    closed=False,
+)
 
 # ---- R-5 required yards (dashed reference) ----
 line((0, 5), (148, 5), "R5-SETBACK")  # side 5'
@@ -101,15 +169,18 @@ line((123, 0), (123, 45), "R5-SETBACK")  # front 25'
 # ---- dimensions ----
 dimen((0, 0), (148, 0), -9)  # lot length
 dimen((0, 0), (0, 45), -9)  # lot width
-dimen((8, 6), (26, 6), -3)  # shed 18 deep
-dimen((8, 6), (8, 18), -3)  # shed 12 wide
-dimen((0, 6), (8, 6), 3)  # shed 8' off alley (uses x=0 alley)
-dimen((5, 42), (29, 42), 4)  # ADU 24 deep
-dimen((29, 22), (29, 42), 5)  # ADU 20 wide
-dimen((0, 30), (5, 30), 3)  # ADU 5' off alley
-dimen((29, 45), (29, 42), 6)  # ADU 3' off north
+dimen((SHED_WEST, SHED_SOUTH), (SHED_EAST, SHED_SOUTH), -3)  # shed 18 deep
+dimen((SHED_WEST, SHED_SOUTH), (SHED_WEST, SHED_NORTH), -3)  # shed 6 wide
+dimen((0, SHED_SOUTH), (SHED_WEST, SHED_SOUTH), 3)  # shed 8' off alley
+dimen((12, SHED_NORTH), (12, STAIR_SOUTH), -3)  # shed-to-stair clearance
+dimen((ADU_WEST, adu_north), (adu_east, adu_north), 4)  # enclosed ADU 24 deep
+dimen((adu_east, ADU_SOUTH), (adu_east, adu_north), 5)  # enclosed ADU 20 wide
+dimen((0, 30), (ADU_WEST, 30), 3)  # ADU 5' off alley
+dimen((adu_east, 45), (adu_east, adu_north), 6)  # ADU 5' off north
+dimen((STAIR_WEST, STAIR_SOUTH), (STAIR_WEST, ADU_SOUTH), -3)  # stair depth
+dimen((PATIO_WEST, 32), (PATIO_EAST, 32), 3)  # patio depth
 dimen((ew, 9), (148, 9), -4)  # front setback (measured 25')
-dimen((26, 6), (hw - 9, 6), 3)  # deck-to-shed clear distance
+dimen((SHED_EAST, SHED_SOUTH), (hw - 9, SHED_SOUTH), 3)  # deck-to-shed clearance
 
 # ---- labels ----
 label(
@@ -118,15 +189,31 @@ label(
 label("(built 1931)", (rd + 17), 18.5, 1.5, layer="TEXT")
 label("PORCH", ew + 3.5, 30, 1.3)
 label("DECK", hw - 4.5, 16, 1.3)
-label("EXISTING\nSHED 12x18", 17, 12, 1.5)
-label("PROPOSED ADU", 17, 38, 2.0, layer="PROPOSED-ADU")
-label("20 x 24  -  2 STORY", 17, 35, 1.6, layer="PROPOSED-ADU")
-label("GARAGE BELOW / 1-BED ABOVE", 17, 32, 1.4, layer="PROPOSED-ADU")
-label("GARAGE DOOR -> ALLEY", 17, 29, 1.3, layer="PROPOSED-ADU")
+label("EXISTING 12x18 SHED - REMOVE", 17, 14.2, 0.9, layer="EXISTING-SHED-REMOVE")
+label("REPLACEMENT SHED", 17, 8.8, 1.2, layer="PROPOSED-SHED")
+label("18 x 6  -  108 SF - LOW PROFILE", 17, 6.7, 0.9, layer="PROPOSED-SHED")
+label("OPTION E ADU", 17, 36, 1.8, layer="PROPOSED-ADU")
+label("20 x 24  -  2 STORY", 17, 33, 1.6, layer="PROPOSED-ADU")
+label("GARAGE / PROGRAM BELOW", 17, 30, 1.2, layer="PROPOSED-ADU")
+label("1-BED ABOVE", 17, 27.5, 1.2, layer="PROPOSED-ADU")
+label("DOOR -> ALLEY", 17, 25, 1.1, layer="PROPOSED-ADU")
+
+# Put Option E access notes in open yard rather than crowding the 4' bands.
+line((23, 18), (35, 18), "PROPOSED-ADU-ACCESS")
+label(
+    "OPTION E: 11' STAIR + 16' x 4' COVERED PATIO / UPPER LANDING + 3'-6\" EAST PATIOS",
+    36,
+    18,
+    1.0,
+    layer="PROPOSED-ADU-ACCESS",
+    align=TextEntityAlignment.MIDDLE_LEFT,
+)
+label("COVERED PATIO BELOW - OPEN CONNECTION ABOVE", 30.75, 17, 0.75, layer="PROPOSED-ADU-ACCESS")
+label("5' CLEAR SHED-TO-STAIR", 30, 15.5, 1.05, layer="PROPOSED-SHED")
 label("ALLEY (REAR)", -5, 22.5, 1.8, align=TextEntityAlignment.MIDDLE_CENTER)
 label("W 29TH ST (FRONT)", 154, 22.5, 1.8, align=TextEntityAlignment.MIDDLE_CENTER)
 label("R-5 REQ'D YARD (5' SIDE / 5' REAR / 25' FRONT)", 74, 47, 1.4, layer="R5-SETBACK")
-label("ADU N. SETBACK 3' < R-5 MIN 5' - VARIANCE REQUIRED", 60, 43.4, 1.3, layer="R5-SETBACK")
+label("ADU N. SETBACK 5' - R-5 MIN MET", 72, 43.4, 1.3, layer="DIMENSIONS")
 label(
     "FRONT SETBACK 25' (MEASURED)",
     ew + 11,

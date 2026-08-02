@@ -1,5 +1,5 @@
 """Generate a 3D massing model of the 112 W 29th St lot: existing house,
-existing shed, and the proposed 20x24 ADU.
+replacement shed, and the proposed 20x24 ADU.
 
 Same coordinate system as plan/generate_site_plan.py: 1 unit = 1 foot,
 X = East (toward street), Y = North, Z = up. Origin = SW lot corner
@@ -19,7 +19,7 @@ import json
 import os
 
 OUT_DIR = os.path.dirname(os.path.abspath(__file__))
-DATE = "2026-07-03"
+DATE = "2026-08-02"
 
 # ---------------- site geometry (matches plan/generate_site_plan.py) --------
 LOT_L, LOT_W = 148.0, 45.0
@@ -30,12 +30,12 @@ HW = EW - 48  # house west face       = 75  (48' deep)
 HS, HN = 9.0, 36.0  # house south / north walls (27' wide)
 DECK = (HW - 9, HS, HW, 24.0)  # 9x15 deck, SW
 PORCH = (EW, 23.6, EW + PORCH_PROJECTION, HN)  # open porch, NE
-SHED = (8.0, 6.0, 26.0, 18.0)  # 12x18, SW corner
-ADU = (5.0, 22.0, 29.0, 42.0)  # 20x24, 5' off alley / 3' off north line
+SHED = (8.0, 5.0, 26.0, 11.0)  # selected 18x6 replacement on south setback
+ADU = (5.0, 20.0, 29.0, 40.0)  # 20x24, 5' off alley / 5' off north line
 
 # heights (ft) -- massing estimates, field-verify before design work
 HOUSE_EAVE, HOUSE_RIDGE = 10.0, 20.0  # 1-story 1931, gable ridge E-W
-SHED_EAVE, SHED_RIDGE = 7.5, 10.8  # corrugated metal, ridge E-W
+SHED_EAVE, SHED_RIDGE = 7.0, 9.5  # low-profile replacement, ridge E-W
 ADU_EAVE, ADU_RIDGE = 16.0, 20.0  # 2-story at the R-5 20' cap
 
 SUN = (0.45, -0.5, 0.74)  # unit vector toward the sun (SE, high)
@@ -247,13 +247,12 @@ box(dx0 - 0.25, dy0, dx0, dy1, 1.6, 4.4, RAIL_C, g)  # west rail
 box(dx0 - 0.25, dy0 - 0.25, dx1, dy0, 1.6, 4.4, RAIL_C, g)  # south rail
 box(dx0 - 0.25, dy1, dx1, dy1 + 0.25, 1.6, 4.4, RAIL_C, g)  # north rail
 
-# ---------------- existing shed (12x18 corrugated metal) --------------------
+# ---------------- replacement shed (18x6, low profile) ----------------------
 g = "shed"
 sx0, sy0, sx1, sy1 = SHED
-sf = gable(sx0, sx1, sy0, sy1, SHED_EAVE, SHED_RIDGE, S_WALL, S_ROOF, g, oe=0.7, og=0.5)
+sf = gable(sx0, sx1, sy0, sy1, SHED_EAVE, SHED_RIDGE, S_WALL, S_ROOF, g, oe=0.0, og=0.5)
 shadow(sx0, sy0, sx1, sy1, 9, g)
-wquad("x", sx1, 1, 8.8, 15.2, 0, 6.9, 0.07, S_DOOR, g, sf["e"])  # red slider, east end
-window("x", sx1, 1, 15.6, 17.2, 3.2, 4.8, g, sf["e"], trim=S_WALL)
+wquad("x", sx1, 1, 5.6, 10.4, 0, 6.5, 0.07, S_DOOR, g, sf["e"])  # double slider
 
 # ---------------- proposed ADU (20x24, garage below / 1-bed above) ----------
 g = "adu"
@@ -261,17 +260,17 @@ ax0, ay0, ax1, ay1 = ADU
 af = gable(ax0, ax1, ay0, ay1, ADU_EAVE, ADU_RIDGE, A_WALL, A_ROOF, g)
 shadow(ax0, ay0, ax1, ay1, 18, g)
 # west (alley) face: garage door + entry + upper windows
-wquad("x", ax0, -1, 26.5, 37.5, 0, 8, 0.07, A_GDOOR, g, af["w"])  # garage door
-wquad("x", ax0, -1, 27.2, 36.8, 6.7, 7.6, 0.11, GLASS, g, af["w"])  # door lites
-wquad("x", ax0, -1, 22.9, 25.9, -0.1, 7.2, 0.05, A_TRIM, g, af["w"])
-wquad("x", ax0, -1, 23.2, 25.6, 0, 7, 0.09, A_DOOR, g, af["w"])  # entry door
-window("x", ax0, -1, 26.5, 30, 11.5, 15, g, af["w"], trim=A_WTRIM)
-window("x", ax0, -1, 34, 37.5, 11.5, 15, g, af["w"], trim=A_WTRIM)
+wquad("x", ax0, -1, 24.5, 35.5, 0, 8, 0.07, A_GDOOR, g, af["w"])  # garage door
+wquad("x", ax0, -1, 25.2, 34.8, 6.7, 7.6, 0.11, GLASS, g, af["w"])  # door lites
+wquad("x", ax0, -1, 20.9, 23.9, -0.1, 7.2, 0.05, A_TRIM, g, af["w"])
+wquad("x", ax0, -1, 21.2, 23.6, 0, 7, 0.09, A_DOOR, g, af["w"])  # entry door
+window("x", ax0, -1, 24.5, 28, 11.5, 15, g, af["w"], trim=A_WTRIM)
+window("x", ax0, -1, 32, 35.5, 11.5, 15, g, af["w"], trim=A_WTRIM)
 # east (yard) face
-wquad("x", ax1, 1, 30, 33, 0, 7, 0.07, A_DOOR, g, af["e"])  # yard door
-window("x", ax1, 1, 24.5, 28, 11, 14.5, g, af["e"], trim=A_WTRIM)
-window("x", ax1, 1, 35, 38.5, 11, 14.5, g, af["e"], trim=A_WTRIM)
-window("x", ax1, 1, 34.5, 38.5, 3, 6.5, g, af["e"], trim=A_WTRIM)  # office window
+wquad("x", ax1, 1, 28, 31, 0, 7, 0.07, A_DOOR, g, af["e"])  # yard door
+window("x", ax1, 1, 22.5, 26, 11, 14.5, g, af["e"], trim=A_WTRIM)
+window("x", ax1, 1, 33, 36.5, 11, 14.5, g, af["e"], trim=A_WTRIM)
+window("x", ax1, 1, 32.5, 36.5, 3, 6.5, g, af["e"], trim=A_WTRIM)  # office window
 # south / north faces
 for x0 in (9, 17):
     window("y", ay0, -1, x0, x0 + 4, 11, 14.5, g, af["s"], trim=A_WTRIM)
@@ -290,8 +289,8 @@ shadow(5, 56, 21, 68, 8, g)
 # ---------------- labels -----------------------------------------------------
 labels += [
     {"t": "EXISTING HOUSE · 1931", "g": "labels", "p": [99, 22.5, 24]},
-    {"t": "SHED 12×18", "g": "labels", "p": [17, 12, 12.6]},
-    {"t": "PROPOSED ADU 20×24", "g": "labels", "p": [17, 32, 24]},
+    {"t": "REPLACEMENT SHED 18×6", "g": "labels", "p": [17, 8, 11.2]},
+    {"t": "PROPOSED ADU 20×24", "g": "labels", "p": [17, 30, 24]},
     {"t": "DECK", "g": "labels", "p": [70.5, 16.5, 8], "s": 1},
     {"t": "PORCH", "g": "labels", "p": [124.5, 30, 12.5], "s": 1},
     {"t": "ALLEY", "g": "site", "p": [-7, 22.5, 1.5], "s": 1},
@@ -406,7 +405,7 @@ BODY = r"""
   <div class="sub">45&times;148 lot &middot; house + shed + proposed ADU</div>
   <label><input type="checkbox" data-g="adu" checked> Proposed ADU (20&times;24, 2-story)</label>
   <label><input type="checkbox" data-g="house" checked> Existing house (1931)</label>
-  <label><input type="checkbox" data-g="shed" checked> Existing shed (12&times;18)</label>
+  <label><input type="checkbox" data-g="shed" checked> Replacement shed (18&times;6)</label>
   <label><input type="checkbox" data-g="context" checked> Neighbors (approx.)</label>
   <label><input type="checkbox" data-g="setback" checked> R-5 setback lines</label>
   <label><input type="checkbox" data-g="labels" checked> Labels</label>
@@ -420,8 +419,9 @@ BODY = r"""
 <div class="card" id="dims">
   <b>Lot</b> 45&prime;&times;148&prime; (6,660 sf) &middot; zone R-5 &middot; alley W / street E<br>
   <b>House</b> 1,303 sf 1-story (1931) &middot; front setback 25&prime; measured<br>
+  <b>Shed</b> replacement 18&times;6 &middot; 108 sf &middot; south setback 5&prime;<br>
   <b>ADU</b> 20&times;24 &middot; &le;20&prime; &middot; garage + ~480 sf 1-bed &middot; 5&prime; off alley,
-  3&prime; off N line (<b>variance req&rsquo;d</b>, R-5 min 5&prime;)<br>
+  5&prime; off N line (R-5 minimum met)<br>
   <i>Preliminary massing &mdash; heights estimated, field-verify.</i>
 </div>
 <canvas id="compass" width="108" height="108"></canvas>
@@ -449,8 +449,8 @@ for (const f of SC.faces) BUCKET[f.l||'solid'].push(f);
 const cam = {az:215, el:35, d:190, t:[70,22,2]};
 const VIEWS = {
   bird:{az:215, el:35, d:190, t:[70,22,2]},
-  alley:{az:181, el:11, d:95, t:[22,31,9]},
-  yard:{az:-17, el:9, d:45, t:[17,30,9]},
+  alley:{az:181, el:11, d:95, t:[22,29,9]},
+  yard:{az:-17, el:9, d:45, t:[17,28,9]},
   street:{az:-4, el:13, d:120, t:[115,22,9]},
   top:{az:-90, el:88, d:215, t:[74,22,0]},
 };

@@ -10,7 +10,7 @@ apartment level, furnished, annotated):
 | [`option-a-living-east`](option-a-living-east.png) | interior, north wall | west (alley) | east + south | living gets the yard view; bedroom sits over the garage door |
 | [`option-b-bedroom-east`](option-b-bedroom-east.png) | interior, north wall | east (yard) | center + south | quiet bright bedroom; living loses the yard view |
 | [`option-c-exterior-stair`](option-c-exterior-stair.png) | **exterior**, east face | west (alley) | east + south | ~46 sf more apartment *and* garage; you arrive outside |
-| [`option-d-south-stair-roof-aware`](option-d-south-stair-roof-aware.png) | **exterior**, south face from alley | west (alley) | center + east | direct alley stair; kitchen moves to full-height gable zone; shed must move |
+| [`option-d-south-stair-roof-aware`](option-d-south-stair-roof-aware.png) | **exterior**, south face from alley | west (alley) | center + east | direct alley stair; kitchen moves to full-height gable zone; smaller shed required |
 
 Regenerate after editing: `uv run python3 apartment/generate_floorplans.py`
 (pure-stdlib Python → SVG; PNGs render via the local headless chromium,
@@ -24,12 +24,13 @@ the repo README:
 1. **Envelope: 24' E-W × 20' N-S.** With 2×6 exterior walls the interior is
    ~23' × 19' = **437 sf net** (480 sf gross — under the 500 sf R-5 cap, so
    there is no bonus square footage to find; only better arrangements).
-2. **The north wall is only 3' off the property line.** The building code
-   (IRC/VA R302.1) sharply limits window area in a wall 3–5 ft from a lot
-   line — treat the north wall as **blank**. This is a gift, not a problem:
+2. **The north wall is 5' off the property line.** This meets the working R-5
+   setback. Keep the north wall **blank** at concept stage for privacy and a
+   simple fire-separation strategy until the architect confirms projections and openings.
+   This is a gift, not a problem:
    every apartment needs one blank wall for the stair, bath, kitchen run,
    and closets. Put all of them there and you lose nothing.
-3. **Light and view: south + east.** South face looks over the low shed and
+3. **Light and view: south + east.** South face looks over the selected low-profile 18 × 6 shed and
    gets all-day sun; east faces your yard and the back of the main house
    (morning sun, and the "who's home" sightline). West = alley, fine for
    secondary windows. So **living spaces want the SE corner**.
@@ -60,7 +61,10 @@ not from Option D. It preserves the sketch's core ideas:
   and an exterior east patio on level 1;
 - west bedroom, west bath/laundry, open living room, central TV wall, and balcony on level 2;
 - exterior stair beginning at the west alley, rising east along the south wall,
-  and reaching an upper east patio stacked directly above the level-1 patio;
+  then wrapping around the southeast corner in a 3'-6"-wide open connection to
+  an upper east patio stacked directly above the level-1 patio;
+- a 16' × 4' covered level-1 south patio below the raised landing after the stair
+  flight, connecting around the southeast corner to the east patio;
 - sliding-glass apartment entrance from that upper east patio.
 
 One deliberate correction: kitchen is no longer a tall cabinet run under the sloping north eave.
