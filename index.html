@@ -10,7 +10,7 @@
     <meta property="og:url" content="https://adu.anders.omg.lol/" />
     <meta name="theme-color" content="#2f4238" />
     <title>112 W 29th St — Option F ADU plans</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css?v=20260803-interiors" />
   </head>
   <body>
     <a class="skip-link" href="#content">Skip to content</a>
@@ -42,11 +42,14 @@
         <button id="tab-floor-plans" role="tab" aria-selected="false" aria-controls="floor-plans" tabindex="-1" data-tab="floor-plans">
           <span>03</span> Floor plans
         </button>
+        <button id="tab-interiors" role="tab" aria-selected="false" aria-controls="interiors" tabindex="-1" data-tab="interiors">
+          <span>04</span> Interiors
+        </button>
         <button id="tab-inspiration" role="tab" aria-selected="false" aria-controls="inspiration" tabindex="-1" data-tab="inspiration">
-          <span>04</span> Inspiration
+          <span>05</span> Inspiration
         </button>
         <button id="tab-files" role="tab" aria-selected="false" aria-controls="files" tabindex="-1" data-tab="files">
-          <span>05</span> Files
+          <span>06</span> Files
         </button>
       </nav>
 
@@ -78,9 +81,9 @@
               <div class="summary-image"><img src="renderings/option-f-alley-photoreal.png" alt="Option F photorealistic alley view showing the south stair and connected upper landing" /></div>
               <div><span>02 · Exterior</span><h3>Option F alley view</h3><p>Single-run south stair, flat upper landing, conventional apartment entry, and the terrace wrapping toward the yard.</p></div>
             </a>
-            <a class="summary-card" href="apartment/option-f-recommended-development.png">
-              <div class="summary-image"><img src="apartment/option-f-recommended-development.png" alt="Option F recommended garage and apartment floor-plan development" /></div>
-              <div><span>03 · Interior</span><h3>Recommended layout · Option F</h3><p>Full-depth garage, stacked wet core, upstairs laundry, powder room below, and large east-facing sliders on both floors.</p></div>
+            <a class="summary-card" href="#interiors" data-summary-tab="interiors">
+              <div class="summary-image"><img src="renderings/option-f-second-floor-interior-corrected.png" alt="Option F second-floor interior concept showing the open living room, low TV wall, kitchen, dining area, and east-west roof ridge" /></div>
+              <div><span>03 · Interior</span><h3>Inside Option F</h3><p>See the full-depth garage below and the compact apartment above as plan-informed interior concepts.</p></div>
             </a>
           </div>
 
@@ -192,6 +195,33 @@
           </div>
         </section>
 
+        <section id="interiors" class="tab-panel" role="tabpanel" aria-labelledby="tab-interiors" hidden>
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Plan-informed visualizations</p>
+              <h2>Two levels,<br />seen from inside.</h2>
+            </div>
+            <p>These renderings translate Option F's current room relationships into perspective. They illustrate spatial intent and material character; dimensioned plans and future permit drawings govern.</p>
+          </div>
+
+          <div class="interior-grid">
+            <figure>
+              <a href="renderings/option-f-first-floor-interior.png">
+                <img src="renderings/option-f-first-floor-interior.png" alt="Option F first-floor garage interior with one full-depth parking bay, a mechanical and storage door, and a separate protected-hall door" />
+              </a>
+              <figcaption><strong>Level 1 · garage and service wall</strong><span>One full-depth bay with separate garage-support and protected-hall doors. Powder room and owner garden room remain beyond the hall.</span></figcaption>
+            </figure>
+            <figure>
+              <a href="renderings/option-f-second-floor-interior-corrected.png">
+                <img src="renderings/option-f-second-floor-interior-corrected.png" alt="Option F second-floor apartment interior looking west along the east-west roof ridge, with living room, four-foot TV wall, kitchen, dining area, bedroom, closet, and recessed bathroom entrance" />
+              </a>
+              <figcaption><strong>Level 2 · apartment</strong><span>View west along the east-west ridge. A 4-ft media wall separates living and kitchen while preserving an open room.</span></figcaption>
+            </figure>
+          </div>
+
+          <p class="disclaimer">Concept imagery only. Floor-plan geometry, roof section, rated assemblies, structure, MEP, clearances, and finishes require architect and engineer verification.</p>
+        </section>
+
         <section id="inspiration" class="tab-panel" role="tabpanel" aria-labelledby="tab-inspiration" hidden>
           <div class="panel-heading">
             <div>
@@ -226,6 +256,8 @@
             <a href="apartment/option-f-recommended-development.svg"><div><strong>Option F floor plans</strong><span>Editable vector drawing · both levels</span></div><b>SVG ↗</b></a>
             <a href="plan/site-plan-option-f.dxf" download><div><strong>Option F site plan — CAD</strong><span>True scale · 1 unit = 1 ft</span></div><b>DXF ↓</b></a>
             <a href="plan/site-plan-option-f-architect.pdf"><div><strong>Option F site plan — printable</strong><span>North arrow, scale bar, title block</span></div><b>PDF ↗</b></a>
+            <a href="renderings/option-f-first-floor-interior.png"><div><strong>Option F first-floor interior</strong><span>Garage and protected service-wall concept rendering</span></div><b>PNG ↗</b></a>
+            <a href="renderings/option-f-second-floor-interior-corrected.png"><div><strong>Option F second-floor interior</strong><span>Apartment concept rendering with corrected roof and bathroom circulation</span></div><b>PNG ↗</b></a>
             <a href="renderings/photoreal-render-prompt.md"><div><strong>Option F render prompts</strong><span>Source hierarchy, geometry, and both camera briefs</span></div><b>MD ↗</b></a>
             <a href="model/site-model-3d.html#yard"><div><strong>Interactive site model</strong><span>Orbit, zoom, layers, and preset views</span></div><b>HTML ↗</b></a>
             <a href="model/site-model.obj" download><div><strong>3D massing model</strong><span>True-scale, feet, Y-up</span></div><b>OBJ ↓</b></a>
@@ -268,6 +300,16 @@
           if (event.key === 'End') next = tabs.length - 1;
           selectTab(tabs[next]);
           tabs[next].focus();
+        });
+      });
+
+      document.querySelectorAll('[data-summary-tab]').forEach((link) => {
+        link.addEventListener('click', (event) => {
+          const tab = tabs.find((item) => item.dataset.tab === link.dataset.summaryTab);
+          if (!tab) return;
+          event.preventDefault();
+          selectTab(tab);
+          tab.focus();
         });
       });
 
