@@ -84,6 +84,20 @@ footprint; ADU living area ≤ greater of 500 sf or 1/3 of the house = 500 sf ca
   `python3 sync/pinterest_pull.py`. See its README for limits (pull-only, no delete-sync) and how
   to upgrade to full bidirectional via the Pinterest API.
 
+## Validate plans and model artifacts
+
+Run the same architecture checks used by CI:
+
+```sh
+./bin/check-plans
+```
+
+The command audits DXF structure and project geometry, checks the FCStd archive against its
+semantic manifest, loads and validates STEP solids with OpenCascade, checks the GLB container,
+and parses the committed SVG, PDF, and PNG outputs. CI additionally installs the official Khronos
+glTF Validator and requires zero errors and zero warnings. These checks enforce documented Option E
+design invariants; they do not certify zoning, building-code compliance, or constructability.
+
 ## Resources & sources
 
 **Property records**

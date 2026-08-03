@@ -1,0 +1,6 @@
+#!/bin/sh
+set -eu
+
+repo_dir=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+exec uv run --project "$repo_dir" --group architecture python3 \
+  "$repo_dir/scripts/check_plans.py" "$@"

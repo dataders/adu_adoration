@@ -9,6 +9,7 @@ requires-python = ">=3.11"
 dependencies = [
     "ezdxf>=1.1",
     "matplotlib>=3.8",
+    "trimesh>=4.9",
 ]
 
 [dependency-groups]
@@ -16,6 +17,10 @@ dependencies = [
 dev = [
     "ruff>=0.15",
     "ty>=0.0.1a1",
+]
+architecture = [
+    "cadquery-ocp-novtk==7.9.3.1.1",
+    "pypdf>=6,<7",
 ]
 
 # ---------------------------------------------------------------------------

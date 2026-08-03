@@ -5,7 +5,6 @@ from pathlib import Path
 import numpy as np
 import trimesh
 
-
 MODEL_DIR = Path(__file__).resolve().parent
 SOURCE = MODEL_DIR / "adu-option-e-arch.obj"
 TARGET = MODEL_DIR / "adu-option-e.glb"

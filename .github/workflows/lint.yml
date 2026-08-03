@@ -38,3 +38,27 @@ jobs:
         run: uv sync --group dev
       - name: Ty type check
         run: uv run --group dev ty check
+
+  architecture:
+    name: architecture artifacts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.11"
+      - name: Install official glTF validator
+        env:
+          GLTF_VALIDATOR_VERSION: 2.0.0-dev.3.10
+          GLTF_VALIDATOR_SHA256: 168eba887964125abe17ae97899b38d0b3cfd73c266c78424c194929ddcbc522
+        run: |
+          archive="$RUNNER_TEMP/gltf-validator.tar.xz"
+          url="https://github.com/KhronosGroup/glTF-Validator/releases/download/${GLTF_VALIDATOR_VERSION}/gltf_validator-${GLTF_VALIDATOR_VERSION}-linux64.tar.xz"
+          curl --fail --location --silent --show-error "$url" --output "$archive"
+          echo "${GLTF_VALIDATOR_SHA256}  ${archive}" | sha256sum --check
+          mkdir "$RUNNER_TEMP/gltf-validator"
+          tar --extract --xz --file "$archive" --directory "$RUNNER_TEMP/gltf-validator"
+          echo "$RUNNER_TEMP/gltf-validator" >> "$GITHUB_PATH"
+      - name: Validate plans and model artifacts
+        run: ./bin/check-plans

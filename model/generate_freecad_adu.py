@@ -16,8 +16,8 @@ and code clearances require architect/engineer verification.
 
 from pathlib import Path
 
-import FreeCAD as App
-import Part
+import FreeCAD as App  # ty: ignore[unresolved-import]
+import Part  # ty: ignore[unresolved-import]
 
 FT = 304.8
 IN = 25.4

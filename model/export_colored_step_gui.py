@@ -2,10 +2,9 @@
 
 from pathlib import Path
 
-import FreeCAD as App
-import FreeCADGui as Gui
-import ImportGui
-
+import FreeCAD as App  # ty: ignore[unresolved-import]
+import FreeCADGui as Gui  # ty: ignore[unresolved-import]
+import ImportGui  # ty: ignore[unresolved-import]
 
 MODEL_DIR = Path(__file__).resolve().parent
 SOURCE = MODEL_DIR / "adu-option-e.FCStd"
@@ -17,9 +16,7 @@ objects = sorted(
     (
         obj
         for obj in doc.Objects
-        if "Category" in obj.PropertiesList
-        and hasattr(obj, "Shape")
-        and not obj.Shape.isNull()
+        if "Category" in obj.PropertiesList and hasattr(obj, "Shape") and not obj.Shape.isNull()
     ),
     key=lambda obj: obj.Name,
 )

@@ -7,13 +7,12 @@ Run with FreeCAD's bundled Python runtime:
         model/export_freecad_formats.py
 """
 
-from pathlib import Path
 import json
 import sys
+from pathlib import Path
 
-import FreeCAD as App
-import Part
-
+import FreeCAD as App  # ty: ignore[unresolved-import]
+import Part  # ty: ignore[unresolved-import]
 
 FT = 304.8
 OUT_DIR = Path(__file__).resolve().parent
@@ -25,9 +24,7 @@ def model_objects(doc):
         (
             obj
             for obj in doc.Objects
-            if "Category" in obj.PropertiesList
-            and hasattr(obj, "Shape")
-            and not obj.Shape.isNull()
+            if "Category" in obj.PropertiesList and hasattr(obj, "Shape") and not obj.Shape.isNull()
         ),
         key=lambda obj: obj.Name,
     )
@@ -88,11 +85,11 @@ def export_manifest(objects, path):
 
 
 def main():
-    import Import
-    import Mesh
+    import Import  # ty: ignore[unresolved-import]
+    import Mesh  # ty: ignore[unresolved-import]
 
     sys.path.insert(0, str(Path(App.getHomePath()).resolve() / "Mod" / "BIM" / "importers"))
-    import importOBJ
+    import importOBJ  # ty: ignore[unresolved-import]
 
     doc = App.openDocument(str(SOURCE))
     objects = model_objects(doc)

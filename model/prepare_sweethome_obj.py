@@ -5,7 +5,6 @@ from pathlib import Path
 import numpy as np
 import trimesh
 
-
 MODEL_DIR = Path(__file__).resolve().parent
 SOURCE_OBJ = MODEL_DIR / "adu-option-e-arch.obj"
 SOURCE_MTL = MODEL_DIR / "adu-option-e-arch.mtl"
@@ -41,9 +40,7 @@ def main():
     for line in SOURCE_SIMPLE_OBJ.read_text(encoding="utf-8").splitlines():
         if line.startswith("v "):
             _, x, y, z = line.split()
-            simple_output.append(
-                f"v {float(x) / 10:.6f} {float(z) / 10:.6f} {-float(y) / 10:.6f}"
-            )
+            simple_output.append(f"v {float(x) / 10:.6f} {float(z) / 10:.6f} {-float(y) / 10:.6f}")
         else:
             simple_output.append(line)
     TARGET_SIMPLE_OBJ.write_text("\n".join(simple_output) + "\n", encoding="utf-8")
