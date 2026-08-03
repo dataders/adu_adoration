@@ -1,12 +1,13 @@
 # Apartment layout — the 1-bed above the garage
 
 How to plan (and keep iterating) the ~480 sf apartment on level 2 of the
-20 × 24 ADU. Five worked schemes live here as full sheets (garage level +
+20 × 24 ADU. Six worked schemes live here as full sheets (garage level +
 apartment level, furnished, annotated):
 
 | sheet | stair | bedroom | living | headline trade |
 |---|---|---|---|---|
-| **[`option-e-primary-design-basis`](option-e-primary-design-basis.png)** | **exterior**, south face from alley | west (alley) | center + east | **PRIMARY:** owner's two-level sketch, corrected roof-aware kitchen, programmed lower level |
+| **[`option-f-recommended-development`](option-f-recommended-development.png)** | **exterior**, south face from alley | west (alley) | center + east | **RECOMMENDED DEVELOPMENT:** full-depth garage, stacked wet core, connected landing/east patios, large sliders |
+| [`option-e-primary-design-basis`](option-e-primary-design-basis.png) | **exterior**, south face from alley | west (alley) | center + east | **OWNER-SKETCH BASELINE:** corrected roof-aware kitchen, programmed lower level |
 | [`option-a-living-east`](option-a-living-east.png) | interior, north wall | west (alley) | east + south | living gets the yard view; bedroom sits over the garage door |
 | [`option-b-bedroom-east`](option-b-bedroom-east.png) | interior, north wall | east (yard) | center + south | quiet bright bedroom; living loses the yard view |
 | [`option-c-exterior-stair`](option-c-exterior-stair.png) | **exterior**, east face | west (alley) | east + south | ~46 sf more apartment *and* garage; you arrive outside |
@@ -52,7 +53,7 @@ the repo README:
    logic while preserving the owner's preferred two-level organization. Final floor/roof section still
    controls; changing roof overhang alone does not create interior headroom.
 
-## Primary design basis — Option E
+## Owner-sketch baseline — Option E
 
 Option E starts from the [owner's preferred two-level sketch](../images/12-handdrawn-two-level-design-basis.jpg),
 not from Option D. It preserves the sketch's core ideas:

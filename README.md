@@ -19,7 +19,17 @@ backyard of **112 W 29th St** (PID 43615 / PIN S0001130005), Richmond, VA 23225.
 A **20 × 24 ft, ≤20 ft tall, two-story detached ADU** — garage/office below, ~480 sf 1-bed above —
 at the rear, garage door facing the alley, just north of the shed.
 
-**Primary floor-plan design basis: Option E.** It translates the owner's two-level sketch into the
+**Recommended development concept: Option F.** It retains Option E's 20 × 24 envelope, west bedroom,
+south alley stair, and east-facing living space, but corrects the main coordination problems found in
+multidisciplinary review: a full-depth south garage bay; vertically stacked north-center bathrooms;
+a separate garage-support/mechanical zone; one northeast owner office/garden room; a conventional
+apartment entry on a connected south landing; full-length stacked east patios; and large east sliders
+on both floors. Laundry occupies the upper low-eave seasonal-storage room, and the lower bath is a
+powder room. See
+[`apartment/option-f-recommended-development.png`](apartment/option-f-recommended-development.png) and
+[`plan/site-plan-option-f-architect.pdf`](plan/site-plan-option-f-architect.pdf).
+
+**Owner-sketch baseline: Option E.** It translates the owner's two-level sketch into the
 20 × 24 enclosed envelope: garage/bath/office/sunroom below; bedroom/bath-laundry/open living above;
 4-ft-deep exterior stair/landing from the alley along the south side to 3-ft-6-in-deep stacked east
 patios. Apartment entry is a sliding glass door from the upper patio. Refrigerator and pantry sit
@@ -71,6 +81,8 @@ footprint; ADU living area ≤ greater of 500 sf or 1/3 of the house = 500 sf ca
     removal / replacement shed / Option E ADU / exterior access / R-5 setbacks / dims / text). This is the file to hand an
     architect — opens in AutoCAD, Revit, SketchUp, etc.
   - **`site-plan-architect.pdf`** — printable/markup version of the DXF (north arrow, scale bar, title block).
+  - **`site-plan-option-f.dxf` / `site-plan-option-f-architect.pdf`** — recommended Option F site response
+    with south stair/landing connected around the southeast corner to stacked east patios.
   - `site-plan.svg` / `site-plan.png` — the quick colored diagram. Render with
     `rsvg-convert -w 1920 -h 880 site-plan.svg -o site-plan.png` (cairosvg has no cairo lib here).
   - `generate_site_plan.py` — regenerates the DXF + PDF:
