@@ -3,13 +3,13 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Site plan, floor-plan studies, references, and source files for a proposed detached ADU at 112 W 29th St in Richmond, Virginia." />
-    <meta property="og:title" content="112 W 29th St — ADU design brief" />
-    <meta property="og:description" content="A simple working brief for early architectural concepts." />
+    <meta name="description" content="Option F plans, engineering basis, site studies, and source files for a proposed detached ADU at 112 W 29th St in Richmond, Virginia." />
+    <meta property="og:title" content="112 W 29th St — Option F ADU plans" />
+    <meta property="og:description" content="An 11-sheet schematic construction and engineering basis for a 480 sf detached garage apartment." />
     <meta property="og:image" content="https://adu.anders.omg.lol/renderings/option-f-yard-photoreal.png" />
     <meta property="og:url" content="https://adu.anders.omg.lol/" />
     <meta name="theme-color" content="#2f4238" />
-    <title>112 W 29th St — ADU design brief</title>
+    <title>112 W 29th St — Option F ADU plans</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -18,12 +18,12 @@
     <main class="page-shell">
       <header class="brief-header">
         <div>
-          <p class="eyebrow">Working architect brief</p>
+          <p class="eyebrow">Owner coordination set</p>
           <h1>112 W 29th St</h1>
           <p class="subtitle">Detached garage apartment · Richmond, Virginia</p>
         </div>
         <dl class="project-meta">
-          <div><dt>Status</dt><dd>Option F concept</dd></div>
+          <div><dt>Status</dt><dd>Engineering basis</dd></div>
           <div><dt>Living space</dt><dd>480 sf gross</dd></div>
           <div><dt>Roof height</dt><dd>20 ft planned ridge</dd></div>
         </dl>
@@ -33,17 +33,20 @@
         <button id="tab-summary" role="tab" aria-selected="true" aria-controls="summary" tabindex="0" data-tab="summary">
           Summary
         </button>
+        <button id="tab-plans" role="tab" aria-selected="false" aria-controls="plans" tabindex="-1" data-tab="plans">
+          <span>01</span> Plan set
+        </button>
         <button id="tab-site" role="tab" aria-selected="false" aria-controls="site" tabindex="-1" data-tab="site">
-          <span>01</span> Site plan draft
+          <span>02</span> Site plan
         </button>
         <button id="tab-floor-plans" role="tab" aria-selected="false" aria-controls="floor-plans" tabindex="-1" data-tab="floor-plans">
-          <span>02</span> Floor plans
+          <span>03</span> Floor plans
         </button>
         <button id="tab-inspiration" role="tab" aria-selected="false" aria-controls="inspiration" tabindex="-1" data-tab="inspiration">
-          <span>03</span> Inspiration
+          <span>04</span> Inspiration
         </button>
         <button id="tab-files" role="tab" aria-selected="false" aria-controls="files" tabindex="-1" data-tab="files">
-          <span>04</span> Files
+          <span>05</span> Files
         </button>
       </nav>
 
@@ -51,9 +54,20 @@
         <section id="summary" class="tab-panel summary-panel" role="tabpanel" aria-labelledby="tab-summary">
           <div class="summary-heading">
             <p class="eyebrow">Project at a glance</p>
-            <h2>480 sf above a garage,<br />under a 20 ft ridge.</h2>
-            <p>Three drawings tell the current story. Open any one for a full-size view.</p>
+            <h2>480 sf above a garage,<br />now coordinated across 11 sheets.</h2>
+            <p>Option F has advanced from layout study to a schematic construction and engineering basis. Start with the full plan set, then explore the design sources.</p>
           </div>
+
+          <a class="plan-set-callout" href="output/pdf/adu-option-f-construction-engineering-basis.pdf">
+            <img src="images/13-option-f-construction-set-cover.png" alt="Cover of the Option F 11-sheet schematic construction and engineering basis set" />
+            <div>
+              <span class="tag new">New · August 2026</span>
+              <p class="eyebrow">11 × 17 · 11 sheets · 1.6 MB</p>
+              <h3>Construction + engineering basis</h3>
+              <p>Dimensioned plans, site and utility concept, roof and opening schedules, four elevations, two sections, structural framing basis, MEP coordination, and permit closeout checklist.</p>
+              <b>Open complete PDF ↗</b>
+            </div>
+          </a>
 
           <div class="summary-grid">
             <a class="summary-card" href="plan/site-plan-option-f-architect.pdf">
@@ -71,11 +85,41 @@
           </div>
 
           <div class="summary-note">
-            <strong>Current site response</strong>
+            <strong>Current basis</strong>
+            <span>Plan set: 11 coordinated sheets</span>
             <span>North setback: 5 ft by-right</span>
             <span>Shed: replace with low-profile 18 × 6 structure</span>
-            <span>South landing: continuous into east patio</span>
-            <span>East openings: 6-ft sliders on both floors</span>
+            <span>Structural criteria: 115 mph wind · 20 psf snow</span>
+          </div>
+        </section>
+
+        <section id="plans" class="tab-panel" role="tabpanel" aria-labelledby="tab-plans" hidden>
+          <div class="panel-heading plan-set-heading">
+            <div>
+              <p class="eyebrow">Schematic construction + engineering basis</p>
+              <h2>A serious handoff,<br />without pretending it is stamped.</h2>
+            </div>
+            <div>
+              <p>The set coordinates known geometry, current Richmond design criteria, preliminary assemblies, structural load paths, MEP intent, and every unresolved permit item.</p>
+              <a class="primary-action" href="output/pdf/adu-option-f-construction-engineering-basis.pdf">Open 11-sheet PDF ↗</a>
+            </div>
+          </div>
+
+          <a class="plan-set-preview" href="output/pdf/adu-option-f-construction-engineering-basis.pdf" aria-label="Open the complete Option F construction and engineering basis PDF">
+            <img src="images/13-option-f-construction-set-cover.png" alt="Option F construction and engineering basis cover sheet with design rendering and sheet index" />
+          </a>
+
+          <div class="scope-grid" aria-label="Plan set contents">
+            <article><span>G / C</span><h3>Basis + site</h3><p>Code and zoning matrix, permit requirements, setbacks, access, drainage, and utility routing.</p></article>
+            <article><span>A</span><h3>Architecture</h3><p>Dimensioned levels, roof, schedules, four elevations, sections, envelope, stair, and fire separation.</p></article>
+            <article><span>S</span><h3>Structure</h3><p>Foundation, floor and roof framing concepts, preliminary member basis, lateral system, and deferred engineering.</p></article>
+            <article><span>M / E / P</span><h3>Building systems</h3><p>Plumbing riser, electrical single line, HVAC and ventilation basis, alarms, energy, and inspection hold points.</p></article>
+          </div>
+
+          <div class="status-strip">
+            <div><strong>What this is</strong><p>A coordinated owner/architect/engineer handoff and scope-control document.</p></div>
+            <div><strong>What remains</strong><p>Survey, soil basis, written zoning rulings, sealed engineered products, REScheck, load calculations, and trade permits.</p></div>
+            <div><strong>Construction status</strong><p>Not for construction. Do not scale. Field verification and approved permit drawings govern.</p></div>
           </div>
         </section>
 
@@ -99,7 +143,7 @@
             <p><strong>Elevated exterior circulation</strong> Architect and engineer to resolve posts, lateral bracing, footings, drainage, flashing, and a true 4-ft clear walking width after guards.</p>
             <p><strong>Survey and utilities</strong> Confirm property lines, grades, utility routes, stormwater path, and fire-department access before fixing the footprint.</p>
           </div>
-          <p class="disclaimer">Owner measurements and public records only. Preliminary — not for permitting or construction.</p>
+          <p class="disclaimer">Owner measurements and public records only. The coordinated plan set remains schematic and not for construction.</p>
         </section>
 
         <section id="floor-plans" class="tab-panel" role="tabpanel" aria-labelledby="tab-floor-plans" hidden>
@@ -177,6 +221,7 @@
           </div>
 
           <div class="file-list">
+            <a class="featured-file" href="output/pdf/adu-option-f-construction-engineering-basis.pdf"><div><strong>Option F construction + engineering basis</strong><span>11-sheet 11 × 17 schematic set · architecture, structure, MEP, code, and closeout</span></div><b>PDF ↗</b></a>
             <a href="output/pdf/adu-option-f-concept-plan-set.pdf"><div><strong>Option F concept plan set</strong><span>Floor plans and site plan · combined working PDF</span></div><b>PDF ↗</b></a>
             <a href="apartment/option-f-recommended-development.svg"><div><strong>Option F floor plans</strong><span>Editable vector drawing · both levels</span></div><b>SVG ↗</b></a>
             <a href="plan/site-plan-option-f.dxf" download><div><strong>Option F site plan — CAD</strong><span>True scale · 1 unit = 1 ft</span></div><b>DXF ↓</b></a>
@@ -192,7 +237,7 @@
       </div>
 
       <footer>
-        <p>Last updated August 2026 · Early architectural concepts</p>
+        <p>Last updated August 3, 2026 · Schematic construction and engineering basis</p>
         <a href="mailto:?subject=112%20W%2029th%20St%20ADU%20brief&body=ADU%20brief%3A%20https%3A%2F%2Fadu.anders.omg.lol%2F">Share brief</a>
       </footer>
     </main>

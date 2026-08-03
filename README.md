@@ -29,6 +29,14 @@ powder room. See
 [`apartment/option-f-recommended-development.png`](apartment/option-f-recommended-development.png) and
 [`plan/site-plan-option-f-architect.pdf`](plan/site-plan-option-f-architect.pdf).
 
+The current owner-coordination deliverable is the **11-sheet schematic construction and engineering
+basis set** at [`output/pdf/adu-option-f-construction-engineering-basis.pdf`](output/pdf/adu-option-f-construction-engineering-basis.pdf).
+It coordinates code/zoning, site and utilities, dimensioned plans, roof/opening schedules, elevations,
+sections, envelope, preliminary structural framing, MEP/life safety, and permit closeout. Regenerate it
+with `uv run --with reportlab --with pillow python3 plan/generate_construction_basis_set.py`. It is
+explicitly not sealed or for construction; survey, soil, zoning rulings, engineered products, energy
+compliance, utility verification, and trade designs remain required.
+
 **Owner-sketch baseline: Option E.** It translates the owner's two-level sketch into the
 20 × 24 enclosed envelope: garage/bath/office/sunroom below; bedroom/bath-laundry/open living above;
 4-ft-deep exterior stair/landing from the alley along the south side to 3-ft-6-in-deep stacked east
