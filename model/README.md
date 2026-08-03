@@ -1,9 +1,10 @@
 # 3D lot model — house, replacement shed, proposed ADU
 
-True-scale 3D massing model of the whole lot (1 unit = 1 foot), built from the same
-measured geometry as [`plan/generate_site_plan.py`](../plan/generate_site_plan.py):
+True-scale Option F 3D models, built from the same measured geometry as
+[`plan/generate_site_plan.py`](../plan/generate_site_plan.py) and the current
+Option F floor-plan/engineering basis:
 45×148 lot, existing 1931 house (with porch + deck), selected low-profile 18×6 replacement shed, and the proposed
-20×24 two-story ADU at the R-5 20 ft accessory height cap, plus approximate massing
+20×24 two-story ADU below the R-5 20 ft accessory height cap, plus approximate massing
 of the two neighboring houses for context.
 
 ## Files
@@ -13,13 +14,26 @@ of the two neighboring houses for context.
   pan with right-drag or shift-drag. Checkboxes toggle the ADU, shed, house, neighbors,
   R-5 setback lines and labels; buttons jump to preset views (also linkable via
   `#bird`, `#alley`, `#yard`, `#street`, `#top`).
-- **`site-model.obj`** + **`site-model.mtl`** — the same model as a standard OBJ
+- **`site-model.obj`** + **`site-model.mtl`** — the same whole-site model as a standard OBJ
   (Y-up, feet). Imports into SketchUp (File → Import), Blender, FreeCAD, or any
   online OBJ viewer. Hand this to an architect alongside `plan/site-plan.dxf`.
-- **`generate_3d_model.py`** — regenerates all of the above:
-  `python3 model/generate_3d_model.py` (stdlib only, no dependencies).
+- **`adu-option-f.step`** + **`adu-option-f.brep`** — current neutral CAD
+  model: 79 named schematic solids for the Option F shell, partitions,
+  openings, stair, 4-ft patios, 36-in guards, and flush setback-side roof basis.
+- **`adu-option-f.glb`** + **`adu-option-f.obj`** — current color visualization
+  exports of the same Option F building model.
+- **`adu-option-f-manifest.json`** — machine-readable version, datums, bounds,
+  sources, and semantic object list.
+- **`option_f_geometry.py`** — canonical Option F dimensions shared by model generation and CI.
+- **`generate_option_f_model.py`** — regenerates current building exports:
+  `uv run --group architecture python model/generate_option_f_model.py`.
+- **`generate_3d_model.py`** — regenerates the whole-site viewer and OBJ:
+  `uv run python model/generate_3d_model.py`.
 
-### Editable Option E FreeCAD model
+### Historical Option E FreeCAD model
+
+Files below are retained only to document the previous Option E study. They are
+not current geometry and must not be used to override Option F plans or models.
 
 - **`adu-option-e.FCStd`** — editable two-level Option E model. Organized into
   Level 1, Level 2, exterior access, and roof groups, with named walls, room
@@ -104,7 +118,7 @@ fire separation, plumbing, and zoning treatment.
 |---|---|---|---|
 | house | 10′ | 20′ | 1-story, gable ridge E–W, green siding |
 | replacement shed | 7′ | 9.5′ | 18×6 low-profile massing, red slider on east gable end |
-| ADU | 16′ | 20′ | two-story at the §30-680.4 20′ accessory cap |
+| ADU Option F | 16′ | 19′-10″ | +9′-3″ upper-subfloor basis; north eave and west rake flush pending zoning |
 
 Footprints and setbacks are the measured/confirmed values from the site plan
 (front setback 25′, ADU 5′ off alley / 5′ off north line).

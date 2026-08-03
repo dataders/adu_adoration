@@ -78,22 +78,20 @@ footprint; ADU living area ≤ greater of 500 sf or 1/3 of the house = 500 sf ca
   (level 1): five furnished layout options (A–E) as SVG/PNG sheets, the decision framework,
   and `generate_floorplans.py` to iterate them.
 - [`model/`](model/) — 3D massing model of the whole lot (house + shed + proposed ADU):
-  - **`site-model-3d.html`** — interactive 3D viewer, open directly in a browser
+  - **`site-model-3d.html`** — coordinated Option F interactive whole-site viewer
     (orbit/zoom/pan, layer toggles, preset views).
-  - **`site-model.obj`** (+ `.mtl`) — true-scale OBJ (feet, Y-up) for SketchUp / Blender.
-  - **`adu-option-e.FCStd`** — editable FreeCAD model of both Option E levels,
-    with walls, openings, room zones, roof, patios, balcony, and exterior stair.
-  - **`adu-option-e.step`** — neutral CAD export of the FreeCAD model.
-  - `generate_3d_model.py` — regenerates both: `python3 model/generate_3d_model.py` (no deps).
-  - `generate_freecad_adu.py` — regenerates the Option E FreeCAD/STEP model using
-    FreeCAD's native Python API; see [`model/README.md`](model/README.md) for the command.
+  - **`site-model.obj`** (+ `.mtl`) — coordinated Option F whole-site OBJ (feet, Y-up).
+  - **`adu-option-f.step` / `.brep`** — current neutral CAD building model.
+  - **`adu-option-f.glb` / `.obj`** — current real-time/mesh building model.
+  - **`adu-option-f-manifest.json`** — version, datums, sources, bounds, and named objects.
+  - `option_f_geometry.py` — canonical Option F geometry contract.
+  - `generate_option_f_model.py` and `generate_3d_model.py` — regenerate current model artifacts.
+  - Option E FreeCAD/Sweet Home artifacts remain historical comparison files; see
+    [`model/README.md`](model/README.md) for the boundary.
 - [`plan/`](plan/) — the site plan in several formats:
-  - **`site-plan.dxf`** — true-scale CAD file (1 unit = 1 ft, layered: lot / house / existing shed
-    removal / replacement shed / Option E ADU / exterior access / R-5 setbacks / dims / text). This is the file to hand an
-    architect — opens in AutoCAD, Revit, SketchUp, etc.
-  - **`site-plan-architect.pdf`** — printable/markup version of the DXF (north arrow, scale bar, title block).
   - **`site-plan-option-f.dxf` / `site-plan-option-f-architect.pdf`** — recommended Option F site response
-    with south stair/landing connected around the southeast corner to stacked east patios.
+    and current architect handoff, with south stair/landing connected around the southeast corner to stacked east patios.
+  - **`site-plan.dxf` / `site-plan-architect.pdf`** — historical Option E site study retained for comparison.
   - `site-plan.svg` / `site-plan.png` — the quick colored diagram. Render with
     `rsvg-convert -w 1920 -h 880 site-plan.svg -o site-plan.png` (cairosvg has no cairo lib here).
   - `generate_site_plan.py` — regenerates the DXF + PDF:
@@ -117,11 +115,12 @@ Run the same architecture checks used by CI:
 ./bin/check-plans
 ```
 
-The command audits DXF structure and project geometry, checks the FCStd archive against its
-semantic manifest, loads and validates STEP solids with OpenCascade, checks the GLB container,
-and parses the committed SVG, PDF, and PNG outputs. CI additionally installs the official Khronos
-glTF Validator and requires zero errors and zero warnings. These checks enforce documented Option E
-design invariants; they do not certify zoning, building-code compliance, or constructability.
+The command audits the Option F DXF and access geometry, checks the coordinated
+artifact manifest and model datums, loads all 79 STEP solids with OpenCascade,
+checks the GLB container, and parses committed PDF/PNG outputs. CI additionally
+installs the official Khronos glTF Validator and requires zero errors and zero
+warnings. These checks enforce documented Option F schematic invariants; they
+do not certify zoning, building-code compliance, or constructability.
 
 ## Resources & sources
 

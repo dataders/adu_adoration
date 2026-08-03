@@ -1,0 +1,50 @@
+{
+  "schema": "adu-option-f-artifact-coordination-v1",
+  "design": "Option F",
+  "version": "2026-08-03-option-f-basis-v1",
+  "status": "schematic design and engineering basis; not for construction",
+  "authority_order": [
+    "output/pdf/adu-option-f-construction-engineering-basis.pdf",
+    "apartment/option-f-recommended-development.svg",
+    "plan/site-plan-option-f.dxf",
+    "model/option_f_geometry.py"
+  ],
+  "current_artifacts": {
+    "floor_plan": "apartment/option-f-recommended-development.svg",
+    "site_plan": "plan/site-plan-option-f.dxf",
+    "construction_basis": "output/pdf/adu-option-f-construction-engineering-basis.pdf",
+    "building_cad": "model/adu-option-f.step",
+    "building_realtime": "model/adu-option-f.glb",
+    "building_manifest": "model/adu-option-f-manifest.json",
+    "interactive_site_model": "model/site-model-3d.html",
+    "whole_site_obj": "model/site-model.obj",
+    "yard_render": "renderings/option-f-yard-photoreal-v2.png",
+    "alley_render": "renderings/option-f-alley-photoreal-v2.png",
+    "level_1_interior_render": "renderings/option-f-first-floor-interior.png",
+    "level_2_interior_render": "renderings/option-f-second-floor-interior-corrected.png",
+    "render_spec": "renderings/photoreal-render-prompt.md"
+  },
+  "coordinated_invariants": {
+    "enclosed_footprint_ft": [24.0, 20.0],
+    "upper_subfloor_ft": 9.25,
+    "eave_ft": 16.0,
+    "ridge_max_ft": 19.833,
+    "east_patio_depth_ft": 4.0,
+    "east_slider_width_ft": 6.0,
+    "stair_risers": 14,
+    "stair_treads": 13,
+    "guard_height_ft": 3.0,
+    "north_wall_openings": 0,
+    "west_upper_windows": 1,
+    "south_upper_sliders": 0,
+    "setback_roof_edges": ["north eave flush", "west rake flush"]
+  },
+  "historical_only": [
+    "model/adu-option-e.*",
+    "model/generate_freecad_adu.py",
+    "plan/site-plan.dxf",
+    "plan/site-plan-architect.pdf",
+    "renderings/option-f-yard-photoreal.png",
+    "renderings/option-f-alley-photoreal.png"
+  ]
+}

@@ -12,14 +12,14 @@ Outputs (all written next to this script):
                                       (orbit / zoom / pan, layer toggles);
                                       no internet needed, open in a browser
 
-Run:  python3 model/generate_3d_model.py   (stdlib only, no deps)
+Run:  uv run python model/generate_3d_model.py   (stdlib only, no deps)
 """
 
 import json
 import os
 
 OUT_DIR = os.path.dirname(os.path.abspath(__file__))
-DATE = "2026-08-02"
+DATE = "2026-08-03 · Option F basis v1"
 
 # ---------------- site geometry (matches plan/generate_site_plan.py) --------
 LOT_L, LOT_W = 148.0, 45.0
@@ -36,7 +36,7 @@ ADU = (5.0, 20.0, 29.0, 40.0)  # 20x24, 5' off alley / 5' off north line
 # heights (ft) -- massing estimates, field-verify before design work
 HOUSE_EAVE, HOUSE_RIDGE = 10.0, 20.0  # 1-story 1931, gable ridge E-W
 SHED_EAVE, SHED_RIDGE = 7.0, 9.5  # low-profile replacement, ridge E-W
-ADU_EAVE, ADU_RIDGE = 16.0, 20.0  # 2-story at the R-5 20' cap
+ADU_EAVE, ADU_RIDGE = 16.0, 19.833  # current engineering-basis maximum
 
 SUN = (0.45, -0.5, 0.74)  # unit vector toward the sun (SE, high)
 SHADOW_K = 0.7  # aesthetic shadow-length factor
@@ -254,28 +254,43 @@ sf = gable(sx0, sx1, sy0, sy1, SHED_EAVE, SHED_RIDGE, S_WALL, S_ROOF, g, oe=0.0,
 shadow(sx0, sy0, sx1, sy1, 9, g)
 wquad("x", sx1, 1, 5.6, 10.4, 0, 6.5, 0.07, S_DOOR, g, sf["e"])  # double slider
 
-# ---------------- proposed ADU (20x24, garage below / 1-bed above) ----------
+# ---------------- proposed Option F ADU -------------------------------------
 g = "adu"
 ax0, ay0, ax1, ay1 = ADU
-af = gable(ax0, ax1, ay0, ay1, ADU_EAVE, ADU_RIDGE, A_WALL, A_ROOF, g)
+af = gable(ax0, ax1, ay0, ay1, ADU_EAVE, ADU_RIDGE, A_WALL, A_ROOF, g, oe=0, og=0)
 shadow(ax0, ay0, ax1, ay1, 18, g)
-# west (alley) face: garage door + entry + upper windows
-wquad("x", ax0, -1, 24.5, 35.5, 0, 8, 0.07, A_GDOOR, g, af["w"])  # garage door
-wquad("x", ax0, -1, 25.2, 34.8, 6.7, 7.6, 0.11, GLASS, g, af["w"])  # door lites
-wquad("x", ax0, -1, 20.9, 23.9, -0.1, 7.2, 0.05, A_TRIM, g, af["w"])
-wquad("x", ax0, -1, 21.2, 23.6, 0, 7, 0.09, A_DOOR, g, af["w"])  # entry door
-window("x", ax0, -1, 24.5, 28, 11.5, 15, g, af["w"], trim=A_WTRIM)
-window("x", ax0, -1, 32, 35.5, 11.5, 15, g, af["w"], trim=A_WTRIM)
-# east (yard) face
-wquad("x", ax1, 1, 28, 31, 0, 7, 0.07, A_DOOR, g, af["e"])  # yard door
-window("x", ax1, 1, 22.5, 26, 11, 14.5, g, af["e"], trim=A_WTRIM)
-window("x", ax1, 1, 33, 36.5, 11, 14.5, g, af["e"], trim=A_WTRIM)
-window("x", ax1, 1, 32.5, 36.5, 3, 6.5, g, af["e"], trim=A_WTRIM)  # office window
-# south / north faces
-for x0 in (9, 17):
-    window("y", ay0, -1, x0, x0 + 4, 11, 14.5, g, af["s"], trim=A_WTRIM)
-window("y", ay0, -1, 20, 23, 4, 6.5, g, af["s"], trim=A_WTRIM)
-window("y", ay1, 1, 12, 16, 11, 14.5, g, af["n"], trim=A_WTRIM)
+# West/alley: one garage door below, one bedroom EERO window above.
+wquad("x", ax0, -1, ay0 + 1.3, ay0 + 11.0, 0, 7.5, 0.07, A_GDOOR, g, af["w"])
+wquad("x", ax0, -1, ay0 + 2.0, ay0 + 10.3, 6.7, 7.4, 0.11, GLASS, g, af["w"])
+window("x", ax0, -1, ay0 + 3.0, ay0 + 6.5, 11.55, 15.05, g, af["w"], trim=A_WTRIM)
+
+# East/yard: stacked six-foot sliders plus shop and dining windows.
+window("x", ax1, 1, ay0 + 12.3, ay0 + 18.3, 0.5, 7.17, g, af["e"], trim=A_WTRIM)
+window("x", ax1, 1, ay0 + 4.0, ay0 + 7.0, 3.5, 7.0, g, af["e"], trim=A_WTRIM)
+window("x", ax1, 1, ay0 + 1.5, ay0 + 7.5, 9.25, 15.92, g, af["e"], trim=A_WTRIM)
+window("x", ax1, 1, ay0 + 15.0, ay0 + 18.5, 11.55, 15.05, g, af["e"], trim=A_WTRIM)
+
+# South: conventional upper entry and five-foot living window; no lower slider.
+wquad("y", ay0, -1, ax0 + 11.5, ax0 + 14.5, 9.25, 15.92, 0.07, A_DOOR, g, af["s"])
+window("y", ay0, -1, ax0 + 16.0, ax0 + 21.0, 11.55, 15.05, g, af["s"], trim=A_WTRIM)
+# North wall intentionally blank at the setback.
+
+# Full four-foot east patios and continuous south landing.
+box(ax0 + 11.5, ay0 - 4, ax1 + 4, ay0, 0, 0.25, DECK_C, g)
+box(ax1, ay0, ax1 + 4, ay1 - 0.5, 0, 0.25, DECK_C, g)
+box(ax0 + 11.5, ay0 - 4, ax1 + 4, ay0, 9.25, 9.6, DECK_C, g)
+box(ax1, ay0, ax1 + 4, ay1 - 0.5, 9.25, 9.6, DECK_C, g)
+
+# Fourteen risers / thirteen treads along south wall, rising east.
+stair_run = 11.0 / 13
+stair_rise = 9.25 / 14
+for i in range(13):
+    x = ax0 + 0.5 + i * stair_run
+    box(x, ay0 - 4, x + stair_run + 0.02, ay0, 0, (i + 1) * stair_rise, DECK_C, g)
+
+# Diagrammatic 36-inch guards; southeast patio connection remains open.
+box(ax0 + 11.5, ay0 - 4, ax1 + 4, ay0 - 3.88, 9.6, 12.6, RAIL_C, g)
+box(ax1 + 3.88, ay0, ax1 + 4, ay1 - 0.5, 9.6, 12.6, RAIL_C, g)
 
 # ---------------- neighbor massing (approx, from oblique satellite) ---------
 g = "context"
@@ -290,7 +305,7 @@ shadow(5, 56, 21, 68, 8, g)
 labels += [
     {"t": "EXISTING HOUSE · 1931", "g": "labels", "p": [99, 22.5, 24]},
     {"t": "REPLACEMENT SHED 18×6", "g": "labels", "p": [17, 8, 11.2]},
-    {"t": "PROPOSED ADU 20×24", "g": "labels", "p": [17, 30, 24]},
+    {"t": "OPTION F ADU 20×24", "g": "labels", "p": [17, 30, 24]},
     {"t": "DECK", "g": "labels", "p": [70.5, 16.5, 8], "s": 1},
     {"t": "PORCH", "g": "labels", "p": [124.5, 30, 12.5], "s": 1},
     {"t": "ALLEY", "g": "site", "p": [-7, 22.5, 1.5], "s": 1},
@@ -402,8 +417,8 @@ BODY = r"""
 <canvas id="cv"></canvas>
 <div class="card" id="ui">
   <h1>112 W 29th St &mdash; lot 3D</h1>
-  <div class="sub">45&times;148 lot &middot; house + shed + proposed ADU</div>
-  <label><input type="checkbox" data-g="adu" checked> Proposed ADU (20&times;24, 2-story)</label>
+  <div class="sub">Current Option F geometry &middot; basis v1</div>
+  <label><input type="checkbox" data-g="adu" checked> Option F ADU + stair/patios</label>
   <label><input type="checkbox" data-g="house" checked> Existing house (1931)</label>
   <label><input type="checkbox" data-g="shed" checked> Replacement shed (18&times;6)</label>
   <label><input type="checkbox" data-g="context" checked> Neighbors (approx.)</label>
@@ -420,7 +435,7 @@ BODY = r"""
   <b>Lot</b> 45&prime;&times;148&prime; (6,660 sf) &middot; zone R-5 &middot; alley W / street E<br>
   <b>House</b> 1,303 sf 1-story (1931) &middot; front setback 25&prime; measured<br>
   <b>Shed</b> replacement 18&times;6 &middot; 108 sf &middot; south setback 5&prime;<br>
-  <b>ADU</b> 20&times;24 &middot; &le;20&prime; &middot; garage + ~480 sf 1-bed &middot; 5&prime; off alley,
+  <b>ADU</b> Option F &middot; 20&times;24 &middot; 19&prime;-10&Prime; ridge basis &middot; garage + 480 sf 1-bed &middot; 5&prime; off alley,
   5&prime; off N line (R-5 minimum met)<br>
   <i>Preliminary massing &mdash; heights estimated, field-verify.</i>
 </div>

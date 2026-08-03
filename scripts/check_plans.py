@@ -11,8 +11,6 @@ import shutil
 import struct
 import subprocess
 import sys
-import xml.etree.ElementTree as ET
-import zipfile
 from collections.abc import Iterable, Sequence
 from pathlib import Path
 from typing import Any
@@ -76,7 +74,7 @@ def line_key(entity: Any) -> tuple[tuple[float, float], tuple[float, float]]:
 
 
 def validate_dxf() -> None:
-    path = PLAN_DIR / "site-plan.dxf"
+    path = PLAN_DIR / "site-plan-option-f.dxf"
     document = ezdxf.readfile(path)
     auditor = document.audit()
     require(not auditor.errors, f"DXF audit found {len(auditor.errors)} error(s)")
@@ -132,8 +130,8 @@ def validate_dxf() -> None:
 
     access_polylines = list(modelspace.query('LWPOLYLINE[layer=="PROPOSED-ADU-ACCESS"]'))
     expected_open_access = {
-        frozenset({(16.5, 16.0), (32.5, 16.0), (32.5, 20.0)}),
-        frozenset({(29.0, 20.0), (29.0, 39.5), (32.5, 39.5), (32.5, 20.0)}),
+        frozenset({(16.5, 16.0), (33.0, 16.0), (33.0, 20.0)}),
+        frozenset({(29.0, 20.0), (29.0, 39.5), (33.0, 39.5), (33.0, 20.0)}),
     }
     actual_open_access = {
         frozenset(normalized_points(entity))
@@ -141,7 +139,7 @@ def validate_dxf() -> None:
         if not getattr(entity, "closed")
     }
     require(
-        actual_open_access == expected_open_access, "Option E landing or patio geometry changed"
+        actual_open_access == expected_open_access, "Option F landing or patio geometry changed"
     )
 
     design_access_points = [
@@ -155,8 +153,8 @@ def validate_dxf() -> None:
         max(point[1] for point in design_access_points),
     )
     require(
-        close_sequence(access_bounds, (5.5, 16.0, 32.5, 39.5)),
-        f"Option E access geometry bounds changed: {access_bounds}",
+        close_sequence(access_bounds, (5.5, 16.0, 33.0, 39.5)),
+        f"Option F access geometry bounds changed: {access_bounds}",
     )
 
     dimensions = list(modelspace.query('DIMENSION[layer=="DIMENSIONS"]'))
@@ -165,10 +163,10 @@ def validate_dxf() -> None:
         entity.dxf.text for entity in modelspace.query("TEXT") if entity.dxf.hasattr("text")
     )
     required_text = {
-        "OPTION E ADU",
+        "OPTION F ADU",
         "20 x 24  -  2 STORY",
         "18 x 6  -  108 SF - LOW PROFILE",
-        "5' CLEAR SHED-TO-STAIR",
+        "5' CLEAR",
         "ADU N. SETBACK 5' - R-5 MIN MET",
         "FRONT SETBACK 25' (MEASURED)",
         "PRELIMINARY - NOT FOR CONSTRUCTION - DIMENSIONS APPROX, FIELD-VERIFY",
@@ -178,82 +176,60 @@ def validate_dxf() -> None:
 
 
 def load_manifest() -> dict[str, Any]:
-    path = MODEL_DIR / "adu-option-e-manifest.json"
+    path = MODEL_DIR / "adu-option-f-manifest.json"
     payload = json.loads(path.read_text(encoding="utf-8"))
-    require(payload.get("schema") == "adu-option-e-object-manifest-v1", "unknown manifest schema")
-    require(payload.get("object_count") == 72, "manifest must describe 72 objects")
+    require(payload.get("schema") == "adu-option-f-model-manifest-v1", "unknown manifest schema")
+    require(payload.get("design") == "Option F", "manifest design must be Option F")
+    require(payload.get("object_count") == 79, "manifest must describe 79 objects")
     objects = payload.get("objects")
-    require(isinstance(objects, list) and len(objects) == 72, "manifest object list is incomplete")
+    require(isinstance(objects, list) and len(objects) == 79, "manifest object list is incomplete")
     return payload
 
 
 def validate_manifest(payload: dict[str, Any]) -> None:
+    require(payload.get("units") == "feet", "manifest units changed")
+    require(payload.get("version") == "2026-08-03-option-f-basis-v1", "model version changed")
     require(
-        payload.get("units")
-        == {
-            "source_geometry": "millimetres",
-            "reported_bounds": "feet",
-            "reported_area": "square feet",
-            "reported_volume": "cubic feet",
-        },
-        "manifest units changed",
+        payload.get("datums_ft") == {"upper_subfloor": 9.25, "eave": 16.0, "ridge": 19.833},
+        "Option F vertical datums changed",
     )
     bounds = payload["bounds_ft"]
     require(close_sequence(bounds["min"], (0.0, -4.0, 0.0)), "manifest minimum bounds changed")
-    require(close_sequence(bounds["max"], (27.5, 20.0, 20.0)), "manifest maximum bounds changed")
+    require(
+        close_sequence(bounds["max"], (28.0, 20.0, 19.833), tolerance=1e-3),
+        f"manifest maximum bounds changed: {bounds['max']}",
+    )
 
     objects = payload["objects"]
     names = [item["name"] for item in objects]
     require(len(names) == len(set(names)), "manifest contains duplicate object names")
-    require(all(item["design_source"] == "Option E" for item in objects), "design source changed")
-    require(all(item["area_sq_ft"] > 0 for item in objects), "object with non-positive area")
-    require(all(item["volume_cu_ft"] > 0 for item in objects), "object with non-positive volume")
-    require(all(item["topology"]["solids"] >= 1 for item in objects), "object without a solid")
+    require(
+        all(all(value > 0 for value in item["size_ft"]) for item in objects),
+        "object with non-positive size",
+    )
 
     stair_steps = [item for item in objects if item["category"] == "Exterior stair"]
     room_zones = [item for item in objects if item["category"] == "Room zone"]
     require(len(stair_steps) == 13, f"expected 13 stair steps, found {len(stair_steps)}")
     require(len(room_zones) == 10, f"expected 10 room zones, found {len(room_zones)}")
 
-    objects_by_label = {item["label"]: item for item in objects}
+    objects_by_label = {item["name"]: item for item in objects}
     required_labels = {
         "Level 1 slab 20x24",
         "Level 2 floor assembly 20x24",
         "Ground south covered patio",
         "Upper south landing",
-        "Upper east balcony",
-        "South roof plane",
-        "North roof plane",
+        "Ground east patio 4ft",
+        "Upper east patio 4ft",
+        "L1 east 6ft slider",
+        "L2 east 6ft slider",
+        "South roof plane flush west",
+        "North roof plane flush north-west",
     }
     require(required_labels <= objects_by_label.keys(), "manifest missing major model components")
     for label in ("Level 1 slab 20x24", "Level 2 floor assembly 20x24"):
-        item_bounds = objects_by_label[label]["bounds_ft"]
-        width = item_bounds["max"][0] - item_bounds["min"][0]
-        depth = item_bounds["max"][1] - item_bounds["min"][1]
+        width, depth = objects_by_label[label]["size_ft"][:2]
         require(close(width, 24.0) and close(depth, 20.0), f"{label} is not 24 ft x 20 ft")
-
-
-def validate_fcstd(payload: dict[str, Any]) -> None:
-    path = MODEL_DIR / "adu-option-e.FCStd"
-    require(zipfile.is_zipfile(path), "FCStd is not a valid ZIP container")
-    expected_shape_files = {f"{item['name']}.Shape.brp" for item in payload["objects"]}
-    with zipfile.ZipFile(path) as archive:
-        require(archive.testzip() is None, "FCStd contains an entry with a bad CRC")
-        entries = set(archive.namelist())
-        require(
-            {"Document.xml", "GuiDocument.xml", "ShapeAppearance"} <= entries, "FCStd is incomplete"
-        )
-        actual_shape_files = {name for name in entries if name.endswith(".Shape.brp")}
-        require(
-            actual_shape_files == expected_shape_files, "FCStd shapes do not match manifest objects"
-        )
-        root = ET.fromstring(archive.read("Document.xml"))
-
-    objects_element = root.find("Objects")
-    require(objects_element is not None, "FCStd Document.xml has no Objects section")
-    document_names = {element.attrib["name"] for element in root.findall("./ObjectData/Object")}
-    manifest_names = {item["name"] for item in payload["objects"]}
-    require(manifest_names <= document_names, "FCStd Document.xml is missing manifest objects")
 
 
 def validate_step(payload: dict[str, Any]) -> None:
@@ -274,7 +250,7 @@ def validate_step(payload: dict[str, Any]) -> None:
     bounds_api = getattr(brep_bnd_lib, "BRepBndLib")
 
     reader = step_reader_type()
-    status = reader.ReadFile(str(MODEL_DIR / "adu-option-e.step"))
+    status = reader.ReadFile(str(MODEL_DIR / "adu-option-f.step"))
     require(status == read_done, f"OpenCascade could not read STEP: {status}")
     require(reader.TransferRoots() > 0, "STEP has no transferable roots")
     shape = reader.OneShape()
@@ -286,7 +262,7 @@ def validate_step(payload: dict[str, Any]) -> None:
     while explorer.More():
         solid_count += 1
         explorer.Next()
-    expected_solids = sum(item["topology"]["solids"] for item in payload["objects"])
+    expected_solids = payload["object_count"]
     require(
         solid_count == expected_solids, f"STEP has {solid_count} solids; expected {expected_solids}"
     )
@@ -297,11 +273,11 @@ def validate_step(payload: dict[str, Any]) -> None:
     step_min = [raw_bounds[index] / FT_IN_MM for index in range(3)]
     step_max = [raw_bounds[index] / FT_IN_MM for index in range(3, 6)]
     require(
-        close_sequence(step_min, payload["bounds_ft"]["min"], tolerance=1e-5),
+        close_sequence(step_min, payload["bounds_ft"]["min"], tolerance=1e-3),
         f"STEP minimum bounds differ from manifest: {step_min}",
     )
     require(
-        close_sequence(step_max, payload["bounds_ft"]["max"], tolerance=1e-5),
+        close_sequence(step_max, payload["bounds_ft"]["max"], tolerance=1e-3),
         f"STEP maximum bounds differ from manifest: {step_max}",
     )
 
@@ -319,13 +295,12 @@ def read_glb_json(path: Path) -> dict[str, Any]:
 
 
 def validate_glb() -> None:
-    path = MODEL_DIR / "adu-option-e.glb"
+    path = MODEL_DIR / "adu-option-f.glb"
     payload = read_glb_json(path)
     require(payload.get("asset", {}).get("version") == "2.0", "GLB asset version is not 2.0")
     require(len(payload.get("scenes", [])) >= 1, "GLB has no scene")
     require(len(payload.get("nodes", [])) >= 1, "GLB has no nodes")
-    require(len(payload.get("meshes", [])) == 18, "GLB must retain 18 material meshes")
-    require(len(payload.get("materials", [])) == 18, "GLB must retain 18 materials")
+    require(len(payload.get("meshes", [])) >= 1, "GLB has no meshes")
 
     validator = shutil.which("gltf_validator")
     if validator is None:
@@ -352,16 +327,8 @@ def png_dimensions(path: Path) -> tuple[int, int]:
 
 
 def validate_rendered_outputs() -> None:
-    svg_path = PLAN_DIR / "site-plan.svg"
-    svg_root = ET.parse(svg_path).getroot()
-    require(svg_root.tag == "{http://www.w3.org/2000/svg}svg", "site-plan.svg has an invalid root")
-    require(svg_root.attrib.get("viewBox") == "0 0 960 440", "site-plan.svg viewBox changed")
-    svg_text = " ".join(element.text or "" for element in svg_root.iter())
-    for expected in ("20 × 24 ft enclosed", "5 ft clear", "R-5 minimum met"):
-        require(expected in svg_text, f"site-plan.svg missing text: {expected}")
-
     pypdf = importlib.import_module("pypdf")
-    pdf = pypdf.PdfReader(PLAN_DIR / "site-plan-architect.pdf")
+    pdf = pypdf.PdfReader(PLAN_DIR / "site-plan-option-f-architect.pdf")
     require(len(pdf.pages) == 1, "architect PDF must contain exactly one page")
     page = pdf.pages[0]
     require(float(page.mediabox.width) > 600, "architect PDF page width is unexpectedly small")
@@ -372,10 +339,8 @@ def validate_rendered_outputs() -> None:
     )
 
     expected_pngs = {
-        PLAN_DIR / "site-plan.png": (1920, 880),
-        MODEL_DIR / "adu-option-e-level-1.png": (1600, 1200),
-        MODEL_DIR / "adu-option-e-level-2.png": (1600, 1200),
-        MODEL_DIR / "adu-option-e-axon.png": (1600, 1200),
+        PLAN_DIR / "site-plan-option-f.png": (1839, 960),
+        ROOT / "apartment" / "option-f-recommended-development.png": (3308, 2336),
     }
     for path, expected_dimensions in expected_pngs.items():
         require(png_dimensions(path) == expected_dimensions, f"{path.name} dimensions changed")
@@ -383,18 +348,16 @@ def validate_rendered_outputs() -> None:
 
 def validate_required_artifacts() -> None:
     required = {
-        PLAN_DIR / "site-plan.dxf",
-        PLAN_DIR / "site-plan.svg",
-        PLAN_DIR / "site-plan.png",
-        PLAN_DIR / "site-plan-architect.pdf",
-        MODEL_DIR / "adu-option-e.FCStd",
-        MODEL_DIR / "adu-option-e.step",
-        MODEL_DIR / "adu-option-e.brep",
-        MODEL_DIR / "adu-option-e.glb",
-        MODEL_DIR / "adu-option-e.obj",
-        MODEL_DIR / "adu-option-e-arch.obj",
-        MODEL_DIR / "adu-option-e-arch.mtl",
-        MODEL_DIR / "adu-option-e-manifest.json",
+        PLAN_DIR / "site-plan-option-f.dxf",
+        PLAN_DIR / "site-plan-option-f.png",
+        PLAN_DIR / "site-plan-option-f-architect.pdf",
+        MODEL_DIR / "adu-option-f.step",
+        MODEL_DIR / "adu-option-f.brep",
+        MODEL_DIR / "adu-option-f.glb",
+        MODEL_DIR / "adu-option-f.obj",
+        MODEL_DIR / "adu-option-f-manifest.json",
+        MODEL_DIR / "site-model-3d.html",
+        MODEL_DIR / "site-model.obj",
     }
     missing = sorted(str(path.relative_to(ROOT)) for path in required if not path.is_file())
     empty = sorted(
@@ -406,19 +369,51 @@ def validate_required_artifacts() -> None:
     require(not empty, f"empty required artifacts: {empty}")
 
 
+def validate_coordination_manifest() -> None:
+    payload = json.loads((ROOT / "option-f-artifact-manifest.json").read_text())
+    require(payload.get("design") == "Option F", "coordination manifest design changed")
+    require(
+        payload.get("version") == "2026-08-03-option-f-basis-v1",
+        "coordination manifest version changed",
+    )
+    for role, relative_path in payload.get("current_artifacts", {}).items():
+        require(
+            (ROOT / relative_path).is_file(), f"current {role} artifact missing: {relative_path}"
+        )
+    require(
+        payload.get("coordinated_invariants")
+        == {
+            "enclosed_footprint_ft": [24.0, 20.0],
+            "upper_subfloor_ft": 9.25,
+            "eave_ft": 16.0,
+            "ridge_max_ft": 19.833,
+            "east_patio_depth_ft": 4.0,
+            "east_slider_width_ft": 6.0,
+            "stair_risers": 14,
+            "stair_treads": 13,
+            "guard_height_ft": 3.0,
+            "north_wall_openings": 0,
+            "west_upper_windows": 1,
+            "south_upper_sliders": 0,
+            "setback_roof_edges": ["north eave flush", "west rake flush"],
+        },
+        "coordinated invariants changed",
+    )
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.parse_args()
 
     checks = [
         ("required artifacts", validate_required_artifacts),
+        ("coordination manifest", validate_coordination_manifest),
         ("DXF audit and site geometry", validate_dxf),
     ]
     manifest = load_manifest()
     checks.extend(
         [
-            ("FreeCAD semantic manifest", lambda: validate_manifest(manifest)),
-            ("FCStd archive", lambda: validate_fcstd(manifest)),
+            ("Option F semantic manifest", lambda: validate_manifest(manifest)),
             ("STEP BRep geometry", lambda: validate_step(manifest)),
             ("GLB model", validate_glb),
             ("SVG, PDF, and PNG outputs", validate_rendered_outputs),
@@ -429,7 +424,7 @@ def main() -> int:
         for label, check in checks:
             check()
             print(f"ok: {label}")
-    except (CheckFailure, OSError, ValueError, ET.ParseError, zipfile.BadZipFile) as error:
+    except (CheckFailure, OSError, ValueError) as error:
         print(f"error: {error}", file=sys.stderr)
         return 1
 

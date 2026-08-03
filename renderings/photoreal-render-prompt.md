@@ -11,7 +11,8 @@ Use sources in this order when they conflict:
 3. `../plan/site-plan-option-f.dxf` — true-scale site geometry
 4. `../inspiration/03-craftsman-gray-red-trim-carriage-door.jpg` — exterior style and materials only
 5. actual `../images/` photographs — vegetation, fences, alley, and yard character
-6. Option E CAD/axonometric files — provisional 20 × 24 ft gable massing only; never use their doors, windows, patio depth, room program, or access geometry
+6. `../model/adu-option-f.step` and `../model/adu-option-f.glb` — current coordinated Option F three-dimensional geometry
+7. Option E CAD/axonometric files — historical comparison only; never use their doors, windows, patio depth, room program, access geometry, or vertical datums
 
 Earlier generated renders are not geometry references. In particular, do not restore Option E's first-floor shower, downstairs laundry, smaller sliders, separate office door, 3-ft-6-in patio depth, or a landing that stops before the east patio.
 
@@ -32,16 +33,17 @@ Create a convincing photograph of the proposed detached Option F ADU at 112 W 29
 BUILDING MASSING
 - Enclosed footprint: exactly 24 feet east-west by 20 feet north-south, 480 square feet gross per level.
 - Exactly two stories: full-depth garage, support space, powder room, protected hall, and owner office/garden room below; one-bedroom apartment above.
-- Working second-floor elevation: 9 feet 6 inches above grade.
-- East-west gable ridge: 16-foot eaves and 20-foot planned ridge, with west alley and east yard elevations as gable ends.
+- Working top-of-upper-subfloor elevation: 9 feet 3 inches above the level-1 slab datum.
+- East-west gable ridge: 16-foot eaves and a 19-foot-10-inch maximum ridge basis, with west alley and east yard elevations as gable ends.
 - Low-pitch dark-charcoal composition-shingle roof. No shed roof, flat roof, or dormers.
 - ADU sits 5 feet east of the west alley property line and 5 feet south of the north property line.
+- Keep the west rake and north eave flush to the setback walls. Add projections there only after zoning approval or inward relocation of the building.
 
 STYLE AND MATERIALS
 - muted sage or gray-green horizontal wood lap siding
 - warm creamy-white corner boards, fascia, posts, stair structure, landing structure, and traditional painted wood guards
 - muted barn-red window sashes and selected doors
-- divided-light windows, wide eaves, exposed painted rafter tails, restrained Craftsman knee braces, and a small gable vent
+- divided-light windows, restrained projections where allowed, exposed painted rafter tails, restrained Craftsman knee braces, and a small gable vent
 - black traditional lantern sconces
 - cream carriage-style garage door with square top-row windows and black hardware
 - real wood stair treads and decking
@@ -99,7 +101,7 @@ Append this block to Prompt 1.
 CAMERA — ALLEY-SIDE VIEW
 Camera stands in the west alley, slightly southwest of the ADU, looking northeast. The west gable and garage elevation are primary. Frame enough of the south wall and east end to prove the complete access sequence.
 
-Show one cream carriage-style garage door at level 1 and restrained upper west bedroom/bath glazing. South is camera-right. Near the camera, the 4-foot-wide stair rises away from the alley for its 11-foot run. At the top, treads stop and the long flat landing continues past the conventional upper entry, then wraps openly around the southeast corner. Reveal enough of the stacked east patios and their two large sliders to make that connection legible.
+Show one cream carriage-style garage door at level 1 and exactly one generous upper west bedroom EERO casement. Keep the west gable rake flush. South is camera-right. Near the camera, the 4-foot-wide stair rises away from the alley for its 11-foot run. At the top, treads stop and the long flat landing continues past the conventional upper entry and five-foot-wide raised-sill living window, then wraps openly around the southeast corner. There is no south-wall slider. Reveal enough of the stacked east patios and their two large sliders to make that connection legible.
 
 Show the low 18-by-6-foot replacement shed south of the stair, not the old tall shed. Keep a visible 5-foot clear strip between shed and stair. Do not make the stair climb across the west garage facade, continue treads along the landing, or hide circulation beneath an invented stair roof.
 ```
@@ -111,7 +113,7 @@ Reference bundle:
 3. `../inspiration/03-craftsman-gray-red-trim-carriage-door.jpg`
 4. `../images/11-backyard-alley-parking-facing-east.jpg`
 
-Current generated output: `option-f-alley-photoreal.png`
+Current generated output: `option-f-alley-photoreal-v2.png`
 
 ## Prompt 3 — yard-side camera block
 
@@ -135,7 +137,7 @@ Reference bundle:
 3. `../inspiration/03-craftsman-gray-red-trim-carriage-door.jpg`
 4. `../images/10-backyard-garden-facing-north.jpg`
 
-Current generated output: `option-f-yard-photoreal.png`
+Current generated output: `option-f-yard-photoreal-v2.png`
 
 ## Remaining design caveat
 

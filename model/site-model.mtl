@@ -57,19 +57,16 @@ newmtl m18
 Kd 0.914 0.886 0.800
 
 newmtl m19
-Kd 0.922 0.894 0.812
-
-newmtl m20
 Kd 0.298 0.290 0.271
 
-newmtl m21
+newmtl m20
 Kd 0.725 0.706 0.659
 
-newmtl m22
+newmtl m21
 Kd 0.561 0.541 0.502
 
-newmtl m23
+newmtl m22
 Kd 0.769 0.757 0.722
 
-newmtl m24
+newmtl m23
 Kd 0.847 0.835 0.804
