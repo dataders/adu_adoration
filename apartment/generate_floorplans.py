@@ -895,7 +895,9 @@ def upper_e(p):
 
 def option_f_access(p, upper=False):
     """South stair/landing continues around the corner to full east patios."""
-    p.stair(0.5, -4.0, 11.0, 4.0, direction="w" if upper else "e", updown="DN" if upper else "UP", n=13)
+    p.stair(
+        0.5, -4.0, 11.0, 4.0, direction="w" if upper else "e", updown="DN" if upper else "UP", n=13
+    )
     p.rect(11.5, -4.0, 16.5, 4.0, "#f6f6f6", stroke="#c9cdd3", sw=1, layer=p.mid)
     p.text(
         19.7,
@@ -914,7 +916,13 @@ def option_f_access(p, upper=False):
         fill="#7d838d",
         rotate=90,
     )
-    p.text(5.9, -4.55, "alley entry &#8592; stair rises east &#183; 14 risers / 13 treads", size=8.5, fill=NOTEC)
+    p.text(
+        5.9,
+        -4.55,
+        "alley entry &#8592; stair rises east &#183; 14 risers / 13 treads",
+        size=8.5,
+        fill=NOTEC,
+    )
 
 
 def lower_f(p):
@@ -930,7 +938,13 @@ def lower_f(p):
     p.line(0.25, 1.3, 0.25, 11.0, stroke=WALL, sw=1.5)
     p.text(1.0, 6.15, "9'-8\" overhead door &#8594; alley", size=8.2, fill=NOTEC, rotate=-90)
     p.window(23.5, 4.0, 3.0, wall="v")
-    p.label(12.0, 9.8, "full-depth garage / shop", "&#8776; 23' clear depth &#183; one car + storage", size=11.5)
+    p.label(
+        12.0,
+        9.8,
+        "full-depth garage / shop",
+        "&#8776; 23' clear depth &#183; one car + storage",
+        size=11.5,
+    )
 
     # Northwest garage-support zone: equipment remains outside ADU area.
     p.tint(0.5, 11.83, 7.0, 7.67, "mech")
@@ -1257,7 +1271,11 @@ if __name__ == "__main__":
         ),
     ]
     for fname, name, sub, fn, with_stair, notes in sheets:
-        east_x = BW + 5.6 if fn is upper_c else (31.5 if fn is upper_f else (28.5 if fn is upper_e else None))
+        east_x = (
+            BW + 5.6
+            if fn is upper_c
+            else (31.5 if fn is upper_f else (28.5 if fn is upper_e else None))
+        )
         is_south_stair = fn in (upper_d, upper_e, upper_f)
         is_e = fn is upper_e
         is_f = fn is upper_f

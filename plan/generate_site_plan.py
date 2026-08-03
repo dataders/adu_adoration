@@ -240,7 +240,13 @@ label(
     layer="PROPOSED-ADU",
 )
 label("1-BED ABOVE", 17, 27.5, 1.2, layer="PROPOSED-ADU")
-label("STAIR ENTRY FROM ALLEY" if OPTION == "F" else "DOOR -> ALLEY", 17, 25, 1.0, layer="PROPOSED-ADU")
+label(
+    "STAIR ENTRY FROM ALLEY" if OPTION == "F" else "DOOR -> ALLEY",
+    17,
+    25,
+    1.0,
+    layer="PROPOSED-ADU",
+)
 
 # Put access notes in open yard rather than crowding the 4' bands.
 if OPTION == "E":
@@ -253,7 +259,9 @@ if OPTION == "E":
         layer="PROPOSED-ADU-ACCESS",
         align=TextEntityAlignment.MIDDLE_LEFT,
     )
-    label("COVERED PATIO BELOW - OPEN CONNECTION ABOVE", 30.75, 17, 0.75, layer="PROPOSED-ADU-ACCESS")
+    label(
+        "COVERED PATIO BELOW - OPEN CONNECTION ABOVE", 30.75, 17, 0.75, layer="PROPOSED-ADU-ACCESS"
+    )
 else:
     line((32, 26), (42, 26), "PROPOSED-ADU-ACCESS")
     label(
@@ -264,7 +272,14 @@ else:
         layer="PROPOSED-ADU-ACCESS",
         align=TextEntityAlignment.MIDDLE_LEFT,
     )
-    label("14 RISERS / 13 TREADS - FINAL SECTION TO VERIFY", 43, 24.6, 0.8, layer="PROPOSED-ADU-ACCESS", align=TextEntityAlignment.MIDDLE_LEFT)
+    label(
+        "14 RISERS / 13 TREADS - FINAL SECTION TO VERIFY",
+        43,
+        24.6,
+        0.8,
+        layer="PROPOSED-ADU-ACCESS",
+        align=TextEntityAlignment.MIDDLE_LEFT,
+    )
 label("5' CLEAR", 30, 14.0, 0.85, layer="PROPOSED-SHED")
 label("ALLEY (REAR)", -5, 22.5, 1.8, align=TextEntityAlignment.MIDDLE_CENTER)
 label("W 29TH ST (FRONT)", 154, 22.5, 1.8, align=TextEntityAlignment.MIDDLE_CENTER)
