@@ -60,7 +60,12 @@ footprint; ADU living area ≤ greater of 500 sf or 1/3 of the house = 500 sf ca
   - **`site-model-3d.html`** — interactive 3D viewer, open directly in a browser
     (orbit/zoom/pan, layer toggles, preset views).
   - **`site-model.obj`** (+ `.mtl`) — true-scale OBJ (feet, Y-up) for SketchUp / Blender.
+  - **`adu-option-e.FCStd`** — editable FreeCAD model of both Option E levels,
+    with walls, openings, room zones, roof, patios, balcony, and exterior stair.
+  - **`adu-option-e.step`** — neutral CAD export of the FreeCAD model.
   - `generate_3d_model.py` — regenerates both: `python3 model/generate_3d_model.py` (no deps).
+  - `generate_freecad_adu.py` — regenerates the Option E FreeCAD/STEP model using
+    FreeCAD's native Python API; see [`model/README.md`](model/README.md) for the command.
 - [`plan/`](plan/) — the site plan in several formats:
   - **`site-plan.dxf`** — true-scale CAD file (1 unit = 1 ft, layered: lot / house / existing shed
     removal / replacement shed / Option E ADU / exterior access / R-5 setbacks / dims / text). This is the file to hand an

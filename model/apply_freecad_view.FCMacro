@@ -1,0 +1,29 @@
+"""Apply retained ADU colors/visibility after a headless regeneration."""
+
+import FreeCAD as App
+import FreeCADGui as Gui
+
+
+doc = App.ActiveDocument
+if doc is None:
+    raise RuntimeError("Open adu-option-e.FCStd before running this macro")
+
+for obj in doc.Objects:
+    if "DisplayColor" not in obj.PropertiesList:
+        continue
+    color = tuple(obj.DisplayColor)[:3]
+    obj.ViewObject.ShapeColor = color
+    obj.ViewObject.LineColor = tuple(max(0.0, channel - 0.25) for channel in color)
+    obj.ViewObject.Transparency = obj.DisplayTransparency
+    obj.ViewObject.Visibility = True
+
+for name in ("Level_1", "Level_2", "Exterior_Access", "Roof"):
+    doc.getObject(name).ViewObject.Visibility = True
+
+view = Gui.activeDocument().activeView()
+view.viewAxonometric()
+Gui.updateGui()
+view.fitAll()
+Gui.updateGui()
+doc.recompute()
+doc.save()
