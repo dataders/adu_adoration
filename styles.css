@@ -155,6 +155,16 @@ p { margin: 0; }
 .tag { display: inline-block; margin-bottom: .6rem; padding: .18rem .38rem; background: var(--green); color: white; font-size: .58rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
 .tag.new { background: var(--accent); }
 
+.interior-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.interior-grid figure { margin: 0; overflow: hidden; border: 1px solid var(--line); background: white; }
+.interior-grid a { display: block; overflow: hidden; background: var(--soft); }
+.interior-grid img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; transition: transform .2s ease; }
+.interior-grid a:hover img { transform: scale(1.015); }
+.interior-grid figcaption { min-height: 112px; padding: 1rem; }
+.interior-grid strong, .interior-grid span { display: block; }
+.interior-grid strong { font-family: Georgia, serif; font-size: 1.25rem; font-weight: 400; }
+.interior-grid span { margin-top: .35rem; color: var(--muted); font-size: .76rem; }
+
 .image-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
 .image-grid figure { margin: 0; padding: 5px; border: 1px solid var(--line); background: white; }
 .image-grid figure.featured { grid-column: span 2; grid-row: span 2; }
@@ -184,7 +194,7 @@ footer a { color: var(--green); font-weight: 750; text-underline-offset: .2em; }
   .plan-set-callout img { height: 300px; border-right: 0; border-bottom: 1px solid var(--line); }
   .summary-card { display: grid; grid-template-columns: .9fr 1.1fr; }
   .summary-image { height: 190px; border-right: 1px solid var(--line); border-bottom: 0; }
-  .plan-card { grid-template-columns: 1fr; }
+  .plan-card, .interior-grid { grid-template-columns: 1fr; }
   .plan-card img { height: 230px; border-right: 0; border-bottom: 1px solid var(--line); }
   .image-grid { grid-template-columns: 1fr 1fr; }
   .scope-grid { grid-template-columns: 1fr 1fr; }

@@ -28,6 +28,9 @@ on both floors. Laundry occupies the upper low-eave seasonal-storage room, and t
 powder room. See
 [`apartment/option-f-recommended-development.png`](apartment/option-f-recommended-development.png) and
 [`plan/site-plan-option-f-architect.pdf`](plan/site-plan-option-f-architect.pdf).
+Plan-informed interior views are available for the
+[`first-floor garage and service wall`](renderings/option-f-first-floor-interior.png) and the
+[`second-floor apartment`](renderings/option-f-second-floor-interior-corrected.png).
 
 The current owner-coordination deliverable is the **11-sheet schematic construction and engineering
 basis set** at [`output/pdf/adu-option-f-construction-engineering-basis.pdf`](output/pdf/adu-option-f-construction-engineering-basis.pdf).
@@ -99,6 +102,8 @@ footprint; ADU living area ≤ greater of 500 sf or 1/3 of the house = 500 sf ca
 - [`images/`](images/) — all reference imagery (hand sketches, assessor sketch, satellite shots). See its README.
 - [`documents/`](documents/) — source PDFs (hand-drawn site plans, assessor sketch, DataScout property report).
 - [`inspiration/`](inspiration/) — reference photos of styles we like for the ADU exterior.
+- [`renderings/`](renderings/) — Option F exterior and interior concept imagery, including the
+  first-floor garage/service-wall view and corrected second-floor apartment view.
 - [`sync/`](sync/) — one-way sync that mirrors a **public Pinterest board** into `inspiration/`
   from the board's RSS feed (no login/API token). Save your board URL to `sync/board.txt`, then
   `python3 sync/pinterest_pull.py`. See its README for limits (pull-only, no delete-sync) and how
