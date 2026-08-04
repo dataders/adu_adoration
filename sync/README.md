@@ -6,21 +6,21 @@ Pinterest login, no API token, no signup.
 
 ## Quick start
 
-```bash
+```sh
 # 1. Point it at your board (public boards only) — do this once:
 echo 'https://www.pinterest.com/<user>/<board>/' > sync/board.txt
 
 # 2. Preview what it would pull:
-python3 sync/pinterest_pull.py --dry-run
+uv run --no-project python sync/pinterest_pull.py --dry-run
 
 # 3. Actually pull new pins into inspiration/:
-python3 sync/pinterest_pull.py
+uv run --no-project python sync/pinterest_pull.py
 ```
 
 You can also pass the URL directly instead of using `board.txt`:
 
-```bash
-python3 sync/pinterest_pull.py https://www.pinterest.com/<user>/<board>/
+```sh
+uv run --no-project python sync/pinterest_pull.py https://www.pinterest.com/<user>/<board>/
 ```
 
 Re-run it any time — it's idempotent. Already-downloaded pins are tracked in

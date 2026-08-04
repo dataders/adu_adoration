@@ -23,12 +23,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
         with:
           python-version: "3.12"
 
       - name: Pull new pins
-        run: python3 sync/pinterest_pull.py
+        run: uv run --no-project python sync/pinterest_pull.py
 
       - name: Commit new pins if any
         run: |

@@ -4,5 +4,8 @@ __pycache__/
 .ruff_cache/
 *.FCBak
 
+# macOS
+.DS_Store
+
 # uv / virtual envs
 .venv/

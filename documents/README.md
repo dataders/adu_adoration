@@ -7,6 +7,6 @@
 | `site-plans-handdrawn-compressed.pdf` | Owner's hand-drawn site plans (3 pages, three scales) | Owner |
 
 Notes:
-- `site-plans-handdrawn-compressed.pdf` is downsampled from the original ~57 MB phone-photo PDF
-  (kept out of the repo to stay light); the original lives in the owner's `~/Downloads`.
+- `site-plans-handdrawn-compressed.pdf` is downsampled from the original ~57 MB phone-photo PDF,
+  which the owner retains outside the repository.
 - actDataScout lookups: https://www.actdatascout.com/RealProperty/Virginia/Richmond

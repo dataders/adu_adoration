@@ -17,6 +17,7 @@ dependencies = [
 [dependency-groups]
 # Tooling used by pre-commit and CI. `uv sync` installs these.
 dev = [
+    "pre-commit>=4.5",
     "ruff>=0.15",
     "ty>=0.0.1a1",
 ]

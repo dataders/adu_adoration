@@ -22,12 +22,12 @@ Limits (be honest about them):
       written as `pin-<id>-<slug>.jpg`.
 
 Usage:
-    python3 sync/pinterest_pull.py https://www.pinterest.com/<user>/<board>/
-    python3 sync/pinterest_pull.py            # reads sync/board.txt
-    python3 sync/pinterest_pull.py --dry-run  # show what would download
+    uv run --no-project python sync/pinterest_pull.py https://www.pinterest.com/<user>/<board>/
+    uv run --no-project python sync/pinterest_pull.py            # reads sync/board.txt
+    uv run --no-project python sync/pinterest_pull.py --dry-run  # show what would download
 
 Honors HTTPS_PROXY/HTTP_PROXY and the CA bundle in the environment.
-Standard library only — no pip install required.
+Standard library only — no extra package install required.
 """
 
 from __future__ import annotations
@@ -58,7 +58,8 @@ def resolve_board_url(cli_url: str | None) -> str:
     else:
         sys.exit(
             "No board URL given.\n"
-            "  Pass one:   python3 sync/pinterest_pull.py https://www.pinterest.com/<user>/<board>/\n"
+            "  Pass one:   uv run --no-project python sync/pinterest_pull.py "
+            "https://www.pinterest.com/<user>/<board>/\n"
             "  Or save it: echo 'https://www.pinterest.com/<user>/<board>/' > sync/board.txt"
         )
     if not url:

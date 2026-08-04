@@ -17,6 +17,24 @@ Regenerate after editing: `uv run python3 apartment/generate_floorplans.py`
 (pure-stdlib Python → SVG; PNGs render via the local headless chromium,
 or `rsvg-convert` if present).
 
+## Current design — Option F
+
+Option F is the coordinated design direction. It keeps the useful ideas from the
+owner-sketch baseline while resolving its main coordination problems:
+
+- one full-depth garage/shop bay instead of a short garage behind occupied rooms;
+- a level-1 powder room stacked below the level-2 full bath;
+- laundry in adjacent low-eave seasonal storage rather than inside the wet core;
+- one northeast owner office/garden room and a separate garage-support zone;
+- a conventional upper entry from the connected south landing;
+- 4-ft-deep stacked east patios with 6-ft sliders on both levels; and
+- a larger sink/prep island with range, refrigerator, and pantry on the full-height
+  east gable.
+
+The current geometry contract uses a 9.25-ft upper subfloor, 16-ft eaves, and a
+19.833-ft ridge. Treat the [Option F sheet](option-f-recommended-development.svg),
+current site plan, and construction/engineering basis as one coordinated set.
+
 ## The fixed constraints (get these in your head first)
 
 Everything below falls out of the site plan and zoning already confirmed in
@@ -43,13 +61,13 @@ the repo README:
    the tub, closets — not the kitchen counter.
 
    **Roof warning:** A–C are plan studies, not section-verified layouts. Current
-   massing uses an E–W ridge with 16' eaves and a 20' ridge, so ceiling height
-   falls toward the north and south walls. At the working 9'-6" floor-to-floor
-   assumption, the roof exterior is only about 6'-6" above the upper floor at
+   massing uses an E–W ridge with 16' eaves and a 19'-10" ridge, so ceiling height
+   falls toward the north and south walls. At the working 9'-3" upper-subfloor
+   datum, the roof exterior is only about 6'-9" above the upper floor at
    the eaves before subtracting roof structure and finishes, so a full-height
    refrigerator cannot sit against those walls. Option D responds by moving the tall
    kitchen to the east gable-end wall near the ridge and pulling standing bath
-   fixtures into the central high-headroom band. Option E adopts the same roof
+   fixtures into the central high-headroom band. Options E and F adopt the same roof
    logic while preserving the owner's preferred two-level organization. Final floor/roof section still
    controls; changing roof overhang alone does not create interior headroom.
 
@@ -85,8 +103,8 @@ Iterating a plan this small is really just re-answering three questions.
 interior stair costs ~46 sf on *each* floor (a 3'×13' slot plus landing).
 Inside (A/B): one weather-tight entry, feels like a house, easier
 aging-in-place; costs you a chunk of the garage and the apartment.
-Outside (C/D/E): the apartment keeps all 437 sf; C leaves the garage open,
-while D/E place the stair on the south face and E programs the lower level.
+Outside (C/D/E/F): the apartment keeps all 437 sf; C leaves the garage open,
+while D/E/F place the stair on the south face and E/F program the lower level.
 Exterior access means you carry groceries up in the rain, and the stair adds
 bulk to the yard facade. If inside, the stair goes on the north wall,
 full stop — it's the only room-sized thing that never needs a window.
@@ -95,9 +113,10 @@ full stop — it's the only room-sized thing that never needs a window.
 share plumbing drops, and the drops land in the garage (easy to box out —
 another reason this is cheap to get right). A–C stack one **NW bath
 (6'-4" × 5'-8" with shower + stacked W/D)** over a garage mech/workbench
-corner. D/E move standing bath fixtures toward the ridge for roof headroom;
-E also places a bathroom below. Kitchens vary by scheme, but Option E's
-east-gable appliance wall plus ridge-line island is the primary direction.
+corner. D/E/F move standing bath fixtures toward the ridge for roof headroom.
+Option F stacks the upper bath over a lower powder room and moves laundry into
+adjacent seasonal storage. Its east-gable appliance wall and sink/prep island are
+the current kitchen direction.
 
 **Decision 3 — bedroom west or east?** Whoever gets east gets the morning
 sun and the yard; the other room gets the alley side. A gives the yard to
@@ -113,8 +132,8 @@ daylight matters more.
   window (≥ 5.7 sf clear opening, R310) — fine on the west or south.
 - Queen bed = 5'-0" × 6'-8"; want ~2' walkway on each open side. A 9'-8"
   wide bedroom holds a queen + nightstands with room to spare.
-- Stair: 3'-0" wide min; Virginia allows 8¼" risers / 9" treads, so a
-  ~9'-6" floor-to-floor needs ~14 risers ≈ 10'-4" of run + a 3' landing.
+- Stair: 3'-0" wide min; Virginia allows 8¼" risers / 9" treads, so the
+  9'-3" working rise uses 14 risers and 13 treads plus the upper landing.
 - Kitchen: 36" aisle min (42" nicer); a 10' run + short return comfortably
   holds fridge / sink / range / dishwasher.
 - Bath: 36" × 36" shower, 30" width at the toilet, ~22" clear in front of
@@ -135,9 +154,9 @@ legal advice — confirm with Richmond building review.)*
 2. Edit, re-run, re-look. The furniture is the test: if the queen bed,
    sofa, and a 4-seat table don't fit with walkways, the scheme fails no
    matter how nice the diagram looks.
-3. When a favorite emerges, that sheet plus `plan/site-plan.dxf` is exactly
-   what to hand the architect — they'll redo it properly, but you'll be
-   arguing about *your* plan instead of their first guess.
+3. For current coordination, use the Option F sheet plus
+   `plan/site-plan-option-f.dxf` and the construction/engineering basis set.
+   Historical studies can still frame trade-offs, but they do not govern the handoff.
 
 Open questions to resolve next: floor-to-floor height vs the 20 ft cap
 (drives stair length and ceiling slopes); mini-split head locations;

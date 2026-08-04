@@ -1,0 +1,10 @@
+#!/bin/sh
+set -eu
+
+repo_dir=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+cd "$repo_dir"
+
+uv run --project "$repo_dir" --group dev ruff check .
+uv run --project "$repo_dir" --group dev ruff format --check .
+uv run --project "$repo_dir" --group dev ty check
+exec "$repo_dir/bin/check-plans"
