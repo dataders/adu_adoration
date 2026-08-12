@@ -17,6 +17,9 @@ Run:  uv run python model/generate_3d_model.py   (stdlib only, no deps)
 
 import json
 import os
+from typing import Any
+
+import option_f_geometry as opt
 
 OUT_DIR = os.path.dirname(os.path.abspath(__file__))
 DATE = "2026-08-03 · current plan basis v1"
@@ -66,10 +69,22 @@ A_WTRIM = "#8f3b32"
 GLASS = "#b7c9d3"
 NBR_W = "#b9b4a8"
 NBR_R = "#8f8a80"
+PLAN_WALL = "#2e3236"
+PLAN_OPENING = "#5b6f8d"
+PLAN_TINT = {
+    "garage": "#f2f2ef",
+    "mech": "#e9e7f5",
+    "hall": "#f3f0fa",
+    "bath": "#e7f6ef",
+    "flex": "#fdf3e3",
+    "bed": "#eaf1fa",
+    "kitchen": "#fdf3e3",
+    "living": "#fbeeec",
+}
 
-faces = []  # {c,g,p,[a],[layer]}
-lines = []  # {c,g,p,[dash]}
-labels = []  # {t,g,p,[s]}
+faces: list[dict[str, Any]] = []  # {c,g,p,[a],[layer]}
+lines: list[dict[str, Any]] = []  # {c,g,p,[dash],[l],[w]}
+labels: list[dict[str, Any]] = []  # {t,g,p,[s]}
 
 
 def F(pts, c, g, layer="solid", a=None, parent=None):
@@ -161,6 +176,110 @@ def shadow(x0, y0, x1, y1, h, g):
     corners = [(x0, y0), (x1, y0), (x1, y1), (x0, y1)]
     pts = corners + [(x + dx, y + dy) for x, y in corners]
     F([(x, y, 0.035) for x, y in hull(pts)], "#1c2616", g, layer="decal", a=0.16)
+
+
+def adu_pt(x, y, z):
+    return [ax0 + x, ay0 + y, z]
+
+
+def plan_rect(group, x, y, w, h, z, color, alpha=0.84):
+    F(
+        [adu_pt(x, y, z), adu_pt(x + w, y, z), adu_pt(x + w, y + h, z), adu_pt(x, y + h, z)],
+        color,
+        group,
+        layer="overlay",
+        a=alpha,
+    )
+
+
+def plan_line(group, x0, y0, x1, y1, z, color=PLAN_WALL, width=1.8, dash=False):
+    item = {
+        "c": color,
+        "g": group,
+        "l": "overlay",
+        "w": width,
+        "p": [adu_pt(x0, y0, z), adu_pt(x1, y1, z)],
+    }
+    if dash:
+        item["dash"] = 1
+    lines.append(item)
+
+
+def plan_label(group, text, x, y, z):
+    labels.append({"t": text, "g": group, "p": adu_pt(x, y, z), "s": 1})
+
+
+def plan_room(group, room_name, color_key, z, label=None):
+    _level, name = room_name.split(" ", 1)
+    x, y, w, h = opt.ROOMS[room_name]
+    plan_rect(group, x, y, w, h, z, PLAN_TINT[color_key])
+    plan_label(group, label or name, x + w / 2, y + h / 2, z + 0.08)
+
+
+def add_floor_plan_layers():
+    z1 = 0.62
+    z2 = opt.UPPER_SUBFLOOR_TOP + 0.44
+
+    # Level 1: current full-depth garage, stacked powder room, and owner room.
+    g1 = "floor1"
+    for name, kind, label in (
+        ("L1 garage/shop", "garage", "garage / shop"),
+        ("L1 garage support", "mech", "garage support"),
+        ("L1 protected hall", "hall", "protected hall"),
+        ("L1 powder room", "bath", "powder room"),
+        ("L1 owner office/garden room", "flex", "owner room"),
+    ):
+        plan_room(g1, name, kind, z1, label)
+    for x, y, w, h in (
+        (0.5, 11.5, 23.0, opt.INTERIOR_WALL),
+        (7.5, 11.5, opt.INTERIOR_WALL, 8.0),
+        (14.0, 11.5, opt.INTERIOR_WALL, 8.0),
+        (7.5, 13.5, 6.83, opt.INTERIOR_WALL),
+    ):
+        plan_rect(g1, x, y, w, h, z1 + 0.05, PLAN_WALL, alpha=0.9)
+    for x0, y0, x1, y1 in ((0, 0, 24, 0), (24, 0, 24, 20), (24, 20, 0, 20), (0, 20, 0, 0)):
+        plan_line(g1, x0, y0, x1, y1, z1 + 0.09, width=2.2)
+    plan_line(g1, 0, 1.3, 0, 11.0, z1 + 0.12, PLAN_OPENING, width=3.0)
+    plan_line(g1, 24, 4.0, 24, 7.0, z1 + 0.12, PLAN_OPENING, width=2.4)
+    plan_line(g1, 24, 12.3, 24, 18.3, z1 + 0.12, PLAN_OPENING, width=2.8)
+    plan_label(g1, "LEVEL 1 PLAN", 12.0, -2.0, z1 + 0.18)
+
+    # Level 2: current apartment plan, with open living/dining/kitchen split for readability.
+    g2 = "floor2"
+    for name, kind, label in (
+        ("L2 bedroom", "bed", "bedroom"),
+        ("L2 bedroom closet", "bed", "closet"),
+        ("L2 laundry/seasonal storage", "hall", "laundry / storage"),
+        ("L2 stacked bath", "bath", "stacked bath"),
+    ):
+        plan_room(g2, name, kind, z2, label)
+    for x, y, w, h, kind, label in (
+        (10.53, 0.5, 12.97, 8.0, "living", "living"),
+        (10.53, 8.5, 12.97, 5.0, "kitchen", "kitchen"),
+        (14.33, 13.83, 9.17, 5.67, "living", "dining"),
+    ):
+        plan_rect(g2, x, y, w, h, z2, PLAN_TINT[kind])
+        plan_label(g2, label, x + w / 2, y + h / 2, z2 + 0.08)
+    for x, y, w, h in (
+        (10.2, 0.5, opt.INTERIOR_WALL, 9.5),
+        (0.5, 10.0, 10.03, opt.INTERIOR_WALL),
+        (0.5, 13.5, 13.83, opt.INTERIOR_WALL),
+        (7.5, 13.5, opt.INTERIOR_WALL, 6.0),
+        (14.0, 13.5, opt.INTERIOR_WALL, 6.0),
+        (13.0, 7.2, 6.0, 0.35),
+    ):
+        plan_rect(g2, x, y, w, h, z2 + 0.05, PLAN_WALL, alpha=0.9)
+    for x0, y0, x1, y1 in ((0, 0, 24, 0), (24, 0, 24, 20), (24, 20, 0, 20), (0, 20, 0, 0)):
+        plan_line(g2, x0, y0, x1, y1, z2 + 0.09, width=2.2)
+    plan_line(g2, 0.5, 10.0, 7.5, 10.0, z2 + 0.12, PLAN_OPENING, width=2.0)
+    plan_line(g2, 11.5, 0, 14.5, 0, z2 + 0.12, A_DOOR, width=3.0)
+    plan_line(g2, 16.0, 0, 21.0, 0, z2 + 0.12, PLAN_OPENING, width=2.4)
+    plan_line(g2, 0, 3.0, 0, 6.5, z2 + 0.12, PLAN_OPENING, width=2.4)
+    plan_line(g2, 24, 1.5, 24, 7.5, z2 + 0.12, PLAN_OPENING, width=2.8)
+    plan_line(g2, 24, 15.0, 24, 18.5, z2 + 0.12, PLAN_OPENING, width=2.4)
+    plan_line(g2, 0.5, 10.0, 23.5, 10.0, z2 + 0.14, "#9a7b42", width=1.4, dash=True)
+    plan_label(g2, "E-W RIDGE", 17.0, 10.7, z2 + 0.2)
+    plan_label(g2, "LEVEL 2 PLAN", 12.0, -2.0, z2 + 0.18)
 
 
 # ---------------- ground ----------------------------------------------------
@@ -292,6 +411,8 @@ for i in range(13):
 box(ax0 + 11.5, ay0 - 4, ax1 + 4, ay0 - 3.88, 9.6, 12.6, RAIL_C, g)
 box(ax1 + 3.88, ay0, ax1 + 4, ay1 - 0.5, 9.6, 12.6, RAIL_C, g)
 
+add_floor_plan_layers()
+
 # ---------------- neighbor massing (approx, from oblique satellite) ---------
 g = "context"
 gable(96, 126, 53, 74, 17, 26, NBR_W, NBR_R, g)  # 108 (2-story, N)
@@ -325,7 +446,7 @@ SCENE = {
 # OBJ is Y-up: (E, N, U) -> (x=E, y=U, z=-N). 1 unit = 1 foot.
 def flat(fs):
     for f in fs:
-        if f.get("l") == "decal":
+        if f.get("l") in {"decal", "overlay"}:
             continue
         yield f
         for ch in f.get("ch", ()):
@@ -423,11 +544,14 @@ BODY = r"""
   <label><input type="checkbox" data-g="shed" checked> Replacement shed (18&times;6)</label>
   <label><input type="checkbox" data-g="context" checked> Neighbors (approx.)</label>
   <label><input type="checkbox" data-g="setback" checked> R-5 setback lines</label>
+  <label><input type="checkbox" data-g="floor1"> Level 1 floor plan</label>
+  <label><input type="checkbox" data-g="floor2"> Level 2 floor plan</label>
   <label><input type="checkbox" data-g="labels" checked> Labels</label>
   <div class="views">
     <button data-v="bird">Bird&rsquo;s eye</button><button data-v="alley">Alley</button>
     <button data-v="yard">Backyard</button><button data-v="street">Street</button>
-    <button data-v="top">Top</button>
+    <button data-v="top">Top</button><button data-v="level1">Level 1</button>
+    <button data-v="level2">Level 2</button>
   </div>
   <div class="hint">drag &middot; orbit &nbsp; | &nbsp; scroll/pinch &middot; zoom &nbsp; | &nbsp; right-drag / shift &middot; pan</div>
 </div>
@@ -445,7 +569,7 @@ BODY = r"""
 const SC = __SCENE__;
 const cv = document.getElementById('cv'), ctx = cv.getContext('2d');
 const cps = document.getElementById('compass'), cpx = cps.getContext('2d');
-const vis = {site:1, house:1, shed:1, adu:1, context:1, setback:1, labels:1};
+const vis = {site:1, house:1, shed:1, adu:1, context:1, setback:1, floor1:0, floor2:0, labels:1};
 const L = SC.sun;
 
 // precompute world normals + layer buckets
@@ -457,7 +581,7 @@ function prep(f){
   (f.ch||[]).forEach(prep);
 }
 SC.faces.forEach(prep);
-const BUCKET = {ground:[], decal:[], solid:[]};
+const BUCKET = {ground:[], decal:[], solid:[], overlay:[]};
 for (const f of SC.faces) BUCKET[f.l||'solid'].push(f);
 
 // camera
@@ -468,10 +592,23 @@ const VIEWS = {
   yard:{az:-17, el:9, d:45, t:[17,28,9]},
   street:{az:-4, el:13, d:120, t:[115,22,9]},
   top:{az:-90, el:88, d:215, t:[74,22,0]},
+  level1:{az:-90, el:88, d:74, t:[17,29,2], plan:'floor1'},
+  level2:{az:-90, el:88, d:74, t:[17,29,11], plan:'floor2'},
 };
 let anim=null, dirty=true;
+function setPlan(plan){
+  for(const key of ['floor1','floor2']){
+    vis[key]=key===plan?1:0;
+    const box=document.querySelector(`#ui input[data-g="${key}"]`);
+    if(box) box.checked=!!vis[key];
+  }
+  dirty=true;
+}
 const hv=VIEWS[(location.hash||'').slice(1)];
-if(hv) Object.assign(cam, {az:hv.az, el:hv.el, d:hv.d, t:[...hv.t]});
+if(hv){
+  Object.assign(cam, {az:hv.az, el:hv.el, d:hv.d, t:[...hv.t]});
+  if(hv.plan) setPlan(hv.plan);
+}
 
 function basis(){
   const az=cam.az*Math.PI/180, el=cam.el*Math.PI/180;
@@ -552,25 +689,30 @@ function render(){
   }
   drawFaces(BUCKET.ground);
   drawFaces(BUCKET.decal);
-  // lines
-  for(const ln of SC.lines){
-    if(!vis[ln.g]) continue;
-    ctx.strokeStyle=ln.c; ctx.lineWidth=1.4;
-    ctx.setLineDash(ln.dash?[7,5]:[]);
-    ctx.beginPath();
-    let started=false;
-    for(let i=0;i<ln.p.length-1;i++){
-      let a=toCam(ln.p[i]), b=toCam(ln.p[i+1]);
-      if(a[2]<=NEAR&&b[2]<=NEAR) continue;
-      if(a[2]<=NEAR){const t=(NEAR-a[2])/(b[2]-a[2]);a=[a[0]+t*(b[0]-a[0]),a[1]+t*(b[1]-a[1]),NEAR];}
-      if(b[2]<=NEAR){const t=(NEAR-b[2])/(a[2]-b[2]);b=[b[0]+t*(a[0]-b[0]),b[1]+t*(a[1]-b[1]),NEAR];}
-      const sa=px(a),sb=px(b);
-      ctx.moveTo(sa[0],sa[1]); ctx.lineTo(sb[0],sb[1]); started=true;
+  function drawLines(layer){
+    for(const ln of SC.lines){
+      const lineLayer=ln.l||'base';
+      if((layer||'base')!==lineLayer||!vis[ln.g]) continue;
+      ctx.strokeStyle=ln.c; ctx.lineWidth=ln.w||1.4;
+      ctx.setLineDash(ln.dash?[7,5]:[]);
+      ctx.beginPath();
+      let started=false;
+      for(let i=0;i<ln.p.length-1;i++){
+        let a=toCam(ln.p[i]), b=toCam(ln.p[i+1]);
+        if(a[2]<=NEAR&&b[2]<=NEAR) continue;
+        if(a[2]<=NEAR){const t=(NEAR-a[2])/(b[2]-a[2]);a=[a[0]+t*(b[0]-a[0]),a[1]+t*(b[1]-a[1]),NEAR];}
+        if(b[2]<=NEAR){const t=(NEAR-b[2])/(a[2]-b[2]);b=[b[0]+t*(a[0]-b[0]),b[1]+t*(a[1]-b[1]),NEAR];}
+        const sa=px(a),sb=px(b);
+        ctx.moveTo(sa[0],sa[1]); ctx.lineTo(sb[0],sb[1]); started=true;
+      }
+      if(started) ctx.stroke();
+      ctx.setLineDash([]);
     }
-    if(started) ctx.stroke();
-    ctx.setLineDash([]);
   }
+  drawLines();
   drawFaces(BUCKET.solid);
+  drawFaces(BUCKET.overlay);
+  drawLines('overlay');
   // labels
   ctx.textAlign='center'; ctx.textBaseline='middle';
   for(const lb of SC.labels){
@@ -642,6 +784,8 @@ document.querySelectorAll('#ui input').forEach(cb=>cb.addEventListener('change',
   vis[cb.dataset.g]=cb.checked?1:0; dirty=true;}));
 document.querySelectorAll('#ui .views button').forEach(bt=>bt.addEventListener('click',()=>{
   const v=VIEWS[bt.dataset.v];
+  if(!v) return;
+  if(v.plan) setPlan(v.plan);
   anim={t0:performance.now(), a:{az:cam.az,el:cam.el,d:cam.d,t:[...cam.t]},
         b:{az:v.az,el:v.el,d:v.d,t:[...v.t]}};
 }));
