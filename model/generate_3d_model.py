@@ -424,13 +424,13 @@ shadow(5, 56, 21, 68, 8, g)
 
 # ---------------- labels -----------------------------------------------------
 labels += [
-    {"t": "EXISTING HOUSE · 1931", "g": "labels", "p": [99, 22.5, 24]},
-    {"t": "REPLACEMENT SHED 18×6", "g": "labels", "p": [17, 8, 11.2]},
-    {"t": "CURRENT ADU 20×24", "g": "labels", "p": [17, 30, 24]},
-    {"t": "DECK", "g": "labels", "p": [70.5, 16.5, 8], "s": 1},
-    {"t": "PORCH", "g": "labels", "p": [124.5, 30, 12.5], "s": 1},
-    {"t": "ALLEY", "g": "site", "p": [-7, 22.5, 1.5], "s": 1},
-    {"t": "W 29TH ST", "g": "site", "p": [166, 22.5, 1.5], "s": 1},
+    {"t": "EXISTING HOUSE · 1931", "g": "labels", "target": "house", "p": [99, 22.5, 24]},
+    {"t": "REPLACEMENT SHED 18×6", "g": "labels", "target": "shed", "p": [17, 8, 11.2]},
+    {"t": "CURRENT ADU 20×24", "g": "labels", "target": "adu", "p": [17, 30, 24]},
+    {"t": "DECK", "g": "labels", "target": "house", "p": [70.5, 16.5, 8], "s": 1},
+    {"t": "PORCH", "g": "labels", "target": "house", "p": [124.5, 30, 12.5], "s": 1},
+    {"t": "ALLEY", "g": "site", "target": "site", "p": [-7, 22.5, 1.5], "s": 1},
+    {"t": "W 29TH ST", "g": "site", "target": "site", "p": [166, 22.5, 1.5], "s": 1},
 ]
 
 SCENE = {
@@ -524,10 +524,11 @@ BODY = r"""
   #ui h1 { font-size:15px; margin:0 0 2px; }
   #ui .sub { color:var(--mut); font-size:12px; margin-bottom:8px; }
   #ui label { display:flex; gap:7px; align-items:center; font-size:13px; padding:1.5px 0; cursor:pointer; }
-  #ui .views { display:flex; flex-wrap:wrap; gap:5px; margin-top:8px; }
-  #ui .views button { font:12px system-ui; padding:4px 9px; border-radius:8px; border:1px solid var(--edge);
-                      background:transparent; color:var(--ink); cursor:pointer; }
-  #ui .views button:hover { background:var(--edge); }
+  #ui .filter-actions, #ui .views { display:flex; flex-wrap:wrap; gap:5px; margin-top:8px; }
+  #ui .filter-actions { margin:7px 0 5px; }
+  #ui .filter-actions button, #ui .views button { font:12px system-ui; padding:4px 9px; border-radius:8px; border:1px solid var(--edge);
+                                                   background:transparent; color:var(--ink); cursor:pointer; }
+  #ui .filter-actions button:hover, #ui .views button:hover { background:var(--edge); }
   #ui .hint { color:var(--mut); font-size:11.5px; margin-top:8px; }
   #dims { right:12px; bottom:12px; font-size:12px; color:var(--mut); max-width:min(330px, calc(100vw - 32px)); }
   #dims b { color:var(--ink); }
@@ -539,6 +540,10 @@ BODY = r"""
 <div class="card" id="ui">
   <h1>112 W 29th St &mdash; lot 3D</h1>
   <div class="sub">Current plan geometry &middot; basis v1</div>
+  <div class="filter-actions" aria-label="Layer filters">
+    <button data-select="all">All layers</button><button data-select="none">No layers</button>
+  </div>
+  <label><input type="checkbox" data-g="site" checked> Lot / street / alley</label>
   <label><input type="checkbox" data-g="adu" checked> Current ADU + stair/patios</label>
   <label><input type="checkbox" data-g="house" checked> Existing house (1931)</label>
   <label><input type="checkbox" data-g="shed" checked> Replacement shed (18&times;6)</label>
@@ -571,6 +576,7 @@ const cv = document.getElementById('cv'), ctx = cv.getContext('2d');
 const cps = document.getElementById('compass'), cpx = cps.getContext('2d');
 const vis = {site:1, house:1, shed:1, adu:1, context:1, setback:1, floor1:0, floor2:0, labels:1};
 const L = SC.sun;
+const LAYER_KEYS = ['site','adu','house','shed','context','setback','floor1','floor2'];
 
 // precompute world normals + layer buckets
 function prep(f){
@@ -596,11 +602,18 @@ const VIEWS = {
   level2:{az:-90, el:88, d:74, t:[17,29,11], plan:'floor2'},
 };
 let anim=null, dirty=true;
+function setLayer(key, on){
+  vis[key]=on?1:0;
+  const box=document.querySelector(`#ui input[data-g="${key}"]`);
+  if(box) box.checked=!!vis[key];
+}
+function setLayerSelection(on){
+  for(const key of LAYER_KEYS) setLayer(key, on);
+  dirty=true;
+}
 function setPlan(plan){
   for(const key of ['floor1','floor2']){
-    vis[key]=key===plan?1:0;
-    const box=document.querySelector(`#ui input[data-g="${key}"]`);
-    if(box) box.checked=!!vis[key];
+    setLayer(key, key===plan);
   }
   dirty=true;
 }
@@ -715,9 +728,13 @@ function render(){
   drawLines('overlay');
   // labels
   ctx.textAlign='center'; ctx.textBaseline='middle';
+  function labelVisible(lb){
+    if(!vis.labels) return false;
+    const target=lb.target||lb.g;
+    return vis[target]!==0;
+  }
   for(const lb of SC.labels){
-    if(!vis[lb.g]||!vis.labels&&lb.g==='labels') continue;
-    if(lb.g!=='labels'&&!vis.labels) continue;
+    if(!labelVisible(lb)) continue;
     const c=toCam(lb.p); if(c[2]<=NEAR) continue;
     const s=px(c), fs=lb.s?11:12.5;
     ctx.font=(lb.s?'':'600 ')+fs+'px system-ui';
@@ -782,6 +799,9 @@ cv.addEventListener('wheel',e=>{e.preventDefault();
   cam.d*=Math.exp(e.deltaY*0.0011); cam.d=Math.max(15,Math.min(600,cam.d)); dirty=true;},{passive:false});
 document.querySelectorAll('#ui input').forEach(cb=>cb.addEventListener('change',()=>{
   vis[cb.dataset.g]=cb.checked?1:0; dirty=true;}));
+document.querySelectorAll('#ui .filter-actions button').forEach(bt=>bt.addEventListener('click',()=>{
+  setLayerSelection(bt.dataset.select==='all');
+}));
 document.querySelectorAll('#ui .views button').forEach(bt=>bt.addEventListener('click',()=>{
   const v=VIEWS[bt.dataset.v];
   if(!v) return;
