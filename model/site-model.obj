@@ -1,5 +1,5 @@
 # 112 W 29th St, Richmond VA -- lot massing model (house / shed / proposed ADU)
-# units: feet, Y-up. Generated 2026-08-03 · Option F basis v1 by model/generate_3d_model.py
+# units: feet, Y-up. Generated 2026-08-03 · current plan basis v1 by model/generate_3d_model.py
 # PRELIMINARY - massing only, heights estimated, field-verify
 mtllib site-model.mtl
 g Site_Ground

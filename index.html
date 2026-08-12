@@ -10,7 +10,7 @@
     <meta property="og:image" content="https://adu.anders.omg.lol/renderings/option-f-yard-photoreal-v2.png" />
     <meta property="og:url" content="https://adu.anders.omg.lol/" />
     <meta name="theme-color" content="#2f4238" />
-    <link rel="stylesheet" href="styles.css?v=20260811-loom" />
+    <link rel="stylesheet" href="styles.css?v=20260811-3d-model" />
   </head>
   <body>
     <a class="skip-link" href="#content">Skip to content</a>
@@ -39,17 +39,20 @@
         <button id="tab-site" role="tab" aria-selected="false" aria-controls="site" tabindex="-1" data-tab="site">
           <span>02</span> Site plan
         </button>
+        <button id="tab-model" role="tab" aria-selected="false" aria-controls="model" tabindex="-1" data-tab="model">
+          <span>03</span> 3D model
+        </button>
         <button id="tab-floor-plans" role="tab" aria-selected="false" aria-controls="floor-plans" tabindex="-1" data-tab="floor-plans">
-          <span>03</span> Floor plans
+          <span>04</span> Floor plans
         </button>
         <button id="tab-interiors" role="tab" aria-selected="false" aria-controls="interiors" tabindex="-1" data-tab="interiors">
-          <span>04</span> Interiors
+          <span>05</span> Interiors
         </button>
         <button id="tab-inspiration" role="tab" aria-selected="false" aria-controls="inspiration" tabindex="-1" data-tab="inspiration">
-          <span>05</span> Inspiration
+          <span>06</span> Inspiration
         </button>
         <button id="tab-files" role="tab" aria-selected="false" aria-controls="files" tabindex="-1" data-tab="files">
-          <span>06</span> Files
+          <span>07</span> Files
         </button>
       </nav>
 
@@ -166,6 +169,29 @@
             <p><strong>Survey and utilities</strong> Confirm property lines, grades, utility routes, stormwater path, and fire-department access before fixing the footprint.</p>
           </div>
           <p class="disclaimer">Owner measurements and public records only. The coordinated plan set remains schematic and not for construction.</p>
+        </section>
+
+        <section id="model" class="tab-panel" role="tabpanel" aria-labelledby="tab-model" hidden>
+          <div class="panel-heading model-heading">
+            <div>
+              <p class="eyebrow">Interactive site model</p>
+              <h2>The current plan,<br />in its yard and alley context.</h2>
+            </div>
+            <div>
+              <p>True-scale whole-site massing with the existing house, replacement shed, current ADU, south stair, east patios, neighbors, and setback lines.</p>
+              <a class="primary-action" href="model/site-model-3d.html#yard">Open full-screen model ↗</a>
+            </div>
+          </div>
+
+          <div class="model-embed">
+            <iframe
+              src="model/site-model-3d.html#yard"
+              title="Interactive ADU site model"
+              loading="lazy"
+            ></iframe>
+          </div>
+
+          <p class="disclaimer">Preliminary massing only. Dimensions come from owner measurements, public records, and the current schematic basis; field verification and permit drawings govern.</p>
         </section>
 
         <section id="floor-plans" class="tab-panel" role="tabpanel" aria-labelledby="tab-floor-plans" hidden>

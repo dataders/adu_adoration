@@ -19,7 +19,7 @@ import json
 import os
 
 OUT_DIR = os.path.dirname(os.path.abspath(__file__))
-DATE = "2026-08-03 · Option F basis v1"
+DATE = "2026-08-03 · current plan basis v1"
 
 # ---------------- site geometry (matches plan/generate_site_plan.py) --------
 LOT_L, LOT_W = 148.0, 45.0
@@ -305,7 +305,7 @@ shadow(5, 56, 21, 68, 8, g)
 labels += [
     {"t": "EXISTING HOUSE · 1931", "g": "labels", "p": [99, 22.5, 24]},
     {"t": "REPLACEMENT SHED 18×6", "g": "labels", "p": [17, 8, 11.2]},
-    {"t": "OPTION F ADU 20×24", "g": "labels", "p": [17, 30, 24]},
+    {"t": "CURRENT ADU 20×24", "g": "labels", "p": [17, 30, 24]},
     {"t": "DECK", "g": "labels", "p": [70.5, 16.5, 8], "s": 1},
     {"t": "PORCH", "g": "labels", "p": [124.5, 30, 12.5], "s": 1},
     {"t": "ALLEY", "g": "site", "p": [-7, 22.5, 1.5], "s": 1},
@@ -417,8 +417,8 @@ BODY = r"""
 <canvas id="cv"></canvas>
 <div class="card" id="ui">
   <h1>112 W 29th St &mdash; lot 3D</h1>
-  <div class="sub">Current Option F geometry &middot; basis v1</div>
-  <label><input type="checkbox" data-g="adu" checked> Option F ADU + stair/patios</label>
+  <div class="sub">Current plan geometry &middot; basis v1</div>
+  <label><input type="checkbox" data-g="adu" checked> Current ADU + stair/patios</label>
   <label><input type="checkbox" data-g="house" checked> Existing house (1931)</label>
   <label><input type="checkbox" data-g="shed" checked> Replacement shed (18&times;6)</label>
   <label><input type="checkbox" data-g="context" checked> Neighbors (approx.)</label>
@@ -435,7 +435,7 @@ BODY = r"""
   <b>Lot</b> 45&prime;&times;148&prime; (6,660 sf) &middot; zone R-5 &middot; alley W / street E<br>
   <b>House</b> 1,303 sf 1-story (1931) &middot; front setback 25&prime; measured<br>
   <b>Shed</b> replacement 18&times;6 &middot; 108 sf &middot; south setback 5&prime;<br>
-  <b>ADU</b> Option F &middot; 20&times;24 &middot; 19&prime;-10&Prime; ridge basis &middot; garage + 480 sf 1-bed &middot; 5&prime; off alley,
+  <b>ADU</b> Current plan &middot; 20&times;24 &middot; 19&prime;-10&Prime; ridge basis &middot; garage + 480 sf 1-bed &middot; 5&prime; off alley,
   5&prime; off N line (R-5 minimum met)<br>
   <i>Preliminary massing &mdash; heights estimated, field-verify.</i>
 </div>
