@@ -1,0 +1,11 @@
+# Python
+__pycache__/
+*.py[cod]
+.ruff_cache/
+*.FCBak
+
+# macOS
+.DS_Store
+
+# uv / virtual envs
+.venv/

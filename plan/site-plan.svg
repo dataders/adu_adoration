@@ -28,34 +28,54 @@
 <line x1="430" y1="270" x2="440" y2="270" stroke="#9ca3af" stroke-width="1"></line>
 <text transform="rotate(90 425 204)" x="425" y="204" text-anchor="middle" font-size="11" fill="#4b5563">27 ft</text>
 
-<rect x="169" y="226" width="87" height="58" fill="#eef0f2" stroke="#6b7280" stroke-width="1.5"></rect>
-<text x="212" y="259" text-anchor="middle" font-size="11" fill="#4b5563">shed 12×18</text>
-<line x1="130" y1="262" x2="169" y2="262" stroke="#9ca3af" stroke-width="1"></line>
-<line x1="130" y1="257" x2="130" y2="267" stroke="#9ca3af" stroke-width="1"></line>
-<line x1="169" y1="257" x2="169" y2="267" stroke="#9ca3af" stroke-width="1"></line>
-<text x="149" y="255" text-anchor="middle" font-size="11" fill="#4b5563">8 ft</text>
+<rect x="169" y="226" width="87" height="58" fill="none" stroke="#dc2626" stroke-width="1" stroke-dasharray="4 3"></rect>
+<rect x="169" y="260" width="87" height="29" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"></rect>
+<text x="212" y="274" text-anchor="middle" font-size="10" fill="#15803d" font-weight="600">replacement shed</text>
+<text x="212" y="285" text-anchor="middle" font-size="8.5" fill="#15803d">18×6 · 108 sf · low profile</text>
+<text x="275" y="282" font-size="10" fill="#dc2626">dashed red = old 12×18 shed</text>
+<line x1="130" y1="270" x2="169" y2="270" stroke="#9ca3af" stroke-width="1"></line>
+<line x1="130" y1="265" x2="130" y2="275" stroke="#9ca3af" stroke-width="1"></line>
+<line x1="169" y1="265" x2="169" y2="275" stroke="#9ca3af" stroke-width="1"></line>
+<text x="149" y="263" text-anchor="middle" font-size="11" fill="#4b5563">8 ft</text>
 
-<line x1="256" y1="250" x2="450" y2="250" stroke="#9ca3af" stroke-width="1"></line>
-<line x1="256" y1="245" x2="256" y2="255" stroke="#9ca3af" stroke-width="1"></line>
-<line x1="450" y1="245" x2="450" y2="255" stroke="#9ca3af" stroke-width="1"></line>
-<text x="353" y="244" text-anchor="middle" font-size="11" fill="#4b5563">≈ 40 ft deck-to-shed</text>
+<line x1="256" y1="260" x2="450" y2="260" stroke="#9ca3af" stroke-width="1"></line>
+<line x1="256" y1="255" x2="256" y2="265" stroke="#9ca3af" stroke-width="1"></line>
+<line x1="450" y1="255" x2="450" y2="265" stroke="#9ca3af" stroke-width="1"></line>
+<text x="353" y="254" text-anchor="middle" font-size="11" fill="#4b5563">≈ 40 ft deck-to-shed</text>
 
-<rect x="154" y="110" width="117" height="97" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"></rect>
-<rect x="154" y="134" width="7" height="49" fill="#ffffff" stroke="#3b82f6" stroke-width="1"></rect>
-<text x="214" y="130" text-anchor="middle" font-size="13" fill="#2563eb" font-weight="500">new ADU</text>
-<text x="214" y="148" text-anchor="middle" font-size="12" fill="#2563eb">20 × 24 ft footprint</text>
-<text x="214" y="165" text-anchor="middle" font-size="11" fill="#2563eb">garage below · 1-bed above</text>
-<text x="214" y="181" text-anchor="middle" font-size="11" fill="#2563eb">1-bed ≈ 480 sf · ≤ 20 ft tall</text>
-<text x="214" y="197" text-anchor="middle" font-size="11" fill="#2563eb">garage door → alley</text>
+<rect x="154" y="120" width="117" height="97" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"></rect>
+<rect x="154" y="144" width="7" height="49" fill="#ffffff" stroke="#3b82f6" stroke-width="1"></rect>
+<rect x="157" y="217" width="53" height="19" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"></rect>
+<g stroke="#d97706" stroke-width="0.8">
+  <line x1="161" y1="217" x2="161" y2="236"></line><line x1="165" y1="217" x2="165" y2="236"></line>
+  <line x1="169" y1="217" x2="169" y2="236"></line><line x1="173" y1="217" x2="173" y2="236"></line>
+  <line x1="177" y1="217" x2="177" y2="236"></line><line x1="181" y1="217" x2="181" y2="236"></line>
+  <line x1="185" y1="217" x2="185" y2="236"></line><line x1="189" y1="217" x2="189" y2="236"></line>
+  <line x1="193" y1="217" x2="193" y2="236"></line><line x1="197" y1="217" x2="197" y2="236"></line>
+  <line x1="201" y1="217" x2="201" y2="236"></line><line x1="205" y1="217" x2="205" y2="236"></line>
+</g>
+<rect x="210" y="217" width="78" height="19" fill="#eef5ed" stroke="#d97706" stroke-width="1.5" stroke-dasharray="4 3"></rect>
+<rect x="271" y="122" width="17" height="95" fill="#fffbeb" stroke="#d97706" stroke-width="1.5" stroke-dasharray="4 3"></rect>
+<line x1="271" y1="217" x2="288" y2="217" stroke="#fffbeb" stroke-width="4"></line>
+<text x="214" y="137" text-anchor="middle" font-size="12" fill="#2563eb" font-weight="600">Option E ADU</text>
+<text x="214" y="157" text-anchor="middle" font-size="11" fill="#2563eb">20 × 24 ft enclosed · 2 story</text>
+<text x="214" y="176" text-anchor="middle" font-size="10" fill="#2563eb">garage / program below</text>
+<text x="214" y="193" text-anchor="middle" font-size="10" fill="#2563eb">1-bed above · ≤ 20 ft tall</text>
+<text x="214" y="209" text-anchor="middle" font-size="10" fill="#2563eb">garage door → alley</text>
+<text x="183" y="230" text-anchor="middle" font-size="9" fill="#92400e">stair up →</text>
+<text x="249" y="225" text-anchor="middle" font-size="7.5" fill="#557153">covered patio below</text>
+<text x="249" y="233" text-anchor="middle" font-size="7.5" fill="#92400e">upper landing above →</text>
+<text transform="rotate(90 281 168)" x="281" y="168" text-anchor="middle" font-size="8" fill="#92400e">patio / balcony</text>
 
 <line x1="130" y1="142" x2="154" y2="142" stroke="#9ca3af" stroke-width="1"></line>
 <text x="142" y="136" text-anchor="middle" font-size="11" fill="#4b5563">5 ft</text>
-<line x1="232" y1="95" x2="232" y2="110" stroke="#dc2626" stroke-width="1.5"></line>
-<text transform="rotate(90 224 102)" x="224" y="102" text-anchor="middle" font-size="11" fill="#dc2626">3 ft</text>
-<text x="240" y="106" font-size="11" fill="#dc2626">(R-5 min is 5 ft)</text>
-<line x1="232" y1="207" x2="232" y2="226" stroke="#9ca3af" stroke-width="1"></line>
-<text x="300" y="221" font-size="11" fill="#4b5563">≈ 4 ft gap</text>
-<line x1="248" y1="219" x2="296" y2="218" stroke="#9ca3af" stroke-width="0.75"></line>
+<line x1="232" y1="95" x2="232" y2="120" stroke="#16a34a" stroke-width="1.5"></line>
+<text transform="rotate(90 224 108)" x="224" y="108" text-anchor="middle" font-size="11" fill="#15803d">5 ft</text>
+<text x="240" y="116" font-size="11" fill="#15803d">R-5 minimum met</text>
+<line x1="210" y1="236" x2="210" y2="260" stroke="#16a34a" stroke-width="1.5"></line>
+<line x1="205" y1="236" x2="215" y2="236" stroke="#16a34a" stroke-width="1.5"></line>
+<line x1="205" y1="260" x2="215" y2="260" stroke="#16a34a" stroke-width="1.5"></line>
+<text x="220" y="252" font-size="11" fill="#15803d">5 ft clear</text>
 
 <line x1="130" y1="332" x2="848" y2="332" stroke="#9ca3af" stroke-width="1"></line>
 <line x1="130" y1="327" x2="130" y2="337" stroke="#9ca3af" stroke-width="1"></line>
@@ -72,7 +92,11 @@
 <text x="560" y="40" text-anchor="middle" font-size="12" fill="#4b5563">112 W 29th St · R-5 · north up · west = alley</text>
 
 <rect x="130" y="392" width="14" height="14" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"></rect>
-<text x="150" y="403" font-size="12" fill="#4b5563">new ADU (20×24, 2-story)</text>
-<rect x="400" y="392" width="14" height="14" fill="#eef0f2" stroke="#6b7280"></rect>
-<text x="420" y="403" font-size="12" fill="#4b5563">existing house, deck, porch &amp; shed</text>
+<text x="150" y="403" font-size="12" fill="#4b5563">Option E ADU (20×24 enclosed)</text>
+<rect x="340" y="392" width="14" height="14" fill="#fffbeb" stroke="#d97706"></rect>
+<text x="360" y="403" font-size="12" fill="#4b5563">exterior access</text>
+<rect x="535" y="392" width="14" height="14" fill="#eef0f2" stroke="#6b7280"></rect>
+<text x="555" y="403" font-size="12" fill="#4b5563">existing house, deck &amp; porch</text>
+<rect x="770" y="392" width="14" height="14" fill="#dcfce7" stroke="#16a34a"></rect>
+<text x="790" y="403" font-size="12" fill="#4b5563">replacement shed</text>
 </svg>

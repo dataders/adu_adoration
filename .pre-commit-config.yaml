@@ -1,0 +1,24 @@
+# Pre-commit hooks: ruff (lint + format) and ty (type check).
+# Install once with:  uv run pre-commit install
+# Run against everything with:  uv run pre-commit run --all-files
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.15.8
+    hooks:
+      # Linter (with autofix). Runs first so its fixes are formatted below.
+      - id: ruff-check
+        args: [--fix]
+      # Formatter.
+      - id: ruff-format
+
+  - repo: local
+    hooks:
+      # ty runs from the project environment (via uv) so it can resolve the
+      # third-party imports declared in pyproject.toml.
+      - id: ty
+        name: ty (type check)
+        entry: uv run --group dev ty check
+        language: system
+        types: [python]
+        pass_filenames: false
+        require_serial: true

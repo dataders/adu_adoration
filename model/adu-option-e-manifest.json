@@ -1,0 +1,2472 @@
+{
+  "bounds_ft": {
+    "max": [
+      27.5,
+      20.0,
+      20.0
+    ],
+    "min": [
+      0.0,
+      -4.0,
+      0.0
+    ]
+  },
+  "object_count": 72,
+  "objects": [
+    {
+      "area_sq_ft": 74.3016,
+      "bounds_ft": {
+        "max": [
+          6.85,
+          16.15,
+          10.31
+        ],
+        "min": [
+          0.55,
+          10.33,
+          10.27
+        ]
+      },
+      "category": "Room zone",
+      "color_hex": "#b8e3d1",
+      "color_rgb": [
+        0.721569,
+        0.890196,
+        0.819608
+      ],
+      "design_source": "Option E",
+      "label": "Bathroom and laundry",
+      "level": "Level 2",
+      "name": "Bathroom_and_laundry",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 58,
+      "volume_cu_ft": 1.46664
+    },
+    {
+      "area_sq_ft": 182.0,
+      "bounds_ft": {
+        "max": [
+          10.15,
+          9.95,
+          10.31
+        ],
+        "min": [
+          0.55,
+          0.55,
+          10.27
+        ]
+      },
+      "category": "Room zone",
+      "color_hex": "#b0ccf0",
+      "color_rgb": [
+        0.690196,
+        0.8,
+        0.941176
+      ],
+      "design_source": "Option E",
+      "label": "Bedroom",
+      "level": "Level 2",
+      "name": "Bedroom",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 58,
+      "volume_cu_ft": 3.6096
+    },
+    {
+      "area_sq_ft": 9.3888,
+      "bounds_ft": {
+        "max": [
+          27.5,
+          19.5,
+          13.0
+        ],
+        "min": [
+          27.38,
+          0.0,
+          12.88
+        ]
+      },
+      "category": "Guard",
+      "color_hex": "#a38c6b",
+      "color_rgb": [
+        0.639216,
+        0.54902,
+        0.419608
+      ],
+      "design_source": "Option E",
+      "label": "East balcony guard rail",
+      "level": "Exterior",
+      "name": "East_balcony_guard_rail",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 0.2808
+    },
+    {
+      "area_sq_ft": 81.264,
+      "bounds_ft": {
+        "max": [
+          23.5,
+          15.1,
+          13.25
+        ],
+        "min": [
+          21.33,
+          8.5,
+          10.25
+        ]
+      },
+      "category": "Cabinetry",
+      "color_hex": "#94734f",
+      "color_rgb": [
+        0.580392,
+        0.45098,
+        0.309804
+      ],
+      "design_source": "Option E",
+      "label": "East gable appliance run",
+      "level": "Level 2",
+      "name": "East_gable_appliance_run",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 42.966
+    },
+    {
+      "area_sq_ft": 11.125,
+      "bounds_ft": {
+        "max": [
+          23.8125,
+          11.2,
+          15.15
+        ],
+        "min": [
+          23.6875,
+          9.2,
+          12.65
+        ]
+      },
+      "category": "Window",
+      "color_hex": "#59b3e0",
+      "color_rgb": [
+        0.34902,
+        0.701961,
+        0.878431
+      ],
+      "design_source": "Option E",
+      "label": "East kitchen window",
+      "level": "Level 2",
+      "name": "East_kitchen_window",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 55,
+      "volume_cu_ft": 0.625
+    },
+    {
+      "area_sq_ft": 65.825,
+      "bounds_ft": {
+        "max": [
+          23.8125,
+          7.0,
+          16.55
+        ],
+        "min": [
+          23.6875,
+          2.0,
+          10.25
+        ]
+      },
+      "category": "Window",
+      "color_hex": "#59b3e0",
+      "color_rgb": [
+        0.34902,
+        0.701961,
+        0.878431
+      ],
+      "design_source": "Option E",
+      "label": "East sliding glass entry",
+      "level": "Level 2",
+      "name": "East_sliding_glass_entry",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 55,
+      "volume_cu_ft": 3.9375
+    },
+    {
+      "area_sq_ft": 14.135917,
+      "bounds_ft": {
+        "max": [
+          1.376154,
+          0.0,
+          0.730769
+        ],
+        "min": [
+          0.5,
+          -4.0,
+          0.0
+        ]
+      },
+      "category": "Exterior stair",
+      "color_hex": "#a38c6b",
+      "color_rgb": [
+        0.639216,
+        0.54902,
+        0.419608
+      ],
+      "design_source": "Option E",
+      "label": "Exterior stair step 01",
+      "level": "Exterior",
+      "name": "Exterior_stair_step_01",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 2.561065
+    },
+    {
+      "area_sq_ft": 21.262604,
+      "bounds_ft": {
+        "max": [
+          2.222308,
+          0.0,
+          1.461538
+        ],
+        "min": [
+          1.346154,
+          -4.0,
+          0.0
+        ]
+      },
+      "category": "Exterior stair",
+      "color_hex": "#a38c6b",
+      "color_rgb": [
+        0.639216,
+        0.54902,
+        0.419608
+      ],
+      "design_source": "Option E",
+      "label": "Exterior stair step 02",
+      "level": "Exterior",
+      "name": "Exterior_stair_step_02",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 5.12213
+    },
+    {
+      "area_sq_ft": 28.38929,
+      "bounds_ft": {
+        "max": [
+          3.068462,
+          0.0,
+          2.192308
+        ],
+        "min": [
+          2.192308,
+          -4.0,
+          0.0
+        ]
+      },
+      "category": "Exterior stair",
+      "color_hex": "#a38c6b",
+      "color_rgb": [
+        0.639216,
+        0.54902,
+        0.419608
+      ],
+      "design_source": "Option E",
+      "label": "Exterior stair step 03",
+      "level": "Exterior",
+      "name": "Exterior_stair_step_03",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 7.683195
+    },
+    {
+      "area_sq_ft": 35.515976,
+      "bounds_ft": {
+        "max": [
+          3.914615,
+          0.0,
+          2.923077
+        ],
+        "min": [
+          3.038462,
+          -4.0,
+          0.0
+        ]
+      },
+      "category": "Exterior stair",
+      "color_hex": "#a38c6b",
+      "color_rgb": [
+        0.639216,
+        0.54902,
+        0.419608
+      ],
+      "design_source": "Option E",
+      "label": "Exterior stair step 04",
+      "level": "Exterior",
+      "name": "Exterior_stair_step_04",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 10.24426
+    },
+    {
+      "area_sq_ft": 42.642663,
+      "bounds_ft": {
+        "max": [
+          4.760769,
+          0.0,
+          3.653846
+        ],
+        "min": [
+          3.884615,
+          -4.0,
+          0.0
+        ]
+      },
+      "category": "Exterior stair",
+      "color_hex": "#a38c6b",
+      "color_rgb": [
+        0.639216,
+        0.54902,
+        0.419608
+      ],
+      "design_source": "Option E",
+      "label": "Exterior stair step 05",
+      "level": "Exterior",
+      "name": "Exterior_stair_step_05",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 12.805325
+    },
+    {
+      "area_sq_ft": 49.769349,
+      "bounds_ft": {
+        "max": [
+          5.606923,
+          0.0,
+          4.384615
+        ],
+        "min": [
+          4.730769,
+          -4.0,
+          0.0
+        ]
+      },
+      "category": "Exterior stair",
+      "color_hex": "#a38c6b",
+      "color_rgb": [
+        0.639216,
+        0.54902,
+        0.419608
+      ],
+      "design_source": "Option E",
+      "label": "Exterior stair step 06",
+      "level": "Exterior",
+      "name": "Exterior_stair_step_06",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 15.366391
+    },
+    {
+      "area_sq_ft": 56.896036,
+      "bounds_ft": {
+        "max": [
+          6.453077,
+          0.0,
+          5.115385
+        ],
+        "min": [
+          5.576923,
+          -4.0,
+          0.0
+        ]
+      },
+      "category": "Exterior stair",
+      "color_hex": "#a38c6b",
+      "color_rgb": [
+        0.639216,
+        0.54902,
+        0.419608
+      ],
+      "design_source": "Option E",
+      "label": "Exterior stair step 07",
+      "level": "Exterior",
+      "name": "Exterior_stair_step_07",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 17.927456
+    },
+    {
+      "area_sq_ft": 64.022722,
+      "bounds_ft": {
+        "max": [
+          7.299231,
+          0.0,
+          5.846154
+        ],
+        "min": [
+          6.423077,
+          -4.0,
+          0.0
+        ]
+      },
+      "category": "Exterior stair",
+      "color_hex": "#a38c6b",
+      "color_rgb": [
+        0.639216,
+        0.54902,
+        0.419608
+      ],
+      "design_source": "Option E",
+      "label": "Exterior stair step 08",
+      "level": "Exterior",
+      "name": "Exterior_stair_step_08",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 20.488521
+    },
+    {
+      "area_sq_ft": 71.149408,
+      "bounds_ft": {
+        "max": [
+          8.145385,
+          0.0,
+          6.576923
+        ],
+        "min": [
+          7.269231,
+          -4.0,
+          0.0
+        ]
+      },
+      "category": "Exterior stair",
+      "color_hex": "#a38c6b",
+      "color_rgb": [
+        0.639216,
+        0.54902,
+        0.419608
+      ],
+      "design_source": "Option E",
+      "label": "Exterior stair step 09",
+      "level": "Exterior",
+      "name": "Exterior_stair_step_09",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 23.049586
+    },
+    {
+      "area_sq_ft": 78.276095,
+      "bounds_ft": {
+        "max": [
+          8.991538,
+          0.0,
+          7.307692
+        ],
+        "min": [
+          8.115385,
+          -4.0,
+          0.0
+        ]
+      },
+      "category": "Exterior stair",
+      "color_hex": "#a38c6b",
+      "color_rgb": [
+        0.639216,
+        0.54902,
+        0.419608
+      ],
+      "design_source": "Option E",
+      "label": "Exterior stair step 10",
+      "level": "Exterior",
+      "name": "Exterior_stair_step_10",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 25.610651
+    },
+    {
+      "area_sq_ft": 85.402781,
+      "bounds_ft": {
+        "max": [
+          9.837692,
+          0.0,
+          8.038462
+        ],
+        "min": [
+          8.961538,
+          -4.0,
+          0.0
+        ]
+      },
+      "category": "Exterior stair",
+      "color_hex": "#a38c6b",
+      "color_rgb": [
+        0.639216,
+        0.54902,
+        0.419608
+      ],
+      "design_source": "Option E",
+      "label": "Exterior stair step 11",
+      "level": "Exterior",
+      "name": "Exterior_stair_step_11",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 28.171716
+    },
+    {
+      "area_sq_ft": 92.529467,
+      "bounds_ft": {
+        "max": [
+          10.683846,
+          0.0,
+          8.769231
+        ],
+        "min": [
+          9.807692,
+          -4.0,
+          0.0
+        ]
+      },
+      "category": "Exterior stair",
+      "color_hex": "#a38c6b",
+      "color_rgb": [
+        0.639216,
+        0.54902,
+        0.419608
+      ],
+      "design_source": "Option E",
+      "label": "Exterior stair step 12",
+      "level": "Exterior",
+      "name": "Exterior_stair_step_12",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 30.732781
+    },
+    {
+      "area_sq_ft": 99.656154,
+      "bounds_ft": {
+        "max": [
+          11.53,
+          0.0,
+          9.5
+        ],
+        "min": [
+          10.653846,
+          -4.0,
+          0.0
+        ]
+      },
+      "category": "Exterior stair",
+      "color_hex": "#a38c6b",
+      "color_rgb": [
+        0.639216,
+        0.54902,
+        0.419608
+      ],
+      "design_source": "Option E",
+      "label": "Exterior stair step 13",
+      "level": "Exterior",
+      "name": "Exterior_stair_step_13",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 33.293846
+    },
+    {
+      "area_sq_ft": 361.264,
+      "bounds_ft": {
+        "max": [
+          13.95,
+          13.95,
+          0.56
+        ],
+        "min": [
+          0.55,
+          0.55,
+          0.52
+        ]
+      },
+      "category": "Room zone",
+      "color_hex": "#d1d1c7",
+      "color_rgb": [
+        0.819608,
+        0.819608,
+        0.780392
+      ],
+      "design_source": "Option E",
+      "label": "Garage and storage zone",
+      "level": "Level 1",
+      "name": "Garage_and_storage_zone",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 58,
+      "volume_cu_ft": 7.1824
+    },
+    {
+      "area_sq_ft": 75.504,
+      "bounds_ft": {
+        "max": [
+          7.45,
+          19.45,
+          0.56
+        ],
+        "min": [
+          0.55,
+          14.05,
+          0.52
+        ]
+      },
+      "category": "Room zone",
+      "color_hex": "#d1d1c7",
+      "color_rgb": [
+        0.819608,
+        0.819608,
+        0.780392
+      ],
+      "design_source": "Option E",
+      "label": "Garage north return",
+      "level": "Level 1",
+      "name": "Garage_north_return",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 58,
+      "volume_cu_ft": 1.4904
+    },
+    {
+      "area_sq_ft": 149.8,
+      "bounds_ft": {
+        "max": [
+          0.3125,
+          11.9,
+          8.0
+        ],
+        "min": [
+          0.1875,
+          2.2,
+          0.5
+        ]
+      },
+      "category": "Door",
+      "color_hex": "#7a4d2b",
+      "color_rgb": [
+        0.478431,
+        0.301961,
+        0.168627
+      ],
+      "design_source": "Option E",
+      "label": "Garage overhead door",
+      "level": "Level 1",
+      "name": "Garage_overhead_door",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 10,
+      "volume_cu_ft": 9.09375
+    },
+    {
+      "area_sq_ft": 148.0,
+      "bounds_ft": {
+        "max": [
+          27.5,
+          19.5,
+          0.25
+        ],
+        "min": [
+          24.0,
+          0.0,
+          0.0
+        ]
+      },
+      "category": "Patio",
+      "color_hex": "#adb0a6",
+      "color_rgb": [
+        0.678431,
+        0.690196,
+        0.65098
+      ],
+      "design_source": "Option E",
+      "label": "Ground east patio",
+      "level": "Level 1",
+      "name": "Ground_east_patio",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 17.0625
+    },
+    {
+      "area_sq_ft": 138.0,
+      "bounds_ft": {
+        "max": [
+          27.5,
+          0.0,
+          0.25
+        ],
+        "min": [
+          11.5,
+          -4.0,
+          0.0
+        ]
+      },
+      "category": "Patio",
+      "color_hex": "#adb0a6",
+      "color_rgb": [
+        0.678431,
+        0.690196,
+        0.65098
+      ],
+      "design_source": "Option E",
+      "label": "Ground south covered patio",
+      "level": "Level 1",
+      "name": "Ground_south_covered_patio",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 16.0
+    },
+    {
+      "area_sq_ft": 177.016,
+      "bounds_ft": {
+        "max": [
+          23.45,
+          15.5,
+          10.31
+        ],
+        "min": [
+          10.55,
+          8.7,
+          10.27
+        ]
+      },
+      "category": "Room zone",
+      "color_hex": "#f5dba6",
+      "color_rgb": [
+        0.960784,
+        0.858824,
+        0.65098
+      ],
+      "design_source": "Option E",
+      "label": "Kitchen and dining",
+      "level": "Level 2",
+      "name": "Kitchen_and_dining",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 58,
+      "volume_cu_ft": 3.5088
+    },
+    {
+      "area_sq_ft": 90.16,
+      "bounds_ft": {
+        "max": [
+          19.4,
+          11.1,
+          13.25
+        ],
+        "min": [
+          12.0,
+          8.9,
+          10.25
+        ]
+      },
+      "category": "Cabinetry",
+      "color_hex": "#94734f",
+      "color_rgb": [
+        0.580392,
+        0.45098,
+        0.309804
+      ],
+      "design_source": "Option E",
+      "label": "Kitchen ridge island",
+      "level": "Level 2",
+      "name": "Kitchen_ridge_island",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 48.84
+    },
+    {
+      "area_sq_ft": 99.078,
+      "bounds_ft": {
+        "max": [
+          14.0,
+          14.33,
+          9.5
+        ],
+        "min": [
+          7.5,
+          14.0,
+          0.5
+        ]
+      },
+      "category": "Interior wall",
+      "color_hex": "#ebe6d6",
+      "color_rgb": [
+        0.921569,
+        0.901961,
+        0.839216
+      ],
+      "design_source": "Option E",
+      "label": "L1 bathroom south wall",
+      "level": "Level 1",
+      "name": "L1_bathroom_south_wall",
+      "topology": {
+        "edges": 24,
+        "faces": 10,
+        "solids": 1,
+        "vertices": 16
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 13.9194
+    },
+    {
+      "area_sq_ft": 108.57,
+      "bounds_ft": {
+        "max": [
+          7.83,
+          19.5,
+          9.5
+        ],
+        "min": [
+          7.5,
+          14.0,
+          0.5
+        ]
+      },
+      "category": "Interior wall",
+      "color_hex": "#ebe6d6",
+      "color_rgb": [
+        0.921569,
+        0.901961,
+        0.839216
+      ],
+      "design_source": "Option E",
+      "label": "L1 bathroom west wall",
+      "level": "Level 1",
+      "name": "L1_bathroom_west_wall",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 16.335
+    },
+    {
+      "area_sq_ft": 301.3,
+      "bounds_ft": {
+        "max": [
+          24.0,
+          20.0,
+          9.5
+        ],
+        "min": [
+          23.5,
+          0.0,
+          0.5
+        ]
+      },
+      "category": "Exterior wall",
+      "color_hex": "#bdd1b3",
+      "color_rgb": [
+        0.741176,
+        0.819608,
+        0.701961
+      ],
+      "design_source": "Option E",
+      "label": "L1 east exterior wall",
+      "level": "Level 1",
+      "name": "L1_east_exterior_wall",
+      "topology": {
+        "edges": 48,
+        "faces": 18,
+        "solids": 1,
+        "vertices": 32
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 63.125
+    },
+    {
+      "area_sq_ft": 323.1,
+      "bounds_ft": {
+        "max": [
+          14.33,
+          19.5,
+          9.5
+        ],
+        "min": [
+          14.0,
+          0.5,
+          0.5
+        ]
+      },
+      "category": "Interior wall",
+      "color_hex": "#ebe6d6",
+      "color_rgb": [
+        0.921569,
+        0.901961,
+        0.839216
+      ],
+      "design_source": "Option E",
+      "label": "L1 garage to east rooms",
+      "level": "Level 1",
+      "name": "L1_garage_to_east_rooms",
+      "topology": {
+        "edges": 24,
+        "faces": 10,
+        "solids": 1,
+        "vertices": 16
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 49.5
+    },
+    {
+      "area_sq_ft": 465.0,
+      "bounds_ft": {
+        "max": [
+          24.0,
+          20.0,
+          9.5
+        ],
+        "min": [
+          0.0,
+          19.5,
+          0.5
+        ]
+      },
+      "category": "Exterior wall",
+      "color_hex": "#bdd1b3",
+      "color_rgb": [
+        0.741176,
+        0.819608,
+        0.701961
+      ],
+      "design_source": "Option E",
+      "label": "L1 north exterior wall",
+      "level": "Level 1",
+      "name": "L1_north_exterior_wall",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 108.0
+    },
+    {
+      "area_sq_ft": 152.338,
+      "bounds_ft": {
+        "max": [
+          23.5,
+          14.33,
+          9.5
+        ],
+        "min": [
+          14.0,
+          14.0,
+          0.5
+        ]
+      },
+      "category": "Interior wall",
+      "color_hex": "#ebe6d6",
+      "color_rgb": [
+        0.921569,
+        0.901961,
+        0.839216
+      ],
+      "design_source": "Option E",
+      "label": "L1 office south wall",
+      "level": "Level 1",
+      "name": "L1_office_south_wall",
+      "topology": {
+        "edges": 24,
+        "faces": 10,
+        "solids": 1,
+        "vertices": 16
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 22.3806
+    },
+    {
+      "area_sq_ft": 19.8,
+      "bounds_ft": {
+        "max": [
+          10.9,
+          19.1,
+          0.65
+        ],
+        "min": [
+          7.9,
+          16.1,
+          0.5
+        ]
+      },
+      "category": "Fixture",
+      "color_hex": "#ebf0f2",
+      "color_rgb": [
+        0.921569,
+        0.941176,
+        0.94902
+      ],
+      "design_source": "Option E",
+      "label": "L1 shower",
+      "level": "Level 1",
+      "name": "L1_shower",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 1.35
+    },
+    {
+      "area_sq_ft": 465.0,
+      "bounds_ft": {
+        "max": [
+          24.0,
+          0.5,
+          9.5
+        ],
+        "min": [
+          0.0,
+          0.0,
+          0.5
+        ]
+      },
+      "category": "Exterior wall",
+      "color_hex": "#bdd1b3",
+      "color_rgb": [
+        0.741176,
+        0.819608,
+        0.701961
+      ],
+      "design_source": "Option E",
+      "label": "L1 south exterior wall",
+      "level": "Level 1",
+      "name": "L1_south_exterior_wall",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 108.0
+    },
+    {
+      "area_sq_ft": 28.52,
+      "bounds_ft": {
+        "max": [
+          10.4,
+          15.8,
+          3.3
+        ],
+        "min": [
+          8.0,
+          14.35,
+          0.5
+        ]
+      },
+      "category": "Fixture",
+      "color_hex": "#94734f",
+      "color_rgb": [
+        0.580392,
+        0.45098,
+        0.309804
+      ],
+      "design_source": "Option E",
+      "label": "L1 vanity",
+      "level": "Level 1",
+      "name": "L1_vanity",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 9.744
+    },
+    {
+      "area_sq_ft": 251.0,
+      "bounds_ft": {
+        "max": [
+          0.5,
+          20.0,
+          9.5
+        ],
+        "min": [
+          0.0,
+          0.0,
+          0.5
+        ]
+      },
+      "category": "Exterior wall",
+      "color_hex": "#bdd1b3",
+      "color_rgb": [
+        0.741176,
+        0.819608,
+        0.701961
+      ],
+      "design_source": "Option E",
+      "label": "L1 west exterior wall with garage door",
+      "level": "Level 1",
+      "name": "L1_west_exterior_wall_with_garage_door",
+      "topology": {
+        "edges": 24,
+        "faces": 10,
+        "solids": 1,
+        "vertices": 16
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 53.625
+    },
+    {
+      "area_sq_ft": 53.798,
+      "bounds_ft": {
+        "max": [
+          7.23,
+          16.2,
+          16.0
+        ],
+        "min": [
+          6.9,
+          10.0,
+          10.25
+        ]
+      },
+      "category": "Interior wall",
+      "color_hex": "#ebe6d6",
+      "color_rgb": [
+        0.921569,
+        0.901961,
+        0.839216
+      ],
+      "design_source": "Option E",
+      "label": "L2 bath east wall",
+      "level": "Level 2",
+      "name": "L2_bath_east_wall",
+      "topology": {
+        "edges": 24,
+        "faces": 12,
+        "solids": 2,
+        "vertices": 16
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 7.2105
+    },
+    {
+      "area_sq_ft": 85.6318,
+      "bounds_ft": {
+        "max": [
+          7.23,
+          16.53,
+          16.0
+        ],
+        "min": [
+          0.5,
+          16.2,
+          10.25
+        ]
+      },
+      "category": "Interior wall",
+      "color_hex": "#ebe6d6",
+      "color_rgb": [
+        0.921569,
+        0.901961,
+        0.839216
+      ],
+      "design_source": "Option E",
+      "label": "L2 bath storage wall",
+      "level": "Level 2",
+      "name": "L2_bath_storage_wall",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 12.770175
+    },
+    {
+      "area_sq_ft": 19.75,
+      "bounds_ft": {
+        "max": [
+          6.5,
+          8.33,
+          16.0
+        ],
+        "min": [
+          0.5,
+          8.0,
+          10.25
+        ]
+      },
+      "category": "Interior wall",
+      "color_hex": "#ebe6d6",
+      "color_rgb": [
+        0.921569,
+        0.901961,
+        0.839216
+      ],
+      "design_source": "Option E",
+      "label": "L2 bedroom closet wall",
+      "level": "Level 2",
+      "name": "L2_bedroom_closet_wall",
+      "topology": {
+        "edges": 24,
+        "faces": 12,
+        "solids": 2,
+        "vertices": 16
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 1.8975
+    },
+    {
+      "area_sq_ft": 93.926,
+      "bounds_ft": {
+        "max": [
+          10.53,
+          10.0,
+          16.0
+        ],
+        "min": [
+          10.2,
+          0.5,
+          10.25
+        ]
+      },
+      "category": "Interior wall",
+      "color_hex": "#ebe6d6",
+      "color_rgb": [
+        0.921569,
+        0.901961,
+        0.839216
+      ],
+      "design_source": "Option E",
+      "label": "L2 bedroom east wall",
+      "level": "Level 2",
+      "name": "L2_bedroom_east_wall",
+      "topology": {
+        "edges": 24,
+        "faces": 12,
+        "solids": 2,
+        "vertices": 16
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 13.47225
+    },
+    {
+      "area_sq_ft": 125.7598,
+      "bounds_ft": {
+        "max": [
+          10.53,
+          10.33,
+          16.0
+        ],
+        "min": [
+          0.5,
+          10.0,
+          10.25
+        ]
+      },
+      "category": "Interior wall",
+      "color_hex": "#ebe6d6",
+      "color_rgb": [
+        0.921569,
+        0.901961,
+        0.839216
+      ],
+      "design_source": "Option E",
+      "label": "L2 bedroom north wall",
+      "level": "Level 2",
+      "name": "L2_bedroom_north_wall",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 19.031925
+    },
+    {
+      "area_sq_ft": 193.5,
+      "bounds_ft": {
+        "max": [
+          24.0,
+          20.0,
+          16.0
+        ],
+        "min": [
+          23.5,
+          0.0,
+          10.25
+        ]
+      },
+      "category": "Exterior wall",
+      "color_hex": "#bdd1b3",
+      "color_rgb": [
+        0.741176,
+        0.819608,
+        0.701961
+      ],
+      "design_source": "Option E",
+      "label": "L2 east exterior wall",
+      "level": "Level 2",
+      "name": "L2_east_exterior_wall",
+      "topology": {
+        "edges": 36,
+        "faces": 16,
+        "solids": 2,
+        "vertices": 24
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 40.625
+    },
+    {
+      "area_sq_ft": 305.75,
+      "bounds_ft": {
+        "max": [
+          24.0,
+          20.0,
+          16.0
+        ],
+        "min": [
+          0.0,
+          19.5,
+          10.25
+        ]
+      },
+      "category": "Exterior wall",
+      "color_hex": "#bdd1b3",
+      "color_rgb": [
+        0.741176,
+        0.819608,
+        0.701961
+      ],
+      "design_source": "Option E",
+      "label": "L2 north blank exterior wall",
+      "level": "Level 2",
+      "name": "L2_north_blank_exterior_wall",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 69.0
+    },
+    {
+      "area_sq_ft": 19.8,
+      "bounds_ft": {
+        "max": [
+          3.7,
+          13.4,
+          10.4
+        ],
+        "min": [
+          0.7,
+          10.4,
+          10.25
+        ]
+      },
+      "category": "Fixture",
+      "color_hex": "#ebf0f2",
+      "color_rgb": [
+        0.921569,
+        0.941176,
+        0.94902
+      ],
+      "design_source": "Option E",
+      "label": "L2 shower",
+      "level": "Level 2",
+      "name": "L2_shower",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 1.35
+    },
+    {
+      "area_sq_ft": 298.25,
+      "bounds_ft": {
+        "max": [
+          24.0,
+          0.5,
+          16.0
+        ],
+        "min": [
+          0.0,
+          0.0,
+          10.25
+        ]
+      },
+      "category": "Exterior wall",
+      "color_hex": "#bdd1b3",
+      "color_rgb": [
+        0.741176,
+        0.819608,
+        0.701961
+      ],
+      "design_source": "Option E",
+      "label": "L2 south exterior wall",
+      "level": "Level 2",
+      "name": "L2_south_exterior_wall",
+      "topology": {
+        "edges": 24,
+        "faces": 10,
+        "solids": 1,
+        "vertices": 16
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 65.875
+    },
+    {
+      "area_sq_ft": 31.64,
+      "bounds_ft": {
+        "max": [
+          3.1,
+          15.5,
+          13.05
+        ],
+        "min": [
+          0.7,
+          13.75,
+          10.25
+        ]
+      },
+      "category": "Fixture",
+      "color_hex": "#94734f",
+      "color_rgb": [
+        0.580392,
+        0.45098,
+        0.309804
+      ],
+      "design_source": "Option E",
+      "label": "L2 vanity",
+      "level": "Level 2",
+      "name": "L2_vanity",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 11.76
+    },
+    {
+      "area_sq_ft": 239.95,
+      "bounds_ft": {
+        "max": [
+          0.5,
+          20.0,
+          16.0
+        ],
+        "min": [
+          0.0,
+          0.0,
+          10.25
+        ]
+      },
+      "category": "Exterior wall",
+      "color_hex": "#bdd1b3",
+      "color_rgb": [
+        0.741176,
+        0.819608,
+        0.701961
+      ],
+      "design_source": "Option E",
+      "label": "L2 west exterior wall",
+      "level": "Level 2",
+      "name": "L2_west_exterior_wall",
+      "topology": {
+        "edges": 36,
+        "faces": 14,
+        "solids": 1,
+        "vertices": 24
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 51.0
+    },
+    {
+      "area_sq_ft": 60.6784,
+      "bounds_ft": {
+        "max": [
+          13.67,
+          19.45,
+          0.56
+        ],
+        "min": [
+          7.83,
+          14.33,
+          0.52
+        ]
+      },
+      "category": "Room zone",
+      "color_hex": "#b8e3d1",
+      "color_rgb": [
+        0.721569,
+        0.890196,
+        0.819608
+      ],
+      "design_source": "Option E",
+      "label": "Level 1 bathroom",
+      "level": "Level 1",
+      "name": "Level_1_bathroom",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 58,
+      "volume_cu_ft": 1.196032
+    },
+    {
+      "area_sq_ft": 1004.0,
+      "bounds_ft": {
+        "max": [
+          24.0,
+          20.0,
+          0.5
+        ],
+        "min": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "category": "Floor slab",
+      "color_hex": "#b8b8b3",
+      "color_rgb": [
+        0.721569,
+        0.721569,
+        0.701961
+      ],
+      "design_source": "Option E",
+      "label": "Level 1 slab 20x24",
+      "level": "Level 1",
+      "name": "Level_1_slab_20x24",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 240.0
+    },
+    {
+      "area_sq_ft": 1026.0,
+      "bounds_ft": {
+        "max": [
+          24.0,
+          20.0,
+          10.25
+        ],
+        "min": [
+          0.0,
+          0.0,
+          9.5
+        ]
+      },
+      "category": "Floor slab",
+      "color_hex": "#b8b8b3",
+      "color_rgb": [
+        0.721569,
+        0.721569,
+        0.701961
+      ],
+      "design_source": "Option E",
+      "label": "Level 2 floor assembly 20x24",
+      "level": "Level 2",
+      "name": "Level_2_floor_assembly_20x24",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 360.0
+    },
+    {
+      "area_sq_ft": 59.35,
+      "bounds_ft": {
+        "max": [
+          18.5,
+          7.7,
+          14.25
+        ],
+        "min": [
+          12.0,
+          7.35,
+          10.25
+        ]
+      },
+      "category": "Interior wall",
+      "color_hex": "#ebe6d6",
+      "color_rgb": [
+        0.921569,
+        0.901961,
+        0.839216
+      ],
+      "design_source": "Option E",
+      "label": "Low TV wall",
+      "level": "Level 2",
+      "name": "Low_TV_wall",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 9.1
+    },
+    {
+      "area_sq_ft": 37.5296,
+      "bounds_ft": {
+        "max": [
+          6.85,
+          19.45,
+          10.31
+        ],
+        "min": [
+          0.55,
+          16.53,
+          10.27
+        ]
+      },
+      "category": "Room zone",
+      "color_hex": "#ccc2e6",
+      "color_rgb": [
+        0.8,
+        0.760784,
+        0.901961
+      ],
+      "design_source": "Option E",
+      "label": "Low eave linen storage",
+      "level": "Level 2",
+      "name": "Low_eave_linen_storage",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 58,
+      "volume_cu_ft": 0.73584
+    },
+    {
+      "area_sq_ft": 540.775821,
+      "bounds_ft": {
+        "max": [
+          24.0,
+          20.0,
+          20.0
+        ],
+        "min": [
+          0.0,
+          10.0,
+          15.65
+        ]
+      },
+      "category": "Roof",
+      "color_hex": "#475761",
+      "color_rgb": [
+        0.278431,
+        0.341176,
+        0.380392
+      ],
+      "design_source": "Option E",
+      "label": "North roof plane",
+      "level": "Roof",
+      "name": "North_roof_plane",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 84.0
+    },
+    {
+      "area_sq_ft": 94.528,
+      "bounds_ft": {
+        "max": [
+          23.45,
+          19.45,
+          0.56
+        ],
+        "min": [
+          14.33,
+          14.33,
+          0.52
+        ]
+      },
+      "category": "Room zone",
+      "color_hex": "#f5dba6",
+      "color_rgb": [
+        0.960784,
+        0.858824,
+        0.65098
+      ],
+      "design_source": "Option E",
+      "label": "Office",
+      "level": "Level 1",
+      "name": "Office",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 58,
+      "volume_cu_ft": 1.867776
+    },
+    {
+      "area_sq_ft": 53.92,
+      "bounds_ft": {
+        "max": [
+          20.6,
+          18.8,
+          3.0
+        ],
+        "min": [
+          15.0,
+          17.2,
+          0.5
+        ]
+      },
+      "category": "Furniture",
+      "color_hex": "#94734f",
+      "color_rgb": [
+        0.580392,
+        0.45098,
+        0.309804
+      ],
+      "design_source": "Option E",
+      "label": "Office desk",
+      "level": "Level 1",
+      "name": "Office_desk",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 22.4
+    },
+    {
+      "area_sq_ft": 36.325,
+      "bounds_ft": {
+        "max": [
+          23.8125,
+          18.3,
+          7.3
+        ],
+        "min": [
+          23.6875,
+          15.8,
+          0.5
+        ]
+      },
+      "category": "Door",
+      "color_hex": "#7a4d2b",
+      "color_rgb": [
+        0.478431,
+        0.301961,
+        0.168627
+      ],
+      "design_source": "Option E",
+      "label": "Office east door",
+      "level": "Level 1",
+      "name": "Office_east_door",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 10,
+      "volume_cu_ft": 2.125
+    },
+    {
+      "area_sq_ft": 210.66,
+      "bounds_ft": {
+        "max": [
+          23.45,
+          8.65,
+          10.31
+        ],
+        "min": [
+          10.55,
+          0.55,
+          10.27
+        ]
+      },
+      "category": "Room zone",
+      "color_hex": "#f5bdb3",
+      "color_rgb": [
+        0.960784,
+        0.741176,
+        0.701961
+      ],
+      "design_source": "Option E",
+      "label": "Open living and dining",
+      "level": "Level 2",
+      "name": "Open_living_and_dining",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 58,
+      "volume_cu_ft": 4.1796
+    },
+    {
+      "area_sq_ft": 61.46,
+      "bounds_ft": {
+        "max": [
+          23.15,
+          11.4,
+          16.75
+        ],
+        "min": [
+          21.45,
+          9.0,
+          10.25
+        ]
+      },
+      "category": "Cabinetry",
+      "color_hex": "#94734f",
+      "color_rgb": [
+        0.580392,
+        0.45098,
+        0.309804
+      ],
+      "design_source": "Option E",
+      "label": "Pantry",
+      "level": "Level 2",
+      "name": "Pantry",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 26.52
+    },
+    {
+      "area_sq_ft": 79.3,
+      "bounds_ft": {
+        "max": [
+          23.4,
+          14.8,
+          16.75
+        ],
+        "min": [
+          20.9,
+          12.2,
+          10.25
+        ]
+      },
+      "category": "Appliance",
+      "color_hex": "#b8bdbf",
+      "color_rgb": [
+        0.721569,
+        0.741176,
+        0.74902
+      ],
+      "design_source": "Option E",
+      "label": "Refrigerator",
+      "level": "Level 2",
+      "name": "Refrigerator",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 42.25
+    },
+    {
+      "area_sq_ft": 1.7088,
+      "bounds_ft": {
+        "max": [
+          11.62,
+          -3.88,
+          13.0
+        ],
+        "min": [
+          11.5,
+          -4.0,
+          9.5
+        ]
+      },
+      "category": "Guard",
+      "color_hex": "#a38c6b",
+      "color_rgb": [
+        0.639216,
+        0.54902,
+        0.419608
+      ],
+      "design_source": "Option E",
+      "label": "South landing guard post 11.5",
+      "level": "Exterior",
+      "name": "South_landing_guard_post_11_5",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 0.0504
+    },
+    {
+      "area_sq_ft": 1.7088,
+      "bounds_ft": {
+        "max": [
+          19.62,
+          -3.88,
+          13.0
+        ],
+        "min": [
+          19.5,
+          -4.0,
+          9.5
+        ]
+      },
+      "category": "Guard",
+      "color_hex": "#a38c6b",
+      "color_rgb": [
+        0.639216,
+        0.54902,
+        0.419608
+      ],
+      "design_source": "Option E",
+      "label": "South landing guard post 19.5",
+      "level": "Exterior",
+      "name": "South_landing_guard_post_19_5",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 0.0504
+    },
+    {
+      "area_sq_ft": 1.7088,
+      "bounds_ft": {
+        "max": [
+          27.5,
+          -3.88,
+          13.0
+        ],
+        "min": [
+          27.38,
+          -4.0,
+          9.5
+        ]
+      },
+      "category": "Guard",
+      "color_hex": "#a38c6b",
+      "color_rgb": [
+        0.639216,
+        0.54902,
+        0.419608
+      ],
+      "design_source": "Option E",
+      "label": "South landing guard post 27.38",
+      "level": "Exterior",
+      "name": "South_landing_guard_post_27_38",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 0.0504
+    },
+    {
+      "area_sq_ft": 7.7088,
+      "bounds_ft": {
+        "max": [
+          27.5,
+          -3.88,
+          13.0
+        ],
+        "min": [
+          11.5,
+          -4.0,
+          12.88
+        ]
+      },
+      "category": "Guard",
+      "color_hex": "#a38c6b",
+      "color_rgb": [
+        0.639216,
+        0.54902,
+        0.419608
+      ],
+      "design_source": "Option E",
+      "label": "South landing guard rail",
+      "level": "Exterior",
+      "name": "South_landing_guard_rail",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 0.2304
+    },
+    {
+      "area_sq_ft": 13.75,
+      "bounds_ft": {
+        "max": [
+          17.5,
+          0.3125,
+          15.15
+        ],
+        "min": [
+          15.0,
+          0.1875,
+          12.65
+        ]
+      },
+      "category": "Window",
+      "color_hex": "#59b3e0",
+      "color_rgb": [
+        0.34902,
+        0.701961,
+        0.878431
+      ],
+      "design_source": "Option E",
+      "label": "South living window",
+      "level": "Level 2",
+      "name": "South_living_window",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 55,
+      "volume_cu_ft": 0.78125
+    },
+    {
+      "area_sq_ft": 540.775821,
+      "bounds_ft": {
+        "max": [
+          24.0,
+          10.0,
+          20.0
+        ],
+        "min": [
+          0.0,
+          0.0,
+          15.65
+        ]
+      },
+      "category": "Roof",
+      "color_hex": "#475761",
+      "color_rgb": [
+        0.278431,
+        0.341176,
+        0.380392
+      ],
+      "design_source": "Option E",
+      "label": "South roof plane",
+      "level": "Roof",
+      "name": "South_roof_plane",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 84.0
+    },
+    {
+      "area_sq_ft": 246.2176,
+      "bounds_ft": {
+        "max": [
+          23.45,
+          13.95,
+          0.56
+        ],
+        "min": [
+          14.33,
+          0.55,
+          0.52
+        ]
+      },
+      "category": "Room zone",
+      "color_hex": "#f5c7b8",
+      "color_rgb": [
+        0.960784,
+        0.780392,
+        0.721569
+      ],
+      "design_source": "Option E",
+      "label": "Sunroom",
+      "level": "Level 1",
+      "name": "Sunroom",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 58,
+      "volume_cu_ft": 4.88832
+    },
+    {
+      "area_sq_ft": 58.75,
+      "bounds_ft": {
+        "max": [
+          23.8125,
+          12.1,
+          7.5
+        ],
+        "min": [
+          23.6875,
+          8.1,
+          0.5
+        ]
+      },
+      "category": "Window",
+      "color_hex": "#59b3e0",
+      "color_rgb": [
+        0.34902,
+        0.701961,
+        0.878431
+      ],
+      "design_source": "Option E",
+      "label": "Sunroom east slider",
+      "level": "Level 1",
+      "name": "Sunroom_east_slider",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 55,
+      "volume_cu_ft": 3.5
+    },
+    {
+      "area_sq_ft": 19.0,
+      "bounds_ft": {
+        "max": [
+          23.8125,
+          5.7,
+          7.0
+        ],
+        "min": [
+          23.6875,
+          3.2,
+          3.5
+        ]
+      },
+      "category": "Window",
+      "color_hex": "#59b3e0",
+      "color_rgb": [
+        0.34902,
+        0.701961,
+        0.878431
+      ],
+      "design_source": "Option E",
+      "label": "Sunroom east window",
+      "level": "Level 1",
+      "name": "Sunroom_east_window",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 55,
+      "volume_cu_ft": 1.09375
+    },
+    {
+      "area_sq_ft": 152.6,
+      "bounds_ft": {
+        "max": [
+          27.5,
+          19.5,
+          9.85
+        ],
+        "min": [
+          24.0,
+          0.0,
+          9.5
+        ]
+      },
+      "category": "Balcony",
+      "color_hex": "#a38c6b",
+      "color_rgb": [
+        0.639216,
+        0.54902,
+        0.419608
+      ],
+      "design_source": "Option E",
+      "label": "Upper east balcony",
+      "level": "Level 2",
+      "name": "Upper_east_balcony",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 23.8875
+    },
+    {
+      "area_sq_ft": 142.0,
+      "bounds_ft": {
+        "max": [
+          27.5,
+          0.0,
+          9.85
+        ],
+        "min": [
+          11.5,
+          -4.0,
+          9.5
+        ]
+      },
+      "category": "Landing",
+      "color_hex": "#a38c6b",
+      "color_rgb": [
+        0.639216,
+        0.54902,
+        0.419608
+      ],
+      "design_source": "Option E",
+      "label": "Upper south landing",
+      "level": "Level 2",
+      "name": "Upper_south_landing",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 0,
+      "volume_cu_ft": 22.4
+    },
+    {
+      "area_sq_ft": 11.125,
+      "bounds_ft": {
+        "max": [
+          0.3125,
+          14.2,
+          15.55
+        ],
+        "min": [
+          0.1875,
+          12.2,
+          13.05
+        ]
+      },
+      "category": "Window",
+      "color_hex": "#59b3e0",
+      "color_rgb": [
+        0.34902,
+        0.701961,
+        0.878431
+      ],
+      "design_source": "Option E",
+      "label": "West bathroom window",
+      "level": "Level 2",
+      "name": "West_bathroom_window",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 55,
+      "volume_cu_ft": 0.625
+    },
+    {
+      "area_sq_ft": 17.425,
+      "bounds_ft": {
+        "max": [
+          0.3125,
+          5.8,
+          15.75
+        ],
+        "min": [
+          0.1875,
+          3.3,
+          12.55
+        ]
+      },
+      "category": "Window",
+      "color_hex": "#59b3e0",
+      "color_rgb": [
+        0.34902,
+        0.701961,
+        0.878431
+      ],
+      "design_source": "Option E",
+      "label": "West bedroom window",
+      "level": "Level 2",
+      "name": "West_bedroom_window",
+      "topology": {
+        "edges": 12,
+        "faces": 6,
+        "solids": 1,
+        "vertices": 8
+      },
+      "transparency_percent": 55,
+      "volume_cu_ft": 1.0
+    }
+  ],
+  "schema": "adu-option-e-object-manifest-v1",
+  "units": {
+    "reported_area": "square feet",
+    "reported_bounds": "feet",
+    "reported_volume": "cubic feet",
+    "source_geometry": "millimetres"
+  }
+}
