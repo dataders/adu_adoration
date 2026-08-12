@@ -1,0 +1,472 @@
+<title>ADU massing — balcony-entry scheme</title>
+<style>
+  :root {
+    --paper: #f0ede3;
+    --sky-top: #dfe5df;
+    --grass: #97a87e;
+    --alley: #b9b3a6;
+    --patio: #d8d2c2;
+    --ink: #2b2c27;
+    --muted: #6f6e63;
+    --card: rgba(252, 251, 246, 0.88);
+    --line: #cdc9ba;
+    --accent: #9e3f36;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #181a16; --sky-top: #22261f; --grass: #46523a; --alley: #3a3933;
+      --patio: #45423a; --ink: #e6e3d6; --muted: #97958a;
+      --card: rgba(28, 30, 25, 0.88); --line: #3c3e35; --accent: #c96a5f;
+    }
+  }
+  :root[data-theme="light"] {
+    --paper: #f0ede3; --sky-top: #dfe5df; --grass: #97a87e; --alley: #b9b3a6;
+    --patio: #d8d2c2; --ink: #2b2c27; --muted: #6f6e63;
+    --card: rgba(252, 251, 246, 0.88); --line: #cdc9ba; --accent: #9e3f36;
+  }
+  :root[data-theme="dark"] {
+    --paper: #181a16; --sky-top: #22261f; --grass: #46523a; --alley: #3a3933;
+    --patio: #45423a; --ink: #e6e3d6; --muted: #97958a;
+    --card: rgba(28, 30, 25, 0.88); --line: #3c3e35; --accent: #c96a5f;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif;
+    overflow: hidden;
+  }
+  #stage { position: fixed; inset: 0; cursor: grab; touch-action: none; }
+  #stage.dragging { cursor: grabbing; }
+
+  .sheet-title { position: fixed; top: 20px; left: 24px; max-width: 330px; pointer-events: none; }
+  .sheet-title .eyebrow {
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); margin: 0 0 4px;
+  }
+  .sheet-title h1 {
+    font-family: Charter, "Bitstream Charter", Cambria, Georgia, serif;
+    font-size: 26px; line-height: 1.15; font-weight: 700; margin: 0; text-wrap: balance;
+  }
+  .sheet-title .sub { font-size: 12.5px; color: var(--muted); margin: 6px 0 0; }
+  .sheet-title .sub em { color: var(--accent); font-style: normal; font-weight: 600; }
+
+  .facts {
+    position: fixed; top: 20px; right: 20px; width: 238px;
+    background: var(--card); border: 1px solid var(--line); border-radius: 6px;
+    padding: 12px 14px; backdrop-filter: blur(6px);
+  }
+  .facts h2 {
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); margin: 0 0 8px; font-weight: 600;
+  }
+  .facts dl { margin: 0; display: grid; grid-template-columns: 1fr auto; gap: 3px 12px; }
+  .facts dt { color: var(--muted); font-size: 12.5px; }
+  .facts dd { margin: 0; text-align: right; font-variant-numeric: tabular-nums; font-size: 12.5px; }
+  .facts .ok { color: var(--accent); font-weight: 600; }
+  .facts .rule { grid-column: 1 / -1; border-top: 1px dashed var(--line); margin: 5px 0; }
+
+  .controls {
+    position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%);
+    display: flex; background: var(--card); border: 1px solid var(--line);
+    border-radius: 999px; padding: 4px; backdrop-filter: blur(6px);
+  }
+  .controls button {
+    appearance: none; border: 0; background: transparent; color: var(--muted);
+    font: 600 13px/1 system-ui, sans-serif; padding: 9px 18px; border-radius: 999px;
+    cursor: pointer; letter-spacing: 0.02em;
+  }
+  .controls button[aria-pressed="true"] { background: var(--accent); color: var(--paper); }
+  .controls button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .hint {
+    position: fixed; left: 50%; bottom: 74px; transform: translateX(-50%);
+    font-size: 11.5px; color: var(--muted); letter-spacing: 0.04em;
+    pointer-events: none; transition: opacity 0.6s;
+  }
+  @media (max-width: 640px) {
+    .facts { display: none; }
+    .sheet-title h1 { font-size: 20px; }
+  }
+</style>
+
+<canvas id="stage"></canvas>
+
+<header class="sheet-title">
+  <p class="eyebrow">112 W 29th St · Richmond, VA</p>
+  <h1>Backyard ADU — balcony-entry scheme</h1>
+  <p class="sub">24 × 20 ft · front gable to the alley · upstairs <em>480 sf ≤ 500 ✓</em></p>
+</header>
+
+<aside class="facts">
+  <h2>Massing facts</h2>
+  <dl>
+    <dt>Footprint</dt><dd>24 × 20 ft · 480 sf</dd>
+    <dt>Eave / ridge</dt><dd>15 ft / 25 ft</dd>
+    <dt>Height midpoint</dt><dd class="ok">20 ft ✓ cap</dd>
+    <dt>Upstairs unit</dt><dd class="ok">480 sf ✓ ≤ 500</dd>
+    <div class="rule"></div>
+    <dt>Balcony</dt><dd>6 × 20 · open-air</dd>
+    <dt>Entry</dt><dd>S stair → balcony</dd>
+    <dt>Garage door</dt><dd>alley (west)</dd>
+  </dl>
+</aside>
+
+<nav class="controls" aria-label="View mode">
+  <button id="b-ext" aria-pressed="true">Exterior</button>
+  <button id="b-up" aria-pressed="false">Upstairs</button>
+  <button id="b-dn" aria-pressed="false">Downstairs</button>
+</nav>
+<p class="hint" id="hint">drag to orbit · scroll to zoom · ← → keys rotate</p>
+
+<script>
+(() => {
+  const cv = document.getElementById('stage');
+  const ctx = cv.getContext('2d');
+  let W, H, DPR;
+
+  // ---------- theme tokens read from CSS ----------
+  let T = {};
+  function readTheme() {
+    const s = getComputedStyle(document.documentElement);
+    T = {
+      paper: s.getPropertyValue('--paper').trim(),
+      skyTop: s.getPropertyValue('--sky-top').trim(),
+      grass: s.getPropertyValue('--grass').trim(),
+      alley: s.getPropertyValue('--alley').trim(),
+      patio: s.getPropertyValue('--patio').trim(),
+      ink: s.getPropertyValue('--ink').trim(),
+      card: s.getPropertyValue('--card').trim(),
+    };
+  }
+
+  // ---------- building materials (fixed across themes) ----------
+  const M = {
+    siding:  '#6f8560', sidingG: '#7d9469',
+    roof:    '#33322e', roofEdge:'#26251f',
+    trim:    '#f1eee4', glass:   '#39434a',
+    door:    '#9e3f36', wood:    '#cabfa4',
+    deck:    '#b1a184', stair:   '#a8977a',
+    shadow:  'rgba(40,42,35,0.18)',
+    zoneBed: '#aebfd2', zoneBath:'#9db4c6', zoneKit: '#d3bd93',
+    zoneLiv: '#cfc6ad', zoneGar: '#b9b4a6',
+    plate:   '#e6e0d0', stubWall:'#efeadb',
+  };
+
+  // ---------- vec helpers ----------
+  const sub = (a,b)=>[a[0]-b[0],a[1]-b[1],a[2]-b[2]];
+  const cross = (a,b)=>[a[1]*b[2]-a[2]*b[1], a[2]*b[0]-a[0]*b[2], a[0]*b[1]-a[1]*b[0]];
+  const norm = v => { const l=Math.hypot(v[0],v[1],v[2])||1; return [v[0]/l,v[1]/l,v[2]/l]; };
+  const dot = (a,b)=>a[0]*b[0]+a[1]*b[1]+a[2]*b[2];
+  const SUN = norm([0.55, 0.8, -0.42]);   // fixed world sun: SE, high
+
+  function shade(hex, k) {
+    const n = parseInt(hex.slice(1), 16);
+    return `rgb(${Math.round(((n>>16)&255)*k)},${Math.round(((n>>8)&255)*k)},${Math.round((n&255)*k)})`;
+  }
+
+  // ---------- geometry (ft: x east 0-24 [+balcony to 30], y up, z north 0-20) ----------
+  const F2 = 10.5, EAVE = 15, RIDGE = 25, PEAK = RIDGE - 0.45, STUB = 3.2;
+
+  function quad(a,b,c,d,color,opts){ return Object.assign({pts:[a,b,c,d],color},opts||{}); }
+  function poly(pts,color,opts){ return Object.assign({pts,color},opts||{}); }
+
+  function buildScene(mode) {
+    const F = [], L = [], ground = [];
+    const D = { W: [], S: [], N: [], E: [], EG: [] };   // wall-mounted decor, painted right after its wall
+    const ext = mode === 'ext';
+    const up  = mode === 'up';
+    const dn  = mode === 'dn';
+
+    // --- ground pieces (painted first, unsorted) ---
+    ground.push(quad([-40,0,-30],[64,0,-30],[64,0,50],[-40,0,50], T.grass, {flat:true}));
+    ground.push(quad([-40,0,-30],[-6,0,-30],[-6,0,50],[-40,0,50], T.alley, {flat:true}));
+    ground.push(quad([24.2,0.02,1],[33,0.02,1],[33,0.02,19],[24.2,0.02,19], T.patio, {flat:true}));
+    ground.push(poly([[1,0.03,-1.5],[27,0.03,-1.5],[31,0.03,3],[31,0.03,21],[2,0.03,21]], M.shadow, {flat:true}));
+
+    // wall-mounted rectangles, pushed out from the wall plane, keyed to their wall
+    const east = (u1,v1,u2,v2,c,e)=> { const x=24+(e||0.06);
+      D.E.push(quad([x,v1,u1],[x,v1,u2],[x,v2,u2],[x,v2,u1],c)); };
+    const eastG = (u1,v1,u2,v2,c,e)=> { const x=24+(e||0.06);
+      D.EG.push(quad([x,v1,u1],[x,v1,u2],[x,v2,u2],[x,v2,u1],c)); };
+    const west = (u1,v1,u2,v2,c,e)=> { const x=-(e||0.06);
+      D.W.push(quad([x,v1,u1],[x,v1,u2],[x,v2,u2],[x,v2,u1],c)); };
+    const south = (u1,v1,u2,v2,c,e)=> { const z=-(e||0.06);
+      D.S.push(quad([u1,v1,z],[u2,v1,z],[u2,v2,z],[u1,v2,z],c)); };
+    const northw = (u1,v1,u2,v2,c,e)=> { const z=20+(e||0.06);
+      D.N.push(quad([u1,v1,z],[u2,v1,z],[u2,v2,z],[u1,v2,z],c)); };
+
+    // --- perimeter walls ---
+    const wallTop = ext ? EAVE : (up ? F2 : STUB);
+    F.push(quad([0,0,0],[24,0,0],[24,wallTop,0],[0,wallTop,0], M.siding, {wall:'S'}));
+    F.push(quad([0,0,20],[24,0,20],[24,wallTop,20],[0,wallTop,20], M.siding, {wall:'N'}));
+    F.push(quad([24,0,0],[24,0,20],[24,wallTop,20],[24,wallTop,0], M.siding, {wall:'E'}));
+    if (ext) {
+      F.push(poly([[0,0,0],[0,0,20],[0,EAVE,20],[0,PEAK,10],[0,EAVE,0]], M.sidingG, {wall:'W'}));         // W gable
+      F.push(poly([[24,F2,0],[24,F2,20],[24,EAVE,20],[24,PEAK,10],[24,EAVE,0]], M.sidingG, {wall:'EG'})); // E gable (recessed)
+      // French doors ×2 on east gable wall
+      eastG(5,F2, 9,F2+7, M.trim, 0.05);  eastG(5.4,F2+0.4, 8.6,F2+6.7, M.glass, 0.1);
+      eastG(11,F2, 15,F2+7, M.trim, 0.05); eastG(11.4,F2+0.4, 14.6,F2+6.7, M.glass, 0.1);
+    } else {
+      F.push(poly([[0,0,0],[0,0,20],[0,wallTop,20],[0,wallTop,0]], M.sidingG, {wall:'W'}));    // W low
+    }
+    if (up) {  // dollhouse rim above the plate
+      const rim = F2 + 0.9;
+      F.push(quad([0,F2,0],[24,F2,0],[24,rim,0],[0,rim,0], M.stubWall));
+      F.push(quad([0,F2,20],[24,F2,20],[24,rim,20],[0,rim,20], M.stubWall));
+      F.push(quad([0,F2,0],[0,F2,20],[0,rim,20],[0,rim,0], M.stubWall));
+    }
+
+    // --- ground-floor facade decor (hidden in downstairs cutaway) ---
+    if (!dn) {
+      west(5.5,0,14.5,7.5, M.wood);                       // carriage garage door
+      west(6.1,5.9,13.9,7.0, M.glass, 0.1);               // lite row
+      west(6.1,0.4,9.7,5.5, shade(M.wood,0.93), 0.1);     // panels
+      west(10.3,0.4,13.9,5.5, shade(M.wood,0.93), 0.1);
+      west(1.6,0,4.4,6.8, M.door);                        // barn-red entry door
+      east(4,0.3, 10,7, M.trim); east(4.4,0.6, 9.6,6.7, M.glass, 0.12);   // sunroom sliders
+      east(14,0, 16.8,6.8, M.door);                                        // office door
+      east(17.6,3, 19.6,6.4, M.trim); east(17.8,3.2, 19.4,6.2, M.glass, 0.12);
+      south(13,3,16,6.5, M.trim); south(13.3,3.3,15.7,6.2, M.glass, 0.12); // sunroom S windows
+      south(17,3,20,6.5, M.trim); south(17.3,3.3,19.7,6.2, M.glass, 0.12);
+      northw(17,3.5,20,6.5, M.trim); northw(17.3,3.8,19.7,6.2, M.glass, 0.12); // office N window
+    }
+    if (ext) {  // upper west windows + vent
+      west(2.6,11.5,7.4,14.5, M.trim); west(2.9,11.8,7.1,14.2, M.glass, 0.1);
+      west(12.6,11.5,17.4,14.5, M.trim); west(12.9,11.8,17.1,14.2, M.glass, 0.1);
+      west(9.2,17.5,10.8,19.2, M.trim); west(9.4,17.7,10.6,19.0, M.glass, 0.1);
+    }
+
+    // --- balcony ---
+    if (!dn) {
+      F.push(quad([24,F2,0],[30,F2,0],[30,F2,20],[24,F2,20], M.deck));
+      F.push(quad([24,F2-0.55,0],[30,F2-0.55,0],[30,F2-0.55,20],[24,F2-0.55,20], shade(M.deck,0.8)));
+      F.push(quad([24,F2-0.55,0],[30,F2-0.55,0],[30,F2,0],[24,F2,0], shade(M.deck,0.72)));
+      F.push(quad([30,F2-0.55,0],[30,F2-0.55,20],[30,F2,20],[30,F2,0], shade(M.deck,0.72)));
+      const post = (x,z,y1)=> {
+        const h = 0.35;
+        F.push(quad([x-h,0,z-h],[x+h,0,z-h],[x+h,y1,z-h],[x-h,y1,z-h], M.trim));
+        F.push(quad([x-h,0,z+h],[x+h,0,z+h],[x+h,y1,z+h],[x-h,y1,z+h], M.trim));
+        F.push(quad([x-h,0,z-h],[x-h,0,z+h],[x-h,y1,z+h],[x-h,y1,z-h], shade('#f1eee4',0.88)));
+        F.push(quad([x+h,0,z-h],[x+h,0,z+h],[x+h,y1,z+h],[x+h,y1,z-h], shade('#f1eee4',0.88)));
+      };
+      post(29.6, 0.5, ext ? EAVE-0.4 : F2+3.5);
+      post(29.6, 19.5, ext ? EAVE-0.4 : F2+3.5);
+      const rail = (a,b)=> {
+        F.push(quad([a[0],F2+3.2,a[1]],[b[0],F2+3.2,b[1]],[b[0],F2+3.55,b[1]],[a[0],F2+3.55,a[1]], M.trim));
+        F.push(quad([a[0],F2+0.2,a[1]],[b[0],F2+0.2,b[1]],[b[0],F2+0.5,b[1]],[a[0],F2+0.5,a[1]], shade('#f1eee4',0.92)));
+      };
+      rail([30,0],[30,20]); rail([24,20],[30,20]); rail([28.5,0],[30,0]);
+    }
+
+    // --- exterior stair along south wall (grade x=9 → balcony x=24) ---
+    if (!dn) {
+      const sz0 = -0.4, sz1 = -3.9;
+      F.push(poly([[9,0,sz0],[24,F2,sz0],[24,F2-1.1,sz0],[9.9,0,sz0]], M.stair));
+      F.push(poly([[9,0,sz1],[24,F2,sz1],[24,F2-1.1,sz1],[9.9,0,sz1]], shade('#a8977a',0.9)));
+      F.push(quad([9,0,sz0],[24,F2,sz0],[24,F2,sz1],[9,0,sz1], M.stair));
+      F.push(quad([9.4,3.1,sz1],[24,F2+3.1,sz1],[24,F2+3.45,sz1],[9.4,3.45,sz1], M.trim));
+      F.push(quad([24,F2+3.2,sz1],[28.5,F2+3.2,-0.1],[28.5,F2+3.55,-0.1],[24,F2+3.55,sz1], M.trim));
+    }
+
+    // --- roof (subdivided into strips so the painter's sort behaves) ---
+    if (ext) {
+      const o = 1.1, x0 = -0.9, x1 = 30.6, N = 8;
+      for (let i = 0; i < N; i++) {
+        const a = x0 + (x1-x0)*i/N, b = x0 + (x1-x0)*(i+1)/N;
+        F.push(quad([a,EAVE-0.4,-o],[b,EAVE-0.4,-o],[b,RIDGE-0.4,10],[a,RIDGE-0.4,10], M.roof));
+        F.push(quad([a,EAVE-0.4,20+o],[b,EAVE-0.4,20+o],[b,RIDGE-0.4,10],[a,RIDGE-0.4,10], shade(M.roof,0.92)));
+        F.push(quad([a,RIDGE-0.28,9.7],[b,RIDGE-0.28,9.7],[b,RIDGE-0.28,10.3],[a,RIDGE-0.28,10.3], M.roofEdge));
+      }
+      F.push(quad([x0,EAVE-1,-o],[x1,EAVE-1,-o],[x1,EAVE-0.4,-o],[x0,EAVE-0.4,-o], M.trim));
+      F.push(quad([x0,EAVE-1,20+o],[x1,EAVE-1,20+o],[x1,EAVE-0.4,20+o],[x0,EAVE-0.4,20+o], M.trim));
+    }
+
+    // --- cutaway floor plans ---
+    const stubWall = (x1,z1,x2,z2,y0)=>
+      F.push(quad([x1,y0,z1],[x2,y0,z2],[x2,y0+STUB,z2],[x1,y0+STUB,z1], M.stubWall));
+
+    if (up) {
+      const fz = (x1,z1,x2,z2,c)=> F.push(quad([x1,F2+0.05,z1],[x2,F2+0.05,z1],[x2,F2+0.05,z2],[x1,F2+0.05,z2], c));
+      fz(0,0,24,20, M.plate);
+      fz(0,12,9,17.5, M.zoneBath);     // bath + W/D (NW)
+      fz(0,0.5,9,12, M.zoneBed);       // bedroom (SW)
+      fz(9,13,24,19.5, M.zoneKit);     // kitchen along TV wall (N-mid)
+      fz(9,0.5,24,13, M.zoneLiv);      // living (SE)
+      stubWall(9,0,9,17.5, F2);        // west band vs living
+      stubWall(0,12,9,12, F2);         // bed vs bath
+      stubWall(0,17.5,9,17.5, F2);     // bath vs north closet strip
+      stubWall(11,13,21,13, F2);       // TV / kitchen wall
+      L.push({p:[4.5,F2+1.6,6],    t:'BED'});
+      L.push({p:[4.5,F2+1.6,14.7], t:'BATH · W/D'});
+      L.push({p:[16.5,F2+1.6,16.5],t:'KITCHEN'});
+      L.push({p:[16.5,F2+1.6,6.5], t:'LIVING'});
+      L.push({p:[27,F2+1.6,10],    t:'BALCONY'});
+    }
+    if (dn) {
+      const fz = (x1,z1,x2,z2,c)=> F.push(quad([x1,0.08,z1],[x2,0.08,z1],[x2,0.08,z2],[x1,0.08,z2], c));
+      fz(0,0,24,20, M.plate);
+      fz(0.3,0.3,11,19.7, M.zoneGar);   // garage (W)
+      fz(11,14,16,19.7, M.zoneBath);    // bath (N-mid)
+      fz(16,12,23.7,19.7, M.zoneKit);   // office (NE)
+      fz(11,0.3,23.7,12, M.zoneLiv);    // sunroom (SE)
+      stubWall(11,0,11,20, 0);
+      stubWall(11,14,16,14, 0); stubWall(16,14,16,20, 0);
+      stubWall(16,12,24,12, 0);
+      L.push({p:[5.5,1.8,10],  t:'GARAGE'});
+      L.push({p:[13.5,1.8,17], t:'BATH'});
+      L.push({p:[20,1.8,16],   t:'OFFICE'});
+      L.push({p:[17.5,1.8,6],  t:'SUNROOM'});
+      L.push({p:[28.5,1.4,10], t:'PATIO'});
+    }
+
+    return {F, L, ground, D};
+  }
+
+  // ---------- camera / projection ----------
+  const C = [14, 7.5, 9];
+  let yaw = -0.9, pitch = 0.42;
+  let DIST = 95, FOCAL = 1;
+
+  function project(p) {
+    const t = sub(p, C);
+    const cy = Math.cos(yaw), sy = Math.sin(yaw);
+    const x1 = t[0]*cy + t[2]*sy;
+    const z1 = -t[0]*sy + t[2]*cy;
+    const cp = Math.cos(pitch), sp = Math.sin(pitch);
+    const y2 = t[1]*cp + z1*sp;
+    const z2 = -t[1]*sp + z1*cp;
+    const d = DIST + z2;
+    const k = FOCAL / Math.max(d, 8);
+    return [W/2 + x1*k, H*0.54 - y2*k, d];
+  }
+
+  function draw() {
+    const g = ctx.createLinearGradient(0,0,0,H);
+    g.addColorStop(0, T.skyTop); g.addColorStop(1, T.paper);
+    ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
+
+    const {F, L, ground, D} = scene;
+
+    const paint = f => {
+      const p2 = f.pts.map(project);
+      ctx.beginPath();
+      ctx.moveTo(p2[0][0], p2[0][1]);
+      for (let i=1;i<p2.length;i++) ctx.lineTo(p2[i][0], p2[i][1]);
+      ctx.closePath();
+      let col = f.color;
+      if (!f.flat && col[0] === '#') {
+        const n = norm(cross(sub(f.pts[1],f.pts[0]), sub(f.pts[2],f.pts[0])));
+        col = shade(col, 0.62 + 0.38 * Math.abs(dot(n, SUN)));
+      }
+      ctx.fillStyle = col;
+      ctx.fill();
+    };
+
+    ground.forEach(paint);
+
+    F.map(f => {
+      let cx=0, cyy=0, cz=0;
+      for (const p of f.pts) { cx+=p[0]; cyy+=p[1]; cz+=p[2]; }
+      const n = f.pts.length;
+      const pr = project([cx/n, cyy/n, cz/n]);
+      return [pr[2], f];
+    }).sort((a,b) => b[0]-a[0]).forEach(x => {
+      paint(x[1]);
+      if (x[1].wall && D[x[1].wall]) D[x[1].wall].forEach(paint);   // decor rides on its wall
+    });
+
+    ctx.font = '600 12px system-ui, sans-serif';
+    ctx.textAlign = 'center';
+    for (const l of L) {
+      const p = project(l.p);
+      ctx.lineWidth = 4; ctx.strokeStyle = T.card; ctx.lineJoin = 'round';
+      ctx.strokeText(l.t, p[0], p[1]);
+      ctx.fillStyle = T.ink;
+      ctx.fillText(l.t, p[0], p[1]);
+    }
+
+    // compass
+    const c0 = project([14,0,9]), c1 = project([14,0,14]);
+    const ang = Math.atan2(c1[1]-c0[1], c1[0]-c0[0]);
+    ctx.save();
+    ctx.translate(46, H-46); ctx.rotate(ang);
+    ctx.strokeStyle = T.ink; ctx.fillStyle = T.ink; ctx.lineWidth = 1.4;
+    ctx.beginPath(); ctx.moveTo(-12,0); ctx.lineTo(12,0); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(12,0); ctx.lineTo(5,-4); ctx.lineTo(5,4); ctx.closePath(); ctx.fill();
+    ctx.rotate(-ang);
+    ctx.font = '600 10px system-ui'; ctx.textAlign = 'center';
+    ctx.fillText('N', 0, -18);
+    ctx.restore();
+  }
+
+  // ---------- state & interaction ----------
+  let mode = 'ext';
+  let scene = null;
+  function setMode(m) {
+    mode = m; scene = buildScene(m);
+    if (m !== 'ext' && pitch < 0.85) pitch = 1.02;   // steepen for plan views
+    for (const [id, mm] of [['b-ext','ext'],['b-up','up'],['b-dn','dn']])
+      document.getElementById(id).setAttribute('aria-pressed', String(mm === m));
+    draw();
+  }
+  document.getElementById('b-ext').onclick = () => setMode('ext');
+  document.getElementById('b-up').onclick  = () => setMode('up');
+  document.getElementById('b-dn').onclick  = () => setMode('dn');
+
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let spinning = !reduced;
+
+  let px=0, py=0, down=false;
+  cv.addEventListener('pointerdown', e => {
+    down = true; px = e.clientX; py = e.clientY;
+    cv.classList.add('dragging'); cv.setPointerCapture(e.pointerId);
+  });
+  addEventListener('pointermove', e => {
+    if (!down) return;
+    spinning = false;
+    document.getElementById('hint').style.opacity = 0;
+    yaw   += (e.clientX - px) * 0.008;
+    pitch += (e.clientY - py) * 0.005;
+    pitch = Math.max(0.06, Math.min(1.25, pitch));
+    px = e.clientX; py = e.clientY;
+    draw();
+  });
+  addEventListener('pointerup', () => { down = false; cv.classList.remove('dragging'); });
+  addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft')  { spinning = false; yaw -= 0.07; draw(); }
+    if (e.key === 'ArrowRight') { spinning = false; yaw += 0.07; draw(); }
+  });
+  cv.addEventListener('wheel', e => {
+    e.preventDefault();
+    DIST = Math.max(55, Math.min(190, DIST + e.deltaY * 0.08));
+    draw();
+  }, {passive:false});
+
+  function tick() {
+    if (spinning) { yaw += 0.0022; draw(); }
+    requestAnimationFrame(tick);
+  }
+
+  function resize() {
+    DPR = Math.min(devicePixelRatio || 1, 2);
+    W = innerWidth; H = innerHeight;
+    cv.width = W*DPR; cv.height = H*DPR;
+    cv.style.width = W+'px'; cv.style.height = H+'px';
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+    FOCAL = Math.min(W, H) * 2.3;
+    draw();
+  }
+  addEventListener('resize', resize);
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+    readTheme(); scene = buildScene(mode); draw();
+  });
+  new MutationObserver(() => { readTheme(); scene = buildScene(mode); draw(); })
+    .observe(document.documentElement, {attributes:true, attributeFilter:['data-theme']});
+
+  readTheme();
+  scene = buildScene('ext');
+  resize();
+  tick();
+})();
+</script>

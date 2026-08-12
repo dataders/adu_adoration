@@ -28,6 +28,10 @@ Option E is the owner-sketch baseline. Options A–E and their model artifacts r
 design history, but they do not override Option F. Renderings communicate spatial and
 material intent; dimensioned plans and future professional documents govern geometry.
 
+The earlier balcony-entry study in `plan/floor-plans-balcony-scheme.{svg,png}` and
+`renderings/massing-3d-interactive.html` is retained as historical reference only. It does
+not override the current Option F authority.
+
 > This repository contains schematic design work, not sealed permit or construction
 > documents. Survey, zoning determinations, code analysis, structural engineering, energy
 > compliance, utility verification, and trade design still require qualified professionals.
