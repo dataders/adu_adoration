@@ -23,8 +23,9 @@ current files disagree, resolve intent in this order:
 4. `output/pdf/adu-option-f-construction-engineering-basis.pdf`
 
 Use source records in `documents/` and `images/` for existing conditions. Current renderings use `model/render_model.py` and `adu-option-f-scene.json`; provenance is
-recorded in `renderings/model-render-manifest.json`. Earlier photoreal prompts and images
-are design history. Never replace measured geometry from an image.
+recorded in `renderings/model-render-manifest.json`. The current written brief is `renderings/photoreal-render-prompt.md`; the old brief is
+archived under `renderings/archive/`. Earlier AI images remain design history. Never
+replace measured geometry from an image.
 
 Option E and Options A–D are historical studies. Files matching `model/adu-option-e.*`,
 `plan/site-plan.*`, and `plan/site-plan-architect.pdf` do not override current Option F

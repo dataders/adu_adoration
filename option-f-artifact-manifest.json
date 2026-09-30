@@ -27,7 +27,8 @@
     "floor_plan_level_1": "apartment/option-f-level-1.svg",
     "floor_plan_level_2": "apartment/option-f-level-2.svg",
     "building_scene": "model/adu-option-f-scene.json",
-    "render_provenance": "renderings/model-render-manifest.json"
+    "render_provenance": "renderings/model-render-manifest.json",
+    "render_prompt": "renderings/photoreal-render-prompt.md"
   },
   "coordinated_invariants": {
     "enclosed_footprint_ft": [
@@ -66,7 +67,8 @@
     "renderings/option-f-alley-photoreal-v2.png",
     "renderings/option-f-first-floor-interior.png",
     "renderings/option-f-second-floor-interior-corrected.png",
-    "renderings/photoreal-render-prompt.md"
+    "renderings/photoreal-render-prompt.md",
+    "renderings/archive/photoreal-render-prompt-v1.md"
   ],
   "exploratory_alternatives": {
     "garden_room": "apartment/option-f-alternative-garden.svg"
