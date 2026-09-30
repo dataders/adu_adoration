@@ -1,13 +1,14 @@
 {
-  "schema": "adu-option-f-artifact-coordination-v1",
+  "schema": "adu-option-f-artifact-coordination-v2",
   "design": "Option F",
-  "version": "2026-08-03-option-f-basis-v1",
-  "status": "schematic design and engineering basis; not for construction",
+  "version": "2026-09-30-option-f-basis-v2",
+  "status": "schematic owner study; not for construction",
   "authority_order": [
-    "output/pdf/adu-option-f-construction-engineering-basis.pdf",
+    "model/option_f_geometry.py",
+    "model/adu-option-f-scene.json",
     "apartment/option-f-recommended-development.svg",
     "plan/site-plan-option-f.dxf",
-    "model/option_f_geometry.py"
+    "output/pdf/adu-option-f-construction-engineering-basis.pdf"
   ],
   "current_artifacts": {
     "floor_plan": "apartment/option-f-recommended-development.svg",
@@ -18,17 +19,24 @@
     "building_manifest": "model/adu-option-f-manifest.json",
     "interactive_site_model": "model/site-model-3d.html",
     "whole_site_obj": "model/site-model.obj",
-    "yard_render": "renderings/option-f-yard-photoreal-v2.png",
-    "alley_render": "renderings/option-f-alley-photoreal-v2.png",
-    "level_1_interior_render": "renderings/option-f-first-floor-interior.png",
-    "level_2_interior_render": "renderings/option-f-second-floor-interior-corrected.png",
-    "render_spec": "renderings/photoreal-render-prompt.md"
+    "yard_render": "renderings/option-f-yard-model.png",
+    "alley_render": "renderings/option-f-alley-model.png",
+    "level_1_interior_render": "renderings/option-f-lower-cutaway.png",
+    "level_2_interior_render": "renderings/option-f-upper-cutaway.png",
+    "render_spec": "model/render_model.py",
+    "floor_plan_level_1": "apartment/option-f-level-1.svg",
+    "floor_plan_level_2": "apartment/option-f-level-2.svg",
+    "building_scene": "model/adu-option-f-scene.json",
+    "render_provenance": "renderings/model-render-manifest.json"
   },
   "coordinated_invariants": {
-    "enclosed_footprint_ft": [24.0, 20.0],
+    "enclosed_footprint_ft": [
+      24.0,
+      20.0
+    ],
     "upper_subfloor_ft": 9.25,
     "eave_ft": 16.0,
-    "ridge_max_ft": 19.833,
+    "ridge_max_ft": 19.833333,
     "east_patio_depth_ft": 4.0,
     "east_slider_width_ft": 6.0,
     "stair_risers": 14,
@@ -37,7 +45,14 @@
     "north_wall_openings": 0,
     "west_upper_windows": 1,
     "south_upper_sliders": 0,
-    "setback_roof_edges": ["north eave flush", "west rake flush"]
+    "setback_roof_edges": [
+      "north eave flush",
+      "west rake flush"
+    ],
+    "lower_hall_clear_ft": 3.25,
+    "kitchen_approach_clear_ft": 4.47,
+    "sofa_slider_route_clear_ft": 3.2,
+    "dining_chair_counter_clear_ft": 3.3
   },
   "historical_only": [
     "model/adu-option-e.*",
@@ -45,6 +60,15 @@
     "plan/site-plan.dxf",
     "plan/site-plan-architect.pdf",
     "renderings/option-f-yard-photoreal.png",
-    "renderings/option-f-alley-photoreal.png"
-  ]
+    "renderings/option-f-alley-photoreal.png",
+    "apartment/archive/option-f-v1.*",
+    "renderings/option-f-yard-photoreal-v2.png",
+    "renderings/option-f-alley-photoreal-v2.png",
+    "renderings/option-f-first-floor-interior.png",
+    "renderings/option-f-second-floor-interior-corrected.png",
+    "renderings/photoreal-render-prompt.md"
+  ],
+  "exploratory_alternatives": {
+    "garden_room": "apartment/option-f-alternative-garden.svg"
+  }
 }

@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Option F · Explore the model</title>
+<link rel="stylesheet" href="viewer.css">
+<script type="importmap">{"imports":{"three":"./vendor/three.module.js"}}</script>
+</head>
+<body>
+<main id="viewer" aria-label="Interactive architectural model"><canvas aria-label="Drag to orbit, scroll to zoom; use view buttons for floor cutaways"></canvas></main>
+<header><a href="../index.html#explore" target="_top">← Project</a><div><strong>Option F <span>02</span></strong><small>24 × 20 ft · schematic design</small></div><a href="adu-option-f.glb" download>Download 3D ↗</a></header>
+<div id="status" role="status">Loading the model…</div>
+<div id="fallback" hidden><img src="../renderings/option-f-yard-model.png" alt="Model view from the yard"><p>Interactive 3D is unavailable in this browser. <a href="../index.html#plans" target="_top">Explore the floor plans</a></p></div>
+<aside><p id="view-note">The yard elevation, east balconies and south stair.</p><nav aria-label="Model views"><button data-view="yard">Yard</button><button data-view="alley">Alley</button><button data-view="level2">Apartment</button><button data-view="level1">Garage</button><button data-view="site">Site</button></nav><div class="options"><label><input type="checkbox" id="roof" checked> Roof</label><label><input type="checkbox" id="furniture" checked> Furniture</label><button id="reset">Reset view</button><span>Drag to orbit · scroll or pinch to zoom</span></div></aside>
+<script id="model-data" type="application/json">__SCENE_DATA__</script><script type="module" src="viewer.js"></script>
+</body></html>

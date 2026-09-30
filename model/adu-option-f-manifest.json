@@ -1,12 +1,10 @@
 {
-  "schema": "adu-option-f-model-manifest-v1",
-  "design": "Option F",
-  "version": "2026-08-03-option-f-basis-v1",
-  "status": "schematic design basis; not for construction",
+  "schema": "adu-option-f-model-manifest-v2",
+  "design": "Option F \u00b7 revision 2",
+  "version": "2026-09-30-option-f-basis-v2",
+  "status": "schematic owner study; not for construction",
   "sources": [
-    "apartment/option-f-recommended-development.svg",
-    "plan/site-plan-option-f.dxf",
-    "output/pdf/adu-option-f-construction-engineering-basis.pdf"
+    "model/option_f_geometry.py"
   ],
   "units": "feet",
   "datums_ft": {
@@ -26,7 +24,13 @@
       19.833
     ]
   },
-  "object_count": 79,
+  "object_count": 358,
+  "clearances_ft": {
+    "lower_hall": 3.25,
+    "entry_to_kitchen": 4.470000000000001,
+    "living_slider_route": 3.1999999999999993,
+    "dining_chair_to_counter": 3.3000000000000007
+  },
   "objects": [
     {
       "name": "Level 1 slab 20x24",
@@ -59,7 +63,7 @@
       ]
     },
     {
-      "name": "L1 south wall final segment",
+      "name": "L1 south wall end",
       "category": "Exterior wall",
       "level": "Level 1",
       "center_ft": [
@@ -68,13 +72,13 @@
         4.5
       ],
       "size_ft": [
-        24.0,
+        24,
         0.5,
-        8.0
+        8
       ]
     },
     {
-      "name": "L1 north wall final segment",
+      "name": "L1 north wall end",
       "category": "Exterior wall",
       "level": "Level 1",
       "center_ft": [
@@ -83,24 +87,24 @@
         4.5
       ],
       "size_ft": [
-        24.0,
+        24,
         0.5,
-        8.0
+        8
       ]
     },
     {
-      "name": "L1 west wall segment 0A",
+      "name": "L1 west wall pier 0",
       "category": "Exterior wall",
       "level": "Level 1",
       "center_ft": [
         0.25,
-        0.65,
+        0.9,
         4.5
       ],
       "size_ft": [
         0.5,
-        1.3,
-        8.0
+        0.8,
+        8
       ]
     },
     {
@@ -119,33 +123,33 @@
       ]
     },
     {
-      "name": "L1 west wall final segment",
+      "name": "L1 west wall end",
       "category": "Exterior wall",
       "level": "Level 1",
       "center_ft": [
         0.25,
-        15.5,
+        15.25,
         4.5
       ],
       "size_ft": [
         0.5,
-        9.0,
-        8.0
+        8.5,
+        8
       ]
     },
     {
-      "name": "L1 east wall segment 0A",
+      "name": "L1 east wall pier 0",
       "category": "Exterior wall",
       "level": "Level 1",
       "center_ft": [
         23.75,
-        2.0,
+        2.25,
         4.5
       ],
       "size_ft": [
         0.5,
-        4.0,
-        8.0
+        3.5,
+        8
       ]
     },
     {
@@ -179,7 +183,7 @@
       ]
     },
     {
-      "name": "L1 east wall segment 1A",
+      "name": "L1 east wall pier 1",
       "category": "Exterior wall",
       "level": "Level 1",
       "center_ft": [
@@ -190,7 +194,7 @@
       "size_ft": [
         0.5,
         5.300000000000001,
-        8.0
+        8
       ]
     },
     {
@@ -209,22 +213,202 @@
       ]
     },
     {
-      "name": "L1 east wall final segment",
+      "name": "L1 east wall end",
       "category": "Exterior wall",
       "level": "Level 1",
       "center_ft": [
         23.75,
-        19.15,
+        18.9,
         4.5
       ],
       "size_ft": [
         0.5,
-        1.6999999999999993,
-        8.0
+        1.1999999999999993,
+        8
       ]
     },
     {
-      "name": "L2 south wall segment 0A",
+      "name": "Garage separation pier 0",
+      "category": "Interior wall",
+      "level": "Level 1",
+      "center_ft": [
+        5.5,
+        11.665,
+        4.5
+      ],
+      "size_ft": [
+        10.0,
+        0.33,
+        8
+      ]
+    },
+    {
+      "name": "Garage separation header 0",
+      "category": "Interior wall",
+      "level": "Level 1",
+      "center_ft": [
+        12.0,
+        11.665,
+        7.8335
+      ],
+      "size_ft": [
+        3.0,
+        0.33,
+        1.3330000000000002
+      ]
+    },
+    {
+      "name": "Garage separation end",
+      "category": "Interior wall",
+      "level": "Level 1",
+      "center_ft": [
+        18.5,
+        11.665,
+        4.5
+      ],
+      "size_ft": [
+        10.0,
+        0.33,
+        8
+      ]
+    },
+    {
+      "name": "Powder and support south pier 0",
+      "category": "Interior wall",
+      "level": "Level 1",
+      "center_ft": [
+        2.0,
+        15.245,
+        4.5
+      ],
+      "size_ft": [
+        3.0,
+        0.33,
+        8
+      ]
+    },
+    {
+      "name": "Powder and support south header 0",
+      "category": "Interior wall",
+      "level": "Level 1",
+      "center_ft": [
+        4.75,
+        15.245,
+        7.8335
+      ],
+      "size_ft": [
+        2.5,
+        0.33,
+        1.3330000000000002
+      ]
+    },
+    {
+      "name": "Powder and support south pier 1",
+      "category": "Interior wall",
+      "level": "Level 1",
+      "center_ft": [
+        8.25,
+        15.245,
+        4.5
+      ],
+      "size_ft": [
+        4.5,
+        0.33,
+        8
+      ]
+    },
+    {
+      "name": "Powder and support south header 1",
+      "category": "Interior wall",
+      "level": "Level 1",
+      "center_ft": [
+        11.75,
+        15.245,
+        7.8335
+      ],
+      "size_ft": [
+        2.5,
+        0.33,
+        1.3330000000000002
+      ]
+    },
+    {
+      "name": "Powder and support south end",
+      "category": "Interior wall",
+      "level": "Level 1",
+      "center_ft": [
+        13.5,
+        15.245,
+        4.5
+      ],
+      "size_ft": [
+        1.0,
+        0.33,
+        8
+      ]
+    },
+    {
+      "name": "Powder east end",
+      "category": "Interior wall",
+      "level": "Level 1",
+      "center_ft": [
+        7.665,
+        17.455,
+        4.5
+      ],
+      "size_ft": [
+        0.33,
+        4.09,
+        8
+      ]
+    },
+    {
+      "name": "Garden room west pier 0",
+      "category": "Interior wall",
+      "level": "Level 1",
+      "center_ft": [
+        14.165,
+        11.89,
+        4.5
+      ],
+      "size_ft": [
+        0.33,
+        0.11999999999999922,
+        8
+      ]
+    },
+    {
+      "name": "Garden room west header 0",
+      "category": "Interior wall",
+      "level": "Level 1",
+      "center_ft": [
+        14.165,
+        13.35,
+        7.8335
+      ],
+      "size_ft": [
+        0.33,
+        2.8,
+        1.3330000000000002
+      ]
+    },
+    {
+      "name": "Garden room west end",
+      "category": "Interior wall",
+      "level": "Level 1",
+      "center_ft": [
+        14.165,
+        17.125,
+        4.5
+      ],
+      "size_ft": [
+        0.33,
+        4.75,
+        8
+      ]
+    },
+    {
+      "name": "L2 south wall pier 0",
       "category": "Exterior wall",
       "level": "Level 2",
       "center_ft": [
@@ -254,7 +438,7 @@
       ]
     },
     {
-      "name": "L2 south wall segment 1A",
+      "name": "L2 south wall pier 1",
       "category": "Exterior wall",
       "level": "Level 2",
       "center_ft": [
@@ -299,7 +483,7 @@
       ]
     },
     {
-      "name": "L2 south wall final segment",
+      "name": "L2 south wall end",
       "category": "Exterior wall",
       "level": "Level 2",
       "center_ft": [
@@ -314,7 +498,7 @@
       ]
     },
     {
-      "name": "L2 north blank wall final segment",
+      "name": "L2 north wall end",
       "category": "Exterior wall",
       "level": "Level 2",
       "center_ft": [
@@ -323,23 +507,23 @@
         12.625
       ],
       "size_ft": [
-        24.0,
+        24,
         0.5,
         6.75
       ]
     },
     {
-      "name": "L2 west wall segment 0A",
+      "name": "L2 west wall pier 0",
       "category": "Exterior wall",
       "level": "Level 2",
       "center_ft": [
         0.25,
-        1.5,
+        1.75,
         12.625
       ],
       "size_ft": [
         0.5,
-        3.0,
+        2.5,
         6.75
       ]
     },
@@ -374,32 +558,32 @@
       ]
     },
     {
-      "name": "L2 west wall final segment",
+      "name": "L2 west wall end",
       "category": "Exterior wall",
       "level": "Level 2",
       "center_ft": [
         0.25,
-        13.25,
+        13.0,
         12.625
       ],
       "size_ft": [
         0.5,
-        13.5,
+        13.0,
         6.75
       ]
     },
     {
-      "name": "L2 east wall segment 0A",
+      "name": "L2 east wall pier 0",
       "category": "Exterior wall",
       "level": "Level 2",
       "center_ft": [
         23.75,
-        0.75,
+        1.0,
         12.625
       ],
       "size_ft": [
         0.5,
-        1.5,
+        1.0,
         6.75
       ]
     },
@@ -419,7 +603,7 @@
       ]
     },
     {
-      "name": "L2 east wall segment 1A",
+      "name": "L2 east wall pier 1",
       "category": "Exterior wall",
       "level": "Level 2",
       "center_ft": [
@@ -464,318 +648,228 @@
       ]
     },
     {
-      "name": "L2 east wall final segment",
+      "name": "L2 east wall end",
       "category": "Exterior wall",
       "level": "Level 2",
       "center_ft": [
         23.75,
-        19.25,
+        19.0,
         12.625
       ],
       "size_ft": [
         0.5,
-        1.5,
+        1.0,
         6.75
       ]
     },
     {
-      "name": "L1 service band wall",
-      "category": "Interior wall",
-      "level": "Level 1",
-      "center_ft": [
-        12.0,
-        11.665,
-        4.5
-      ],
-      "size_ft": [
-        23.0,
-        0.33,
-        8.0
-      ]
-    },
-    {
-      "name": "L1 support east wall",
-      "category": "Interior wall",
-      "level": "Level 1",
-      "center_ft": [
-        7.665,
-        15.5,
-        4.5
-      ],
-      "size_ft": [
-        0.33,
-        8.0,
-        8.0
-      ]
-    },
-    {
-      "name": "L1 core east wall",
-      "category": "Interior wall",
-      "level": "Level 1",
-      "center_ft": [
-        14.165,
-        15.5,
-        4.5
-      ],
-      "size_ft": [
-        0.33,
-        8.0,
-        8.0
-      ]
-    },
-    {
-      "name": "L1 powder south wall",
-      "category": "Interior wall",
-      "level": "Level 1",
-      "center_ft": [
-        10.915,
-        13.665,
-        4.5
-      ],
-      "size_ft": [
-        6.83,
-        0.33,
-        8.0
-      ]
-    },
-    {
-      "name": "L2 bedroom east wall",
+      "name": "Bedroom east pier 0",
       "category": "Interior wall",
       "level": "Level 2",
       "center_ft": [
         10.364999999999998,
-        5.25,
+        3.8,
         12.625
       ],
       "size_ft": [
         0.33,
-        9.5,
+        6.6,
         6.75
       ]
     },
     {
-      "name": "L2 bedroom north wall",
+      "name": "Bedroom east header 0",
       "category": "Interior wall",
       "level": "Level 2",
       "center_ft": [
-        5.515,
+        10.364999999999998,
+        8.299999999999999,
+        15.9585
+      ],
+      "size_ft": [
+        0.33,
+        2.4,
+        0.08300000000000018
+      ]
+    },
+    {
+      "name": "Bedroom east end",
+      "category": "Interior wall",
+      "level": "Level 2",
+      "center_ft": [
+        10.364999999999998,
+        9.75,
+        12.625
+      ],
+      "size_ft": [
+        0.33,
+        0.5,
+        6.75
+      ]
+    },
+    {
+      "name": "Bedroom north pier 0",
+      "category": "Interior wall",
+      "level": "Level 2",
+      "center_ft": [
+        0.75,
         10.165,
         12.625
       ],
       "size_ft": [
-        10.03,
+        0.5,
         0.33,
         6.75
       ]
     },
     {
-      "name": "L2 storage south wall",
+      "name": "Bedroom north header 0",
       "category": "Interior wall",
       "level": "Level 2",
       "center_ft": [
-        7.415,
-        13.665,
+        3.75,
+        10.165,
+        15.9585
+      ],
+      "size_ft": [
+        5.5,
+        0.33,
+        0.08300000000000018
+      ]
+    },
+    {
+      "name": "Bedroom north end",
+      "category": "Interior wall",
+      "level": "Level 2",
+      "center_ft": [
+        8.515,
+        10.165,
         12.625
       ],
       "size_ft": [
-        13.83,
+        4.029999999999999,
         0.33,
         6.75
       ]
     },
     {
-      "name": "L2 bath west wall",
+      "name": "Closet east end",
       "category": "Interior wall",
       "level": "Level 2",
       "center_ft": [
         7.665,
-        16.5,
-        12.625
-      ],
-      "size_ft": [
-        0.33,
-        6.0,
-        6.75
-      ]
-    },
-    {
-      "name": "L2 bath east wall",
-      "category": "Interior wall",
-      "level": "Level 2",
-      "center_ft": [
-        14.165,
-        16.5,
-        12.625
-      ],
-      "size_ft": [
-        0.33,
-        6.0,
-        6.75
-      ]
-    },
-    {
-      "name": "Low TV wall",
-      "category": "Interior wall",
-      "level": "Level 2",
-      "center_ft": [
-        16.0,
-        7.375,
-        11.25
-      ],
-      "size_ft": [
-        6.0,
-        0.35,
-        4.0
-      ]
-    },
-    {
-      "name": "L1 garage/shop",
-      "category": "Room zone",
-      "level": "L1",
-      "center_ft": [
-        12.0,
-        6.0,
-        0.5325
-      ],
-      "size_ft": [
-        23.0,
-        11.0,
-        0.025
-      ]
-    },
-    {
-      "name": "L1 garage support",
-      "category": "Room zone",
-      "level": "L1",
-      "center_ft": [
-        4.0,
-        15.665,
-        0.5325
-      ],
-      "size_ft": [
-        7.0,
-        7.67,
-        0.025
-      ]
-    },
-    {
-      "name": "L1 protected hall",
-      "category": "Room zone",
-      "level": "L1",
-      "center_ft": [
-        10.915,
-        12.665,
-        0.5325
-      ],
-      "size_ft": [
-        6.17,
-        1.67,
-        0.025
-      ]
-    },
-    {
-      "name": "L1 powder room",
-      "category": "Room zone",
-      "level": "L1",
-      "center_ft": [
-        10.915,
-        16.665,
-        0.5325
-      ],
-      "size_ft": [
-        6.17,
-        5.67,
-        0.025
-      ]
-    },
-    {
-      "name": "L1 owner office/garden room",
-      "category": "Room zone",
-      "level": "L1",
-      "center_ft": [
-        18.915,
-        15.665,
-        0.5325
-      ],
-      "size_ft": [
-        9.17,
-        7.67,
-        0.025
-      ]
-    },
-    {
-      "name": "L2 bedroom",
-      "category": "Room zone",
-      "level": "L2",
-      "center_ft": [
-        5.35,
-        5.25,
-        9.282499999999999
-      ],
-      "size_ft": [
-        9.7,
-        9.5,
-        0.025
-      ]
-    },
-    {
-      "name": "L2 bedroom closet",
-      "category": "Room zone",
-      "level": "L2",
-      "center_ft": [
-        4.0,
         11.915,
-        9.282499999999999
+        12.625
       ],
       "size_ft": [
-        7.0,
+        0.33,
         3.17,
-        0.025
+        6.75
       ]
     },
     {
-      "name": "L2 laundry/seasonal storage",
-      "category": "Room zone",
-      "level": "L2",
+      "name": "Bath south end",
+      "category": "Interior wall",
+      "level": "Level 2",
       "center_ft": [
-        4.0,
-        16.665,
-        9.282499999999999
+        4.165,
+        13.665,
+        12.625
       ],
       "size_ft": [
-        7.0,
-        5.67,
-        0.025
+        7.33,
+        0.33,
+        6.75
       ]
     },
     {
-      "name": "L2 stacked bath",
-      "category": "Room zone",
-      "level": "L2",
+      "name": "Bath east pier 0",
+      "category": "Interior wall",
+      "level": "Level 2",
       "center_ft": [
-        10.915,
-        16.665,
-        9.282499999999999
+        7.665,
+        13.915,
+        12.625
       ],
       "size_ft": [
-        6.17,
-        5.67,
-        0.025
+        0.33,
+        0.16999999999999993,
+        6.75
       ]
     },
     {
-      "name": "L2 open living/kitchen/dining",
-      "category": "Room zone",
-      "level": "L2",
+      "name": "Bath east header 0",
+      "category": "Interior wall",
+      "level": "Level 2",
       "center_ft": [
-        17.015,
+        7.665,
+        15.25,
+        15.9585
+      ],
+      "size_ft": [
+        0.33,
+        2.5,
+        0.08300000000000018
+      ]
+    },
+    {
+      "name": "Bath east end",
+      "category": "Interior wall",
+      "level": "Level 2",
+      "center_ft": [
+        7.665,
+        18.0,
+        12.625
+      ],
+      "size_ft": [
+        0.33,
+        3.0,
+        6.75
+      ]
+    },
+    {
+      "name": "Laundry east end",
+      "category": "Interior wall",
+      "level": "Level 2",
+      "center_ft": [
+        10.995,
+        17.9,
+        12.625
+      ],
+      "size_ft": [
+        0.33,
+        3.1999999999999993,
+        6.75
+      ]
+    },
+    {
+      "name": "west gable wall",
+      "category": "Exterior wall",
+      "level": "Roof",
+      "center_ft": [
+        0.25,
         10.0,
-        9.282499999999999
+        17.916666499999998
       ],
       "size_ft": [
-        12.97,
-        19.0,
-        0.025
+        0.5,
+        20,
+        3.8333329999999997
+      ]
+    },
+    {
+      "name": "east gable wall",
+      "category": "Exterior wall",
+      "level": "Roof",
+      "center_ft": [
+        23.75,
+        10.0,
+        17.916666499999998
+      ],
+      "size_ft": [
+        0.5,
+        20,
+        3.8333329999999997
       ]
     },
     {
@@ -783,14 +877,194 @@
       "category": "Door",
       "level": "Level 1",
       "center_ft": [
-        23.75,
+        0.155,
         6.1499999999999995,
         4.25
       ],
       "size_ft": [
-        0.06,
+        0.07,
         9.7,
         7.5
+      ]
+    },
+    {
+      "name": "Garage overhead door jamb 1.3",
+      "category": "Trim",
+      "level": "Level 1",
+      "center_ft": [
+        0.18,
+        1.35,
+        4.25
+      ],
+      "size_ft": [
+        0.12,
+        0.1,
+        7.5
+      ]
+    },
+    {
+      "name": "Garage overhead door jamb 10.9",
+      "category": "Trim",
+      "level": "Level 1",
+      "center_ft": [
+        0.18,
+        10.950000000000001,
+        4.25
+      ],
+      "size_ft": [
+        0.12,
+        0.1,
+        7.5
+      ]
+    },
+    {
+      "name": "Garage overhead door rail 0.5",
+      "category": "Trim",
+      "level": "Level 1",
+      "center_ft": [
+        0.18,
+        6.1499999999999995,
+        0.56
+      ],
+      "size_ft": [
+        0.12,
+        9.7,
+        0.12
+      ]
+    },
+    {
+      "name": "Garage overhead door rail 7.88",
+      "category": "Trim",
+      "level": "Level 1",
+      "center_ft": [
+        0.18,
+        6.1499999999999995,
+        7.9399999999999995
+      ],
+      "size_ft": [
+        0.12,
+        9.7,
+        0.12
+      ]
+    },
+    {
+      "name": "Garage overhead door center mullion",
+      "category": "Trim",
+      "level": "Level 1",
+      "center_ft": [
+        0.18,
+        6.1499999999999995,
+        4.25
+      ],
+      "size_ft": [
+        0.12,
+        0.08,
+        7.5
+      ]
+    },
+    {
+      "name": "Garage overhead door panel rail 1",
+      "category": "Trim",
+      "level": "Level 1",
+      "center_ft": [
+        0.18,
+        6.1499999999999995,
+        2.3975
+      ],
+      "size_ft": [
+        0.12,
+        9.7,
+        0.045
+      ]
+    },
+    {
+      "name": "Garage overhead door panel rail 2",
+      "category": "Trim",
+      "level": "Level 1",
+      "center_ft": [
+        0.18,
+        6.1499999999999995,
+        4.2725
+      ],
+      "size_ft": [
+        0.12,
+        9.7,
+        0.045
+      ]
+    },
+    {
+      "name": "Garage overhead door panel rail 3",
+      "category": "Trim",
+      "level": "Level 1",
+      "center_ft": [
+        0.18,
+        6.1499999999999995,
+        6.1475
+      ],
+      "size_ft": [
+        0.12,
+        9.7,
+        0.045
+      ]
+    },
+    {
+      "name": "Garage overhead door glazed light 0",
+      "category": "Window",
+      "level": "Level 1",
+      "center_ft": [
+        0.18,
+        2.6,
+        7.1000000000000005
+      ],
+      "size_ft": [
+        0.12,
+        1.8,
+        0.8
+      ]
+    },
+    {
+      "name": "Garage overhead door glazed light 1",
+      "category": "Window",
+      "level": "Level 1",
+      "center_ft": [
+        0.18,
+        4.9,
+        7.1000000000000005
+      ],
+      "size_ft": [
+        0.12,
+        1.8,
+        0.8
+      ]
+    },
+    {
+      "name": "Garage overhead door glazed light 2",
+      "category": "Window",
+      "level": "Level 1",
+      "center_ft": [
+        0.18,
+        7.2,
+        7.1000000000000005
+      ],
+      "size_ft": [
+        0.12,
+        1.8,
+        0.8
+      ]
+    },
+    {
+      "name": "Garage overhead door glazed light 3",
+      "category": "Window",
+      "level": "Level 1",
+      "center_ft": [
+        0.18,
+        9.5,
+        7.1000000000000005
+      ],
+      "size_ft": [
+        0.12,
+        1.8,
+        0.8
       ]
     },
     {
@@ -798,14 +1072,104 @@
       "category": "Window",
       "level": "Level 1",
       "center_ft": [
-        23.75,
+        23.835,
         5.5,
         5.25
       ],
       "size_ft": [
-        0.06,
+        0.07,
         3.0,
         3.5
+      ]
+    },
+    {
+      "name": "L1 east shop window jamb 4.0",
+      "category": "Trim",
+      "level": "Level 1",
+      "center_ft": [
+        23.86,
+        4.05,
+        5.25
+      ],
+      "size_ft": [
+        0.12,
+        0.1,
+        3.5
+      ]
+    },
+    {
+      "name": "L1 east shop window jamb 6.9",
+      "category": "Trim",
+      "level": "Level 1",
+      "center_ft": [
+        23.86,
+        6.95,
+        5.25
+      ],
+      "size_ft": [
+        0.12,
+        0.1,
+        3.5
+      ]
+    },
+    {
+      "name": "L1 east shop window rail 3.5",
+      "category": "Trim",
+      "level": "Level 1",
+      "center_ft": [
+        23.86,
+        5.5,
+        3.56
+      ],
+      "size_ft": [
+        0.12,
+        3.0,
+        0.12
+      ]
+    },
+    {
+      "name": "L1 east shop window rail 6.88",
+      "category": "Trim",
+      "level": "Level 1",
+      "center_ft": [
+        23.86,
+        5.5,
+        6.9399999999999995
+      ],
+      "size_ft": [
+        0.12,
+        3.0,
+        0.12
+      ]
+    },
+    {
+      "name": "L1 east shop window center mullion",
+      "category": "Trim",
+      "level": "Level 1",
+      "center_ft": [
+        23.86,
+        5.5,
+        5.25
+      ],
+      "size_ft": [
+        0.12,
+        0.08,
+        3.5
+      ]
+    },
+    {
+      "name": "L1 east shop window transom",
+      "category": "Trim",
+      "level": "Level 1",
+      "center_ft": [
+        23.86,
+        5.5,
+        5.805000000000001
+      ],
+      "size_ft": [
+        0.12,
+        3.0,
+        0.06
       ]
     },
     {
@@ -813,13 +1177,88 @@
       "category": "Window",
       "level": "Level 1",
       "center_ft": [
-        23.75,
+        23.835,
         15.3,
         3.8335
       ],
       "size_ft": [
-        0.06,
+        0.07,
         6.0,
+        6.667
+      ]
+    },
+    {
+      "name": "L1 east 6ft slider jamb 12.3",
+      "category": "Trim",
+      "level": "Level 1",
+      "center_ft": [
+        23.86,
+        12.350000000000001,
+        3.8335
+      ],
+      "size_ft": [
+        0.12,
+        0.1,
+        6.667
+      ]
+    },
+    {
+      "name": "L1 east 6ft slider jamb 18.2",
+      "category": "Trim",
+      "level": "Level 1",
+      "center_ft": [
+        23.86,
+        18.25,
+        3.8335
+      ],
+      "size_ft": [
+        0.12,
+        0.1,
+        6.667
+      ]
+    },
+    {
+      "name": "L1 east 6ft slider rail 0.5",
+      "category": "Trim",
+      "level": "Level 1",
+      "center_ft": [
+        23.86,
+        15.3,
+        0.56
+      ],
+      "size_ft": [
+        0.12,
+        6.0,
+        0.12
+      ]
+    },
+    {
+      "name": "L1 east 6ft slider rail 7.047",
+      "category": "Trim",
+      "level": "Level 1",
+      "center_ft": [
+        23.86,
+        15.3,
+        7.106999999999999
+      ],
+      "size_ft": [
+        0.12,
+        6.0,
+        0.12
+      ]
+    },
+    {
+      "name": "L1 east 6ft slider center mullion",
+      "category": "Trim",
+      "level": "Level 1",
+      "center_ft": [
+        23.86,
+        15.3,
+        3.8335
+      ],
+      "size_ft": [
+        0.12,
+        0.08,
         6.667
       ]
     },
@@ -829,13 +1268,88 @@
       "level": "Level 2",
       "center_ft": [
         13.0,
-        0.25,
+        0.155,
         12.5835
       ],
       "size_ft": [
         3.0,
-        0.06,
+        0.07,
         6.667
+      ]
+    },
+    {
+      "name": "L2 south entry door jamb 11.5",
+      "category": "Trim",
+      "level": "Level 2",
+      "center_ft": [
+        11.55,
+        0.18,
+        12.5835
+      ],
+      "size_ft": [
+        0.1,
+        0.12,
+        6.667
+      ]
+    },
+    {
+      "name": "L2 south entry door jamb 14.4",
+      "category": "Trim",
+      "level": "Level 2",
+      "center_ft": [
+        14.450000000000001,
+        0.18,
+        12.5835
+      ],
+      "size_ft": [
+        0.1,
+        0.12,
+        6.667
+      ]
+    },
+    {
+      "name": "L2 south entry door rail 9.25",
+      "category": "Trim",
+      "level": "Level 2",
+      "center_ft": [
+        13.0,
+        0.18,
+        9.31
+      ],
+      "size_ft": [
+        3.0,
+        0.12,
+        0.12
+      ]
+    },
+    {
+      "name": "L2 south entry door rail 15.797",
+      "category": "Trim",
+      "level": "Level 2",
+      "center_ft": [
+        13.0,
+        0.18,
+        15.857000000000001
+      ],
+      "size_ft": [
+        3.0,
+        0.12,
+        0.12
+      ]
+    },
+    {
+      "name": "L2 south entry door glazed light",
+      "category": "Window",
+      "level": "Level 2",
+      "center_ft": [
+        13.0,
+        0.18,
+        14.275
+      ],
+      "size_ft": [
+        2.3,
+        0.12,
+        2.25
       ]
     },
     {
@@ -844,13 +1358,103 @@
       "level": "Level 2",
       "center_ft": [
         18.5,
-        0.25,
+        0.155,
         13.3
       ],
       "size_ft": [
         5.0,
-        0.06,
+        0.07,
         3.5
+      ]
+    },
+    {
+      "name": "L2 south living window jamb 16.0",
+      "category": "Trim",
+      "level": "Level 2",
+      "center_ft": [
+        16.05,
+        0.18,
+        13.3
+      ],
+      "size_ft": [
+        0.1,
+        0.12,
+        3.5
+      ]
+    },
+    {
+      "name": "L2 south living window jamb 20.9",
+      "category": "Trim",
+      "level": "Level 2",
+      "center_ft": [
+        20.95,
+        0.18,
+        13.3
+      ],
+      "size_ft": [
+        0.1,
+        0.12,
+        3.5
+      ]
+    },
+    {
+      "name": "L2 south living window rail 11.55",
+      "category": "Trim",
+      "level": "Level 2",
+      "center_ft": [
+        18.5,
+        0.18,
+        11.610000000000001
+      ],
+      "size_ft": [
+        5.0,
+        0.12,
+        0.12
+      ]
+    },
+    {
+      "name": "L2 south living window rail 14.930000000000001",
+      "category": "Trim",
+      "level": "Level 2",
+      "center_ft": [
+        18.5,
+        0.18,
+        14.990000000000002
+      ],
+      "size_ft": [
+        5.0,
+        0.12,
+        0.12
+      ]
+    },
+    {
+      "name": "L2 south living window center mullion",
+      "category": "Trim",
+      "level": "Level 2",
+      "center_ft": [
+        18.5,
+        0.18,
+        13.3
+      ],
+      "size_ft": [
+        0.08,
+        0.12,
+        3.5
+      ]
+    },
+    {
+      "name": "L2 south living window transom",
+      "category": "Trim",
+      "level": "Level 2",
+      "center_ft": [
+        18.5,
+        0.18,
+        13.855
+      ],
+      "size_ft": [
+        5.0,
+        0.12,
+        0.06
       ]
     },
     {
@@ -858,14 +1462,104 @@
       "category": "Window",
       "level": "Level 2",
       "center_ft": [
-        0.25,
+        0.155,
         4.75,
         13.3
       ],
       "size_ft": [
-        0.06,
+        0.07,
         3.5,
         3.5
+      ]
+    },
+    {
+      "name": "L2 west bedroom EERO window jamb 3.0",
+      "category": "Trim",
+      "level": "Level 2",
+      "center_ft": [
+        0.18,
+        3.05,
+        13.3
+      ],
+      "size_ft": [
+        0.12,
+        0.1,
+        3.5
+      ]
+    },
+    {
+      "name": "L2 west bedroom EERO window jamb 6.4",
+      "category": "Trim",
+      "level": "Level 2",
+      "center_ft": [
+        0.18,
+        6.45,
+        13.3
+      ],
+      "size_ft": [
+        0.12,
+        0.1,
+        3.5
+      ]
+    },
+    {
+      "name": "L2 west bedroom EERO window rail 11.55",
+      "category": "Trim",
+      "level": "Level 2",
+      "center_ft": [
+        0.18,
+        4.75,
+        11.610000000000001
+      ],
+      "size_ft": [
+        0.12,
+        3.5,
+        0.12
+      ]
+    },
+    {
+      "name": "L2 west bedroom EERO window rail 14.930000000000001",
+      "category": "Trim",
+      "level": "Level 2",
+      "center_ft": [
+        0.18,
+        4.75,
+        14.990000000000002
+      ],
+      "size_ft": [
+        0.12,
+        3.5,
+        0.12
+      ]
+    },
+    {
+      "name": "L2 west bedroom EERO window center mullion",
+      "category": "Trim",
+      "level": "Level 2",
+      "center_ft": [
+        0.18,
+        4.75,
+        13.3
+      ],
+      "size_ft": [
+        0.12,
+        0.08,
+        3.5
+      ]
+    },
+    {
+      "name": "L2 west bedroom EERO window transom",
+      "category": "Trim",
+      "level": "Level 2",
+      "center_ft": [
+        0.18,
+        4.75,
+        13.855
+      ],
+      "size_ft": [
+        0.12,
+        3.5,
+        0.06
       ]
     },
     {
@@ -873,13 +1567,88 @@
       "category": "Window",
       "level": "Level 2",
       "center_ft": [
-        23.75,
+        23.835,
         4.5,
         12.5835
       ],
       "size_ft": [
-        0.06,
+        0.07,
         6.0,
+        6.667
+      ]
+    },
+    {
+      "name": "L2 east 6ft slider jamb 1.5",
+      "category": "Trim",
+      "level": "Level 2",
+      "center_ft": [
+        23.86,
+        1.55,
+        12.5835
+      ],
+      "size_ft": [
+        0.12,
+        0.1,
+        6.667
+      ]
+    },
+    {
+      "name": "L2 east 6ft slider jamb 7.4",
+      "category": "Trim",
+      "level": "Level 2",
+      "center_ft": [
+        23.86,
+        7.45,
+        12.5835
+      ],
+      "size_ft": [
+        0.12,
+        0.1,
+        6.667
+      ]
+    },
+    {
+      "name": "L2 east 6ft slider rail 9.25",
+      "category": "Trim",
+      "level": "Level 2",
+      "center_ft": [
+        23.86,
+        4.5,
+        9.31
+      ],
+      "size_ft": [
+        0.12,
+        6.0,
+        0.12
+      ]
+    },
+    {
+      "name": "L2 east 6ft slider rail 15.797",
+      "category": "Trim",
+      "level": "Level 2",
+      "center_ft": [
+        23.86,
+        4.5,
+        15.857000000000001
+      ],
+      "size_ft": [
+        0.12,
+        6.0,
+        0.12
+      ]
+    },
+    {
+      "name": "L2 east 6ft slider center mullion",
+      "category": "Trim",
+      "level": "Level 2",
+      "center_ft": [
+        23.86,
+        4.5,
+        12.5835
+      ],
+      "size_ft": [
+        0.12,
+        0.08,
         6.667
       ]
     },
@@ -888,14 +1657,104 @@
       "category": "Window",
       "level": "Level 2",
       "center_ft": [
-        23.75,
+        23.835,
         16.75,
         13.3
       ],
       "size_ft": [
-        0.06,
+        0.07,
         3.5,
         3.5
+      ]
+    },
+    {
+      "name": "L2 east dining window jamb 15.0",
+      "category": "Trim",
+      "level": "Level 2",
+      "center_ft": [
+        23.86,
+        15.05,
+        13.3
+      ],
+      "size_ft": [
+        0.12,
+        0.1,
+        3.5
+      ]
+    },
+    {
+      "name": "L2 east dining window jamb 18.4",
+      "category": "Trim",
+      "level": "Level 2",
+      "center_ft": [
+        23.86,
+        18.45,
+        13.3
+      ],
+      "size_ft": [
+        0.12,
+        0.1,
+        3.5
+      ]
+    },
+    {
+      "name": "L2 east dining window rail 11.55",
+      "category": "Trim",
+      "level": "Level 2",
+      "center_ft": [
+        23.86,
+        16.75,
+        11.610000000000001
+      ],
+      "size_ft": [
+        0.12,
+        3.5,
+        0.12
+      ]
+    },
+    {
+      "name": "L2 east dining window rail 14.930000000000001",
+      "category": "Trim",
+      "level": "Level 2",
+      "center_ft": [
+        23.86,
+        16.75,
+        14.990000000000002
+      ],
+      "size_ft": [
+        0.12,
+        3.5,
+        0.12
+      ]
+    },
+    {
+      "name": "L2 east dining window center mullion",
+      "category": "Trim",
+      "level": "Level 2",
+      "center_ft": [
+        23.86,
+        16.75,
+        13.3
+      ],
+      "size_ft": [
+        0.12,
+        0.08,
+        3.5
+      ]
+    },
+    {
+      "name": "L2 east dining window transom",
+      "category": "Trim",
+      "level": "Level 2",
+      "center_ft": [
+        23.86,
+        16.75,
+        13.855
+      ],
+      "size_ft": [
+        0.12,
+        3.5,
+        0.06
       ]
     },
     {
@@ -905,12 +1764,27 @@
       "center_ft": [
         19.75,
         -2.0,
-        0.125
+        0.25
       ],
       "size_ft": [
         16.5,
         4,
-        0.25
+        0.5
+      ]
+    },
+    {
+      "name": "Upper south landing",
+      "category": "Deck",
+      "level": "Level 2",
+      "center_ft": [
+        19.75,
+        -2.0,
+        9.1
+      ],
+      "size_ft": [
+        16.5,
+        4,
+        0.3
       ]
     },
     {
@@ -920,267 +1794,2457 @@
       "center_ft": [
         26.0,
         9.75,
-        0.125
+        0.25
       ],
       "size_ft": [
         4,
         19.5,
-        0.25
-      ]
-    },
-    {
-      "name": "Upper south landing",
-      "category": "Landing",
-      "level": "Level 2",
-      "center_ft": [
-        19.75,
-        -2.0,
-        9.425
-      ],
-      "size_ft": [
-        16.5,
-        4,
-        0.35
+        0.5
       ]
     },
     {
       "name": "Upper east patio 4ft",
-      "category": "Balcony",
+      "category": "Deck",
       "level": "Level 2",
       "center_ft": [
         26.0,
         9.75,
-        9.425
+        9.1
       ],
       "size_ft": [
         4,
         19.5,
-        0.35
+        0.3
       ]
     },
     {
-      "name": "Exterior stair tread 01",
+      "name": "South stair ground landing",
+      "category": "Patio",
+      "level": "Level 1",
+      "center_ft": [
+        6.0,
+        -2.0,
+        0.25
+      ],
+      "size_ft": [
+        11,
+        4,
+        0.5
+      ]
+    },
+    {
+      "name": "Stair tread 1",
       "category": "Exterior stair",
       "level": "Exterior",
       "center_ft": [
-        0.9330769230769231,
+        0.9230769230769231,
         -2.0,
-        0.33035714285714285
+        1.06
       ],
       "size_ft": [
-        0.8661538461538462,
+        0.8461538461538461,
         4,
-        0.6607142857142857
+        0.13
       ]
     },
     {
-      "name": "Exterior stair tread 02",
+      "name": "Stair tread 2",
       "category": "Exterior stair",
       "level": "Exterior",
       "center_ft": [
-        1.7792307692307694,
+        1.7692307692307694,
         -2.0,
-        0.6607142857142857
+        1.685
       ],
       "size_ft": [
-        0.8661538461538462,
+        0.8461538461538461,
         4,
-        1.3214285714285714
+        0.13
       ]
     },
     {
-      "name": "Exterior stair tread 03",
+      "name": "Stair tread 3",
       "category": "Exterior stair",
       "level": "Exterior",
       "center_ft": [
-        2.6253846153846156,
+        2.6153846153846154,
         -2.0,
-        0.9910714285714286
+        2.31
       ],
       "size_ft": [
-        0.8661538461538462,
+        0.8461538461538461,
         4,
-        1.9821428571428572
+        0.13
       ]
     },
     {
-      "name": "Exterior stair tread 04",
+      "name": "Stair tread 4",
       "category": "Exterior stair",
       "level": "Exterior",
       "center_ft": [
-        3.4715384615384615,
+        3.4615384615384612,
         -2.0,
-        1.3214285714285714
+        2.935
       ],
       "size_ft": [
-        0.8661538461538462,
+        0.8461538461538461,
         4,
-        2.642857142857143
+        0.13
       ]
     },
     {
-      "name": "Exterior stair tread 05",
+      "name": "Stair tread 5",
       "category": "Exterior stair",
       "level": "Exterior",
       "center_ft": [
-        4.317692307692307,
+        4.3076923076923075,
         -2.0,
-        1.6517857142857142
+        3.56
       ],
       "size_ft": [
-        0.8661538461538462,
+        0.8461538461538461,
         4,
-        3.3035714285714284
+        0.13
       ]
     },
     {
-      "name": "Exterior stair tread 06",
+      "name": "Stair tread 6",
       "category": "Exterior stair",
       "level": "Exterior",
       "center_ft": [
-        5.163846153846154,
+        5.153846153846154,
         -2.0,
-        1.9821428571428572
+        4.1850000000000005
       ],
       "size_ft": [
-        0.8661538461538462,
+        0.8461538461538461,
         4,
-        3.9642857142857144
+        0.13
       ]
     },
     {
-      "name": "Exterior stair tread 07",
+      "name": "Stair tread 7",
       "category": "Exterior stair",
       "level": "Exterior",
       "center_ft": [
-        6.01,
+        6.0,
         -2.0,
-        2.3125
+        4.8100000000000005
       ],
       "size_ft": [
-        0.8661538461538462,
+        0.8461538461538461,
         4,
-        4.625
+        0.13
       ]
     },
     {
-      "name": "Exterior stair tread 08",
+      "name": "Stair tread 8",
       "category": "Exterior stair",
       "level": "Exterior",
       "center_ft": [
-        6.8561538461538465,
+        6.846153846153847,
         -2.0,
-        2.642857142857143
+        5.4350000000000005
       ],
       "size_ft": [
-        0.8661538461538462,
+        0.8461538461538461,
         4,
-        5.285714285714286
+        0.13
       ]
     },
     {
-      "name": "Exterior stair tread 09",
+      "name": "Stair tread 9",
       "category": "Exterior stair",
       "level": "Exterior",
       "center_ft": [
-        7.702307692307692,
+        7.6923076923076925,
         -2.0,
-        2.9732142857142856
+        6.0600000000000005
       ],
       "size_ft": [
-        0.8661538461538462,
+        0.8461538461538461,
         4,
-        5.946428571428571
+        0.13
       ]
     },
     {
-      "name": "Exterior stair tread 10",
+      "name": "Stair tread 10",
       "category": "Exterior stair",
       "level": "Exterior",
       "center_ft": [
-        8.548461538461538,
+        8.538461538461538,
         -2.0,
-        3.3035714285714284
+        6.6850000000000005
       ],
       "size_ft": [
-        0.8661538461538462,
+        0.8461538461538461,
         4,
-        6.607142857142857
+        0.13
       ]
     },
     {
-      "name": "Exterior stair tread 11",
+      "name": "Stair tread 11",
       "category": "Exterior stair",
       "level": "Exterior",
       "center_ft": [
-        9.394615384615385,
+        9.384615384615385,
         -2.0,
-        3.633928571428571
+        7.3100000000000005
       ],
       "size_ft": [
-        0.8661538461538462,
+        0.8461538461538461,
         4,
-        7.267857142857142
+        0.13
       ]
     },
     {
-      "name": "Exterior stair tread 12",
+      "name": "Stair tread 12",
       "category": "Exterior stair",
       "level": "Exterior",
       "center_ft": [
-        10.240769230769232,
+        10.230769230769232,
         -2.0,
-        3.9642857142857144
+        7.9350000000000005
       ],
       "size_ft": [
-        0.8661538461538462,
+        0.8461538461538461,
         4,
-        7.928571428571429
+        0.13
       ]
     },
     {
-      "name": "Exterior stair tread 13",
+      "name": "Stair tread 13",
       "category": "Exterior stair",
       "level": "Exterior",
       "center_ft": [
-        11.086923076923076,
+        11.076923076923077,
         -2.0,
-        4.294642857142857
+        8.559999999999999
       ],
       "size_ft": [
-        0.8661538461538462,
+        0.8461538461538461,
         4,
-        8.589285714285714
+        0.13
       ]
     },
     {
-      "name": "South landing guard",
+      "name": "Stair baluster -3.82 0",
       "category": "Guard",
       "level": "Exterior",
       "center_ft": [
-        19.75,
-        -3.94,
-        11.1
+        0.5,
+        -3.82,
+        2.575
       ],
       "size_ft": [
-        16.5,
-        0.12,
-        3.0
+        0.08,
+        0.08,
+        2.9
       ]
     },
     {
-      "name": "East patio guard",
+      "name": "Stair baluster -3.82 1",
       "category": "Guard",
       "level": "Exterior",
       "center_ft": [
-        27.939999999999998,
-        9.75,
-        11.1
+        1.3461538461538463,
+        -3.82,
+        3.2
       ],
       "size_ft": [
+        0.08,
+        0.08,
+        2.9
+      ]
+    },
+    {
+      "name": "Stair baluster -3.82 2",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        2.1923076923076925,
+        -3.82,
+        3.825
+      ],
+      "size_ft": [
+        0.08,
+        0.08,
+        2.9
+      ]
+    },
+    {
+      "name": "Stair baluster -3.82 3",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        3.0384615384615383,
+        -3.82,
+        4.45
+      ],
+      "size_ft": [
+        0.08,
+        0.08,
+        2.9
+      ]
+    },
+    {
+      "name": "Stair baluster -3.82 4",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        3.8846153846153846,
+        -3.82,
+        5.075
+      ],
+      "size_ft": [
+        0.08,
+        0.08,
+        2.9
+      ]
+    },
+    {
+      "name": "Stair baluster -3.82 5",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        4.730769230769231,
+        -3.82,
+        5.7
+      ],
+      "size_ft": [
+        0.08,
+        0.08,
+        2.9
+      ]
+    },
+    {
+      "name": "Stair baluster -3.82 6",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        5.576923076923077,
+        -3.82,
+        6.325
+      ],
+      "size_ft": [
+        0.08,
+        0.08,
+        2.9
+      ]
+    },
+    {
+      "name": "Stair baluster -3.82 7",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        6.423076923076923,
+        -3.82,
+        6.95
+      ],
+      "size_ft": [
+        0.08,
+        0.08,
+        2.9
+      ]
+    },
+    {
+      "name": "Stair baluster -3.82 8",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        7.269230769230769,
+        -3.82,
+        7.575
+      ],
+      "size_ft": [
+        0.08,
+        0.08,
+        2.9
+      ]
+    },
+    {
+      "name": "Stair baluster -3.82 9",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        8.115384615384615,
+        -3.82,
+        8.2
+      ],
+      "size_ft": [
+        0.08,
+        0.08,
+        2.9
+      ]
+    },
+    {
+      "name": "Stair baluster -3.82 10",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        8.961538461538462,
+        -3.82,
+        8.825
+      ],
+      "size_ft": [
+        0.08,
+        0.08,
+        2.9
+      ]
+    },
+    {
+      "name": "Stair baluster -3.82 11",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        9.807692307692308,
+        -3.82,
+        9.45
+      ],
+      "size_ft": [
+        0.08,
+        0.08,
+        2.9
+      ]
+    },
+    {
+      "name": "Stair baluster -3.82 12",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        10.653846153846153,
+        -3.82,
+        10.075
+      ],
+      "size_ft": [
+        0.08,
+        0.08,
+        2.9
+      ]
+    },
+    {
+      "name": "Stair baluster -3.82 13",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        11.5,
+        -3.82,
+        10.7
+      ],
+      "size_ft": [
+        0.08,
+        0.08,
+        2.9
+      ]
+    },
+    {
+      "name": "Stair handrail -3.82",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        6.0,
+        -3.82,
+        8.1475
+      ],
+      "size_ft": [
+        11.1,
         0.12,
+        8.245
+      ]
+    },
+    {
+      "name": "Stair baluster -0.18 0",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        0.5,
+        -0.18,
+        2.575
+      ],
+      "size_ft": [
+        0.08,
+        0.08,
+        2.9
+      ]
+    },
+    {
+      "name": "Stair baluster -0.18 1",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        1.3461538461538463,
+        -0.18,
+        3.2
+      ],
+      "size_ft": [
+        0.08,
+        0.08,
+        2.9
+      ]
+    },
+    {
+      "name": "Stair baluster -0.18 2",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        2.1923076923076925,
+        -0.18,
+        3.825
+      ],
+      "size_ft": [
+        0.08,
+        0.08,
+        2.9
+      ]
+    },
+    {
+      "name": "Stair baluster -0.18 3",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        3.0384615384615383,
+        -0.18,
+        4.45
+      ],
+      "size_ft": [
+        0.08,
+        0.08,
+        2.9
+      ]
+    },
+    {
+      "name": "Stair baluster -0.18 4",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        3.8846153846153846,
+        -0.18,
+        5.075
+      ],
+      "size_ft": [
+        0.08,
+        0.08,
+        2.9
+      ]
+    },
+    {
+      "name": "Stair baluster -0.18 5",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        4.730769230769231,
+        -0.18,
+        5.7
+      ],
+      "size_ft": [
+        0.08,
+        0.08,
+        2.9
+      ]
+    },
+    {
+      "name": "Stair baluster -0.18 6",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        5.576923076923077,
+        -0.18,
+        6.325
+      ],
+      "size_ft": [
+        0.08,
+        0.08,
+        2.9
+      ]
+    },
+    {
+      "name": "Stair baluster -0.18 7",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        6.423076923076923,
+        -0.18,
+        6.95
+      ],
+      "size_ft": [
+        0.08,
+        0.08,
+        2.9
+      ]
+    },
+    {
+      "name": "Stair baluster -0.18 8",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        7.269230769230769,
+        -0.18,
+        7.575
+      ],
+      "size_ft": [
+        0.08,
+        0.08,
+        2.9
+      ]
+    },
+    {
+      "name": "Stair baluster -0.18 9",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        8.115384615384615,
+        -0.18,
+        8.2
+      ],
+      "size_ft": [
+        0.08,
+        0.08,
+        2.9
+      ]
+    },
+    {
+      "name": "Stair baluster -0.18 10",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        8.961538461538462,
+        -0.18,
+        8.825
+      ],
+      "size_ft": [
+        0.08,
+        0.08,
+        2.9
+      ]
+    },
+    {
+      "name": "Stair baluster -0.18 11",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        9.807692307692308,
+        -0.18,
+        9.45
+      ],
+      "size_ft": [
+        0.08,
+        0.08,
+        2.9
+      ]
+    },
+    {
+      "name": "Stair baluster -0.18 12",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        10.653846153846153,
+        -0.18,
+        10.075
+      ],
+      "size_ft": [
+        0.08,
+        0.08,
+        2.9
+      ]
+    },
+    {
+      "name": "Stair baluster -0.18 13",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        11.5,
+        -0.18,
+        10.7
+      ],
+      "size_ft": [
+        0.08,
+        0.08,
+        2.9
+      ]
+    },
+    {
+      "name": "Stair handrail -0.18",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        6.0,
+        -0.18,
+        8.1475
+      ],
+      "size_ft": [
+        11.1,
+        0.12,
+        8.245
+      ]
+    },
+    {
+      "name": "Patio post 11.7 -3.8",
+      "category": "Post",
+      "level": "Exterior",
+      "center_ft": [
+        11.7,
+        -3.8,
+        6.375
+      ],
+      "size_ft": [
+        0.28,
+        0.28,
+        11.75
+      ]
+    },
+    {
+      "name": "Patio post 19.5 -3.8",
+      "category": "Post",
+      "level": "Exterior",
+      "center_ft": [
         19.5,
-        3.0
+        -3.8,
+        6.375
+      ],
+      "size_ft": [
+        0.28,
+        0.28,
+        11.75
+      ]
+    },
+    {
+      "name": "Patio post 27.75 -3.8",
+      "category": "Post",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        -3.8,
+        6.375
+      ],
+      "size_ft": [
+        0.28,
+        0.28,
+        11.75
+      ]
+    },
+    {
+      "name": "Patio post 27.75 6",
+      "category": "Post",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        6.0,
+        6.375
+      ],
+      "size_ft": [
+        0.28,
+        0.28,
+        11.75
+      ]
+    },
+    {
+      "name": "Patio post 27.75 13",
+      "category": "Post",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        13.0,
+        6.375
+      ],
+      "size_ft": [
+        0.28,
+        0.28,
+        11.75
+      ]
+    },
+    {
+      "name": "Patio post 27.75 19.25",
+      "category": "Post",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        19.25,
+        6.375
+      ],
+      "size_ft": [
+        0.28,
+        0.28,
+        11.75
+      ]
+    },
+    {
+      "name": "South landing baluster 0",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        11.7,
+        -3.8,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "South landing baluster 1",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        12.11153846153846,
+        -3.8,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "South landing baluster 2",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        12.523076923076923,
+        -3.8,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "South landing baluster 3",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        12.934615384615384,
+        -3.8,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "South landing baluster 4",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        13.346153846153845,
+        -3.8,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "South landing baluster 5",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        13.757692307692306,
+        -3.8,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "South landing baluster 6",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        14.169230769230769,
+        -3.8,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "South landing baluster 7",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        14.58076923076923,
+        -3.8,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "South landing baluster 8",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        14.99230769230769,
+        -3.8,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "South landing baluster 9",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        15.403846153846153,
+        -3.8,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "South landing baluster 10",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        15.815384615384614,
+        -3.8,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "South landing baluster 11",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        16.226923076923075,
+        -3.8,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "South landing baluster 12",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        16.638461538461538,
+        -3.8,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "South landing baluster 13",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        17.049999999999997,
+        -3.8,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "South landing baluster 14",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        17.46153846153846,
+        -3.8,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "South landing baluster 15",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        17.873076923076923,
+        -3.8,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "South landing baluster 16",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        18.284615384615385,
+        -3.8,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "South landing baluster 17",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        18.696153846153845,
+        -3.8,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "South landing baluster 18",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        19.107692307692307,
+        -3.8,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "South landing baluster 19",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        19.519230769230766,
+        -3.8,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "South landing baluster 20",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        19.93076923076923,
+        -3.8,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "South landing baluster 21",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        20.342307692307692,
+        -3.8,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "South landing baluster 22",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        20.753846153846155,
+        -3.8,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "South landing baluster 23",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        21.165384615384617,
+        -3.8,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "South landing baluster 24",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        21.576923076923077,
+        -3.8,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "South landing baluster 25",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        21.98846153846154,
+        -3.8,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "South landing baluster 26",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        22.4,
+        -3.8,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "South landing baluster 27",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        22.81153846153846,
+        -3.8,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "South landing baluster 28",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        23.223076923076924,
+        -3.8,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "South landing baluster 29",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        23.634615384615387,
+        -3.8,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "South landing baluster 30",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        24.046153846153846,
+        -3.8,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "South landing baluster 31",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        24.457692307692305,
+        -3.8,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "South landing baluster 32",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        24.869230769230768,
+        -3.8,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "South landing baluster 33",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        25.28076923076923,
+        -3.8,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "South landing baluster 34",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        25.692307692307693,
+        -3.8,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "South landing baluster 35",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        26.103846153846156,
+        -3.8,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "South landing baluster 36",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        26.515384615384615,
+        -3.8,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "South landing baluster 37",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        26.926923076923075,
+        -3.8,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "South landing baluster 38",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.338461538461537,
+        -3.8,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "South landing baluster 39",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        -3.8,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "South landing rail 0.12",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        19.725,
+        -3.8,
+        9.42
+      ],
+      "size_ft": [
+        16.17,
+        0.12,
+        0.1
+      ]
+    },
+    {
+      "name": "South landing rail 2.9",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        19.725,
+        -3.8,
+        12.200000000000001
+      ],
+      "size_ft": [
+        16.17,
+        0.12,
+        0.1
+      ]
+    },
+    {
+      "name": "East balcony baluster 0",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        -3.8,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 1",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        -3.380909090909091,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 2",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        -2.961818181818182,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 3",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        -2.5427272727272725,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 4",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        -2.1236363636363635,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 5",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        -1.7045454545454541,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 6",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        -1.2854545454545452,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 7",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        -0.8663636363636362,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 8",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        -0.44727272727272727,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 9",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        -0.028181818181817864,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 10",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        0.39090909090909154,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 11",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        0.8100000000000005,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 12",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        1.2290909090909095,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 13",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        1.6481818181818184,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 14",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        2.0672727272727274,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 15",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        2.4863636363636363,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 16",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        2.9054545454545453,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 17",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        3.324545454545455,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 18",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        3.743636363636364,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 19",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        4.162727272727273,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 20",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        4.581818181818183,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 21",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        5.000909090909091,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 22",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        5.420000000000001,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 23",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        5.839090909090909,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 24",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        6.258181818181819,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 25",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        6.677272727272727,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 26",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        7.096363636363637,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 27",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        7.5154545454545465,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 28",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        7.934545454545455,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 29",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        8.353636363636362,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 30",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        8.772727272727273,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 31",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        9.191818181818181,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 32",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        9.61090909090909,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 33",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        10.030000000000001,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 34",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        10.44909090909091,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 35",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        10.868181818181817,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 36",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        11.287272727272729,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 37",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        11.706363636363637,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 38",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        12.125454545454545,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 39",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        12.544545454545453,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 40",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        12.963636363636365,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 41",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        13.382727272727273,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 42",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        13.80181818181818,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 43",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        14.220909090909092,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 44",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        14.64,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 45",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        15.059090909090909,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 46",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        15.478181818181817,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 47",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        15.897272727272725,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 48",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        16.316363636363636,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 49",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        16.735454545454544,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 50",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        17.154545454545453,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 51",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        17.573636363636364,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 52",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        17.992727272727272,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 53",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        18.41181818181818,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 54",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        18.830909090909092,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony baluster 55",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        19.25,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "East balcony rail 0.12",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        7.725000000000001,
+        9.42
+      ],
+      "size_ft": [
+        0.12,
+        23.17,
+        0.1
+      ]
+    },
+    {
+      "name": "East balcony rail 2.9",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        7.725000000000001,
+        12.200000000000001
+      ],
+      "size_ft": [
+        0.12,
+        23.17,
+        0.1
+      ]
+    },
+    {
+      "name": "North balcony return baluster 0",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        24.15,
+        19.25,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "North balcony return baluster 1",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        24.549999999999997,
+        19.25,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "North balcony return baluster 2",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        24.95,
+        19.25,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "North balcony return baluster 3",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        25.349999999999998,
+        19.25,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "North balcony return baluster 4",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        25.75,
+        19.25,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "North balcony return baluster 5",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        26.15,
+        19.25,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "North balcony return baluster 6",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        26.55,
+        19.25,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "North balcony return baluster 7",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        26.95,
+        19.25,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "North balcony return baluster 8",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.35,
+        19.25,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "North balcony return baluster 9",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        27.75,
+        19.25,
+        10.76
+      ],
+      "size_ft": [
+        0.07,
+        0.07,
+        2.78
+      ]
+    },
+    {
+      "name": "North balcony return rail 0.12",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        25.95,
+        19.25,
+        9.42
+      ],
+      "size_ft": [
+        3.7200000000000015,
+        0.12,
+        0.1
+      ]
+    },
+    {
+      "name": "North balcony return rail 2.9",
+      "category": "Guard",
+      "level": "Exterior",
+      "center_ft": [
+        25.95,
+        19.25,
+        12.200000000000001
+      ],
+      "size_ft": [
+        3.7200000000000015,
+        0.12,
+        0.1
       ]
     },
     {
@@ -1189,13 +4253,13 @@
       "level": "Roof",
       "center_ft": [
         12.0,
-        5.0,
-        17.753260927651684
+        5.039372958294477,
+        17.81395442595249
       ],
       "size_ft": [
         24,
         10.709549098299563,
-        0.35
+        0.22
       ]
     },
     {
@@ -1204,13 +4268,1288 @@
       "level": "Roof",
       "center_ft": [
         12.0,
-        14.937361202713333,
-        17.753260927651684
+        14.960627041705521,
+        17.81395442595249
       ],
       "size_ft": [
         24,
         10.709549098299563,
-        0.35
+        0.22
+      ]
+    },
+    {
+      "name": "L1 garage/shop",
+      "category": "Room zone",
+      "level": "L1",
+      "center_ft": [
+        12.0,
+        6.0,
+        0.5075
+      ],
+      "size_ft": [
+        23.0,
+        11.0,
+        0.005
+      ]
+    },
+    {
+      "name": "L1 protected hall",
+      "category": "Room zone",
+      "level": "L1",
+      "center_ft": [
+        7.25,
+        13.455,
+        0.5075
+      ],
+      "size_ft": [
+        13.5,
+        3.25,
+        0.005
+      ]
+    },
+    {
+      "name": "L1 powder room",
+      "category": "Room zone",
+      "level": "L1",
+      "center_ft": [
+        4.0,
+        17.455,
+        0.5075
+      ],
+      "size_ft": [
+        7.0,
+        4.09,
+        0.005
+      ]
+    },
+    {
+      "name": "L1 garage support",
+      "category": "Room zone",
+      "level": "L1",
+      "center_ft": [
+        10.915,
+        17.455,
+        0.5075
+      ],
+      "size_ft": [
+        6.17,
+        4.09,
+        0.005
+      ]
+    },
+    {
+      "name": "L1 owner office/garden room",
+      "category": "Room zone",
+      "level": "L1",
+      "center_ft": [
+        18.915,
+        15.665,
+        0.5075
+      ],
+      "size_ft": [
+        9.17,
+        7.67,
+        0.005
+      ]
+    },
+    {
+      "name": "L2 bedroom",
+      "category": "Room zone",
+      "level": "L2",
+      "center_ft": [
+        5.35,
+        5.25,
+        9.2575
+      ],
+      "size_ft": [
+        9.7,
+        9.5,
+        0.005
+      ]
+    },
+    {
+      "name": "L2 bedroom closet",
+      "category": "Room zone",
+      "level": "L2",
+      "center_ft": [
+        4.0,
+        11.915,
+        9.2575
+      ],
+      "size_ft": [
+        7.0,
+        3.17,
+        0.005
+      ]
+    },
+    {
+      "name": "L2 stacked bath",
+      "category": "Room zone",
+      "level": "L2",
+      "center_ft": [
+        4.0,
+        16.665,
+        9.2575
+      ],
+      "size_ft": [
+        7.0,
+        5.67,
+        0.005
+      ]
+    },
+    {
+      "name": "L2 laundry cupboard",
+      "category": "Room zone",
+      "level": "L2",
+      "center_ft": [
+        9.3,
+        18.0,
+        9.2575
+      ],
+      "size_ft": [
+        2.6,
+        2.6,
+        0.005
+      ]
+    },
+    {
+      "name": "L2 open living/kitchen/dining",
+      "category": "Room zone",
+      "level": "L2",
+      "center_ft": [
+        17.015,
+        10.0,
+        9.2575
+      ],
+      "size_ft": [
+        12.97,
+        19.0,
+        0.005
+      ]
+    },
+    {
+      "name": "Queen bed base",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        4.3134999999999994,
+        3.7,
+        9.725
+      ],
+      "size_ft": [
+        6.507,
+        5.0,
+        0.65
+      ]
+    },
+    {
+      "name": "Queen bed mattress",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        4.2335,
+        3.7,
+        10.450000000000001
+      ],
+      "size_ft": [
+        6.567,
+        4.9,
+        0.8
+      ]
+    },
+    {
+      "name": "Queen bed duvet",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        5.0585,
+        3.7,
+        10.91
+      ],
+      "size_ft": [
+        4.917,
+        4.94,
+        0.12
+      ]
+    },
+    {
+      "name": "Queen bed pillow 1.5",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        1.7000000000000002,
+        2.5,
+        10.95
+      ],
+      "size_ft": [
+        1.3,
+        2,
+        0.2
+      ]
+    },
+    {
+      "name": "Queen bed pillow 3.8000000000000003",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        1.7000000000000002,
+        4.800000000000001,
+        10.95
+      ],
+      "size_ft": [
+        1.3,
+        2,
+        0.2
+      ]
+    },
+    {
+      "name": "Queen bed headboard",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        0.98,
+        3.7,
+        10.75
+      ],
+      "size_ft": [
+        0.16,
+        5.0,
+        3
+      ]
+    },
+    {
+      "name": "Nightstand",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        1.6,
+        7.1000000000000005,
+        10.1
+      ],
+      "size_ft": [
+        1.4,
+        1.3,
+        1.7
+      ]
+    },
+    {
+      "name": "Dresser",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        9.0,
+        1.6,
+        10.6
+      ],
+      "size_ft": [
+        2.0,
+        1.5,
+        2.7
+      ]
+    },
+    {
+      "name": "Kitchen peninsula base",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        19.25,
+        9.75,
+        10.69
+      ],
+      "size_ft": [
+        8.5,
+        2.5,
+        2.88
+      ]
+    },
+    {
+      "name": "Kitchen peninsula stone top",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        19.25,
+        9.75,
+        12.190000000000001
+      ],
+      "size_ft": [
+        8.55,
+        2.55,
+        0.12
+      ]
+    },
+    {
+      "name": "Kitchen peninsula front joint 1",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        17.132,
+        8.5015,
+        10.73
+      ],
+      "size_ft": [
+        0.014,
+        0.015,
+        2.6
+      ]
+    },
+    {
+      "name": "Kitchen peninsula front joint 2",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        19.257,
+        8.5015,
+        10.73
+      ],
+      "size_ft": [
+        0.014,
+        0.015,
+        2.6
+      ]
+    },
+    {
+      "name": "Kitchen peninsula front joint 3",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        21.382,
+        8.5015,
+        10.73
+      ],
+      "size_ft": [
+        0.014,
+        0.015,
+        2.6
+      ]
+    },
+    {
+      "name": "East kitchen base",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        22.25,
+        12.5,
+        10.69
+      ],
+      "size_ft": [
+        2.5,
+        3.0,
+        2.88
+      ]
+    },
+    {
+      "name": "East kitchen stone top",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        22.25,
+        12.5,
+        12.190000000000001
+      ],
+      "size_ft": [
+        2.55,
+        3.05,
+        0.12
+      ]
+    },
+    {
+      "name": "Refrigerator",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        22.25,
+        15.3,
+        12.5
+      ],
+      "size_ft": [
+        2.5,
+        2.6,
+        6.5
+      ]
+    },
+    {
+      "name": "Dining bench frame",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        17.150000000000002,
+        18.75,
+        9.925
+      ],
+      "size_ft": [
+        4.7,
+        1.5,
+        1.35
+      ]
+    },
+    {
+      "name": "Dining bench cushion",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        17.150000000000002,
+        18.75,
+        10.7
+      ],
+      "size_ft": [
+        4.7,
+        1.5,
+        0.2
+      ]
+    },
+    {
+      "name": "Dining table top",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        17.0,
+        17.05,
+        11.68
+      ],
+      "size_ft": [
+        4.0,
+        2.5,
+        0.14
+      ]
+    },
+    {
+      "name": "Dining table leg 15.12 15.92",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        15.18,
+        15.98,
+        10.43
+      ],
+      "size_ft": [
+        0.12,
+        0.12,
+        2.36
+      ]
+    },
+    {
+      "name": "Dining table leg 15.12 18.05",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        15.18,
+        18.11,
+        10.43
+      ],
+      "size_ft": [
+        0.12,
+        0.12,
+        2.36
+      ]
+    },
+    {
+      "name": "Dining table leg 18.75 15.92",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        18.81,
+        15.98,
+        10.43
+      ],
+      "size_ft": [
+        0.12,
+        0.12,
+        2.36
+      ]
+    },
+    {
+      "name": "Dining table leg 18.75 18.05",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        18.81,
+        18.11,
+        10.43
+      ],
+      "size_ft": [
+        0.12,
+        0.12,
+        2.36
+      ]
+    },
+    {
+      "name": "Dining chair 1 top",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        15.899999999999999,
+        14.950000000000001,
+        10.82
+      ],
+      "size_ft": [
+        1.4,
+        1.3,
+        0.14
+      ]
+    },
+    {
+      "name": "Dining chair 1 leg 15.319999999999999 14.42",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        15.379999999999999,
+        14.48,
+        10.0
+      ],
+      "size_ft": [
+        0.12,
+        0.12,
+        1.5
+      ]
+    },
+    {
+      "name": "Dining chair 1 leg 15.319999999999999 15.350000000000001",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        15.379999999999999,
+        15.410000000000002,
+        10.0
+      ],
+      "size_ft": [
+        0.12,
+        0.12,
+        1.5
+      ]
+    },
+    {
+      "name": "Dining chair 1 leg 16.349999999999998 14.42",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        16.409999999999997,
+        14.48,
+        10.0
+      ],
+      "size_ft": [
+        0.12,
+        0.12,
+        1.5
+      ]
+    },
+    {
+      "name": "Dining chair 1 leg 16.349999999999998 15.350000000000001",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        16.409999999999997,
+        15.410000000000002,
+        10.0
+      ],
+      "size_ft": [
+        0.12,
+        0.12,
+        1.5
+      ]
+    },
+    {
+      "name": "Dining chair 1 back",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        15.899999999999999,
+        14.360000000000001,
+        11.35
+      ],
+      "size_ft": [
+        1.4,
+        0.12,
+        1.2
+      ]
+    },
+    {
+      "name": "Dining chair 2 top",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        18.0,
+        14.950000000000001,
+        10.82
+      ],
+      "size_ft": [
+        1.4,
+        1.3,
+        0.14
+      ]
+    },
+    {
+      "name": "Dining chair 2 leg 17.42 14.42",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        17.48,
+        14.48,
+        10.0
+      ],
+      "size_ft": [
+        0.12,
+        0.12,
+        1.5
+      ]
+    },
+    {
+      "name": "Dining chair 2 leg 17.42 15.350000000000001",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        17.48,
+        15.410000000000002,
+        10.0
+      ],
+      "size_ft": [
+        0.12,
+        0.12,
+        1.5
+      ]
+    },
+    {
+      "name": "Dining chair 2 leg 18.45 14.42",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        18.509999999999998,
+        14.48,
+        10.0
+      ],
+      "size_ft": [
+        0.12,
+        0.12,
+        1.5
+      ]
+    },
+    {
+      "name": "Dining chair 2 leg 18.45 15.350000000000001",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        18.509999999999998,
+        15.410000000000002,
+        10.0
+      ],
+      "size_ft": [
+        0.12,
+        0.12,
+        1.5
+      ]
+    },
+    {
+      "name": "Dining chair 2 back",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        18.0,
+        14.360000000000001,
+        11.35
+      ],
+      "size_ft": [
+        1.4,
+        0.12,
+        1.2
+      ]
+    },
+    {
+      "name": "Sofa facing west base",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        19.05,
+        4.5,
+        9.685
+      ],
+      "size_ft": [
+        2.5,
+        6.0,
+        0.43
+      ]
+    },
+    {
+      "name": "Sofa facing west back",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        20.125,
+        4.5,
+        10.875
+      ],
+      "size_ft": [
+        0.35,
+        6.0,
+        1.9500000000000002
+      ]
+    },
+    {
+      "name": "Sofa facing west arm 1.5",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        18.875,
+        1.65,
+        10.525
+      ],
+      "size_ft": [
+        2.15,
+        0.3,
+        1.25
+      ]
+    },
+    {
+      "name": "Sofa facing west arm 7.2",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        18.875,
+        7.3500000000000005,
+        10.525
+      ],
+      "size_ft": [
+        2.15,
+        0.3,
+        1.25
+      ]
+    },
+    {
+      "name": "Sofa facing west cushion 0",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        18.88,
+        2.716666666666667,
+        10.37
+      ],
+      "size_ft": [
+        2.0,
+        1.7333333333333334,
+        0.5
+      ]
+    },
+    {
+      "name": "Sofa facing west cushion 1",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        18.88,
+        4.483333333333333,
+        10.37
+      ],
+      "size_ft": [
+        2.0,
+        1.7333333333333334,
+        0.5
+      ]
+    },
+    {
+      "name": "Sofa facing west cushion 2",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        18.88,
+        6.25,
+        10.37
+      ],
+      "size_ft": [
+        2.0,
+        1.7333333333333334,
+        0.5
+      ]
+    },
+    {
+      "name": "Coffee table top",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        15.5,
+        5.2,
+        10.530000000000001
+      ],
+      "size_ft": [
+        2.0,
+        3.0,
+        0.14
+      ]
+    },
+    {
+      "name": "Coffee table leg 14.62 3.8200000000000003",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        14.68,
+        3.8800000000000003,
+        9.855
+      ],
+      "size_ft": [
+        0.12,
+        0.12,
+        1.21
+      ]
+    },
+    {
+      "name": "Coffee table leg 14.62 6.45",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        14.68,
+        6.51,
+        9.855
+      ],
+      "size_ft": [
+        0.12,
+        0.12,
+        1.21
+      ]
+    },
+    {
+      "name": "Coffee table leg 16.25 3.8200000000000003",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        16.31,
+        3.8800000000000003,
+        9.855
+      ],
+      "size_ft": [
+        0.12,
+        0.12,
+        1.21
+      ]
+    },
+    {
+      "name": "Coffee table leg 16.25 6.45",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        16.31,
+        6.51,
+        9.855
+      ],
+      "size_ft": [
+        0.12,
+        0.12,
+        1.21
+      ]
+    },
+    {
+      "name": "Shower tray",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        2.2,
+        15.6,
+        9.31
+      ],
+      "size_ft": [
+        3.0,
+        3.0,
+        0.12
+      ]
+    },
+    {
+      "name": "Shower glass",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        3.68,
+        15.6,
+        12.469999999999999
+      ],
+      "size_ft": [
+        0.04,
+        3.0,
+        6.2
+      ]
+    },
+    {
+      "name": "Bath vanity base",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        5.7,
+        18.25,
+        10.54
+      ],
+      "size_ft": [
+        2.6,
+        1.7,
+        2.58
+      ]
+    },
+    {
+      "name": "Bath vanity stone top",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        5.7,
+        18.25,
+        11.89
+      ],
+      "size_ft": [
+        2.65,
+        1.75,
+        0.12
+      ]
+    },
+    {
+      "name": "Upper toilet bowl",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        5.7,
+        16.1,
+        9.85
+      ],
+      "size_ft": [
+        0.9,
+        1.6,
+        1.2
+      ]
+    },
+    {
+      "name": "Upper toilet tank",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        5.8,
+        17.25,
+        10.4
+      ],
+      "size_ft": [
+        1.4,
+        0.5,
+        2.3
+      ]
+    },
+    {
+      "name": "Washer dryer cabinet",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        9.3,
+        18.0,
+        12.35
+      ],
+      "size_ft": [
+        2.6,
+        2.6,
+        6.2
+      ]
+    },
+    {
+      "name": "Washer dryer appliance face 0",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        9.3,
+        16.694999999999997,
+        10.8
+      ],
+      "size_ft": [
+        2.24,
+        0.05,
+        2.1
+      ]
+    },
+    {
+      "name": "Washer dryer appliance face 1",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        9.3,
+        16.694999999999997,
+        13.600000000000001
+      ],
+      "size_ft": [
+        2.24,
+        0.05,
+        2.1
+      ]
+    },
+    {
+      "name": "Powder vanity base",
+      "category": "Furniture",
+      "level": "Level 1",
+      "center_ft": [
+        2.05,
+        18.3,
+        1.79
+      ],
+      "size_ft": [
+        2.5,
+        1.6,
+        2.58
+      ]
+    },
+    {
+      "name": "Powder vanity stone top",
+      "category": "Furniture",
+      "level": "Level 1",
+      "center_ft": [
+        2.05,
+        18.3,
+        3.14
+      ],
+      "size_ft": [
+        2.55,
+        1.6500000000000001,
+        0.12
+      ]
+    },
+    {
+      "name": "Lower toilet bowl",
+      "category": "Furniture",
+      "level": "Level 1",
+      "center_ft": [
+        5.7,
+        17.2,
+        1.1
+      ],
+      "size_ft": [
+        0.9,
+        1.6,
+        1.2
+      ]
+    },
+    {
+      "name": "Lower toilet tank",
+      "category": "Furniture",
+      "level": "Level 1",
+      "center_ft": [
+        5.8,
+        18.349999999999998,
+        1.65
+      ],
+      "size_ft": [
+        1.4,
+        0.5,
+        2.3
+      ]
+    },
+    {
+      "name": "Heat pump water heater",
+      "category": "Furniture",
+      "level": "Level 1",
+      "center_ft": [
+        9.1,
+        18.1,
+        3.2
+      ],
+      "size_ft": [
+        2.0,
+        2.0,
+        5.4
+      ]
+    },
+    {
+      "name": "Garage storage",
+      "category": "Furniture",
+      "level": "Level 1",
+      "center_ft": [
+        12.25,
+        18.65,
+        3.25
+      ],
+      "size_ft": [
+        2.5,
+        1.3,
+        5.5
+      ]
+    },
+    {
+      "name": "Garden desk top",
+      "category": "Furniture",
+      "level": "Level 1",
+      "center_ft": [
+        17.5,
+        18.4,
+        2.9299999999999997
+      ],
+      "size_ft": [
+        5.0,
+        1.8,
+        0.14
+      ]
+    },
+    {
+      "name": "Garden desk leg 15.12 17.62",
+      "category": "Furniture",
+      "level": "Level 1",
+      "center_ft": [
+        15.18,
+        17.68,
+        1.68
+      ],
+      "size_ft": [
+        0.12,
+        0.12,
+        2.36
+      ]
+    },
+    {
+      "name": "Garden desk leg 15.12 19.05",
+      "category": "Furniture",
+      "level": "Level 1",
+      "center_ft": [
+        15.18,
+        19.11,
+        1.68
+      ],
+      "size_ft": [
+        0.12,
+        0.12,
+        2.36
+      ]
+    },
+    {
+      "name": "Garden desk leg 19.75 17.62",
+      "category": "Furniture",
+      "level": "Level 1",
+      "center_ft": [
+        19.81,
+        17.68,
+        1.68
+      ],
+      "size_ft": [
+        0.12,
+        0.12,
+        2.36
+      ]
+    },
+    {
+      "name": "Garden desk leg 19.75 19.05",
+      "category": "Furniture",
+      "level": "Level 1",
+      "center_ft": [
+        19.81,
+        19.11,
+        1.68
+      ],
+      "size_ft": [
+        0.12,
+        0.12,
+        2.36
+      ]
+    },
+    {
+      "name": "Garden bench frame",
+      "category": "Furniture",
+      "level": "Level 1",
+      "center_ft": [
+        20.2,
+        12.95,
+        1.175
+      ],
+      "size_ft": [
+        5.8,
+        2.0,
+        1.35
+      ]
+    },
+    {
+      "name": "Garden bench cushion",
+      "category": "Furniture",
+      "level": "Level 1",
+      "center_ft": [
+        20.2,
+        12.95,
+        1.9500000000000002
+      ],
+      "size_ft": [
+        5.8,
+        2.0,
+        0.2
+      ]
+    },
+    {
+      "name": "Living rug",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        17.4,
+        5.0,
+        9.272499999999999
+      ],
+      "size_ft": [
+        7.4,
+        5.2,
+        0.025
+      ]
+    },
+    {
+      "name": "Wall mounted television",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        10.575,
+        4.95,
+        13.0
+      ],
+      "size_ft": [
+        0.07,
+        3.5,
+        2
+      ]
+    },
+    {
+      "name": "Kitchen sink",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        17.0,
+        9.75,
+        12.262500000000001
+      ],
+      "size_ft": [
+        2,
+        1.5,
+        0.045
+      ]
+    },
+    {
+      "name": "Induction hob",
+      "category": "Furniture",
+      "level": "Level 2",
+      "center_ft": [
+        22.225,
+        12.450000000000001,
+        12.2825
+      ],
+      "size_ft": [
+        2.35,
+        2.3,
+        0.045
+      ]
+    },
+    {
+      "name": "Vehicle envelope 16x6",
+      "category": "Vehicle",
+      "level": "Level 1",
+      "center_ft": [
+        11.0,
+        5.5,
+        2.15
+      ],
+      "size_ft": [
+        16,
+        6,
+        2.9
+      ]
+    },
+    {
+      "name": "Vehicle cabin",
+      "category": "Vehicle",
+      "level": "Level 1",
+      "center_ft": [
+        10.5,
+        5.5,
+        4.4
+      ],
+      "size_ft": [
+        7,
+        5.4,
+        1.6
       ]
     }
   ]

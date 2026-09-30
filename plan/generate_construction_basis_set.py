@@ -10,6 +10,7 @@ finish the permit set without restarting the design.
 from __future__ import annotations
 
 import math
+import sys
 from datetime import date
 from pathlib import Path
 
@@ -21,9 +22,12 @@ from reportlab.pdfbase.pdfmetrics import stringWidth
 from reportlab.pdfgen import canvas
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+from model import option_f_geometry as g  # noqa: E402
+
 OUTPUT = ROOT / "output" / "pdf" / "adu-option-f-construction-engineering-basis.pdf"
 PAGE_W, PAGE_H = 17 * inch, 11 * inch
-ISSUE_DATE = date(2026, 8, 3).isoformat()
+ISSUE_DATE = date(2026, 9, 30).isoformat()
 
 INK = black
 GRAY_1 = Color(0.18, 0.18, 0.18)
@@ -129,7 +133,7 @@ def draw_title_block(c: canvas.Canvas, sheet: str, title: str) -> None:
     c.drawString(
         31,
         y + 10,
-        "SCHEMATIC CONSTRUCTION / ENGINEERING BASIS - NOT FOR CONSTRUCTION - FIELD VERIFY",
+        "REV 2 OWNER STUDY - NOT FOR CONSTRUCTION - CODE / ENGINEERING CRITERIA REQUIRE PROFESSIONAL RECONFIRMATION",
     )
     c.setFont("Helvetica-Bold", 8)
     c.drawString(PAGE_W - 320, y + 24, title)
@@ -243,58 +247,18 @@ def draw_stair_and_patio(c: canvas.Canvas, origin, scale) -> None:
 def draw_level_plan(
     c: canvas.Canvas, level: int, origin: tuple[float, float], scale: float
 ) -> None:
-    plan_shell(c, origin, scale)
-    draw_stair_and_patio(c, origin, scale)
-    if level == 1:
-        wall_rect(c, origin, scale, 0.5, 11.5, 23, 0.33)
-        wall_rect(c, origin, scale, 7.5, 11.5, 0.33, 8)
-        wall_rect(c, origin, scale, 14, 11.5, 0.33, 8)
-        wall_rect(c, origin, scale, 7.5, 13.5, 6.83, 0.33)
-        opening(c, origin, scale, 0, 1.3, 9.7, vertical=True, label="D01 9'-8\" OH")
-        opening(c, origin, scale, 23.5, 12.3, 6, vertical=True, label="D03")
-        opening(c, origin, scale, 23.5, 4, 3, vertical=True, label="W01")
-        room_label(c, origin, scale, 12, 7.5, "GARAGE / SHOP", "approx. 23 ft clear depth")
-        room_label(c, origin, scale, 4, 16, "MECH / STORAGE", "panel + HPWH")
-        room_label(c, origin, scale, 10.8, 17.2, "POWDER", "stacked wet core")
-        room_label(c, origin, scale, 10.8, 12.4, "PROTECTED HALL", "20-min door to garage")
-        room_label(c, origin, scale, 19, 16, "OWNER FLEX ROOM", "classification by Zoning")
-        # plumbing fixtures
-        c.setStrokeColor(INK)
-        c.circle(*plan_xy(origin, scale, 11.8, 16.1), 0.55 * scale, fill=0, stroke=1)
-        wall_rect(c, origin, scale, 8, 14, 2.5, 1.2, GRAY_5)
-    else:
-        wall_rect(c, origin, scale, 10.2, 0.5, 0.33, 9.5)
-        wall_rect(c, origin, scale, 0.5, 10, 10.03, 0.33)
-        wall_rect(c, origin, scale, 0.5, 13.5, 13.83, 0.33)
-        wall_rect(c, origin, scale, 7.5, 13.5, 0.33, 6)
-        wall_rect(c, origin, scale, 14, 13.5, 0.33, 6)
-        opening(c, origin, scale, 0, 3, 3.5, vertical=True, label="W02 EERO")
-        opening(c, origin, scale, 16, 0, 5, label="W03")
-        opening(c, origin, scale, 23.5, 1.5, 6, vertical=True, label="D04")
-        opening(c, origin, scale, 23.5, 15, 3.5, vertical=True, label="W04")
-        room_label(c, origin, scale, 5.2, 5.2, "BEDROOM", "9'-8\" x 9'-6\" / 92 sf")
-        room_label(c, origin, scale, 3.8, 11.8, "CLOSET", "7'-0\" x 3'-2\"")
-        room_label(c, origin, scale, 3.8, 16.5, "LAUNDRY / STORAGE", "low-eave zone")
-        room_label(c, origin, scale, 10.8, 17.2, "BATH", "stacked over powder")
-        room_label(c, origin, scale, 17, 10.8, "KITCHEN", "6'-10\" island")
-        room_label(c, origin, scale, 18, 5.0, "LIVING", "entry from south landing")
-        room_label(c, origin, scale, 18.8, 16.3, "DINING", "seated low-eave zone")
-        # island and east tall cabinet run
-        wall_rect(c, origin, scale, 11.6, 9.1, 6.8, 3, GRAY_5)
-        wall_rect(c, origin, scale, 21, 8.4, 2.5, 7, GRAY_5)
-        wall_rect(c, origin, scale, 7.9, 13.9, 3, 3, GRAY_5)
-        c.circle(*plan_xy(origin, scale, 11.8, 15.0), 0.55 * scale, fill=0, stroke=1)
-
-    # primary dimensions
-    x1, y1 = plan_xy(origin, scale, 0, -5.2)
-    x2, _ = plan_xy(origin, scale, 24, -5.2)
-    dim_line(c, x1, y1, x2, y1, "24'-0\"")
-    x1, y1 = plan_xy(origin, scale, -1.2, 0)
-    _, y2 = plan_xy(origin, scale, -1.2, 20)
-    dim_line(c, x1, y1, x1, y2, "20'-0\"")
-    c.setFont("Helvetica-Bold", 6.5)
-    c.setFillColor(INK)
-    c.drawString(origin[0], origin[1] + 20 * scale + 12, "NORTH / PROPERTY LINE 5 FT BEYOND WALL")
+    # Embed the exact plan asset shown on the website: shared walls, openings,
+    # furniture and clearance labels cannot drift between PDF and floor plan.
+    image = ROOT / "apartment" / f"option-f-level-{level}.png"
+    c.drawImage(
+        str(image),
+        28,
+        82,
+        width=620,
+        height=620 * 970 / 1000,
+        preserveAspectRatio=True,
+        mask="auto",
+    )
 
 
 def draw_north_arrow(c: canvas.Canvas, x: float, y: float) -> None:
@@ -369,63 +333,134 @@ def draw_site(c: canvas.Canvas, x: float, y: float, scale: float) -> None:
 def draw_elevation(
     c: canvas.Canvas, x: float, y: float, width_ft: float, name: str, gable: bool, features: str
 ) -> None:
-    s = 10.2
+    s = 9.5
     w = width_ft * s
+    side = name.split()[0].lower()
     c.setStrokeColor(INK)
-    c.setFillColor(white)
-    c.setLineWidth(0.8)
-    c.line(x - 15, y, x + w + 15, y)
-    c.rect(x, y, w, 16 * s, fill=0, stroke=1)
-    c.line(x, y + 9.25 * s, x + w, y + 9.25 * s)
+    c.setLineWidth(0.7)
+    c.line(x - 8, y, x + w + 8, y)
+    c.rect(x, y + g.GROUND_SLAB_TOP * s, w, (g.EAVE_HEIGHT - g.GROUND_SLAB_TOP) * s)
+    c.line(x, y + g.UPPER_SUBFLOOR_TOP * s, x + w, y + g.UPPER_SUBFLOOR_TOP * s)
     if gable:
-        c.line(x, y + 16 * s, x + w / 2, y + 20 * s)
-        c.line(x + w / 2, y + 20 * s, x + w, y + 16 * s)
+        c.line(x, y + g.EAVE_HEIGHT * s, x + w / 2, y + g.RIDGE_HEIGHT * s)
+        c.line(x + w / 2, y + g.RIDGE_HEIGHT * s, x + w, y + g.EAVE_HEIGHT * s)
     else:
-        c.line(x, y + 16 * s, x + w, y + 16 * s)
-    # schematic openings
-    if "garage" in features:
-        c.rect(x + 2 * s, y, 9.67 * s, 7 * s, fill=0, stroke=1)
-        c.rect(x + 4 * s, y + 11 * s, 4 * s, 3.5 * s, fill=0, stroke=1)
-    if "sliders" in features:
-        c.rect(x + 3 * s, y, 6 * s, 7 * s, fill=0, stroke=1)
-        c.rect(x + 3 * s, y + 9.25 * s, 6 * s, 6.5 * s, fill=0, stroke=1)
-    if "stair" in features:
-        c.line(x + 1 * s, y, x + 12 * s, y + 9.25 * s)
-        for i in range(8):
-            xx = x + (1 + i * 1.35) * s
-            yy = y + i * 1.15 * s
-            c.line(xx, yy, xx + 2.5 * s, yy)
-    c.setFont("Helvetica-Bold", 7.5)
-    c.drawString(x, y - 13, name)
+        c.rect(x, y + g.EAVE_HEIGHT * s, w, (g.RIDGE_HEIGHT - g.EAVE_HEIGHT) * s)
+    for level, base in ((1, g.GROUND_SLAB_TOP), (2, g.UPPER_SUBFLOOR_TOP)):
+        for offset, width, sill, height in g.OPENINGS[f"l{level}_{side}"]:
+            # Exterior view: west looks east (north left); east looks west (north right).
+            left = width_ft - offset - width if side in ("north", "west") else offset
+            c.rect(x + left * s, y + (base + sill) * s, width * s, height * s)
+            if sill == 0 and width == 6:
+                c.line(
+                    x + (left + width / 2) * s,
+                    y + base * s,
+                    x + (left + width / 2) * s,
+                    y + (base + height) * s,
+                )
+    if side == "east":
+        for z in (g.UPPER_SUBFLOOR_TOP, g.UPPER_SUBFLOOR_TOP + g.GUARD_HEIGHT):
+            c.line(x, y + z * s, x + 19.5 * s, y + z * s)
+        for offset in (0, 6, 12, 19.5):
+            c.line(x + offset * s, y, x + offset * s, y + g.UPPER_SUBFLOOR_TOP * s)
+        for i in range(40):
+            xx = x + i * 0.5 * s
+            c.line(
+                xx,
+                y + g.UPPER_SUBFLOOR_TOP * s,
+                xx,
+                y + (g.UPPER_SUBFLOOR_TOP + g.GUARD_HEIGHT) * s,
+            )
+    if side == "south":
+        c.line(x + 11.5 * s, y + g.UPPER_SUBFLOOR_TOP * s, x + 28 * s, y + g.UPPER_SUBFLOOR_TOP * s)
+        for i in range(g.STAIR_TREADS):
+            xx = x + (0.5 + i * 11 / g.STAIR_TREADS) * s
+            zz = (
+                g.GROUND_SLAB_TOP
+                + (i + 1) * (g.UPPER_SUBFLOOR_TOP - g.GROUND_SLAB_TOP) / g.STAIR_RISERS
+            ) * s
+            c.line(xx, y + zz, xx + 11 / g.STAIR_TREADS * s, y + zz)
+        for xx in (11.5, 20, 28):
+            c.line(x + xx * s, y, x + xx * s, y + g.UPPER_SUBFLOOR_TOP * s)
+        c.line(x + 0.5 * s, y + 3.5 * s, x + 11.5 * s, y + (g.UPPER_SUBFLOOR_TOP + 3) * s)
+        c.line(
+            x + 11.5 * s,
+            y + (g.UPPER_SUBFLOOR_TOP + 3) * s,
+            x + 28 * s,
+            y + (g.UPPER_SUBFLOOR_TOP + 3) * s,
+        )
+    c.setFont("Helvetica-Bold", 7)
+    c.drawString(x, y - 14, name)
     c.setFont("Helvetica", 5.8)
-    c.drawRightString(x + w, y - 13, 'SCHEMATIC 1/8" = 1\'-0"')
+    c.drawString(x, y - 25, "SCHEMATIC - OPENINGS FROM SHARED GEOMETRY")
 
 
 def draw_section(c: canvas.Canvas, x: float, y: float, longitudinal=False) -> None:
-    s = 15
+    s = 14
     span = 24 if longitudinal else 20
-    w = span * s
     c.setStrokeColor(INK)
     c.setLineWidth(0.8)
-    c.line(x - 10, y, x + w + 10, y)
-    # footing/stem/slab
-    c.rect(x, y - 10, w, 10, fill=0, stroke=1)
-    c.line(x, y + 9.25 * s, x + w, y + 9.25 * s)
-    c.line(x, y + 16 * s, x + w, y + 16 * s)
+    c.rect(x, y, span * s, g.GROUND_SLAB_TOP * s)
+    c.line(x, y + g.UPPER_SUBFLOOR_TOP * s, x + span * s, y + g.UPPER_SUBFLOOR_TOP * s)
+    section_edge = g.RIDGE_HEIGHT if longitudinal else g.EAVE_HEIGHT
+    c.line(x, y, x, y + section_edge * s)
+    c.line(x + span * s, y, x + span * s, y + section_edge * s)
     if longitudinal:
-        c.line(x, y + 20 * s, x + w, y + 20 * s)
-    else:
-        c.line(x, y + 16 * s, x + w / 2, y + 20 * s)
-        c.line(x + w / 2, y + 20 * s, x + w, y + 16 * s)
-        # sloped ceiling min-height bands
+        c.line(x, y + g.RIDGE_HEIGHT * s, x + span * s, y + g.RIDGE_HEIGHT * s)
         c.setDash(3, 2)
-        c.line(x + 1.4 * s, y + 16.6 * s, x + 18.6 * s, y + 16.6 * s)
+        c.line(
+            x,
+            y + (g.RIDGE_HEIGHT - g.ROOF_INTERIOR_ALLOWANCE) * s,
+            x + span * s,
+            y + (g.RIDGE_HEIGHT - g.ROOF_INTERIOR_ALLOWANCE) * s,
+        )
         c.setDash()
+        c.setFont("Helvetica", 6)
+        c.drawString(x + 6, y + 11.7 * s, "RIDGE SECTION - AT KITCHEN PENINSULA")
+        c.rect(x + 15 * s, y + g.UPPER_SUBFLOOR_TOP * s, 8.5 * s, 3 * s)
+    else:
+        for allowance in (0, g.ROOF_INTERIOR_ALLOWANCE):
+            c.setDash(3, 2) if allowance else c.setDash()
+            c.line(
+                x,
+                y + (g.EAVE_HEIGHT - allowance) * s,
+                x + 10 * s,
+                y + (g.RIDGE_HEIGHT - allowance) * s,
+            )
+            c.line(
+                x + 10 * s,
+                y + (g.RIDGE_HEIGHT - allowance) * s,
+                x + 20 * s,
+                y + (g.EAVE_HEIGHT - allowance) * s,
+            )
+        c.setDash()
+        # A north-south fixture section through the bath vanity and toilet.
+        for name, level, kind, xx, yy, ww, dd, hh in g.FURNITURE:
+            if level == 2 and kind in ("vanity", "toilet"):
+                c.rect(x + yy * s, y + g.UPPER_SUBFLOOR_TOP * s, dd * s, hh * s)
+        c.setDash(2, 2)
+        z = g.UPPER_SUBFLOOR_TOP + 7
+        inset = (7 - g.ceiling_height(0)) / g.ROOF_PITCH
+        c.line(x + inset * s, y + z * s, x + (20 - inset) * s, y + z * s)
+        c.setDash()
+        c.setFont("Helvetica", 5.8)
+        c.drawString(x + 4, y + z * s + 3, "7 FT CONTOUR - PROVISIONAL")
+        c.drawString(
+            x + 4, y + 12 * s, "SOUTH                                      NORTH / BATH FIXTURES"
+        )
     c.setFont("Helvetica", 6)
-    c.drawString(x + 4, y + 4.5 * s, "UNCONDITIONED GARAGE / FLEX")
-    c.drawString(x + 4, y + 12.5 * s, "CONDITIONED ADU - SLOPED CEILING")
-    dim_line(c, x + w + 15, y, x + w + 15, y + 9.25 * s, "+9'-3\" T.O. SUBFLOOR")
-    dim_line(c, x + w + 30, y, x + w + 30, y + 20 * s, "19'-10\" MAX BASIS")
+    c.drawString(x + 4, y + 5 * s, "GARAGE / OWNER SUPPORT")
+    dim_line(
+        c,
+        x + span * s + 14,
+        y,
+        x + span * s + 14,
+        y + g.UPPER_SUBFLOOR_TOP * s,
+        "PROJECT Z +9.25 FT",
+    )
+    c.setFont("Helvetica", 5.8)
+    c.drawString(x, y - 13, "Roof allowance 0.85 ft assumed; finished headroom unresolved.")
+    c.drawString(x, y - 23, "Project Z: slab +0.5 / upper +9.25 / eave +16 / ridge +19.833 ft.")
 
 
 def table(
@@ -451,7 +486,9 @@ def table(
                 c.line(xx, y, xx, y - row_h)
             c.setFillColor(white if header and r == 0 else INK)
             c.setFont("Helvetica-Bold" if header and r == 0 else "Helvetica", size)
-            lines = wrap(cell, "Helvetica", size, widths[i] - 8)[:2]
+            lines = wrap(cell, "Helvetica", size, widths[i] - 8)[
+                : max(2, int((row_h - 8) / (size + 1)))
+            ]
             for j, line in enumerate(lines):
                 c.drawString(xx + 4, y - 8 - j * (size + 1), line)
             xx += widths[i]
@@ -483,7 +520,9 @@ def cover(c: canvas.Canvas) -> None:
     ):
         c.drawString(52, 520 - i * 10, line)
 
-    image_path = ROOT / "renderings" / "option-f-yard-photoreal.png"
+    image_path = ROOT / "renderings" / "option-f-yard-model.png"
+    if not image_path.exists():
+        image_path = ROOT / "apartment" / "option-f-level-2.png"
     if image_path.exists():
         with Image.open(image_path) as img:
             gray = img.convert("L")
@@ -498,7 +537,7 @@ def cover(c: canvas.Canvas) -> None:
             )
     c.setFillColor(GRAY_2)
     c.setFont("Helvetica-Oblique", 6.5)
-    c.drawString(470, 400, "DESIGN INTENT RENDERING - DOES NOT CONTROL CONSTRUCTION")
+    c.drawString(470, 400, "SHARED GEOMETRY / REVISION 2 - SCHEMATIC OWNER DESIGN STUDY")
 
     note_box(
         c,
@@ -509,7 +548,7 @@ def cover(c: canvas.Canvas) -> None:
         "BASIS AND LIMITS",
         [
             "Enclosed building: 24 ft east-west x 20 ft north-south; two stories; 480 sf gross upper ADU. Exterior stair and east patios remain unenclosed.",
-            "Selected Option F: full-depth south garage, stacked north-center wet core, northeast owner flex room, west bedroom, east living/kitchen, south stair, and east patios.",
+            "Selected Option F: full-depth south garage, stacked northwest wet core, northeast owner flex room, west bedroom, east living/kitchen, south stair, and east patios.",
             "No survey, utility locate, geotechnical report, drainage design, truss package, engineered lumber calculations, REScheck, HVAC Manual J/S/D, electrical load calculation, or sealed structural design was available.",
             "Do not scale drawings. Dimensions are design-basis values. Field verify property lines, grades, utilities, existing house geometry, and all product rough openings.",
             "North and west roof edges are flush at setback walls in this basis. Any eave/rake projection requires Zoning confirmation or inward relocation of building.",
@@ -574,7 +613,7 @@ def code_sheet(c: canvas.Canvas) -> None:
         ],
         [
             "Stair",
-            "36 in clear; 14 risers at approx. 7-15/16 in; 13 treads at 10 in basis",
+            "4 ft stair zone; 14 risers at 7.5 in from slab; 13 treads at 10.15 in",
             "Field-set from final floor elevation; VRC R311",
         ],
         [
@@ -594,7 +633,7 @@ def code_sheet(c: canvas.Canvas) -> None:
         [
             "R-5 lot recorded as 45 ft x 148 ft. Working yards: 5 ft side, 5 ft rear, 25 ft front. Current site drawing places ADU walls at north and alley-side minimums.",
             "Detached ADU floor area cannot exceed greater of one-third main dwelling or 500 sf. Upper floor is 480 sf gross. Obtain written ruling for lower owner flex room and powder room exclusions.",
-            "Accessory building height basis is 20 ft maximum. Proposed ridge is 19 ft 10 in from average adjacent grade; survey final grade and roof finish before approval.",
+            "Accessory building height basis is 20 ft maximum. Model ridge is project Z +19.833 ft; survey average adjacent grade and roof finish before determining legal building height.",
             "ADU access must satisfy Public Works and Fire. Confirm hydrant within 250 ft, alley access, address visibility, and any WISP needs.",
             "Verify lot coverage, easements, historic-district status, tree impacts, and whether replacement shed is reviewed in same zoning application.",
         ],
@@ -672,7 +711,7 @@ def site_sheet(c: canvas.Canvas) -> None:
             "Lot: 45 ft x 148 ft; main house east wall approx. 25 ft from front line; field/survey confirmation governs.",
             "ADU enclosed walls: west x=5 ft; east x=29 ft; south y=20 ft; north y=40 ft in repo coordinates.",
             "Replacement shed: 18 ft x 6 ft maximum outside envelope, 8 ft from alley and 5 ft side setback. Keep roof, gutters, and foundation within envelope.",
-            "Stair/access band: approximately x=5.5 to 32.5 ft and y=16 to 20 ft; 5 ft clear to replacement shed basis.",
+            "Stair/access band: approximately x=5.5 to 33 ft and y=16 to 20 ft; 5 ft clear to replacement shed basis.",
             "Existing shed removal must be reconciled with assessor's historical detached-garage record before demolition permit scope is finalized.",
         ],
     )
@@ -693,8 +732,12 @@ def floor_sheet(c: canvas.Canvas, index: int, level: int) -> None:
         ]
         schedules = [
             ["ROOM", "FINISH / BASIS", "CEILING"],
-            ["Garage/shop", "sealed concrete / painted gypsum", "8'-6\" nominal"],
-            ["Mech/storage", "sealed concrete / durable wall finish", "8'-6\" nominal"],
+            ["Garage/shop", "sealed concrete / painted gypsum", "8 ft schematic before finishes"],
+            [
+                "Mech/storage",
+                "sealed concrete / durable wall finish",
+                "8 ft schematic before finishes",
+            ],
             ["Powder/hall", "tile or resilient / moisture-resistant finish", "8'-0\" min"],
             ["Owner flex", "resilient / gypsum; classification pending", "8'-0\" min"],
         ]
@@ -704,24 +747,24 @@ def floor_sheet(c: canvas.Canvas, index: int, level: int) -> None:
             "Sloped ceiling follows roof. Maintain not less than 7 ft over required area and not less than 5 ft at any included floor area; final truss/rafter geometry controls.",
             "Bedroom EERO W02: select casement with at least 5.7 sf net clear, 20 in clear width, 24 in clear height, and sill not over 44 in above floor.",
             "Safety glazing at doors, adjacent glazing, bath/shower, and hazardous locations per VRC R308. Confirm each product and permanently label.",
-            "Kitchen island requires receptacle layout per adopted NEC, plumbing/vent coordination, and 42 in preferred clear work aisle. Verify appliance installation clearances.",
+            "L kitchen has 53.6 in main route, 39.6 in dining-chair aisle and 38.4 in living-slider route. Check appliance door envelopes and selected equipment before approval.",
             "Apartment entry is side-hinged D05 from connected south landing; large east slider D04 is secondary patio access, not sole conventional entry.",
         ]
         schedules = [
             ["ROOM", "AREA / BASIS", "CEILING"],
-            ["Bedroom", "92 sf clear; queen + storage", "sloped, 7 ft compliance zone"],
-            ["Bath", "stacked wet core", "sloped, fixtures near ridge"],
-            ["Kitchen/living/dining", "open plan", "sloped to 20 ft ridge basis"],
+            ["Bedroom", "92 sf clear; queen + storage", "sloped; finished headroom pending"],
+            ["Bath", "stacked wet core", "sloped; fixture clearances pending"],
+            ["Kitchen/living/dining", "open plan", "project ridge +19.833 ft"],
             ["Laundry/storage", "low-eave service zone", "sloped; verify equipment clearance"],
         ]
     note_box(c, 670, 735, 520, 360, "PLAN NOTES", notes, size=7.5)
     table(c, 670, 350, [120, 235, 145], schedules, row_h=38, size=7)
     c.setFont("Helvetica-Bold", 8)
-    c.drawString(95, 92, "PLAN SCALE: 1/4 IN = 1 FT WHEN PRINTED 100% ON 11 x 17")
+    c.drawString(95, 74, "DIMENSIONED SCHEMATIC - NOT TO SCALE")
     c.setFont("Helvetica", 6.5)
     c.drawString(
         95,
-        80,
+        64,
         "DO NOT SCALE ELECTRONIC VIEW. DIMENSIONS TO FACE OF STUD UNLESS NOTED; EXTERIOR DIMENSIONS TO FACE OF SHEATHING.",
     )
 
@@ -735,8 +778,8 @@ def roof_sheet(c: canvas.Canvas) -> None:
     c.setFont("Helvetica-Bold", 7)
     c.drawCentredString(x + 12 * s, y + 10 * s + 5, "RIDGE - E/W - 19'-10\" MAX BASIS")
     c.setFont("Helvetica", 6.5)
-    c.drawCentredString(x + 12 * s, y + 15 * s, "5:12 NORTH ROOF PLANE")
-    c.drawCentredString(x + 12 * s, y + 5 * s, "5:12 SOUTH ROOF PLANE")
+    c.drawCentredString(x + 12 * s, y + 15 * s, "4.6:12 NORTH ROOF PLANE")
+    c.drawCentredString(x + 12 * s, y + 5 * s, "4.6:12 SOUTH ROOF PLANE")
     c.setDash(3, 2)
     c.line(x + 2 * s, y, x + 2 * s, y + 20 * s)
     c.line(x + 22 * s, y, x + 22 * s, y + 20 * s)
@@ -766,7 +809,7 @@ def roof_sheet(c: canvas.Canvas) -> None:
     )
     door_rows = [
         ["MARK", "SIZE BASIS", "TYPE / NOTES"],
-        ["D01", "9'-8\" x 7'-0\"", "wind-rated sectional overhead; engineered portal/header"],
+        ["D01", "9.7 ft x 7.5 ft", "wind-rated sectional overhead; engineered portal/header"],
         ["D02", "3'-0\" x 6'-8\"", "garage/hall protected, self-closing"],
         ["D03", "6'-0\" x 6'-8\"", "level-1 east slider; safety glazing"],
         ["D04", "6'-0\" x 6'-8\"", "level-2 east slider; safety glazing"],
@@ -774,14 +817,26 @@ def roof_sheet(c: canvas.Canvas) -> None:
     ]
     window_rows = [
         ["MARK", "SIZE BASIS", "TYPE / PERFORMANCE"],
-        ["W01", "3'-0\" x 3'-0\"", "garage awning/fixed; tempered if hazardous"],
-        ["W02", "3'-6\" x 5'-0\"", "bedroom casement; EERO product data required"],
+        ["W01", "3 ft x 3.5 ft", "garage awning/fixed; tempered if hazardous"],
+        ["W02", "3.5 ft x 3.5 ft", "bedroom casement; EERO product data required"],
         ["W03", "5'-0\" x 3'-6\"", "south living; safety glazing check"],
-        ["W04", "3'-6\" x 4'-0\"", "east dining; operable/fixed per ventilation"],
+        ["W04", "3.5 ft x 3.5 ft", "east dining; operable/fixed per ventilation"],
         ["ALL", "manufacturer RO", "U <= 0.30 working basis; SHGC <= 0.40"],
     ]
-    table(c, 870, 735, [55, 95, 210], door_rows, row_h=36, size=6.7)
-    table(c, 870, 475, [55, 95, 210], window_rows, row_h=36, size=6.7)
+    for rows, index, wall, opening_index in (
+        (door_rows, 1, "l1_west", 0),
+        (door_rows, 3, "l1_east", 1),
+        (door_rows, 4, "l2_east", 0),
+        (door_rows, 5, "l2_south", 0),
+        (window_rows, 1, "l1_east", 0),
+        (window_rows, 2, "l2_west", 0),
+        (window_rows, 3, "l2_south", 1),
+        (window_rows, 4, "l2_east", 1),
+    ):
+        _, width, _, height = g.OPENINGS[wall][opening_index]
+        rows[index][1] = f"{width:g} ft x {height:.3g} ft"
+    table(c, 855, 735, [38, 78, 219], door_rows, row_h=36, size=6.7)
+    table(c, 855, 475, [38, 78, 219], window_rows, row_h=36, size=6.7)
 
 
 def elevations_sheet(c: canvas.Canvas) -> None:
@@ -798,7 +853,7 @@ def elevations_sheet(c: canvas.Canvas) -> None:
         270,
         "ELEVATION / EXTERIOR NOTES",
         [
-            "Vertical datum: 0'-0\" top of level-1 slab; +9'-3\" top of upper subfloor working basis; +16'-0\" eave/plate basis; +19'-10\" maximum ridge basis. Survey average adjacent grade before finalizing height.",
+            "Project Z datum: lower slab +0.5 ft; upper subfloor +9.25 ft; eave +16 ft; ridge +19.833 ft. Upper subfloor is 8.75 ft above lower slab. Survey average adjacent grade before finalizing height.",
             "Exterior wall basis: fiber-cement lap siding over drained/ventilated rainscreen, continuous water-resistive barrier, taped structural sheathing, 2x6 framing, cavity insulation, smart vapor retarder where required, and gypsum interior finish.",
             "North and west walls sit at working minimum yards. Keep north wall without openings; show flush north eave and flush west rake until Zoning confirms projections or building is relocated inward.",
             "Exterior wood exposed to weather shall be naturally durable or preservative treated. Provide corrosion-resistant fasteners/connectors compatible with treatment and flashing.",
@@ -813,10 +868,10 @@ def sections_sheet(c: canvas.Canvas) -> None:
     sheet(c, 7)
     draw_section(c, 55, 355, longitudinal=False)
     c.setFont("Helvetica-Bold", 7.5)
-    c.drawString(55, 335, "SECTION A - TRANSVERSE / SLOPED CEILING / 1/4 IN = 1 FT")
+    c.drawString(55, 320, "SECTION A - BATH FIXTURE SECTION / NOT TO SCALE")
     draw_section(c, 525, 355, longitudinal=True)
     c.setFont("Helvetica-Bold", 7.5)
-    c.drawString(525, 335, "SECTION B - LONGITUDINAL / 1/4 IN = 1 FT")
+    c.drawString(525, 320, "SECTION B - RIDGE / NOT TO SCALE")
     # wall section diagram
     x, y = 980, 355
     c.setStrokeColor(INK)
@@ -882,7 +937,7 @@ def structural_sheet(c: canvas.Canvas) -> None:
     for xx in (ox + 6 * s, ox + 12 * s, ox + 18 * s):
         c.circle(xx, oy - 4 * s, 6, fill=0, stroke=1)
     c.setFont("Helvetica-Bold", 7)
-    c.drawString(ox, oy + 20 * s + 12, "FOUNDATION PLAN - 1/4 IN = 1 FT")
+    c.drawString(ox, oy + 20 * s + 12, "FOUNDATION PLAN - NOT TO SCALE")
     c.setFont("Helvetica", 5.8)
     c.drawCentredString(ox + 12 * s, oy + 10 * s, "4 IN SLAB / PERIMETER STEM + FOOTING BASIS")
     c.drawCentredString(
@@ -898,7 +953,7 @@ def structural_sheet(c: canvas.Canvas) -> None:
         c.line(xx, fy, xx, fy + 20 * s)
     c.setStrokeColor(INK)
     c.setFont("Helvetica-Bold", 7)
-    c.drawString(fx, fy + 20 * s + 12, "LEVEL 2 FLOOR FRAMING - 1/4 IN = 1 FT")
+    c.drawString(fx, fy + 20 * s + 12, "LEVEL 2 FLOOR FRAMING - NOT TO SCALE")
     c.setFont("Helvetica", 5.8)
     c.drawCentredString(fx + 12 * s, fy + 10 * s, "20 FT SPAN ENGINEERED FLOOR TRUSSES / I-JOISTS")
     c.drawCentredString(fx + 12 * s, fy + 8.8 * s, "SPAN N-S; OPEN-WEB PREFERRED FOR MEP")
@@ -913,7 +968,7 @@ def structural_sheet(c: canvas.Canvas) -> None:
         c.line(xx, ry, xx, ry + 20 * s)
     c.setStrokeColor(INK)
     c.setFont("Helvetica-Bold", 7)
-    c.drawString(rx, ry + 20 * s + 12, "ROOF FRAMING - 1/4 IN = 1 FT")
+    c.drawString(rx, ry + 20 * s + 12, "ROOF FRAMING - NOT TO SCALE")
     c.setFont("Helvetica", 5.8)
     c.drawCentredString(
         rx + 12 * s, ry + 10 * s + 5, "ENGINEERED SCISSOR / PARALLEL-CHORD TRUSS BASIS"
@@ -938,8 +993,8 @@ def structural_sheet(c: canvas.Canvas) -> None:
         ],
         [
             "Floor",
-            "11-7/8 in minimum engineered open-web/I-joist at 16 in o.c.",
-            "Sealed supplier layout, reactions, holes, blocking",
+            "9 in schematic floor zone only; member depth unresolved",
+            "Engineer depth, loads and floor datum; revise headroom to suit",
         ],
         [
             "Garage header",
@@ -953,7 +1008,7 @@ def structural_sheet(c: canvas.Canvas) -> None:
         ],
         [
             "Roof",
-            "engineered trusses at 24 in o.c. max; 5:12 exterior",
+            "engineered trusses at 24 in o.c. max; 4.6:12 exterior",
             "Sealed truss package, bracing, reactions, uplift",
         ],
         [
@@ -1000,7 +1055,7 @@ def mep_sheet(c: canvas.Canvas) -> None:
     c.setFont("Helvetica", 6)
     c.drawString(x + 20, y + 205, "BATH GROUP")
     c.drawString(x + 120, y + 205, "W/D")
-    c.drawString(x + 205, y + 205, "KITCHEN ISLAND")
+    c.drawString(x + 205, y + 205, "KITCHEN PENINSULA")
     c.line(x + 55, y + 195, x + 55, y + 35)
     c.line(x + 140, y + 195, x + 140, y + 35)
     c.line(x + 250, y + 195, x + 250, y + 35)
@@ -1216,6 +1271,45 @@ def closeout_sheet(c: canvas.Canvas) -> None:
     )
 
 
+def concept_set() -> None:
+    output = OUTPUT.with_name("adu-option-f-concept-plan-set.pdf")
+    c = canvas.Canvas(str(output), pagesize=(PAGE_W, PAGE_H))
+    c.setTitle("Option F - revised concept plans and garden-room alternative")
+    assets = [
+        (ROOT / "plan" / "site-plan-option-f.png", "SITE / SEPTEMBER 2026"),
+        (ROOT / "apartment" / "option-f-level-1.png", "LEVEL 1 / REVISED OPTION F"),
+        (ROOT / "apartment" / "option-f-level-2.png", "LEVEL 2 / REVISED OPTION F"),
+        (
+            ROOT / "apartment" / "option-f-alternative-garden.png",
+            "EXPLORATORY GARDEN-ROOM ALTERNATIVE",
+        ),
+    ]
+    for index, (asset, title) in enumerate(assets):
+        if index:
+            c.showPage()
+        c.setFont("Helvetica-Bold", 13)
+        c.drawString(36, PAGE_H - 30, title)
+        c.drawImage(
+            str(asset),
+            36,
+            54,
+            width=PAGE_W - 72,
+            height=PAGE_H - 104,
+            preserveAspectRatio=True,
+            anchor="c",
+            anchorAtXY=False,
+        )
+        c.setFont("Helvetica", 8)
+        c.drawString(
+            36,
+            25,
+            "Owner design study. Not for construction. Final structure, headroom, vehicle fit and zoning remain unresolved.",
+        )
+        c.drawRightString(PAGE_W - 36, 25, f"{index + 1} / {len(assets)}")
+    c.save()
+    print(output)
+
+
 def main() -> None:
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     c = canvas.Canvas(str(OUTPUT), pagesize=(PAGE_W, PAGE_H), pageCompression=1)
@@ -1234,6 +1328,7 @@ def main() -> None:
     closeout_sheet(c)
     c.save()
     print(OUTPUT)
+    concept_set()
 
 
 if __name__ == "__main__":

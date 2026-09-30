@@ -6,7 +6,7 @@ Repository guidance for coding agents and human contributors.
 
 This repository coordinates schematic ADU design studies, generated drawings, 3D models,
 reference material, and a static public brief. **Option F, basis version
-`2026-08-03-option-f-basis-v1`, is current.** Work remains preliminary and not for
+`2026-09-30-option-f-basis-v2`, is current.** Work remains preliminary and not for
 construction.
 
 Do not turn research notes into claims of permit approval, code compliance, or
@@ -17,14 +17,14 @@ constructability. Preserve explicit field-verification and professional-review c
 Use `option-f-artifact-manifest.json` as the index of current artifacts and invariants. When
 current files disagree, resolve intent in this order:
 
-1. `output/pdf/adu-option-f-construction-engineering-basis.pdf`
-2. `apartment/option-f-recommended-development.svg`
-3. `plan/site-plan-option-f.dxf`
-4. `model/option_f_geometry.py`
+1. `model/option_f_geometry.py` — shared room, opening, furniture and datum contract
+2. `model/generate_option_f_model.py` — detailed part geometry and exported scene
+3. `apartment/option-f-recommended-development.svg` and `plan/site-plan-option-f.dxf`
+4. `output/pdf/adu-option-f-construction-engineering-basis.pdf`
 
-Use source records in `documents/` and `images/` for existing conditions. Use
-`renderings/photoreal-render-prompt.md` for rendering source precedence. Never infer or
-replace measured geometry from a photoreal rendering.
+Use source records in `documents/` and `images/` for existing conditions. Current renderings use `model/render_model.py` and `adu-option-f-scene.json`; provenance is
+recorded in `renderings/model-render-manifest.json`. Earlier photoreal prompts and images
+are design history. Never replace measured geometry from an image.
 
 Option E and Options A–D are historical studies. Files matching `model/adu-option-e.*`,
 `plan/site-plan.*`, and `plan/site-plan-architect.pdf` do not override current Option F
@@ -61,8 +61,9 @@ or PNG files. Regenerate them through their owning scripts.
 | `apartment/generate_floorplans.py` | `apartment/option-*.svg` and `.png` |
 | `plan/generate_site_plan.py --option F` | `plan/site-plan-option-f.dxf` and architect PDF |
 | `model/generate_option_f_model.py` | Option F STEP, BREP, GLB, OBJ, and model manifest |
-| `model/generate_3d_model.py` | `model/site-model-3d.html`, `.obj`, and `.mtl` |
-| `plan/generate_construction_basis_set.py` | construction/engineering basis PDF |
+| `model/generate_3d_model.py` | `model/site-model-3d.html` and `.obj` |
+| `model/render_model.py` (Blender) | Four model-derived views and render manifest |
+| `plan/generate_construction_basis_set.py` | Engineering basis and concept PDFs |
 | `sync/pinterest_pull.py` | new `inspiration/pin-*` files and `sync/manifest.json` |
 
 Generator commands live in the root README. Historical FreeCAD and Sweet Home 3D commands
