@@ -1,34 +1,45 @@
-# 3D lot model — house, replacement shed, proposed ADU
+# Option F revision 2 — shared 3D geometry
 
-True-scale Option F 3D models, built from the same measured geometry as
-[`plan/generate_site_plan.py`](../plan/generate_site_plan.py) and the current
-Option F floor-plan/engineering basis:
-45×148 lot, existing 1931 house (with porch + deck), selected low-profile 18×6 replacement shed, and the proposed
-20×24 two-story ADU below the R-5 20 ft accessory height cap, plus approximate massing
-of the two neighboring houses for context.
+Current schematic owner study for a 24 × 20 ft ADU, with a garage and garden office below a 480-sq-ft gross apartment. Geometry is defined in [`option_f_geometry.py`](option_f_geometry.py). Site placement and existing buildings are working assumptions, not a surveyed or approved model.
 
-## Files
+## View the project
 
-- **`site-model-3d.html`** — interactive viewer, no internet or install needed: open it
-  in any browser (double-click the file). Orbit with drag, zoom with scroll/pinch,
-  pan with right-drag or shift-drag. Checkboxes toggle the ADU, shed, house, neighbors,
-  R-5 setback lines and labels; buttons jump to preset views (also linkable via
-  `#bird`, `#alley`, `#yard`, `#street`, `#top`).
-- **`site-model.obj`** + **`site-model.mtl`** — the same whole-site model as a standard OBJ
-  (Y-up, feet). Imports into SketchUp (File → Import), Blender, FreeCAD, or any
-  online OBJ viewer. Hand this to an architect alongside `plan/site-plan.dxf`.
-- **`adu-option-f.step`** + **`adu-option-f.brep`** — current neutral CAD
-  model: 79 named schematic solids for the Option F shell, partitions,
-  openings, stair, 4-ft patios, 36-in guards, and flush setback-side roof basis.
-- **`adu-option-f.glb`** + **`adu-option-f.obj`** — current color visualization
-  exports of the same Option F building model.
-- **`adu-option-f-manifest.json`** — machine-readable version, datums, bounds,
-  sources, and semantic object list.
-- **`option_f_geometry.py`** — canonical Option F dimensions shared by model generation and CI.
-- **`generate_option_f_model.py`** — regenerates current building exports:
-  `uv run --group architecture python model/generate_option_f_model.py`.
-- **`generate_3d_model.py`** — regenerates the whole-site viewer and OBJ:
-  `uv run python model/generate_3d_model.py`.
+The viewer uses ES modules and must be served over HTTP. From repository root:
+
+```sh
+uv run --no-project python -m http.server 8000
+```
+
+Open [the project](http://localhost:8000/) or [the model](http://localhost:8000/model/site-model-3d.html#yard). Directly opening the HTML as `file://` is unsupported. Three.js 0.186.1 and its controls are vendored under `vendor/`; the viewer needs no CDN. The five view links are `#yard`, `#alley`, `#level1`, `#level2`, and `#site`. Drag to orbit, scroll/pinch to zoom, toggle the roof or furniture, and use furnished cutaways to inspect circulation. A static-image fallback is shown when WebGL cannot initialize.
+
+## Current files and authority
+
+- **`option_f_geometry.py`** — canonical feet/Z-up dimensions, openings, partitions, rooms, furniture, and checked circulation widths. Southwest building corner is origin; X east, Y north, Z up.
+- **`generate_option_f_model.py`** — generates physical model components, cuts real wall apertures, and exports exact meshes plus neutral CAD.
+- **`adu-option-f-scene.json`** — shared exact mesh data and semantic parts. Ten room zones are nonphysical metadata and are excluded from CAD/GLB/OBJ physical-solid counts.
+- **`adu-option-f.step`**, **`.brep`** — physical schematic solids, in millimetres/Z-up. The manifest reports source geometry in feet.
+- **`adu-option-f.obj`** — building mesh in feet/Z-up. **`adu-option-f.glb`** uses metres/Y-up.
+- **`adu-option-f-manifest.json`** — version, physical-solid count, all semantic parts, datums, bounds, and circulation widths.
+- **`site-model-3d.html`** — generated viewer with the exact canonical scene embedded. **`viewer-template.html`**, **`viewer.js`**, and **`viewer.css`** own its interface.
+- **`site-model.obj`** — canonical building translated into site coordinates plus approximate context, in feet/Z-up. Pair with [`../plan/site-plan-option-f.dxf`](../plan/site-plan-option-f.dxf). `site-model.mtl` is retained from the earlier export and does not define current geometry.
+- **`render_model.py`** — Blender renderer for model-derived exterior and furnished cutaway images; adds materials, lighting, ground, and sparse landscape context rather than inventing building geometry.
+
+Regenerate in dependency order:
+
+```sh
+uv run --group architecture python model/generate_option_f_model.py
+uv run python model/generate_3d_model.py
+blender --background --python model/render_model.py -- --views yard alley upper lower
+./bin/check
+```
+
+The four images are `renderings/option-f-yard-model.png`, `option-f-alley-model.png`, `option-f-upper-cutaway.png`, and `option-f-lower-cutaway.png`. `renderings/model-render-manifest.json` records source scene, image, and renderer SHA-256 hashes. Run all four views after geometry changes. Earlier AI images remain historical mood references.
+
+## Revision 2 decisions
+
+The 39-inch-clear downstairs hall connects the powder room and approximately 70-sq-ft garden office while retaining 23 ft of parking depth. Upstairs has an L-shaped kitchen and peninsula, common-space laundry access, and a TV on the bedroom partition. A separate approximately 121-sq-ft garden-room study shortens parking depth to 18 ft; it is not represented in the selected model.
+
+Vertical datums remain +9.25 ft upper subfloor, +16 ft eave, and +19.833333 ft ridge. The exterior stair has fourteen risers from the +0.5 ft ground landing to the upper floor. The roof assembly allowance is provisional; finish headroom and actual assemblies require professional design. Four-foot exterior patios are principally circulation, and guard details and usable clear widths remain unresolved.
 
 ### Historical Option E FreeCAD model
 
@@ -120,6 +131,5 @@ fire separation, plumbing, and zoning treatment.
 | replacement shed | 7′ | 9.5′ | 18×6 low-profile massing, red slider on east gable end |
 | ADU Option F | 16′ | 19′-10″ | +9′-3″ upper-subfloor basis; north eave and west rake flush pending zoning |
 
-Footprints and setbacks are the measured/confirmed values from the site plan
-(front setback 25′, ADU 5′ off alley / 5′ off north line).
+Footprints and setbacks follow the working site-plan basis (owner-measured front setback 25′, proposed ADU 5′ off alley / 5′ off north line), pending survey and zoning review.
 Preliminary massing only — not for construction.

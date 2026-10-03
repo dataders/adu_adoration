@@ -6,27 +6,25 @@ S0001130005), Richmond, VA 23225.
 
 ## Project status
 
-**Option F is the current coordinated concept.** It is a 20 × 24 ft, two-story detached
+**Option F revision 2 is the current schematic owner study.** It is a 20 × 24 ft, two-story detached
 building with a full-depth garage/shop and owner office below, an approximately 480 sf
-one-bedroom apartment above, a south exterior stair, and stacked east patios. Working
-height is 19 ft 10 in, below the researched 20 ft accessory-building limit.
+one-bedroom apartment above, a south exterior stair, and stacked east patios. The working ridge datum is 19 ft 10 in; official height measurement and applicable zoning limits remain unverified.
 
 Start with these files:
 
 1. [Construction and engineering basis](output/pdf/adu-option-f-construction-engineering-basis.pdf)
-   — current 11-sheet owner-coordination set.
+   — schematic owner-coordination set, regenerated from the revision 2 geometry.
 2. [Option F floor plans](apartment/option-f-recommended-development.svg) — current room,
    opening, stair, landing, and patio layout.
 3. [Option F site plan](plan/site-plan-option-f-architect.pdf) — current placement,
    setbacks, access, and replacement-shed response.
 4. [Interactive site model](model/site-model-3d.html#yard) — browser-based whole-site
-   massing with views and layer controls.
+   model with furnished floor cutaways and roof controls; serve over local HTTP as below.
 5. [Coordination manifest](option-f-artifact-manifest.json) — machine-readable authority,
    version, invariants, and current-versus-historical artifact boundary.
 
 Option E is the owner-sketch baseline. Options A–E and their model artifacts remain useful
-design history, but they do not override Option F. Renderings communicate spatial and
-material intent; dimensioned plans and future professional documents govern geometry.
+design history, but they do not override Option F. Current model renderings use the same exported scene as the browser viewer. Earlier AI images are mood references only and do not govern geometry.
 
 The earlier balcony-entry study in `plan/floor-plans-balcony-scheme.{svg,png}` and
 `renderings/massing-3d-interactive.html` is retained as historical reference only. It does
@@ -36,7 +34,7 @@ not override the current Option F authority.
 > documents. Survey, zoning determinations, code analysis, structural engineering, energy
 > compliance, utility verification, and trade design still require qualified professionals.
 
-## Verified design basis
+## Working design basis
 
 | Item | Current basis |
 |---|---|
@@ -50,10 +48,11 @@ not override the current Option F authority.
 | Replacement shed | 18 × 6 ft maximum envelope; 108 sf; 5 ft clear south of ADU access |
 | Field measurement | 25 ft front setback confirmed 2026-06-28 |
 
-The current lower level contains one full-depth garage/shop bay, a garage-support/mechanical
-zone, powder room, protected hall, and northeast owner office/garden room. The upper level
-contains a west bedroom, stacked north-center bath, laundry/seasonal storage under the low
-eave, and open living/kitchen/dining space facing the yard.
+Revision 2 retains a 23-ft-clear garage/shop bay and approximately 70-sq-ft northeast garden office. The lower hall is 39 inches clear. A northwest powder room stacks below the upper bath; upstairs laundry opens directly to common space. An L-shaped kitchen with peninsula replaces the island, and the TV moves to the bedroom partition. Schematic furniture clearances are 53.6 inches west of the peninsula, 38.4 inches from sofa to slider route, and 39.6 inches from dining chairs to counter. These are drawing checks, not code-compliance findings.
+
+A separate [garden-room alternative](apartment/option-f-alternative-garden.svg) trades parking depth (18 ft clear) for approximately 121 sq ft of connected garden space. It is exploratory and does not override the current CAD or model.
+
+[`model/option_f_geometry.py`](model/option_f_geometry.py) is the canonical geometry source. Generated drawings, CAD, browser mesh, and renderings must agree with it; stale generated artifacts do not override source intent. Finished headroom, wall/floor/roof assemblies, and appliance operation remain design holds.
 
 The existing field-measured 12 × 18 ft shed is designated for removal. The assessor record
 instead describes a 360 sf detached garage; reconcile that discrepancy during survey and
@@ -70,8 +69,7 @@ uv sync --group dev --group architecture
 
 `./bin/check` runs Ruff lint and format checks, ty type checking, then the architecture
 artifact suite. The architecture checks audit the Option F DXF and access geometry, compare
-the coordination and model manifests, load all 79 STEP solids with OpenCascade, inspect the
-GLB container, and parse committed PDF/PNG outputs. CI also runs the official Khronos glTF
+the coordination and model manifests, load the STEP solids with OpenCascade, verify actual door apertures and furniture clearances, compare the viewer against the canonical scene, validate render provenance hashes, inspect the GLB container, and parse committed PDF/PNG outputs. The model manifest counts physical solids separately from the ten nonphysical room zones. CI also runs the official Khronos glTF
 Validator and requires zero errors and warnings.
 
 Install optional commit hooks with:
@@ -98,9 +96,17 @@ uv run --group architecture python model/generate_option_f_model.py
 # Whole-site viewer and OBJ
 uv run python model/generate_3d_model.py
 
-# 11-sheet construction and engineering basis PDF
+# Schematic drawing set PDF
 uv run python plan/generate_construction_basis_set.py
+
+# Model-derived exterior and furnished cutaway images (Blender executable required)
+blender --background --python model/render_model.py -- --views yard alley upper lower
+
+# Preview static website and viewer (ES modules require HTTP, not file://)
+uv run --no-project python -m http.server 8000
 ```
+
+Open [the local website](http://localhost:8000/) or [the full-screen model](http://localhost:8000/model/site-model-3d.html#yard). Three.js 0.186.1 is vendored locally. Render provenance is recorded in [`renderings/model-render-manifest.json`](renderings/model-render-manifest.json), including hashes of the source scene, renderer, and each image.
 
 Some historical Option E exports require FreeCAD or Sweet Home 3D. See
 [model/README.md](model/README.md) before changing them.
@@ -109,11 +115,11 @@ Some historical Option E exports require FreeCAD or Sweet Home 3D. See
 
 | Path | Purpose |
 |---|---|
-| [`apartment/`](apartment/) | Six furnished floor-plan studies (A–F), current Option F sheet, and generator |
+| [`apartment/`](apartment/) | Historical studies A–E, revision 2 floor sheets, garden alternative, and generator |
 | [`plan/`](plan/) | Current Option F and historical Option E site plans plus plan-set generator |
 | [`model/`](model/) | Option F geometry contract, generators, CAD/mesh exports, whole-site viewer, and historical Option E models |
 | [`output/pdf/`](output/pdf/) | Current combined concept and construction/engineering basis sets |
-| [`renderings/`](renderings/) | Concept imagery and the rendering source hierarchy/prompt |
+| [`renderings/`](renderings/) | Model-derived revision 2 images and archived AI mood references |
 | [`images/`](images/) | Measured sketches, site photos, assessor sketch, and satellite references |
 | [`documents/`](documents/) | Source property and owner PDFs |
 | [`inspiration/`](inspiration/) | Curated and Pinterest-synced style references |
@@ -121,6 +127,7 @@ Some historical Option E exports require FreeCAD or Sweet Home 3D. See
 | [`scripts/`](scripts/) | Repository validation implementation |
 | [`bin/`](bin/) | Stable developer entry points |
 | [`index.html`](index.html) | Static public project brief |
+| [`requirements.html`](requirements.html) | Static high-level requirements brief |
 
 Folder-specific documentation:
 
@@ -158,7 +165,7 @@ See [sync/README.md](sync/README.md) for board setup and limitations.
 Property data came from the saved [actDataScout report](documents/richmond-datascout-report-S0001130005.pdf)
 and assessor sketch. Field sketches and measurements are in `documents/` and `images/`.
 
-Zoning research used current City and Municode pages when the design basis was assembled:
+Zoning research was last checked August 12, 2026. The September design revision does not refresh legal or code findings. Earlier research used these City and Municode sources:
 
 - [City of Richmond ADU guidance](https://www.rva.gov/planning-development-review/accessory-dwelling-units)
 - [Richmond zoning ordinance, Chapter 30](https://library.municode.com/va/richmond/codes/code_of_ordinances)

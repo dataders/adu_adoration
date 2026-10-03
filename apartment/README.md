@@ -6,7 +6,7 @@ apartment level, furnished, annotated):
 
 | sheet | stair | bedroom | living | headline trade |
 |---|---|---|---|---|
-| **[`option-f-recommended-development`](option-f-recommended-development.png)** | **exterior**, south face from alley | west (alley) | center + east | **RECOMMENDED DEVELOPMENT:** full-depth garage, stacked wet core, connected landing/east patios, large sliders |
+| **[`option-f-recommended-development`](option-f-recommended-development.png)** | **exterior**, south face from alley | west (alley) | center + east | **REVISION 2:** clear circulation, northwest wet core, peninsula kitchen, explicit garden-room trade |
 | [`option-e-primary-design-basis`](option-e-primary-design-basis.png) | **exterior**, south face from alley | west (alley) | center + east | **OWNER-SKETCH BASELINE:** corrected roof-aware kitchen, programmed lower level |
 | [`option-a-living-east`](option-a-living-east.png) | interior, north wall | west (alley) | east + south | living gets the yard view; bedroom sits over the garage door |
 | [`option-b-bedroom-east`](option-b-bedroom-east.png) | interior, north wall | east (yard) | center + south | quiet bright bedroom; living loses the yard view |
@@ -17,28 +17,50 @@ Regenerate after editing: `uv run python3 apartment/generate_floorplans.py`
 (pure-stdlib Python → SVG; PNGs render via the local headless chromium,
 or `rsvg-convert` if present).
 
-## Current design — Option F
+## Current design - Option F revision 2
 
-Option F is the coordinated design direction. It keeps the useful ideas from the
-owner-sketch baseline while resolving its main coordination problems:
+Revision 2 is an owner design study with coordinated drawings and model geometry.
+The alternatives are choices for review; the current layout has not been approved
+for construction or demonstrated to satisfy finished headroom requirements.
 
-- one full-depth garage/shop bay instead of a short garage behind occupied rooms;
-- a level-1 powder room stacked below the level-2 full bath;
-- laundry in adjacent low-eave seasonal storage rather than inside the wet core;
-- one northeast owner office/garden room and a separate garage-support zone;
-- a conventional upper entry from the connected south landing;
-- 4-ft-deep stacked east patios with 6-ft sliders on both levels; and
-- a larger sink/prep island with range, refrigerator, and pantry on the full-height
-  east gable.
+- [Level 1](option-f-level-1.svg): 23 ft clear garage depth, 39 in clear protected
+  hall, northwest powder room, mechanical/storage room, 70 sf northeast owner room.
+- [Level 2](option-f-level-2.svg): northwest bath with pocket door, direct laundry
+  access, L kitchen with peninsula, west-facing sofa and partition-mounted TV.
+- Measured routes: 53.6 in west of peninsula, 38.4 in beside sofa to east slider,
+  39.6 in between dining chairs and kitchen. These are planning clearances;
+  appliance-door envelopes and actual furniture still require verification.
+- [Garden-room alternative](option-f-alternative-garden.svg): approximately 121 sf combined
+  owner/garden room, trading garage depth from 23 ft to 18 ft. This is an exploratory
+  floor plan only; no corresponding CAD model or structural solution is claimed.
+- Exterior walls, openings, south stair and connected 4 ft patios retain the same basis.
 
-The current geometry contract uses a 9.25-ft upper subfloor, 16-ft eaves, and a
-19.833-ft ridge. Treat the [Option F sheet](option-f-recommended-development.svg),
-current site plan, and construction/engineering basis as one coordinated set.
+The shared contract is [`model/option_f_geometry.py`](../model/option_f_geometry.py).
+Partitions, exterior openings and furniture feed the floor-plan generator; its
+per-floor output also appears in the PDF. Geometry version is
+`2026-09-30-option-f-basis-v2`. Project Z: lower slab +0.5 ft, upper subfloor
++9.25 ft, eave +16 ft, ridge +19.833 ft. Roof slope follows those heights
+(approximately 4.6:12). A provisional 0.85 ft roof allowance illustrates headroom;
+it is not a selected assembly or a compliance determination.
+
+Generate current assets without changing historical A-E outputs:
+
+```sh
+uv run python apartment/generate_floorplans.py --option-f
+uv run python plan/generate_site_plan.py --option F
+uv run python plan/generate_construction_basis_set.py
+```
+
+The previous F sheet is retained in [archive/option-f-v1.svg](archive/option-f-v1.svg).
+The [concept PDF](../output/pdf/adu-option-f-concept-plan-set.pdf) includes the site,
+each revised floor, and the garden alternative. The 11-sheet
+[basis PDF](../output/pdf/adu-option-f-construction-engineering-basis.pdf) retains
+engineering/code assumptions for professional reconfirmation.
 
 ## The fixed constraints (get these in your head first)
 
-Everything below falls out of the site plan and zoning already confirmed in
-the repo README:
+The following are inherited working assumptions. Final zoning, code and survey
+confirmation remains outside this design revision:
 
 1. **Envelope: 24' E-W × 20' N-S.** With 2×6 exterior walls the interior is
    ~23' × 19' = **437 sf net** (480 sf gross — under the 500 sf R-5 cap, so
@@ -113,10 +135,9 @@ full stop — it's the only room-sized thing that never needs a window.
 share plumbing drops, and the drops land in the garage (easy to box out —
 another reason this is cheap to get right). A–C stack one **NW bath
 (6'-4" × 5'-8" with shower + stacked W/D)** over a garage mech/workbench
-corner. D/E/F move standing bath fixtures toward the ridge for roof headroom.
-Option F stacks the upper bath over a lower powder room and moves laundry into
-adjacent seasonal storage. Its east-gable appliance wall and sink/prep island are
-the current kitchen direction.
+corner. D/E explored fixture placement toward the ridge. Revised F locates the bath
+northwest, above the lower powder room, and gives laundry direct circulation access.
+Its peninsula replaces the island. Fixture headroom remains an explicit section hold.
 
 **Decision 3 — bedroom west or east?** Whoever gets east gets the morning
 sun and the yard; the other room gets the alley side. A gives the yard to
@@ -133,7 +154,8 @@ daylight matters more.
 - Queen bed = 5'-0" × 6'-8"; want ~2' walkway on each open side. A 9'-8"
   wide bedroom holds a queen + nightstands with room to spare.
 - Stair: 3'-0" wide min; Virginia allows 8¼" risers / 9" treads, so the
-  9'-3" working rise uses 14 risers and 13 treads plus the upper landing.
+  8'-9" rise from the +0.5 ft lower slab to the +9.25 ft upper floor
+  uses 14 risers at 7.5 in and 13 treads at about 10.15 in plus the landing.
 - Kitchen: 36" aisle min (42" nicer); a 10' run + short return comfortably
   holds fridge / sink / range / dishwasher.
 - Bath: 36" × 36" shower, 30" width at the toilet, ~22" clear in front of
@@ -148,8 +170,8 @@ legal advice — confirm with Richmond building review.)*
 ## How to iterate
 
 1. Look at a sheet and argue with it ("dining should be by the south
-   window", "swap the sofa and table"). Every wall, door, window and piece
-   of furniture is a couple of lines in `generate_floorplans.py` —
+   window", "swap the sofa and table"). For Option F, change shared walls, openings and furniture in
+   `model/option_f_geometry.py`; drawing symbols live in `generate_floorplans.py` —
    coordinates are in feet from the SW corner, X east, Y north.
 2. Edit, re-run, re-look. The furniture is the test: if the queen bed,
    sofa, and a 4-seat table don't fit with walkways, the scheme fails no

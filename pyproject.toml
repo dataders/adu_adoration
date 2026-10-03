@@ -7,11 +7,11 @@ requires-python = ">=3.11"
 # Runtime dependencies of the generator scripts. Declared so `ty` can resolve
 # their imports; the scripts themselves are typically run via `uv run`.
 dependencies = [
-    "ezdxf>=1.1",
-    "matplotlib>=3.8",
+    "ezdxf>=1.4.4",
+    "matplotlib>=3.11.2",
     "pillow>=12.3.0",
-    "reportlab>=5.0.0",
-    "trimesh>=4.9",
+    "reportlab>=5.0.1",
+    "trimesh>=5.1.0",
 ]
 
 [dependency-groups]
@@ -22,9 +22,12 @@ dev = [
     "ty>=0.0.1a1",
 ]
 architecture = [
-    "cadquery-ocp-novtk==7.9.3.1.1",
-    "pypdf>=6,<7",
+    "cadquery-ocp-novtk==8.0.1.0.0",
+    "pypdf>=6.19.0,<7",
 ]
+
+[tool.uv.dependency-groups]
+architecture = { requires-python = ">=3.11,<3.15" }
 
 # ---------------------------------------------------------------------------
 # Ruff: linter + formatter

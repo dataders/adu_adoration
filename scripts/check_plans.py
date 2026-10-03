@@ -4,14 +4,17 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import importlib
 import json
 import math
+import re
 import shutil
 import struct
 import subprocess
 import sys
 from collections.abc import Iterable, Sequence
+from dataclasses import asdict
 from pathlib import Path
 from typing import Any
 
@@ -167,7 +170,7 @@ def validate_dxf() -> None:
         "20 x 24  -  2 STORY",
         "18 x 6  -  108 SF - LOW PROFILE",
         "5' CLEAR",
-        "ADU N. SETBACK 5' - R-5 MIN MET",
+        "ADU NORTH SETBACK: 5 FT DESIGN BASIS",
         "FRONT SETBACK 25' (MEASURED)",
         "PRELIMINARY - NOT FOR CONSTRUCTION - DIMENSIONS APPROX, FIELD-VERIFY",
     }
@@ -178,17 +181,22 @@ def validate_dxf() -> None:
 def load_manifest() -> dict[str, Any]:
     path = MODEL_DIR / "adu-option-f-manifest.json"
     payload = json.loads(path.read_text(encoding="utf-8"))
-    require(payload.get("schema") == "adu-option-f-model-manifest-v1", "unknown manifest schema")
-    require(payload.get("design") == "Option F", "manifest design must be Option F")
-    require(payload.get("object_count") == 79, "manifest must describe 79 objects")
+    require(payload.get("schema") == "adu-option-f-model-manifest-v2", "unknown manifest schema")
+    require(
+        payload.get("design") == "Option F · revision 2",
+        "manifest design must be Option F revision 2",
+    )
+    require(payload.get("object_count", 0) > 0, "manifest has no physical objects")
     objects = payload.get("objects")
-    require(isinstance(objects, list) and len(objects) == 79, "manifest object list is incomplete")
+    require(isinstance(objects, list), "manifest object list is incomplete")
+    physical = [item for item in objects if item["category"] != "Room zone"]
+    require(len(physical) == payload["object_count"], "physical object count differs from manifest")
     return payload
 
 
 def validate_manifest(payload: dict[str, Any]) -> None:
     require(payload.get("units") == "feet", "manifest units changed")
-    require(payload.get("version") == "2026-08-03-option-f-basis-v1", "model version changed")
+    require(payload.get("version") == "2026-09-30-option-f-basis-v2", "model version changed")
     require(
         payload.get("datums_ft") == {"upper_subfloor": 9.25, "eave": 16.0, "ridge": 19.833},
         "Option F vertical datums changed",
@@ -221,8 +229,7 @@ def validate_manifest(payload: dict[str, Any]) -> None:
         "Upper south landing",
         "Ground east patio 4ft",
         "Upper east patio 4ft",
-        "L1 east 6ft slider",
-        "L2 east 6ft slider",
+        "Garage overhead door",
         "South roof plane flush west",
         "North roof plane flush north-west",
     }
@@ -269,9 +276,8 @@ def validate_step(payload: dict[str, Any]) -> None:
 
     box = box_type()
     bounds_api.Add_s(shape, box)
-    raw_bounds = box.Get()
-    step_min = [raw_bounds[index] / FT_IN_MM for index in range(3)]
-    step_max = [raw_bounds[index] / FT_IN_MM for index in range(3, 6)]
+    step_min = [coordinate / FT_IN_MM for coordinate in box.CornerMin().Coord()]
+    step_max = [coordinate / FT_IN_MM for coordinate in box.CornerMax().Coord()]
     require(
         close_sequence(step_min, payload["bounds_ft"]["min"], tolerance=1e-3),
         f"STEP minimum bounds differ from manifest: {step_min}",
@@ -301,6 +307,22 @@ def validate_glb() -> None:
     require(len(payload.get("scenes", [])) >= 1, "GLB has no scene")
     require(len(payload.get("nodes", [])) >= 1, "GLB has no nodes")
     require(len(payload.get("meshes", [])) >= 1, "GLB has no meshes")
+
+    # glTF requires metres and Y-up; verify the exported transform, not just its header.
+    trimesh = importlib.import_module("trimesh")
+    mesh_scene = trimesh.load(path, force="scene")
+    bounds = load_manifest()["bounds_ft"]
+    lo, hi = bounds["min"], bounds["max"]
+    expected_min = [lo[0] * 0.3048, lo[2] * 0.3048, -hi[1] * 0.3048]
+    expected_max = [hi[0] * 0.3048, hi[2] * 0.3048, -lo[1] * 0.3048]
+    require(
+        close_sequence(mesh_scene.bounds[0], expected_min, tolerance=1e-3),
+        "GLB minimum bounds do not match metres/Y-up conversion",
+    )
+    require(
+        close_sequence(mesh_scene.bounds[1], expected_max, tolerance=1e-3),
+        "GLB maximum bounds do not match metres/Y-up conversion",
+    )
 
     validator = shutil.which("gltf_validator")
     if validator is None:
@@ -339,7 +361,7 @@ def validate_rendered_outputs() -> None:
     )
 
     expected_pngs = {
-        PLAN_DIR / "site-plan-option-f.png": (1839, 960),
+        PLAN_DIR / "site-plan-option-f.png": (1961, 960),
         ROOT / "apartment" / "option-f-recommended-development.png": (3308, 2336),
     }
     for path, expected_dimensions in expected_pngs.items():
@@ -358,6 +380,13 @@ def validate_required_artifacts() -> None:
         MODEL_DIR / "adu-option-f-manifest.json",
         MODEL_DIR / "site-model-3d.html",
         MODEL_DIR / "site-model.obj",
+        MODEL_DIR / "adu-option-f-scene.json",
+        MODEL_DIR / "viewer.js",
+        MODEL_DIR / "viewer.css",
+        MODEL_DIR / "vendor" / "three.module.js",
+        ROOT / "apartment" / "option-f-level-1.svg",
+        ROOT / "apartment" / "option-f-level-2.svg",
+        ROOT / "apartment" / "option-f-alternative-garden.svg",
     }
     missing = sorted(str(path.relative_to(ROOT)) for path in required if not path.is_file())
     empty = sorted(
@@ -373,7 +402,15 @@ def validate_coordination_manifest() -> None:
     payload = json.loads((ROOT / "option-f-artifact-manifest.json").read_text())
     require(payload.get("design") == "Option F", "coordination manifest design changed")
     require(
-        payload.get("version") == "2026-08-03-option-f-basis-v1",
+        payload.get("schema") == "adu-option-f-artifact-coordination-v2",
+        "coordination schema changed",
+    )
+    require(
+        payload.get("authority_order", [None])[0] == "model/option_f_geometry.py",
+        "canonical geometry must precede generated artifacts",
+    )
+    require(
+        payload.get("version") == "2026-09-30-option-f-basis-v2",
         "coordination manifest version changed",
     )
     for role, relative_path in payload.get("current_artifacts", {}).items():
@@ -386,7 +423,7 @@ def validate_coordination_manifest() -> None:
             "enclosed_footprint_ft": [24.0, 20.0],
             "upper_subfloor_ft": 9.25,
             "eave_ft": 16.0,
-            "ridge_max_ft": 19.833,
+            "ridge_max_ft": 19.833333,
             "east_patio_depth_ft": 4.0,
             "east_slider_width_ft": 6.0,
             "stair_risers": 14,
@@ -396,9 +433,187 @@ def validate_coordination_manifest() -> None:
             "west_upper_windows": 1,
             "south_upper_sliders": 0,
             "setback_roof_edges": ["north eave flush", "west rake flush"],
+            "lower_hall_clear_ft": 3.25,
+            "kitchen_approach_clear_ft": 4.47,
+            "sofa_slider_route_clear_ft": 3.2,
+            "dining_chair_counter_clear_ft": 3.3,
         },
         "coordinated invariants changed",
     )
+
+
+def validate_shared_scene(payload: dict[str, Any]) -> None:
+    """Catch stale exports and differing geometry between source, viewer, and CAD manifest."""
+    sys.path.insert(0, str(MODEL_DIR))
+    generator = importlib.import_module("generate_option_f_model")
+    geometry = importlib.import_module("option_f_geometry")
+    generator.build()
+    source_parts = generator.parts
+    scene = json.loads((MODEL_DIR / "adu-option-f-scene.json").read_text())
+    require(scene["version"] == geometry.VERSION, "scene source version is stale")
+    require(scene["units"] == "feet", "scene units must be feet")
+    require(len(scene["parts"]) == len(source_parts), "scene parts differ from source")
+    require(len(payload["objects"]) == len(source_parts), "manifest omits semantic parts")
+    for source, stored, record in zip(
+        source_parts, scene["parts"], payload["objects"], strict=True
+    ):
+        fields = json.loads(json.dumps(asdict(source)))
+        require(
+            all(stored.get(key) == value for key, value in fields.items()),
+            f"stale scene part: {source.name}",
+        )
+        require(
+            record["name"] == source.name and record["category"] == source.category,
+            f"manifest identity mismatch: {source.name}",
+        )
+        require(
+            close_sequence(record["center_ft"], source.center)
+            and close_sequence(record["size_ft"], source.size),
+            f"manifest geometry mismatch: {source.name}",
+        )
+        mesh = generator.mesh_for(source)
+        require(stored["faces"] == mesh.faces.tolist(), f"stale mesh faces: {source.name}")
+        require(
+            len(stored["vertices"]) == len(mesh.vertices)
+            and all(
+                close_sequence(a, b) for a, b in zip(stored["vertices"], mesh.vertices, strict=True)
+            ),
+            f"stale mesh vertices: {source.name}",
+        )
+    viewer = (MODEL_DIR / "site-model-3d.html").read_text()
+    match = re.search(
+        r'<script id="model-data" type="application/json">(.*?)</script>', viewer, re.S
+    )
+    require(match is not None, "viewer missing shared scene JSON")
+    embedded = json.loads(match.group(1)) if match else {}
+    require(embedded.get("parts") == scene["parts"], "viewer geometry differs from exported scene")
+    require(embedded.get("version") == scene["version"], "viewer version differs from scene")
+    require('type="module" src="viewer.js"' in viewer, "viewer module missing")
+
+    # Doorway clear volume must remain empty of wall solids. Decorative door leaves
+    # are not wall solids and do not obscure this check of actual apertures.
+    for level, partitions in geometry.PARTITIONS.items():
+        floor = geometry.GROUND_SLAB_TOP if level == "Level 1" else geometry.UPPER_SUBFLOOR_TOP
+        wall_parts = [
+            part
+            for part in source_parts
+            if part.level == level and part.category == "Interior wall"
+        ]
+        for name, axis, fixed, _start, _end, doors in partitions:
+            for offset, width, height in doors:
+                if axis == "x":
+                    low = (offset, fixed, floor)
+                    high = (offset + width, fixed + geometry.INTERIOR_WALL, floor + height)
+                else:
+                    low = (fixed, offset, floor)
+                    high = (fixed + geometry.INTERIOR_WALL, offset + width, floor + height)
+                for part in wall_parts:
+                    overlaps = all(
+                        min(high[i], part.center[i] + part.size[i] / 2)
+                        - max(low[i], part.center[i] - part.size[i] / 2)
+                        > 1e-6
+                        for i in range(3)
+                    )
+                    require(not overlaps, f"{name}: wall {part.name} blocks door aperture")
+
+    # Exterior sliders, entry, garage door, and windows must also pass through
+    # the wall, rather than sit as opaque markers on an uncut wall surface.
+    for key, openings in geometry.OPENINGS.items():
+        floor_key, side = key.split("_")
+        level = "Level " + floor_key[1:]
+        floor = geometry.GROUND_SLAB_TOP if level == "Level 1" else geometry.UPPER_SUBFLOOR_TOP
+        wall_parts = [
+            part
+            for part in source_parts
+            if part.level == level and part.category == "Exterior wall"
+        ]
+        for offset, width, sill, height in openings:
+            fixed = {"south": 0.0, "north": 19.5, "west": 0.0, "east": 23.5}[side]
+            if side in ("south", "north"):
+                low = (offset, fixed, floor + sill)
+                high = (offset + width, fixed + geometry.EXTERIOR_WALL, floor + sill + height)
+            else:
+                low = (fixed, offset, floor + sill)
+                high = (fixed + geometry.EXTERIOR_WALL, offset + width, floor + sill + height)
+            for part in wall_parts:
+                overlaps = all(
+                    min(high[i], part.center[i] + part.size[i] / 2)
+                    - max(low[i], part.center[i] - part.size[i] / 2)
+                    > 1e-6
+                    for i in range(3)
+                )
+                require(not overlaps, f"{key}: wall {part.name} blocks exterior aperture")
+
+    furniture = {item[0]: item for item in geometry.FURNITURE}
+    room = geometry.ROOMS["L2 open living/kitchen/dining"]
+    derived = {
+        "lower_hall": geometry.ROOMS["L1 protected hall"][3],
+        "entry_to_kitchen": furniture["Kitchen peninsula"][3] - room[0],
+        "living_slider_route": geometry.BUILDING_WIDTH
+        - geometry.EXTERIOR_WALL
+        - (furniture["Sofa facing west"][3] + furniture["Sofa facing west"][5]),
+        "dining_chair_to_counter": furniture["Dining chair 1"][4]
+        - (furniture["Kitchen peninsula"][4] + furniture["Kitchen peninsula"][6]),
+    }
+    expected = {
+        "lower_hall": 3.25,
+        "entry_to_kitchen": 4.47,
+        "living_slider_route": 3.2,
+        "dining_chair_to_counter": 3.3,
+    }
+    for key, width in expected.items():
+        require(close(derived[key], width), f"actual {key} clearance changed: {derived[key]}")
+        require(
+            close(payload["clearances_ft"][key], derived[key]),
+            f"manifest clearance does not match geometry: {key}",
+        )
+    garage = next(part for part in source_parts if part.name == "Garage overhead door")
+    require(
+        garage.center[0] < 0.5 and garage.size[1] > 9, "garage door must occupy the west/alley wall"
+    )
+    steps = [part for part in source_parts if part.category == "Exterior stair"]
+    tops = sorted(part.center[2] + part.size[2] / 2 for part in steps)
+    riser = (geometry.UPPER_SUBFLOOR_TOP - geometry.GROUND_SLAB_TOP) / geometry.STAIR_RISERS
+    heights = [geometry.GROUND_SLAB_TOP, *tops, geometry.UPPER_SUBFLOOR_TOP]
+    require(
+        all(close(b - a, riser) for a, b in zip(heights, heights[1:])),
+        "exterior stair rises are inconsistent between ground landing and upper floor",
+    )
+
+
+def validate_render_provenance() -> None:
+    def digest(path: Path) -> str:
+        return hashlib.sha256(path.read_bytes()).hexdigest()
+
+    manifest = json.loads((ROOT / "renderings" / "model-render-manifest.json").read_text())
+    scene_path = MODEL_DIR / "adu-option-f-scene.json"
+    scene = json.loads(scene_path.read_text())
+    expected = {
+        "option-f-yard-model.png": "yard",
+        "option-f-alley-model.png": "alley",
+        "option-f-upper-cutaway.png": "upper",
+        "option-f-lower-cutaway.png": "lower",
+    }
+    for name, view in expected.items():
+        require(name in manifest, f"render provenance missing {name}")
+        record = manifest[name]
+        require(
+            record.get("scene") == "model/adu-option-f-scene.json", f"wrong render source: {name}"
+        )
+        require(record.get("scene_sha256") == digest(scene_path), f"stale render scene: {name}")
+        require(record.get("scene_version") == scene["version"], f"stale render version: {name}")
+        require(
+            record.get("renderer_sha256") == digest(MODEL_DIR / "render_model.py"),
+            f"stale rendering script: {name}",
+        )
+        image_path = ROOT / "renderings" / name
+        require(record.get("image_sha256") == digest(image_path), f"image hash mismatch: {name}")
+        require(record.get("view") == view, f"wrong render camera: {name}")
+        width, height = png_dimensions(image_path)
+        require(
+            width == record.get("width") and width >= 1000 and height >= 600,
+            f"render image dimensions invalid: {name}",
+        )
 
 
 def main() -> int:
@@ -414,9 +629,14 @@ def main() -> int:
     checks.extend(
         [
             ("Option F semantic manifest", lambda: validate_manifest(manifest)),
+            (
+                "shared scene, door apertures, and clearances",
+                lambda: validate_shared_scene(manifest),
+            ),
             ("STEP BRep geometry", lambda: validate_step(manifest)),
             ("GLB model", validate_glb),
             ("SVG, PDF, and PNG outputs", validate_rendered_outputs),
+            ("model rendering provenance", validate_render_provenance),
         ]
     )
 

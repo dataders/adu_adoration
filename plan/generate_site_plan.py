@@ -20,7 +20,7 @@ args = parser.parse_args()
 OPTION = args.option
 OUTPUT_STEM = "site-plan" if OPTION == "E" else "site-plan-option-f"
 
-DATE = "2026-08-03" if OPTION == "F" else "2026-08-02"
+DATE = "2026-09-30" if OPTION == "F" else "2026-08-02"
 FRONT_SETBACK = 25.0  # MEASURED: main east wall to front (east) lot line (inside of sidewalk)
 PORCH_PROJECTION = 2.0  # MEASURED: front porch protrudes ~2 ft east of the house wall
 
@@ -59,6 +59,24 @@ doc.layers.add("DIMENSIONS", color=3)
 doc.layers.add("TEXT", color=250)
 doc.layers.add("NORTH-ARROW", color=250)
 
+# Presentation palette preserves layer distinctions without neon CAD colors.
+if OPTION == "F":
+    palette = {
+        "LOT-BOUNDARY": 0x303E35,
+        "EXISTING-HOUSE": 0x737A74,
+        "EXISTING-HOUSE-DETAIL": 0x999E97,
+        "EXISTING-SHED-REMOVE": 0xAF7865,
+        "PROPOSED-SHED": 0x87714D,
+        "PROPOSED-ADU": 0x355D49,
+        "PROPOSED-ADU-ACCESS": 0x708C79,
+        "R5-SETBACK": 0xAD6E50,
+        "DIMENSIONS": 0x536A5C,
+        "TEXT": 0x303E35,
+        "NORTH-ARROW": 0x303E35,
+    }
+    for name, color in palette.items():
+        doc.layers.get(name).dxf.true_color = color
+
 # ---- dimension style (feet-scaled) ----
 dim = doc.dimstyles.new("FT")
 dim.dxf.dimtxt = 1.8
@@ -68,6 +86,12 @@ dim.dxf.dimexo = 0.6
 dim.dxf.dimgap = 0.5
 dim.dxf.dimdec = 0
 dim.dxf.dimlfac = 1.0
+if OPTION == "F":
+    dim.dxf.dimtxt = 1.15
+    dim.dxf.dimasz = 0.65
+    dim.dxf.dimclrd = 250
+    dim.dxf.dimclre = 250
+    dim.dxf.dimclrt = 250
 
 
 def poly(points, layer, closed=True):
@@ -133,7 +157,8 @@ poly(
     [(ADU_WEST, ADU_SOUTH), (adu_east, ADU_SOUTH), (adu_east, adu_north), (ADU_WEST, adu_north)],
     "PROPOSED-ADU",
 )
-poly([(ADU_WEST, 24), (6.5, 24), (6.5, 36), (ADU_WEST, 36)], "PROPOSED-ADU")
+door_y1, door_y2 = (21.3, 31) if OPTION == "F" else (24, 36)
+poly([(ADU_WEST, door_y1), (6.5, door_y1), (6.5, door_y2), (ADU_WEST, door_y2)], "PROPOSED-ADU")
 
 # South exterior stair begins at the alley and rises east. Its raised landing
 # shelters a 16' x 4' level-1 patio and continues to the stacked east patio.
@@ -203,13 +228,15 @@ line((123, 0), (123, 45), "R5-SETBACK")  # front 25'
 
 # ---- dimensions ----
 dimen((0, 0), (148, 0), -9)  # lot length
-dimen((0, 0), (0, 45), -9)  # lot width
+dimen((0, 0), (0, 45), 9 if OPTION == "F" else -9)  # lot width
 dimen((SHED_WEST, SHED_SOUTH), (SHED_EAST, SHED_SOUTH), -3)  # shed 18 deep
-dimen((SHED_WEST, SHED_SOUTH), (SHED_WEST, SHED_NORTH), -3)  # shed 6 wide
+dimen((SHED_WEST, SHED_SOUTH), (SHED_WEST, SHED_NORTH), 3 if OPTION == "F" else -3)  # shed 6 wide
 dimen((0, SHED_SOUTH), (SHED_WEST, SHED_SOUTH), 3)  # shed 8' off alley
 dimen((12, SHED_NORTH), (12, STAIR_SOUTH), -3)  # shed-to-stair clearance
 dimen((ADU_WEST, adu_north), (adu_east, adu_north), 4)  # enclosed ADU 24 deep
-dimen((adu_east, ADU_SOUTH), (adu_east, adu_north), 5)  # enclosed ADU 20 wide
+dimen(
+    (adu_east, ADU_SOUTH), (adu_east, adu_north), -7 if OPTION == "F" else 5
+)  # enclosed ADU 20 wide
 dimen((0, 30), (ADU_WEST, 30), 3)  # ADU 5' off alley
 dimen((adu_east, 45), (adu_east, adu_north), 6)  # ADU 5' off north
 dimen((STAIR_WEST, STAIR_SOUTH), (STAIR_WEST, ADU_SOUTH), -3)  # stair depth
@@ -227,7 +254,13 @@ label(
 label("(built 1931)", (rd + 17), 18.5, 1.5, layer="TEXT")
 label("PORCH", ew + 3.5, 30, 1.3)
 label("DECK", hw - 4.5, 16, 1.3)
-label("EXISTING 12x18 SHED - REMOVE", 17, 12.7, 0.9, layer="EXISTING-SHED-REMOVE")
+label(
+    "EXISTING 12x18 SHED - REMOVE",
+    48 if OPTION == "F" else 17,
+    12.7,
+    0.9,
+    layer="EXISTING-SHED-REMOVE",
+)
 label("REPLACEMENT SHED", 17, 8.8, 1.2, layer="PROPOSED-SHED")
 label("18 x 6  -  108 SF - LOW PROFILE", 17, 6.7, 0.9, layer="PROPOSED-SHED")
 label(f"OPTION {OPTION} ADU", 17, 36, 1.8, layer="PROPOSED-ADU")
@@ -281,14 +314,16 @@ else:
         align=TextEntityAlignment.MIDDLE_LEFT,
     )
 label("5' CLEAR", 30, 14.0, 0.85, layer="PROPOSED-SHED")
-label("ALLEY (REAR)", -5, 22.5, 1.8, align=TextEntityAlignment.MIDDLE_CENTER)
+label(
+    "ALLEY (REAR)", -17 if OPTION == "F" else -5, 22.5, 1.8, align=TextEntityAlignment.MIDDLE_CENTER
+)
 label("W 29TH ST (FRONT)", 154, 22.5, 1.8, align=TextEntityAlignment.MIDDLE_CENTER)
 label("R-5 REQ'D YARD (5' SIDE / 5' REAR / 25' FRONT)", 74, 47, 1.4, layer="R5-SETBACK")
-label("ADU N. SETBACK 5' - R-5 MIN MET", 72, 43.4, 1.3, layer="DIMENSIONS")
+label("ADU NORTH SETBACK: 5 FT DESIGN BASIS", 72, 43.4, 1.3, layer="DIMENSIONS")
 label(
     "FRONT SETBACK 25' (MEASURED)",
-    ew + 11,
-    6,
+    ew - 3 if OPTION == "F" else ew + 11,
+    -3 if OPTION == "F" else 6,
     1.3,
     layer="DIMENSIONS",
     align=TextEntityAlignment.MIDDLE_LEFT,
@@ -345,6 +380,9 @@ label(
 DXF_PATH = f"plan/{OUTPUT_STEM}.dxf"
 PDF_PATH = f"plan/{OUTPUT_STEM}-architect.pdf"
 PNG_PATH = f"plan/{OUTPUT_STEM}.png"
+if OPTION == "F":
+    for linetype in doc.linetypes:
+        linetype.dxf.description = linetype.dxf.description.rstrip()
 doc.saveas(DXF_PATH)
 print(f"wrote {DXF_PATH}")
 
