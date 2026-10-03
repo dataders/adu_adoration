@@ -16,15 +16,16 @@ import numpy as np
 import option_f_geometry as g
 import trimesh
 from OCP.BRep import BRep_Builder  # ty: ignore[unresolved-import]
-from OCP.BRepBuilderAPI import (
-    BRepBuilderAPI_MakeFace,  # ty: ignore[unresolved-import]
-    BRepBuilderAPI_MakePolygon,  # ty: ignore[unresolved-import]
-    BRepBuilderAPI_Transform,  # ty: ignore[unresolved-import]
-)
-from OCP.BRepPrimAPI import (
-    BRepPrimAPI_MakeBox,  # ty: ignore[unresolved-import]
-    BRepPrimAPI_MakePrism,  # ty: ignore[unresolved-import]
-)
+
+# Single lines let ty suppress both absent optional modules and incomplete native stubs.
+# isort: off
+from OCP.BRepBuilderAPI import BRepBuilderAPI_MakeFace  # ty: ignore[unresolved-import]
+from OCP.BRepBuilderAPI import BRepBuilderAPI_MakePolygon  # ty: ignore[unresolved-import]
+from OCP.BRepBuilderAPI import BRepBuilderAPI_Transform  # ty: ignore[unresolved-import]
+from OCP.BRepPrimAPI import BRepPrimAPI_MakeBox  # ty: ignore[unresolved-import]
+from OCP.BRepPrimAPI import BRepPrimAPI_MakePrism  # ty: ignore[unresolved-import]
+
+# isort: on
 from OCP.BRepTools import BRepTools  # ty: ignore[unresolved-import]
 from OCP.gp import gp_Ax1, gp_Dir, gp_Pnt, gp_Trsf, gp_Vec  # ty: ignore[unresolved-import]
 from OCP.IFSelect import IFSelect_RetDone  # ty: ignore[unresolved-import]

@@ -106,7 +106,7 @@ blender --background --python model/render_model.py -- --views yard alley upper 
 uv run --no-project python -m http.server 8000
 ```
 
-Open [the local website](http://localhost:8000/) or [the full-screen model](http://localhost:8000/model/site-model-3d.html#yard). Three.js 0.180.0 is vendored locally. Render provenance is recorded in [`renderings/model-render-manifest.json`](renderings/model-render-manifest.json), including hashes of the source scene, renderer, and each image.
+Open [the local website](http://localhost:8000/) or [the full-screen model](http://localhost:8000/model/site-model-3d.html#yard). Three.js 0.186.1 is vendored locally. Render provenance is recorded in [`renderings/model-render-manifest.json`](renderings/model-render-manifest.json), including hashes of the source scene, renderer, and each image.
 
 Some historical Option E exports require FreeCAD or Sweet Home 3D. See
 [model/README.md](model/README.md) before changing them.

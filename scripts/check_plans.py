@@ -276,9 +276,8 @@ def validate_step(payload: dict[str, Any]) -> None:
 
     box = box_type()
     bounds_api.Add_s(shape, box)
-    raw_bounds = box.Get()
-    step_min = [raw_bounds[index] / FT_IN_MM for index in range(3)]
-    step_max = [raw_bounds[index] / FT_IN_MM for index in range(3, 6)]
+    step_min = [coordinate / FT_IN_MM for coordinate in box.CornerMin().Coord()]
+    step_max = [coordinate / FT_IN_MM for coordinate in box.CornerMax().Coord()]
     require(
         close_sequence(step_min, payload["bounds_ft"]["min"], tolerance=1e-3),
         f"STEP minimum bounds differ from manifest: {step_min}",

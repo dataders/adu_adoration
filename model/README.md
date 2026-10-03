@@ -10,7 +10,7 @@ The viewer uses ES modules and must be served over HTTP. From repository root:
 uv run --no-project python -m http.server 8000
 ```
 
-Open [the project](http://localhost:8000/) or [the model](http://localhost:8000/model/site-model-3d.html#yard). Directly opening the HTML as `file://` is unsupported. Three.js 0.180.0 and its controls are vendored under `vendor/`; the viewer needs no CDN. The five view links are `#yard`, `#alley`, `#level1`, `#level2`, and `#site`. Drag to orbit, scroll/pinch to zoom, toggle the roof or furniture, and use furnished cutaways to inspect circulation. A static-image fallback is shown when WebGL cannot initialize.
+Open [the project](http://localhost:8000/) or [the model](http://localhost:8000/model/site-model-3d.html#yard). Directly opening the HTML as `file://` is unsupported. Three.js 0.186.1 and its controls are vendored under `vendor/`; the viewer needs no CDN. The five view links are `#yard`, `#alley`, `#level1`, `#level2`, and `#site`. Drag to orbit, scroll/pinch to zoom, toggle the roof or furniture, and use furnished cutaways to inspect circulation. A static-image fallback is shown when WebGL cannot initialize.
 
 ## Current files and authority
 
